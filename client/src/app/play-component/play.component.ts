@@ -3,6 +3,9 @@ import {DeckService} from "../deck/deck.service";
 import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {CardState} from "./CardState";
+import {MdDialog} from "@angular/material";
+import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
+import {CardComponent} from "../card-component/card.component";
 
 
 
@@ -25,7 +28,7 @@ export class PlayComponent implements OnInit {
     public cardStates: CardState[];
 
 
-    constructor(public deckService : DeckService, private route: ActivatedRoute) {
+    constructor(public deckService : DeckService, private route: ActivatedRoute, public peek :MdDialog) {
         this.cardStates = [];
     }
 
