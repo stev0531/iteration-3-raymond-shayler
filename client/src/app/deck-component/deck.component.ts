@@ -25,6 +25,7 @@ export class DeckComponent implements OnInit {
   openAddDialog() {
       let config = new MatDialogConfig();
       config.data = {deckId: this.id};
+
       let dialogRef = this.dialog.open(NewCardDialogComponent, config);
       dialogRef.afterClosed().subscribe(result => {
           if(result) {

@@ -6,6 +6,7 @@ import {CardState} from "./CardState";
 import {MdDialog} from "@angular/material";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {CardComponent} from "../card-component/card.component";
+import {MatDialogConfig} from "@angular/material";
 
 
 
@@ -51,6 +52,12 @@ export class PlayComponent implements OnInit {
         }
         return this.cardStates[i];
     }
+
+    public openPeekDialog(){
+        let config = new MatDialogConfig();
+        config.data = {synonym: "HP", antonnym: "Damage taken"};
+        let cardRef = this.peek.open(CardComponent, config);
+    };
 
 
     ngOnInit() {
