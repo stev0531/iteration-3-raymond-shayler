@@ -55,7 +55,7 @@ export class PlayComponent implements OnInit {
 
     public openPeekDialog(){
         let config = new MatDialogConfig();
-        config.data = {synonym: "HP", antonnym: "Damage taken"};
+        config.data = {Synonym: "HP", Antonym: "Damage taken"};
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
     };
 
