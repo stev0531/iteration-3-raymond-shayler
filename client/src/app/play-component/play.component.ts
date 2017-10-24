@@ -7,7 +7,7 @@ import {MdDialog} from "@angular/material";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {CardComponent} from "../card-component/card.component";
 import {MatDialogConfig} from "@angular/material";
-
+import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 
 
 @Component({
@@ -56,7 +56,7 @@ export class PlayComponent implements OnInit {
     public openPeekDialog(){
         let config = new MatDialogConfig();
         config.data = {synonym: "HP", antonnym: "Damage taken"};
-        let cardRef = this.peek.open(CardComponent, config);
+        let cardRef = this.peek.open(CardDisplayDialogComponent, config);
     };
 
 

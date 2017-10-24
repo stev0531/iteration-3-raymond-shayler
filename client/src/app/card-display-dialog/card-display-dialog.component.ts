@@ -3,7 +3,7 @@ import {Card} from "../card/card";
 import {MatDialogConfig, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA} from "@angular/material";
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-card-display',
   templateUrl: './card-display-dialog.component.html',
   styleUrls: ['./card-display-dialog.component.css']
 })

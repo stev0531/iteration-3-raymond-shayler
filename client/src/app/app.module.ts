@@ -41,12 +41,14 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
         DeckListComponent,
         NewCardDialogComponent,
         NewDeckDialogComponent,
-        PlayComponent
+        CardDisplayDialogComponent,
+        PlayComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,
         NewDeckDialogComponent,
         CardDisplayDialogComponent,
+        CardComponent,
     ],
     providers: [
         DeckService,
