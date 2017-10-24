@@ -1,12 +1,21 @@
-<div layout-gt-sm="row">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-        <mat-card>
-            <mat-card-title id="hello-world">{{ this.text }}</mat-card-title>
-            <mat-card-subtitle>this is a card</mat-card-subtitle>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                card content
-            </mat-card-content>
-        </mat-card>
+<h1 id="logo">I Am Sage</h1>
+<h3 id="under-logo">Vocabulary</h3>
+
+<div>
+    <div id="playButton" class="button-row">
+        <button id="play-button" class="double-button" mat-raised-button color="accent" [routerLink]="['/card']">Play</button>
+    </div>
+    <div id="cardButton" class="button-row">
+        <button id="card-button" class="double-button" mat-raised-button color="primary" [routerLink]="['/card-create']">Cards</button>
+    </div>
+    <div id="deckButton" class="button-row">
+        <button id="deck-button" class="double-button" mat-raised-button color="primary">Decks</button>
+    </div>
+    <div id ="settingButton" class="button-row">
+        <button id="setting-button" class="double-button" mat-raised-button color="primary">Settings</button>
     </div>
 </div>
+
+
+
+
