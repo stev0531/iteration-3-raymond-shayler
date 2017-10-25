@@ -10,6 +10,9 @@ import {Input} from "@angular/core";
 export class SimpleCardComponent implements OnInit {
 
     @Input() word: string;
+    @Input() _id: string;
+
+    selected: boolean;
 
 
     constructor() {
@@ -22,8 +25,9 @@ export class SimpleCardComponent implements OnInit {
     }
 */
 
-ngOnInit(){
 
+ngOnInit(){
+this.selected = false;
 }
 
 }

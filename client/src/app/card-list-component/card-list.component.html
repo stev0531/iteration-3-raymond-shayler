@@ -1,29 +1,36 @@
 <h1 id="Title">This is a list of cards</h1>
-
-
- <div layout-gt-sm="row">
-    <div flex-gt-xs="80" flex-offset-gt-xs="10" flex-xs="96" flex-offset-xs="2">
-        <mat-card>
-            <mat-card-title id="decks-title">Cards</mat-card-title>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                <simple-card
-                    *ngFor="let card of cards"
-                    [word] = "card.word"
-                ></simple-card>
-                <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
-                <ng-template #decksError>
-                    <p>
-                        There was a problem loading the decks. Possibly the server is down or perhaps there are network
-                        issues.
-                    </p>
-                    <p>
-                        Please wait a bit and try again or start the server.
-                    </p>
-                </ng-template>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div class="wrapper">
+    <simple-card
+        *ngFor="let card of cards"
+        [word] = "card.word"
+        [_id] = "card._id"
+    ></simple-card>
 </div>
+
+ <!--<div layout-gt-sm="row">-->
+    <!--<div flex-gt-xs="80" flex-offset-gt-xs="10" flex-xs="96" flex-offset-xs="2">-->
+        <!--<mat-card>-->
+            <!--<mat-card-title id="decks-title">Cards</mat-card-title>-->
+            <!--<mat-divider></mat-divider>-->
+            <!--<mat-card-content>-->
+                <!--<simple-card-->
+                    <!--*ngFor="let card of cards"-->
+                    <!--[word] = "card.word"-->
+                    <!--[_id] = "card._id"-->
+                <!--&gt;</simple-card>-->
+                <!--&lt;!&ndash; Maybe this should be a pop-up instead of just a text message? Not sure. &ndash;&gt;-->
+                <!--<ng-template #decksError>-->
+                    <!--<p>-->
+                        <!--There was a problem loading the decks. Possibly the server is down or perhaps there are network-->
+                        <!--issues.-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--Please wait a bit and try again or start the server.-->
+                    <!--</p>-->
+                <!--</ng-template>-->
+            <!--</mat-card-content>-->
+        <!--</mat-card>-->
+    <!--</div>-->
+<!--</div>-->
 
 
