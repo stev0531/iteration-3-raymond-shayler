@@ -1,38 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {SimpleCardService} from "../simple-card/simple-card.service";
-import {ActivatedRoute} from "@angular/router";
-import {SimpleCard} from "../simple-card/simple-card";
+import {Input} from "@angular/core";
 
 
 @Component({
-    selector: 'app-simple-card-list',
+    selector: 'simple-card',
     templateUrl: './simple-card.component.html',
     styleUrls: ['./simple-card.component.css']
 })
 export class SimpleCardComponent implements OnInit {
 
-    id : string;
-    simpleCard: SimpleCard;
-    word : string;
+    @Input() word: string;
 
 
+    constructor() {
+    }
+
+    //This is the old constructor that caused it to break
+    /*
     constructor(public SimpleCardService : SimpleCardService, private route: ActivatedRoute) {
 
-
     }
+*/
 
-    ngOnInit() {
-        this.route.params.subscribe(params => {
-            this.id = params['id'];
+ngOnInit(){
 
-            this.SimpleCardService.getSimpleCard(this.id).subscribe(
-                simpleCard => {
-                    this.simpleCard = simpleCard;
-                    this.word = simpleCard.word;
-                }
-            );
-        });
-    }
-
+}
 
 }

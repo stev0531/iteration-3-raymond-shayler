@@ -24,6 +24,7 @@ import {NewCardDialogComponent} from "./new-card-dialog/new-card-dialog.componen
 import {NewDeckDialogComponent} from "./new-deck-dialog/new-deck-dialog.component";
 import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component"
+import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
 
 @NgModule({
@@ -53,6 +54,7 @@ import {SimpleCardComponent} from "./simple-card-component/simple-card.component
         NewDeckDialogComponent
     ],
     providers: [
+        CardListService,
         DeckService,
         MdDialog,
         MdSnackBar,

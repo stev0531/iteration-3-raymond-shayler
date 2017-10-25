@@ -1,16 +1,16 @@
-<div layout-gt-sm="row">
+<h1 id="Title">This is a list of cards</h1>
+
+
+ <div layout-gt-sm="row">
     <div flex-gt-xs="80" flex-offset-gt-xs="10" flex-xs="96" flex-offset-xs="2">
         <mat-card>
             <mat-card-title id="decks-title">Cards</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-
-
-                <mat-nav-list *ngIf="this.simpleCardService.simpleCards; else decksError">
-                    <mat-list-item class="card" *ngFor="let card of this.simpleCardService.simpleCards">
-                        <a class="card-word" matLine>{{ card.word }}</a>
-                    </mat-list-item>
-                </mat-nav-list>
+                <simple-card
+                    *ngFor="let card of cards"
+                    [word] = "card.word"
+                ></simple-card>
                 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
                 <ng-template #decksError>
                     <p>
@@ -25,3 +25,5 @@
         </mat-card>
     </div>
 </div>
+
+

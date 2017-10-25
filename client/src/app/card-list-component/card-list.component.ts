@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {SimpleCardService} from "../simple-card/simple-card.service";
-import {NewDeckDialogComponent} from "../new-deck-dialog/new-deck-dialog.component";
-import {SimpleCardComponent} from "../simple-card-component/simple-card.component";
-import {SimpleCard} from "../simple-card/simple-card";
+import {CardListService} from "./card-list.service";
+import {Card} from "../card/card";
 
 @Component({
-    selector: 'app-card-list',
+    selector: 'card-list',
     templateUrl: './card-list.component.html',
     styleUrls: ['./card-list.component.css']
 })
 export class CardListComponent implements OnInit {
+    public cards: Card[];
 
-    constructor(public simpleCardService: SimpleCardService) { }
 
-    ngOnInit() {
-        this.simpleCardService.getSimpleCards();
+    constructor(public CardListService: CardListService) {
     }
 
+    ngOnInit(): void {
+        this.CardListService.getCards().subscribe(
+            cards => {
+                this.cards = cards;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
 }
-
