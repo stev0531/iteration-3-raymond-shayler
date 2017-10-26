@@ -26,6 +26,7 @@ import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component"
 import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
+import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dialog.component";
 
 @NgModule({
 
@@ -48,10 +49,14 @@ import {SimpleCardComponent} from "./simple-card-component/simple-card.component
         HelpComponent,
         CardListComponent,
         SimpleCardComponent
+        CardDisplayDialogComponent,
+        PlayComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,
-        NewDeckDialogComponent
+        NewDeckDialogComponent,
+        CardDisplayDialogComponent,
+        CardComponent,
     ],
     providers: [
         CardListService,

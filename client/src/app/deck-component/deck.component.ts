@@ -3,7 +3,7 @@ import {DeckService} from "../deck/deck.service";
 import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
-import {MdDialog} from "@angular/material";
+import {MdDialog, MatDialogConfig} from "@angular/material";
 
 
 @Component({
@@ -23,9 +23,10 @@ export class DeckComponent implements OnInit {
   }
 
   openAddDialog() {
-      let dialogRef = this.dialog.open(NewCardDialogComponent, {
-          data: { deckId: this.id },
-      });
+      let config = new MatDialogConfig();
+      config.data = {deckId: this.id};
+
+      let dialogRef = this.dialog.open(NewCardDialogComponent, config);
       dialogRef.afterClosed().subscribe(result => {
           if(result) {
               this.deck.cards.push(result);
