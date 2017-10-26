@@ -48,9 +48,9 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
         PlayComponent,
         HelpComponent,
         CardListComponent,
-        SimpleCardComponent
+        SimpleCardComponent,
         CardDisplayDialogComponent,
-        PlayComponent,
+        PlayComponent
     ],
     entryComponents: [
         NewCardDialogComponent,

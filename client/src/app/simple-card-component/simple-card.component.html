@@ -1,6 +1,6 @@
-<mat-card class="simple-card">
+<mat-card class="simple-card" [ngStyle]="{'background-color': this.selected ? 'lightblue' : 'white'}">
     <mat-card-title class="simple-card-word"
-                    [ngStyle]="{'background-color': this.selected ? 'lightgreen' : 'lightcoral'}"
+
     >{{this.word}}</mat-card-title>
 </mat-card>
 
