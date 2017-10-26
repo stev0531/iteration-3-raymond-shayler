@@ -1,0 +1,12 @@
+.card-line {
+    margin-top: 5px;
+}
+
+.card-desc{
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+.card-cont{
+    margin-left: 1em;
+}

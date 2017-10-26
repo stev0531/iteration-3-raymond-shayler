@@ -9,6 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 import {SharedModule} from "../shared.module";
 import {CardComponent} from "../card-component/card.component";
 import {CardState} from "./CardState";
+import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
+import {By} from "@angular/platform-browser";
 
 describe('PlayComponent', () => {
   let component: PlayComponent;
@@ -57,7 +59,7 @@ describe('PlayComponent', () => {
 
     TestBed.configureTestingModule({
         imports: [SharedModule],
-      declarations: [ PlayComponent, CardComponent ],
+      declarations: [ PlayComponent, CardComponent, ],
         providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
             {provide: DeckService, useValue: deckServiceStub}, {
                 provide: ActivatedRoute,
@@ -95,7 +97,6 @@ describe('PlayComponent', () => {
       card_state2 = component.getCardState(1);
       card_state3 = component.getCardState(2);
       expect(component.cardStates.length).toEqual(3);
-
       card_state1.randomizeSages();
 
       card_state2.randomizeSages();
@@ -117,11 +118,18 @@ describe('PlayComponent', () => {
   });
 
   it('should increase page number when adding points', () => {
-      let card_state1: CardState;
+      let card_state1: CardState;  let de = fixture.debugElement.query(By.css('.card-peek-fab'));
       card_state1 = component.getCardState(0);
 
       component.addPoints(0);
       expect(component.pageNumber).toEqual(1);
   });
+
+  it("should have a peek-button", ()=>{
+     let de = fixture.debugElement.query(By.css('.card-peek-fab'));
+     let el = de.nativeElement;
+
+     expect(el).toBeTruthy();
+  })
 
 });
