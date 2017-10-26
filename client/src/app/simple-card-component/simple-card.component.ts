@@ -11,8 +11,7 @@ export class SimpleCardComponent implements OnInit {
 
     @Input() word: string;
     @Input() _id: string;
-
-    selected: boolean;
+    @Input() selected: boolean;
 
 
     constructor() {

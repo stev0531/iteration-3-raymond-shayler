@@ -2,11 +2,12 @@
 <div class="wrapper">
     <simple-card
         *ngFor="let card of cards"
+        (click)="select(card)"
         [word] = "card.word"
         [_id] = "card._id"
+        [selected]="card.selected"
     ></simple-card>
 </div>
-
  <!--<div layout-gt-sm="row">-->
     <!--<div flex-gt-xs="80" flex-offset-gt-xs="10" flex-xs="96" flex-offset-xs="2">-->
         <!--<mat-card>-->

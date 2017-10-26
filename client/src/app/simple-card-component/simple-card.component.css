@@ -1,11 +1,11 @@
 body {
-    margin:40px;
+    padding:40px;
 }
 
 .simple-card {
-    background-color: white;
     color:black;
     border-radius: 3px;
     padding: 30px;
     font-size: 150%;
 }
+
