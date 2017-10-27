@@ -8,6 +8,8 @@ import {Card} from "../card/card";
 })
 export class CardComponent implements OnInit {
 
+
+
   constructor() {
   }
 
@@ -15,7 +17,13 @@ export class CardComponent implements OnInit {
 
   @Input() selected?: number = 0;
 
+  @Input() showSynonym?: boolean = false;
+  @Input() showAntonym?: boolean = false;
+  @Input() showGeneral_sense?: boolean = false;
+  @Input() showExample_usage?: boolean = false;
+
   ngOnInit() {
   }
+
 
 }
