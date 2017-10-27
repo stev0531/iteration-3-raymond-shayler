@@ -9,9 +9,9 @@ import {MatDialogConfig, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA} from "@angu
 })
 export class CardDisplayDialogComponent implements OnInit {
 
-    constructor(public matDialogRef: MatDialogRef<CardDisplayDialogComponent>,
+    constructor( public matDialogRef: MatDialogRef<CardDisplayDialogComponent>,
                 @Inject(MAT_DIALOG_DATA)
-                public data: { Word: string, Synonym: string, Antonym: string, General_sense: string, Example_usage: string })
+                public data: { Word: string, Synonym: string, Antonym: string, General_sense: string, Example_usage: string, editShown:boolean })
     {  }
 
 
@@ -20,6 +20,7 @@ export class CardDisplayDialogComponent implements OnInit {
     Antonym: string;
     General_sense: string;
     Example_usage: string;
+    editShown: boolean;
 
     // @Input() card: Card;
 
@@ -29,8 +30,12 @@ export class CardDisplayDialogComponent implements OnInit {
         this.Antonym = this.data.Antonym;
         this.General_sense = this.data.General_sense;
         this.Example_usage = this.data.Example_usage;
+        this.editShown = this.data.editShown;
         console.log(this.data);
         console.log(this.Word);
+    }
 
+    setEditShown(value: boolean){
+        this.editShown = value;
     }
 }

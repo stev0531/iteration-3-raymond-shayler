@@ -21,10 +21,13 @@
         <div>
             <h4 mat-line class="card-cont">{{Example_usage}}</h4>
         </div>
-
     </mat-list>
-    <div id="button-controls">
-        <hr>
-        <button class="button">Edit</button>
-    </div>
 </mat-dialog-content>
+<mat-dialog-actions *ngIf="editShown" id="button-controls">
+    <button mat-raised-button class="card-edit-fab" mat-tooltip="Peek At Hints" matTooltipPosition="right">
+        <mat-icon class="md-24" aria-label="Edit Card">mode edit</mat-icon>
+    </button>
+</mat-dialog-actions>
+
+
+

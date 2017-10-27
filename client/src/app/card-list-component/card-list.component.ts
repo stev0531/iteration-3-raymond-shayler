@@ -38,11 +38,12 @@ export class CardListComponent implements OnInit {
             Synonym: presentCard.synonym,
             Antonym: presentCard.antonym,
             General_sense: presentCard.general_sense,
-            Example_usage: presentCard.example_usage
+            Example_usage: presentCard.example_usage,
         };
         console.log(config);
 
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
+       // cardRef.setEditShown(true);
     };
 
     constructor(public CardListService: CardListService,public peek: MdDialog) {
