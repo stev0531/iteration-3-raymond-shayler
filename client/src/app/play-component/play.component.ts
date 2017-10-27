@@ -10,6 +10,7 @@ import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 
 
+
 @Component({
     selector: 'app-play',
     templateUrl: './play.component.html',
@@ -27,6 +28,7 @@ export class PlayComponent implements OnInit {
     public points: number = 0;
 
     public cardStates: CardState[];
+
 
 
     constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog) {

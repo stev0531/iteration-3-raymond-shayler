@@ -3,7 +3,7 @@ import { CommonModule, } from '@angular/common';
 
 import {
     CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule,
-    CovalentMessageModule /*, any other modules */
+    CovalentMessageModule, /*, any other modules */
 } from '@covalent/core';
 
 import {
@@ -19,6 +19,7 @@ import {
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MdExpansionModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
@@ -49,6 +50,7 @@ const MATERIAL_MODULES: any[] = [
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MdExpansionModule,
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -59,8 +61,8 @@ const COVALENT_MODULES: any[] = [
 ];
 
 const OTHER_MODULES: any[] = [
-    PageSliderModule
-]
+    PageSliderModule,
+];
 
 
 @NgModule({

@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {DeckListComponent} from "./deck-list-component/deck-list.component";
 import {DeckComponent} from "./deck-component/deck.component";
 import {PlayComponent} from "./play-component/play.component";
+import {HelpComponent} from "./help-component/help.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -13,7 +14,9 @@ export const routes: Routes = [
     {path: 'decks', component: DeckListComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
-    {path: 'card', redirectTo: '/decks', pathMatch: 'full'}
+    {path: 'card', redirectTo: '/decks', pathMatch: 'full'},
+    {path: 'help', component: HelpComponent}
+
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);
