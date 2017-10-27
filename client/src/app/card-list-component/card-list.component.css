@@ -6,7 +6,16 @@ body {
     margin: 40px;
 }
 
+.menu{
+    width: 100%;
+    position:fixed;
+    margin: auto;
+    z-index: 1;
+    background-color:#1e88e5;
+}
+
 .wrapper {
+    margin-top: 10em;
     text-align: center;
     align-items: center;
     display: grid;

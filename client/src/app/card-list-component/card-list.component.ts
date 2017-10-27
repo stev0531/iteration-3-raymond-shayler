@@ -18,15 +18,22 @@ import {MdDialog} from "@angular/material";
 export class CardListComponent implements OnInit {
     public cards: Card[];
     public selectedCards: Card[];
+    public selectedButton: String;
+    public mode: String;
 
     select(card) {
-        this.openCardDisplay(card);
-        // if (card.selected == true) {
-        //     card.selected = false;
-        //
-        // } else {
-        //     card.selected = true;
-        // }
+        if (this.mode == "View") {
+            this.openCardDisplay(card);
+        } else {
+            if (card.selected == true) {
+                card.selected = false;
+
+            } else {
+                card.selected = true;
+            }
+        }
+        console.log(this.mode);
+        console.log(this.selectedButton);
     }
 
     public openCardDisplay(card) {
@@ -46,7 +53,31 @@ export class CardListComponent implements OnInit {
        // cardRef.setEditShown(true);
     };
 
+    public modeHandler(){
+        if (this.selectedButton == null) {
+            this.mode = "View";
+        } else if (this.selectedButton == "AddCards") {
+            this.mode = "AddCards";
+        } else if (this.selectedButton == "Delete") {
+            this.mode = "Delete";
+        } else {
+            this.mode = "View";
+        }
+    }
+
+    public changeButton(button) {
+        if (this.selectedButton == button) {
+            this.selectedButton = null;
+            console.log(this.selectedButton);
+        } else {
+            this.selectedButton = button;
+        }
+        this.modeHandler();
+    }
+
+
     constructor(public CardListService: CardListService,public peek: MdDialog) {
+        this.mode = "View";
     }
 
     ngOnInit(): void {
