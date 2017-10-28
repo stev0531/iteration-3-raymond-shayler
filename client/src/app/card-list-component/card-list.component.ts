@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {CardListService} from "./card-list.service";
 import {Card} from "../card/card";
 import {SimpleCardComponent} from "../simple-card-component/simple-card.component";
@@ -20,20 +20,27 @@ export class CardListComponent implements OnInit {
     public selectedCards: Card[];
     public selectedButton: String;
     public mode: String;
+    public clearAllSelected: boolean;
+
 
     select(card) {
         if (this.mode == "View") {
             this.openCardDisplay(card);
         } else {
             if (card.selected == true) {
+                this.selectedCards.splice(this.selectedCards.indexOf(card), 1);
                 card.selected = false;
-
             } else {
                 card.selected = true;
+                this.selectedCards.push(card);
             }
         }
-        console.log(this.mode);
-        console.log(this.selectedButton);
+        console.log(this.selectedCards[0].word);
+        console.log(this.selectedCards.length);
+    }
+
+    clearSelected(card){
+        card.selected = false;
     }
 
     public openCardDisplay(card) {
@@ -63,12 +70,17 @@ export class CardListComponent implements OnInit {
         } else {
             this.mode = "View";
         }
+        if (this.mode == "View") {
+            this.clearAllSelected = true;
+            this.selectedCards.length = 0;
+        } else {
+            this.clearAllSelected = false;
+        }
     }
 
     public changeButton(button) {
         if (this.selectedButton == button) {
             this.selectedButton = null;
-            console.log(this.selectedButton);
         } else {
             this.selectedButton = button;
         }
@@ -78,6 +90,7 @@ export class CardListComponent implements OnInit {
 
     constructor(public CardListService: CardListService,public peek: MdDialog) {
         this.mode = "View";
+        this.selectedCards = [];
     }
 
     ngOnInit(): void {

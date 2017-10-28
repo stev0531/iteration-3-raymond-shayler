@@ -19,9 +19,7 @@
         (click)="select(card)"
         [word] = "card.word"
         [_id] = "card._id"
-        [selected]="card.selected"
+        [selected]="clearAllSelected ? clearSelected(card) : card.selected"
     ></simple-card>
 </div>
-
-
 
