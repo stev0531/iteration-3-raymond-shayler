@@ -1,15 +1,16 @@
 <div class="menu">
-    <h2>Card List Menu</h2>
-    <button mat-button (click)="changeButton('AddCards')">
+    <h2 class="page-title">Card List Menu</h2>
+
+    <button class="mode-button mode-button-add" mat-button (click)="changeButton('AddCards')">
         Add Cards to Deck
     </button>
-    <button mat-button (click)="changeButton('Edit')">
+    <button class="mode-button mode-button-edit" mat-button (click)="changeButton('Edit')">
         Edit Cards
     </button>
-    <button mat-button>
+    <button class="mode-button mode-button-create" mat-button>
         Create New Card
     </button>
-    <button mat-button (click)="changeButton('Delete')">
+    <button class="mode-button mode-button-delete" mat-button (click)="changeButton('Delete')">
         Delete Cards
     </button>
 </div>
@@ -17,8 +18,8 @@
     <simple-card
         *ngFor="let card of cards"
         (click)="select(card)"
-        [word] = "card.word"
-        [_id] = "card._id"
+        [word]="card.word"
+        [_id]="card._id"
         [selected]="clearAllSelected ? clearSelected(card) : card.selected"
     ></simple-card>
 </div>
