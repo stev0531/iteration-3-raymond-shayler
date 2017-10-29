@@ -7,9 +7,8 @@
 .show-hint{
     display: inline;
 }
-/*.card-line {*/
-    /*margin-top: 5px;*/
 
-/*}*/
-/*.card-desc { float: left; width: 120px; }*/
-/*.card-cont { margin-left: 100px; }*/
+.card-line{
+    padding:3px;
+    border-radius: 5px;
+}
