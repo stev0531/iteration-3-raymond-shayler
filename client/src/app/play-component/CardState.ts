@@ -19,7 +19,7 @@ export class CardState {
         this.isComplete = false;
         this.selected = 0;
 
-        this.showSynonym = false;
+        this.showSynonym = true;
         this.showAntonym = false;
         this.showGeneral_sense = false;
         this.showExample_usage = false;

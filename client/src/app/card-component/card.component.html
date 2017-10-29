@@ -5,7 +5,7 @@
 
         <span class="card-synonym card-line" [ngClass]="{'hint-selected': this.selected == 1}">
             <span class="card-desc">Synonym:</span>
-            <span class="card-cont" id="cardSynonym" *ngIf = "this.showSynonym"> {{ card.synonym }}</span>
+            <span class="card-cont" id="cardSynonym" [ngClass]="{'show-hint': this.showSynonym == true}"> {{ card.synonym }}</span>
         </span>
         <br>
         <span class="card-antonym card-line" [ngClass]="{'hint-selected': this.selected == 2}">
@@ -22,6 +22,5 @@
             <span class="card-desc">Example usage:</span>
             <span class="card-cont" *ngIf="this.showExample_usage">{{ card.example_usage }}</span>
         </span>
-
     </mat-card-content>
 </mat-card>

@@ -1,6 +1,12 @@
 .hint-selected {
     background-color: pink;
 }
+.card-cont {
+    display: none;
+}
+.show-hint{
+    display: inline;
+}
 /*.card-line {*/
     /*margin-top: 5px;*/
 

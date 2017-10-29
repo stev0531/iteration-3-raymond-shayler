@@ -17,12 +17,13 @@ export class CardComponent implements OnInit {
 
   @Input() selected?: number = 0;
 
-  @Input() showSynonym?: boolean = false;
-  @Input() showAntonym?: boolean = false;
-  @Input() showGeneral_sense?: boolean = false;
-  @Input() showExample_usage?: boolean = false;
+  @Input() showSynonym: boolean;
+  @Input() showAntonym: boolean;
+  @Input() showGeneral_sense: boolean;
+  @Input() showExample_usage: boolean;
 
   ngOnInit() {
+
   }
 
 
