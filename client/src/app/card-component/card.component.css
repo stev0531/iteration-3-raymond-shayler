@@ -1,14 +1,23 @@
+
 .hint-selected {
-    background-color: pink;
+    background-color: lightskyblue;
+    font-weight: bold;
 }
+
 .card-cont {
     display: none;
 }
-.show-hint{
+
+.show-hint {
     display: inline;
 }
 
-.card-line{
-    padding:3px;
-    border-radius: 5px;
+.card-desc {
+
 }
+
+.card-line {
+    /*padding:5px;*/
+    border-radius:2px;
+}
+

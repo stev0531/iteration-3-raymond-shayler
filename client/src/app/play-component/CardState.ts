@@ -12,6 +12,7 @@ export class CardState {
     public showGeneral_sense: boolean;
     public showExample_usage: boolean;
 
+    public showHints: boolean[];
 
     constructor(){
         this.cardPoints = 5;
@@ -19,20 +20,16 @@ export class CardState {
         this.isComplete = false;
         this.selected = 0;
 
-        this.showSynonym = true;
-        this.showAntonym = false;
-        this.showGeneral_sense = false;
-        this.showExample_usage = false;
+        this.showHints = [false, false, false, false];
     }
 
     public randomizeSages(): void{
         if(this.cardHints.length > 0 && !this.isComplete) {
 
-            this.showSynonym = true;
-            this.showAntonym = true;
 
             let randNum = Math.floor(Math.random() * this.cardHints.length);
             this.selected = this.cardHints[randNum];
+            this.showHints[this.selected] = true;
 
             this.cardHints.splice(randNum, 1);
             this.cardPoints = this.cardPoints - 1;

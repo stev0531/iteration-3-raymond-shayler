@@ -7,20 +7,14 @@ import {Card} from "../card/card";
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-
-
-
   constructor() {
   }
 
   @Input() card: Card;
 
   @Input() selected?: number = 0;
+  @Input() showHints: boolean[];
 
-  @Input() showSynonym: boolean;
-  @Input() showAntonym: boolean;
-  @Input() showGeneral_sense: boolean;
-  @Input() showExample_usage: boolean;
 
   ngOnInit() {
 

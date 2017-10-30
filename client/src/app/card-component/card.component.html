@@ -5,22 +5,25 @@
 
         <span class="card-synonym card-line" [ngClass]="{'hint-selected': this.selected == 1}">
             <span class="card-desc">Synonym:</span>
-            <span class="card-cont" id="cardSynonym" [ngClass]="{'show-hint': this.showSynonym == true}"> {{ card.synonym }}</span>
+            <span class="card-cont" [ngClass]="{'show-hint': this.showHints[1]}"> {{ card.synonym }}</span>
         </span>
+        <br>
         <br>
         <span class="card-antonym card-line" [ngClass]="{'hint-selected': this.selected == 2}">
             <span class="card-desc">Antonym:</span>
-            <span class="card-cont" *ngIf="this.showAntonym">{{ card.antonym }} </span>
+            <span class="card-cont" [ngClass]="{'show-hint': this.showHints[2]}">{{ card.antonym }} </span>
         </span>
+        <br>
         <br>
         <span class="card-general-usage card-line" [ngClass]="{'hint-selected': this.selected == 3}">
             <span class="card-desc">General usage:</span>
-            <span class="card-cont" *ngIf="this.showGeneral_sense">{{ card.general_sense }}</span>
+            <span class="card-cont" [ngClass]="{'show-hint': this.showHints[3]}">{{ card.general_sense }}</span>
         </span>
+        <br>
         <br>
         <span class="card-example-usage card-line" [ngClass]="{'hint-selected': this.selected == 4}">
             <span class="card-desc">Example usage:</span>
-            <span class="card-cont" *ngIf="this.showExample_usage">{{ card.example_usage }}</span>
+            <span class="card-cont" [ngClass]="{'show-hint': this.showHints[4]}">{{ card.example_usage }}</span>
         </span>
     </mat-card-content>
 </mat-card>
