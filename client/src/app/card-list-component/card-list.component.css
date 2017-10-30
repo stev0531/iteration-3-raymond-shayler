@@ -7,15 +7,12 @@ body {
 }
 
 .menu{
-    width: 100%;
-    position:fixed;
-    margin: auto;
-    z-index: 1;
-    background-color:#1e88e5;
+    display: flex;
+    justify-content: center;
 }
 
 .wrapper {
-    margin-top: 10em;
+    margin-top: 1em;
     text-align: center;
     align-items: center;
     display: grid;

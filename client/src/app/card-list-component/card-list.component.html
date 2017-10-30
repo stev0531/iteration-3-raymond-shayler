@@ -1,19 +1,39 @@
-<div class="menu">
-    <h2 class="page-title">Card List Menu</h2>
+<!--<div class="menu">-->
+    <!--<h2 class="page-title">Card List Menu</h2>-->
 
-    <button class="mode-button mode-button-add" mat-button (click)="changeButton('AddCards')">
-        Add Cards to Deck
-    </button>
-    <button class="mode-button mode-button-edit" mat-button (click)="changeButton('Edit')">
-        Edit Cards
-    </button>
-    <button class="mode-button mode-button-create" mat-button>
-        Create New Card
-    </button>
-    <button class="mode-button mode-button-delete" mat-button (click)="changeButton('Delete')">
-        Delete Cards
-    </button>
-</div>
+    <!--<button class="mode-button mode-button-add" mat-button (click)="changeButton('AddCards')">-->
+        <!--Add Cards to Deck-->
+    <!--</button>-->
+    <!--<button class="mode-button mode-button-edit" mat-button (click)="changeButton('Edit')">-->
+        <!--Edit Cards-->
+    <!--</button>-->
+    <!--<button class="mode-button mode-button-create" mat-button>-->
+        <!--Create New Card-->
+    <!--</button>-->
+    <!--<button class="mode-button mode-button-delete" mat-button (click)="changeButton('Delete')">-->
+        <!--Delete Cards-->
+    <!--</button>-->
+<!--</div>-->
+
+<mat-button-toggle-group class="menu" #group="matButtonToggleGroup"  (change)="updateMode($event)">
+
+    <mat-button-toggle value="View">
+        View
+    </mat-button-toggle>
+    <mat-button-toggle value="AddCards">
+        Add
+    </mat-button-toggle>
+    <mat-button-toggle value="Edit">
+        Edit
+    </mat-button-toggle >
+    <mat-button-toggle value="Create">
+        Create
+    </mat-button-toggle>
+    <mat-button-toggle value="Delete">
+        Delete
+    </mat-button-toggle>
+
+</mat-button-toggle-group>
 <div class="wrapper">
     <simple-card
         *ngFor="let card of cards"

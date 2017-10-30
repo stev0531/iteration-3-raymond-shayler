@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CardListService} from "./card-list.service";
 import {Card} from "../card/card";
 import {SimpleCardComponent} from "../simple-card-component/simple-card.component";
@@ -22,6 +22,18 @@ export class CardListComponent implements OnInit {
     public mode: String;
     public clearAllSelected: boolean;
 
+
+
+    updateMode(event){
+        console.log(event);
+        this.mode = event.value;
+        if (this.mode == "View") {
+            this.clearAllSelected = true;
+            this.selectedCards.length = 0;
+        } else {
+            this.clearAllSelected = false;
+        }
+    }
 
     select(card) {
         if (this.mode == "View") {
