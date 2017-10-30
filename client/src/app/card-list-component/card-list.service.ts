@@ -24,5 +24,30 @@ export class CardListService {
         let newSimpleCard : Observable<Card> = this.http.request( + "/" + id).map(res => res.json());
         return newSimpleCard;
     }
+
+/*
+    public deleteCardsFromDeck(ids: string[]) {
+        let wipRequest: string = "";
+        for (var i = 0; i < ids.length; i++) {
+            wipRequest = wipRequest + ids[i].toString() + ",";
+        }
+        console.log("/del/" + wipRequest);
+        let deleteRequest: Observable<any> = this.http.request("/del" + wipRequest);
+    }
+*/
+/*
+    public addNewDeck(name: string) {
+        let response = this.http.post(this.deckUrl + "/add", {name: name}).map(res => res.json());
+        return response; */
+
+    public addCardsToDeck(ids: string[]) {
+        console.log("Received adding cards request");
+        let wipRequest: string = "";
+        for (var i = 0; i < ids.length; i++) {
+            wipRequest = wipRequest + ids[i] + ",";
+        }
+        let addRequest = this.http.post(this.cardUrl +"/addMany", wipRequest).map(res => res.json());
+        return addRequest;
+    }
 }
 

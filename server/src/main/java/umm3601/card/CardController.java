@@ -100,6 +100,33 @@ public class CardController {
         return JSON.serialize(cards);
     }
 
+/*
+    public Object deleteCards(Request request, Response response) {
+        System.err.print("Received this request "+ request);
+        deleteCards(request.queryMap().toMap());
+        return response;
+    }
+
+
+    public void deleteCards(Map<String, String[]> queryParams){
+        String id = queryParams.keySet().toArray()[0].toString();
+        System.err.println("about to delete card:" + id);
+        cardCollection.deleteOne(eq("_id", new ObjectId(id)));
+
+        }
+*/
+
+    public Object addCardsToDeck(Request req, Response res) {
+        System.out.print("Received this request " + req);
+        return addCardsToDeck(req.queryMap().toMap());
+
+    }
+
+    public Object addCardsToDeck(Map<String, String[]> queryParams){
+        String ids = queryParams.keySet().toArray()[0].toString();
+        System.out.println("about to add cards:" + ids);
+        return "completed";
+    }
 
     public Object addNewCard(Request req, Response res)
     {
@@ -144,7 +171,7 @@ public class CardController {
                 return false;
             }
         }
-      
+
         catch(RuntimeException ree)
         {
             ree.printStackTrace();
@@ -181,5 +208,6 @@ public class CardController {
 
         return newCard;
     }
+
 
 }

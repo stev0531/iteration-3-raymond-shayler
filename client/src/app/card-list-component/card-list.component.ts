@@ -25,7 +25,7 @@ export class CardListComponent implements OnInit {
 
 
 
-    updateMode(event){
+    updateMode(event) {
         console.log(event);
         this.mode = event.value;
         if (this.mode == "View") {
@@ -33,6 +33,9 @@ export class CardListComponent implements OnInit {
             this.selectedCards.length = 0;
         } else {
             this.clearAllSelected = false;
+        }
+        if (this.mode == "AddCards") {
+            this.addCards();
         }
     }
 
@@ -104,6 +107,17 @@ export class CardListComponent implements OnInit {
     constructor(public CardListService: CardListService,public peek: MdDialog) {
         this.mode = "View";
         this.selectedCards = [];
+    }
+
+    addCards(){
+        let cardIds: string[] = [];
+        if (this.selectedCards.length > 0) {
+            for (var i = 0; i < this.selectedCards.length; i++) {
+                cardIds[i] = this.selectedCards[i]._id;
+            }
+        }
+        this.CardListService.addCardsToDeck(cardIds);
+
     }
 
     ngOnInit(): void {
