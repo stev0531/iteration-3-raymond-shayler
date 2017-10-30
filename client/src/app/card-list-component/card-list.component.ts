@@ -10,6 +10,7 @@ import {MdDialog} from "@angular/material";
     selector: 'card-list',
     templateUrl: './card-list.component.html',
     styleUrls: ['./card-list.component.css']
+
 })
 
 
@@ -47,7 +48,7 @@ export class CardListComponent implements OnInit {
                 this.selectedCards.push(card);
             }
         }
-        console.log(this.selectedCards[0].word);
+      //  console.log(this.selectedCards[0].word);
         console.log(this.selectedCards.length);
     }
 
