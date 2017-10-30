@@ -19,8 +19,7 @@ describe('CardComponent', () => {
         imports: [SharedModule],
         declarations: [ TestComponentWrapper, CardComponent ],
         providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,19 +34,23 @@ describe('CardComponent', () => {
   });
 
     it('should check that card is added correctly', () => {
-
         expect(component.card.synonym).toContain("test synonym");
         expect(component.card.antonym).toContain("test antonym");
         expect(component.card.general_sense).toContain("test general_sense");
         expect(component.card.example_usage).toContain("test example_usage");
-
-
     });
 
      it('synonym should be highlighted', () => {
          let synonym: HTMLElement = debugElement.query(By.css('.card-synonym')).nativeElement;
-         expect(synonym.classList).toContain("hint-selected");
+         expect(synonym.classList).not.toContain("hint-selected");
      });
+
+    it('antonym should not be highlighted', () => {
+        let synonym: HTMLElement = debugElement.query(By.css('.card-antonym')).nativeElement;
+        expect(synonym.classList).toContain("hint-selected");
+    });
+
+
 });
 
 @Component({
@@ -63,6 +66,4 @@ class TestComponentWrapper {
         general_sense: "test general_sense",
         example_usage: "test example_usage",
     };
-
-
 }

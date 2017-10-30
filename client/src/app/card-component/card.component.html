@@ -3,26 +3,26 @@
     <mat-divider></mat-divider>
     <mat-card-content>
 
-        <span class="card-synonym card-line" [ngClass]="{'hint-selected': this.selected == 1}">
-            <span class="card-desc">Synonym:</span>
+        <span class="card-line" >
+            <span class="card-synonym card-desc" [ngClass]="{'hint-selected': this.selected == 1}">Synonym:</span>
             <span class="card-cont" [ngClass]="{'show-hint': this.showHints[1]}"> {{ card.synonym }}</span>
         </span>
         <br>
         <br>
-        <span class="card-antonym card-line" [ngClass]="{'hint-selected': this.selected == 2}">
-            <span class="card-desc">Antonym:</span>
+        <span class="card-line" >
+            <span class="card-antonym card-desc" [ngClass]="{'hint-selected': this.selected == 2}">Antonym:</span>
             <span class="card-cont" [ngClass]="{'show-hint': this.showHints[2]}">{{ card.antonym }} </span>
         </span>
         <br>
         <br>
-        <span class="card-general-usage card-line" [ngClass]="{'hint-selected': this.selected == 3}">
-            <span class="card-desc">General usage:</span>
+        <span class="card-line">
+            <span class="card-general-usage card-desc" [ngClass]="{'hint-selected': this.selected == 3}">General usage:</span>
             <span class="card-cont" [ngClass]="{'show-hint': this.showHints[3]}">{{ card.general_sense }}</span>
         </span>
         <br>
         <br>
-        <span class="card-example-usage card-line" [ngClass]="{'hint-selected': this.selected == 4}">
-            <span class="card-desc">Example usage:</span>
+        <span class="card-line" >
+            <span class="card-example-usage card-desc" [ngClass]="{'hint-selected': this.selected == 4}">Example usage:</span>
             <span class="card-cont" [ngClass]="{'show-hint': this.showHints[4]}">{{ card.example_usage }}</span>
         </span>
     </mat-card-content>

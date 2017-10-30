@@ -1,7 +1,6 @@
 
 .hint-selected {
     background-color: lightskyblue;
-    font-weight: bold;
 }
 
 .card-cont {
@@ -13,7 +12,7 @@
 }
 
 .card-desc {
-
+    font-weight: bold;
 }
 
 .card-line {
