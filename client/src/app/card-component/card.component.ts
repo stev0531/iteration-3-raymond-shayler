@@ -13,7 +13,7 @@ export class CardComponent implements OnInit {
   @Input() card: Card;
 
   @Input() selected?: number = 0;
-  @Input() showHints?: boolean[] = [true,true,true,true];
+  @Input() showHints?: boolean[] = [false, false, false, false];
 
 
   ngOnInit() {

@@ -7,11 +7,6 @@ export class CardState {
     public isComplete: boolean;
     public selected: number;
 
-    public showSynonym: boolean;
-    public showAntonym: boolean;
-    public showGeneral_sense: boolean;
-    public showExample_usage: boolean;
-
     public showHints: boolean[];
 
     constructor(){
@@ -29,7 +24,7 @@ export class CardState {
 
             let randNum = Math.floor(Math.random() * this.cardHints.length);
             this.selected = this.cardHints[randNum];
-            this.showHints[this.selected] = true;
+            this.showHints[this.selected-1] = true;
 
             this.cardHints.splice(randNum, 1);
             this.cardPoints = this.cardPoints - 1;

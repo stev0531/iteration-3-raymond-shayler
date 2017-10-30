@@ -29,33 +29,49 @@ describe('CardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the card', () => {
     expect(component).toBeTruthy();
   });
 
-    it('should check that card is added correctly', () => {
+    it('should check that card fields are correct', () => {
         expect(component.card.synonym).toContain("test synonym");
         expect(component.card.antonym).toContain("test antonym");
         expect(component.card.general_sense).toContain("test general_sense");
         expect(component.card.example_usage).toContain("test example_usage");
     });
 
-     it('synonym should be highlighted', () => {
+     it('should highlight hints correctly', () => {
          let synonym: HTMLElement = debugElement.query(By.css('.card-synonym')).nativeElement;
-         expect(synonym.classList).not.toContain("hint-selected");
+         expect(synonym.classList).toContain("hint-selected");
+
+         let antonym: HTMLElement = debugElement.query(By.css('.card-antonym')).nativeElement;
+         expect(antonym.classList).not.toContain("hint-selected");
+
+         let general_sense: HTMLElement = debugElement.query(By.css('.card-general-sense')).nativeElement;
+         expect(general_sense.classList).not.toContain("hint-selected");
+
+         let example_usage: HTMLElement = debugElement.query(By.css('.card-example-usage')).nativeElement;
+         expect(example_usage.classList).not.toContain("hint-selected");
      });
 
-    it('antonym should not be highlighted', () => {
-        let synonym: HTMLElement = debugElement.query(By.css('.card-antonym')).nativeElement;
-        expect(synonym.classList).toContain("hint-selected");
-    });
+     it('should display shown hints correctly', () =>{
+         let synonymCont: HTMLElement = debugElement.query(By.css('.synonym-cont')).nativeElement;
+         expect(synonymCont.classList).toContain("show-hint");
 
+         let antonymCont: HTMLElement = debugElement.query(By.css('.antonym-cont')).nativeElement;
+         expect(antonymCont.classList).toContain("show-hint");
 
+         let generalSenseCont: HTMLElement = debugElement.query(By.css('.general-sense-cont')).nativeElement;
+         expect(generalSenseCont.classList).not.toContain("show-hint");
+
+         let exampleUsageCont: HTMLElement = debugElement.query(By.css('.example-usage-cont')).nativeElement;
+         expect(exampleUsageCont.classList).not.toContain("show-hint");
+    })
 });
 
 @Component({
     selector: 'test-component-wrapper',
-    template: '<app-card [card]="card" [selected]="1"></app-card>'
+    template: '<app-card [card]="card" [selected]="1" [showHints]="[true,true,false,false]"></app-card>'
 })
 class TestComponentWrapper {
     card : Card = {
