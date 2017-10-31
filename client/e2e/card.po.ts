@@ -11,6 +11,10 @@ export class CardPage {
         e.click();
     }
 
+    //incomplete method to test card-clicks.
+    calcHints(){
+        return 1;
+    }
     getElementById(id: string) {
         let e = element(by.id(id));
         return e;
