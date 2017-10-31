@@ -18,10 +18,10 @@ describe('deck-page', () => {
         page.navigateTo('59de8a1f012e92ce86a57176');
         browser.sleep(1000);
         page.getAllCards().each( e => {
-           expect(e.element(by.className("card-synonym")).element(by.className("card-desc")).getText()).toContain("Synonym");
-           expect(e.element(by.className("card-antonym")).element(by.className("card-desc")).getText()).toContain("Antonym");
-           expect(e.element(by.className("card-general-usage")).element(by.className("card-desc")).getText()).toContain("General usage");
-           expect(e.element(by.className("card-example-usage")).element(by.className("card-desc")).getText()).toContain("Example usage");
+           expect(e.element(by.className("card-synonym")).getText()).toContain("Synonym");
+           expect(e.element(by.className("card-antonym")).getText()).toContain("Antonym");
+           expect(e.element(by.className("card-general-sense")).getText()).toContain("General sense");
+           expect(e.element(by.className("card-example-usage")).getText()).toContain("Example usage");
 
         });
     });
@@ -71,10 +71,10 @@ describe('deck-page', () => {
 
         let e = page.getAllCards().last();
         expect(e.element(by.className("card-word")).getText()).toEqual(word);
-        expect(e.element(by.className("card-synonym")).element(by.className("card-cont")).getText()).toEqual(synonym);
-        expect(e.element(by.className("card-antonym")).element(by.className("card-cont")).getText()).toEqual(antonym);
-        expect(e.element(by.className("card-general-usage")).element(by.className("card-cont")).getText()).toEqual(generalsense);
-        expect(e.element(by.className("card-example-usage")).element(by.className("card-cont")).getText()).toEqual(exampleusage);
+        expect(e.element(by.className("synonym-cont")).getText()).toEqual(synonym);
+        expect(e.element(by.className("antonym-cont")).getText()).toEqual(antonym);
+        expect(e.element(by.className("general-sense-cont")).getText()).toEqual(generalsense);
+        expect(e.element(by.className("example-usage-cont")).getText()).toEqual(exampleusage);
 
     });
 

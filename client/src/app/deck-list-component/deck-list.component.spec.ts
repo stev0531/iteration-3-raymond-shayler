@@ -38,4 +38,8 @@ describe('DeckListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Test maths', () => {
+    expect(5).toEqual(5);
+  })
 });
