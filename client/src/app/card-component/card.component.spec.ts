@@ -55,16 +55,16 @@ describe('CardComponent', () => {
      });
 
      it('should display shown hints correctly', () =>{
-         let synonymCont: HTMLElement = debugElement.query(By.css('#synonym-cont')).nativeElement;
+         let synonymCont: HTMLElement = debugElement.query(By.css('.synonym-cont')).nativeElement;
          expect(synonymCont.classList).toContain("show-hint");
 
-         let antonymCont: HTMLElement = debugElement.query(By.css('#antonym-cont')).nativeElement;
+         let antonymCont: HTMLElement = debugElement.query(By.css('.antonym-cont')).nativeElement;
          expect(antonymCont.classList).toContain("show-hint");
 
-         let generalSenseCont: HTMLElement = debugElement.query(By.css('#general-sense-cont')).nativeElement;
+         let generalSenseCont: HTMLElement = debugElement.query(By.css('.general-sense-cont')).nativeElement;
          expect(generalSenseCont.classList).not.toContain("show-hint");
 
-         let exampleUsageCont: HTMLElement = debugElement.query(By.css('#example-usage-cont')).nativeElement;
+         let exampleUsageCont: HTMLElement = debugElement.query(By.css('.example-usage-cont')).nativeElement;
          expect(exampleUsageCont.classList).not.toContain("show-hint");
     })
 });
