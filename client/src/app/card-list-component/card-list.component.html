@@ -14,9 +14,8 @@
         <!--Delete Cards-->
     <!--</button>-->
 <!--</div>-->
-
-<mat-button-toggle-group class="menu" #group="matButtonToggleGroup"  (change)="updateMode($event)">
-
+<div class="menu">
+<mat-button-toggle-group class="toggleButtons" #group="matButtonToggleGroup"  (change)="updateMode($event)">
     <mat-button-toggle value="View">
         View
     </mat-button-toggle>
@@ -32,8 +31,9 @@
     <mat-button-toggle value="Delete">
         Delete
     </mat-button-toggle>
-
 </mat-button-toggle-group>
+</div>
+
 <div class="wrapper">
     <simple-card
         *ngFor="let card of cards"

@@ -5,6 +5,8 @@ import {SimpleCardComponent} from "../simple-card-component/simple-card.componen
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {MdDialog} from "@angular/material";
+import {DeckService} from "../deck/deck.service";
+import {Deck} from "../deck/deck";
 
 @Component({
     selector: 'card-list',
@@ -22,6 +24,8 @@ export class CardListComponent implements OnInit {
     public selectedButton: String;
     public mode: String;
     public clearAllSelected: boolean;
+    public decks: Deck[];
+    public selectedDeck: Deck;
 
 
 
@@ -104,7 +108,7 @@ export class CardListComponent implements OnInit {
     }
 
 
-    constructor(public CardListService: CardListService,public peek: MdDialog) {
+    constructor(public CardListService: CardListService, public DeckService: DeckService, public peek: MdDialog) {
         this.mode = "View";
         this.selectedCards = [];
     }
@@ -129,5 +133,13 @@ export class CardListComponent implements OnInit {
                 console.log(err);
             }
         );
+    this.DeckService.getDecks().subscribe(
+        decks => {
+            this.decks = decks;
+        },
+        err => {
+            console.log(err);
+        }
+    );
     }
 }

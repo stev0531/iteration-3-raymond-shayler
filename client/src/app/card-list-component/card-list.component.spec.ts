@@ -11,6 +11,8 @@ import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-di
 import {CardListComponent} from "./card-list.component";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {DeckService} from "../deck/deck.service";
+
 
 describe('CardListComponent', () => {
     let component: CardListComponent;
@@ -123,5 +125,5 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
 
-    
+
 });

@@ -130,7 +130,6 @@ public class CardController {
 
     public Object addNewCard(Request req, Response res)
     {
-
         res.type("application/json");
         Object o = JSON.parse(req.body());
         try {
@@ -182,6 +181,7 @@ public class CardController {
 
 
     public Document addNewCard(String deckID, String word, String synonym, String antonym, String general_sense, String example_usage){
+
         if (deckID == null || word == null || synonym == null || antonym == null || general_sense == null || example_usage == null) {
             return null;
         }
