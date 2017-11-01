@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Inject} from '@angular/core';
 import {Card} from "../card/card";
 import {MatDialogConfig, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA} from "@angular/material";
+import {CardService} from "../card/card.service";
 
 @Component({
     selector: 'app-card-display-dialog',
@@ -33,6 +34,7 @@ export class CardDisplayDialogComponent implements OnInit {
         this.editShown = this.data.editShown;
         console.log(this.data);
         console.log(this.Word);
+
     }
 
     setEditShown(value: boolean){

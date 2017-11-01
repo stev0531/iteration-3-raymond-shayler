@@ -15,6 +15,10 @@ import spark.Request;
 import spark.Response;
 import umm3601.deck.DeckController;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -117,16 +121,61 @@ public class CardController {
 */
 
     public Object addCardsToDeck(Request req, Response res) {
-        System.out.print("Received this request " + req);
-        return addCardsToDeck(req.queryMap().toMap());
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("/tmp/logs.txt"));
+            pw.println("In addCardsToDeck");
+            pw.close();
+        } catch (IOException e) {
 
+        }
+
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
+        try {
+            if (o.getClass().equals(BasicDBObject.class)) {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+
+                    String deckID = dbO.getString("DeckID");
+                    String[] cardIds = (String[]) dbO.get("cardArray");
+
+                    System.err.println("Adding new cards to " + deckID + " " + cardIds);
+                    return addCardsToDeck(deckID, cardIds);
+                } catch (NullPointerException e) {
+                    System.err.println("A value was malformed or omitted, card addition request failed.");
+                    return false;
+                }
+            } else {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return false;
+            }
+        } catch (RuntimeException ree) {
+            ree.printStackTrace();
+            return false;
+        }
     }
 
-    public Object addCardsToDeck(Map<String, String[]> queryParams){
-        String ids = queryParams.keySet().toArray()[0].toString();
-        System.out.println("about to add cards:" + ids);
-        return "completed";
-    }
+    public boolean addCardsToDeck(String deckID, String[] cardIds){
+        try {
+            PrintWriter fw = new PrintWriter(new FileWriter("logs.txt"));
+            fw.println(deckID);
+            fw.println(new ObjectId(deckID));
+            fw.close();
+        } catch (IOException e) {
+
+        }
+
+        for (int i = 0; i < cardIds.length; i++) {
+            // try {
+                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", cardIds[i])));
+            /* }  catch (MongoException me) {
+                me.printStackTrace();
+                return false;
+            } */
+
+        }
+            return true;
+        }
 
     public Object addNewCard(Request req, Response res)
     {
@@ -209,5 +258,27 @@ public class CardController {
         return newCard;
     }
 
+    public String getSimpleCards(Request req, Response res){
+        res.type("application/json");
+        return getSimpleCards(req.queryMap().toMap());
+    }
+
+    public String getSimpleCards(Map<String, String[]> queryParams){
+        Document filterDoc = new Document();
+        if (queryParams.containsKey("word")){
+            String  targetWord = queryParams.get("word")[0];
+            filterDoc = filterDoc.append("word", targetWord);
+        }
+
+        AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
+            Aggregates.match(filterDoc),
+            Aggregates.project(Projections.fields(
+                Projections.include("_id"),
+                Projections.include("word")
+            ))
+        ));
+
+        return JSON.serialize(cards);
+    }
 
 }

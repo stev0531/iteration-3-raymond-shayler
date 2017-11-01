@@ -4,6 +4,8 @@ import {Card} from "../card/card";
 import {Observable} from "rxjs/Observable";
 import {environment} from "../../environments/environment";
 import "rxjs/add/operator/map";
+import {Deck} from "../deck/deck";
+import {SimpleDeck} from "../simple-deck/simple-deck";
 
 @Injectable()
 export class CardListService {
@@ -14,9 +16,9 @@ export class CardListService {
 
 
 
-    getCards(): Observable<Card[]> {
+    getSimpleCards(): Observable<any> {
 
-        let observable: Observable<any> = this.http.request(this.cardUrl);
+        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-cards");
         return observable.map(res => res.json());
     }
 
@@ -40,14 +42,24 @@ export class CardListService {
         let response = this.http.post(this.deckUrl + "/add", {name: name}).map(res => res.json());
         return response; */
 
-    public addCardsToDeck(ids: string[]) {
+    public addCardsToDeck(deck: SimpleDeck, ids: string[]) {
         console.log("Received adding cards request");
         let wipRequest: string = "";
+        wipRequest += "?DeckID=" + deck._id["$oid"] + "&cardArray=";
         for (var i = 0; i < ids.length; i++) {
-            wipRequest = wipRequest + ids[i] + ",";
+            console.log(ids[i]);
+            wipRequest += ids[i];
+            if (i < ids.length - 1) {
+                wipRequest += "&cardArray=";
+            }
         }
-        let addRequest = this.http.post(this.cardUrl +"/addMany", wipRequest).map(res => res.json());
-        return addRequest;
+        console.log(this.cardUrl + "/multi" + wipRequest);
+        // console.log(this.http.post(this.cardUrl +"/multi", wipRequest).map(res => res.json()));
+        return this.http.post(this.cardUrl +"/multi", wipRequest).map(res => {
+            console.log("processing response");
+            console.log(res.json());
+            res.json();
+        });
     }
 }
 

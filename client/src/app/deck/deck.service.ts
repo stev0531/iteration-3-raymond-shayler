@@ -4,6 +4,7 @@ import {Deck} from "./deck";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
+import {SimpleDeck} from "../simple-deck/simple-deck";
 
 @Injectable()
 export class DeckService {
@@ -27,7 +28,7 @@ export class DeckService {
       );
   }
 */
-    getDecks(): Observable<Deck[]> {
+    public getDecks(): Observable<Deck[]> {
 
         let observable: Observable<any> = this.http.request(this.deckUrl);
         return observable.map(res => res.json());
@@ -50,6 +51,10 @@ export class DeckService {
       return response;
   }
 
+    public getSimpleDecks(): Observable<SimpleDeck[]> {
 
-
+        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-decks");
+        console.log(this.deckUrl + "/simple-decks");
+        return observable.map(res => res.json());
+    }
 }

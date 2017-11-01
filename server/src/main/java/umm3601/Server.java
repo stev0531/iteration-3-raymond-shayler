@@ -66,13 +66,15 @@ public class Server {
 
         /// Deck and Card Endpoints ///////////////////////////
         /////////////////////////////////////////////
-        get("api/cards/:id", cardController::getCard);
         get("api/cards", cardController::getCards);
         get("api/decks", deckController::getDecks);
         post("api/decks/add", deckController::addNewDeck);
         get("api/decks/:id", deckController::getDeck);
         post("api/cards/add", cardController::addNewCard);
-        post("api/cards/addMany", cardController::addCardsToDeck);
+        post("api/addMany", cardController::addCardsToDeck);
+        get("api/cards/:id", cardController::getCard);
+        get("api/simple-cards", cardController::getSimpleCards);
+        get("api/simple-decks", deckController::getSimpleDecks);
 
 
         // Called after each request to insert the GZIP header into the response.

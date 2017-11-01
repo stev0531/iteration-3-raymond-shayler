@@ -7,40 +7,32 @@ import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-di
 import {MdDialog} from "@angular/material";
 import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
+import {SimpleCard} from "../simple-card/simple-card";
+import {SimpleDeck} from "../simple-deck/simple-deck";
 
 @Component({
     selector: 'card-list',
     templateUrl: './card-list.component.html',
     styleUrls: ['./card-list.component.css']
-
 })
 
 
 @ViewChild(SimpleCardComponent)
 
 export class CardListComponent implements OnInit {
-    public cards: Card[];
-    public selectedCards: Card[];
+    public cards: SimpleCard[];
+    public selectedCards: SimpleCard[];
     public selectedButton: String;
     public mode: String;
     public clearAllSelected: boolean;
-    public decks: Deck[];
-    public selectedDeck: Deck;
+    public decks: SimpleDeck[];
+    public selectedDeck: SimpleDeck;
 
 
-
-    updateMode(event) {
-        console.log(event);
-        this.mode = event.value;
-        if (this.mode == "View") {
-            this.clearAllSelected = true;
-            this.selectedCards.length = 0;
-        } else {
-            this.clearAllSelected = false;
-        }
-        if (this.mode == "AddCards") {
-            this.addCards();
-        }
+    selectDeck(deck) {
+        this.selectedDeck = deck;
+        console.log("YAY");
+        console.log(this.selectedDeck);
     }
 
     select(card) {
@@ -55,7 +47,6 @@ export class CardListComponent implements OnInit {
                 this.selectedCards.push(card);
             }
         }
-      //  console.log(this.selectedCards[0].word);
         console.log(this.selectedCards.length);
     }
 
@@ -83,10 +74,8 @@ export class CardListComponent implements OnInit {
     public modeHandler(){
         if (this.selectedButton == null) {
             this.mode = "View";
-        } else if (this.selectedButton == "AddCards") {
-            this.mode = "AddCards";
-        } else if (this.selectedButton == "Delete") {
-            this.mode = "Delete";
+        } else if (this.selectedButton == "select") {
+            this.mode = "Select";
         } else {
             this.mode = "View";
         }
@@ -117,15 +106,15 @@ export class CardListComponent implements OnInit {
         let cardIds: string[] = [];
         if (this.selectedCards.length > 0) {
             for (var i = 0; i < this.selectedCards.length; i++) {
-                cardIds[i] = this.selectedCards[i]._id;
+                cardIds[i] = this.selectedCards[i]._id["$oid"];
             }
         }
-        this.CardListService.addCardsToDeck(cardIds);
+        this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
 
     }
 
     ngOnInit(): void {
-        this.CardListService.getCards().subscribe(
+        this.CardListService.getSimpleCards().subscribe(
             cards => {
                 this.cards = cards;
             },
@@ -133,13 +122,13 @@ export class CardListComponent implements OnInit {
                 console.log(err);
             }
         );
-    this.DeckService.getDecks().subscribe(
-        decks => {
-            this.decks = decks;
-        },
-        err => {
-            console.log(err);
-        }
-    );
+        this.DeckService.getSimpleDecks().subscribe(
+            decks => {
+                this.decks = decks;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 }

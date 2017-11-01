@@ -12,6 +12,7 @@ import {CardListComponent} from "./card-list.component";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
+import {Deck} from "../deck/deck";
 
 
 describe('CardListComponent', () => {
@@ -23,8 +24,27 @@ describe('CardListComponent', () => {
         getCards: () => Observable<any>
     };
 
+    let deckServiceStub: {
+        getDecks: () => Observable<Deck>
+    };
+
     beforeEach(async(() => {
 
+        deckServiceStub = {
+            getDecks: () => Observable.of({
+                _id : {
+                    $oid: "test id"
+                },
+                name: "test deck",
+                cards: [{   _id : "test id",
+                    word : "test word",
+                    synonym : "test synonym",
+                    antonym: "test antonym",
+                    general_sense: "test general_sense",
+                    example_usage: "test example_usage",
+                }]
+            })
+        };
         cardServiceStub = {
             getCards: () => Observable.of([
                     {   _id : "test id",
@@ -73,7 +93,9 @@ describe('CardListComponent', () => {
                     useValue: {
                         params: Observable.of({id: "test id"})
                     }
-                }],
+                },
+                {provide: DeckService, useValue: deckServiceStub}
+            ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
@@ -98,14 +120,8 @@ describe('CardListComponent', () => {
        expect(component.selectedCards.length).toBe(0);
     });
 
-    it('Will put a card into the selected array if the mode is "AddCards"', () => {
-        component.mode = "AddCards";
-        component.select(component.cards[0]);
-        expect(component.selectedCards.length).toBe(1);
-    });
-
-    it ('Will put a card into the selected array if the mode is "Delete"', () => {
-        component.mode = "Delete";
+    it('Will put a card into the selected array if the mode is "Select"', () => {
+        component.mode = "Select";
         component.select(component.cards[0]);
         expect(component.selectedCards.length).toBe(1);
     });
