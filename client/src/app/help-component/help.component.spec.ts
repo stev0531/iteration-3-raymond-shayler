@@ -39,7 +39,7 @@ describe('HelpComponent', () => {
         expect(el.textContent).toContain("Help & Rules");
     });
 
-    it("should have four sections", ()=>{
+    it("should have four sections", () => {
         de = fixture.debugElement.query(By.css('.section-rules'));
         el = de.nativeElement;
         expect(el.textContent).toContain("How to Play")

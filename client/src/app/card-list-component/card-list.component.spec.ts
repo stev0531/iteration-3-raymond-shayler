@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed,} from '@angular/core/testing';
 import {NgModule} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
@@ -12,13 +12,11 @@ import {CardListComponent} from "./card-list.component";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
-import {Deck} from "../deck/deck";
 
 
 describe('CardListComponent', () => {
     let component: CardListComponent;
     let fixture: ComponentFixture<CardListComponent>;
-    let cardList: CardListComponent;
 
     let cardServiceStub: {
         getSimpleCards: () => Observable<any>
@@ -77,12 +75,13 @@ describe('CardListComponent', () => {
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
-        class TestDialog {}
+        class TestDialog {
+        }
 
 
         TestBed.configureTestingModule({
             imports: [SharedModule, TestDialog, CommonModule],
-            declarations: [ CardListComponent, CardComponent, SimpleCardComponent],
+            declarations: [CardListComponent, CardComponent, SimpleCardComponent],
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
                 {provide: CardListService, useValue: cardServiceStub}, {
                     provide: ActivatedRoute,
@@ -108,12 +107,12 @@ describe('CardListComponent', () => {
     });
 
     it('Should have an array with all of the received cards', () => {
-       expect(component.cards.length).toBe(3);
+        expect(component.cards.length).toBe(3);
     });
 
     it('Will not put a card into the selected array if the mode is "View"', () => {
-       component.select(component.cards[0]);
-       expect(component.selectedCards.length).toBe(0);
+        component.select(component.cards[0]);
+        expect(component.selectedCards.length).toBe(0);
     });
 
     it('Will put a card into the selected array if the mode is "Select"', () => {
@@ -122,13 +121,13 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(1);
     });
 
-    it ('Will deselect a card if it is selected twice', () => {
-       component.mode = "AddCards";
-       component.select(component.cards[0]);
-       component.select(component.cards[0]);
-       expect(component.selectedCards.length).toBe(0);
+    it('Will deselect a card if it is selected twice', () => {
+        component.mode = "AddCards";
+        component.select(component.cards[0]);
+        component.select(component.cards[0]);
+        expect(component.selectedCards.length).toBe(0);
     });
-    it ('Will deselect all cards if the mode is changed to view', () => {
+    it('Will deselect all cards if the mode is changed to view', () => {
         component.mode = "AddCards";
         component.select(component.cards[0]);
         component.select(component.cards[1]);

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import {SimpleCard} from "./simple-card";
 import {Observable} from "rxjs/Observable";
@@ -10,9 +10,10 @@ export class SimpleCardService {
 
     private cardUrl: string = environment.API_URL + "cards";
 
-    constructor(private http: Http) {  }
+    constructor(private http: Http) {
+    }
 
-    public simpleCards: SimpleCard[] ;
+    public simpleCards: SimpleCard[];
 
     public getSimpleCards(): void {
         this.http.request(this.cardUrl).map(res => res.json()).subscribe(
@@ -24,8 +25,8 @@ export class SimpleCardService {
         );
     }
 
-    public getSimpleCard(id:string) : Observable<SimpleCard> {
-        let newSimpleCard : Observable<SimpleCard> = this.http.request( + "/" + id).map(res => res.json());
+    public getSimpleCard(id: string): Observable<SimpleCard> {
+        let newSimpleCard: Observable<SimpleCard> = this.http.request(+"/" + id).map(res => res.json());
         return newSimpleCard;
     }
 }

@@ -1,10 +1,9 @@
-.card-desc{
-    font-weight:bold;
+.pop-in-card-desc {
+    font-weight: bold;
 }
 
-.pop-in-card-word{
+.pop-in-card-word {
     white-space: pre;
     text-align: center;
-    font-size:15pt;
-
+    font-size: 15pt;
 }

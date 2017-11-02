@@ -10,7 +10,6 @@ import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 
 
-
 @Component({
     selector: 'app-play',
     templateUrl: './play.component.html',

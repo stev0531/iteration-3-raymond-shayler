@@ -10,11 +10,10 @@
 
 $primary: mat-palette($mat-green);
 
-$accent:  mat-palette($mat-pink);
+$accent: mat-palette($mat-pink);
 
 // The warn palette is optional (defaults to red).
-$warn:    mat-palette($mat-green,300);
-
+$warn: mat-palette($mat-green, 300);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary, $accent, $warn);

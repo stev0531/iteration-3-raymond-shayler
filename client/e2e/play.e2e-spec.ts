@@ -44,9 +44,9 @@ describe('play-page', () => {
         //page.getActivePage();
         page.clickButton('cardPeek');
         browser.sleep(1000);
-        expect(page.getActivePage().element(by.className("card-entire"))).toBeTruthy();
-        expect(page.getActivePage().element(by.className("card-desc")).isPresent).toBeTruthy();
-        expect(page.getActivePage().element(by.className("card-desc")).getText()).toContain("Synonym");
+        expect(page.getElementsByClass("pop-in-card-entire")).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-desc").first().isPresent).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-desc").getText()).toContain("Synonym");
         expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
     });
 
