@@ -19,6 +19,8 @@ import {
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MatButtonToggleModule,
+    MdSelectModule,
     MdExpansionModule,
 } from '@angular/material';
 
@@ -50,6 +52,8 @@ const MATERIAL_MODULES: any[] = [
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MatButtonToggleModule,
+    MdSelectModule,
     MdExpansionModule,
 ];
 

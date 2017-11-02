@@ -1,12 +1,25 @@
 #Title {
-    text-align: center;
 }
 
 body {
     margin: 40px;
 }
 
+.toggleButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.menu{
+    width: 100%;
+    position:fixed;
+    margin: auto;
+    z-index: 1;
+    background-color:#1e88e5;
+}
+
 .wrapper {
+    margin-top: 5em;
     text-align: center;
     align-items: center;
     display: grid;
