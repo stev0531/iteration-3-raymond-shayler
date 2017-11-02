@@ -1,5 +1,5 @@
 import {CardPage} from "./card.po";
-import {by} from "protractor";
+import {browser, by} from "protractor";
 
 describe('card-component', () => {
     let page: CardPage;
@@ -31,6 +31,7 @@ describe('card-component', () => {
         hintButton.click();
         hintButton.click();
         hintButton.click();
+        browser.sleep(500);
         expect(page.getActivePage().element(by.className("synonym-cont")).getText()).toContain('artistic');
         expect(page.getActivePage().element(by.className("antonym-cont")).getText()).toContain('Efferant');
         expect(page.getActivePage().element(by.className("general-sense-cont")).getText()).toContain('reading for pleasure');

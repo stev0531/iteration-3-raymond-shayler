@@ -31,7 +31,6 @@ export class CardListComponent implements OnInit {
 
     selectDeck(deck) {
         this.selectedDeck = deck;
-        console.log("YAY");
         console.log(this.selectedDeck);
     }
 
@@ -75,7 +74,6 @@ export class CardListComponent implements OnInit {
             }
         );
 
-        // cardRef.setEditShown(true);
     };
 
     public modeHandler() {
@@ -117,7 +115,7 @@ export class CardListComponent implements OnInit {
             }
         }
         this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
-
+        this.clearAllSelected = true;
     }
 
     ngOnInit(): void {

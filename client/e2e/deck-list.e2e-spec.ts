@@ -1,19 +1,20 @@
 import {DeckListPage} from "./deck-list.po";
-import {browser, by} from 'protractor';
+import {browser, by, protractor} from 'protractor';
+
 
 
 describe('deck-list-page', () => {
-   let page: DeckListPage;
+    let page: DeckListPage;
 
-   beforeEach(() => {
-       page = new DeckListPage();
-       page.navigateTo();
-   });
+    beforeEach(() => {
+        page = new DeckListPage();
+        page.navigateTo();
+    });
 
 
-   it('should highlight title header', () => {
-       expect(page.getPageTitle()).toEqual('Decks');
-   });
+    it('should highlight title header', () => {
+        expect(page.getPageTitle()).toEqual('Decks');
+    });
 
     it("should have a play button and a deck name link for every deck", () => {
         page.getAllDecks().each(e => {
@@ -24,15 +25,15 @@ describe('deck-list-page', () => {
     });
 
     it('should add one deck', () => {
-       page.getAllDecks().count().then( beforecount => {
-           page.addDeck("Test Deck");
-           browser.sleep(500); // wait for stuff
-           expect(page.getAllDecks().count()).toEqual(beforecount + 1);
-       });
+        page.getAllDecks().count().then(beforecount => {
+            page.addDeck("Test Deck");
+            browser.sleep(500); // wait for stuff
+            expect(page.getAllDecks().count()).toEqual(beforecount + 1);
+        });
     });
 
     it('should add three decks', () => {
-        page.getAllDecks().count().then( beforecount => {
+        page.getAllDecks().count().then(beforecount => {
             page.addDeck("Test Deck 1");
             browser.sleep(500); // wait for stuff
             page.addDeck("Test Deck 2");
@@ -44,7 +45,7 @@ describe('deck-list-page', () => {
     });
 
     it('should add one deck and check that its still there', () => {
-        page.getAllDecks().count().then( beforecount => {
+        page.getAllDecks().count().then(beforecount => {
             page.addDeck("Test Deck");
             page.navigateTo();
             expect(page.getAllDecks().count()).toEqual(beforecount + 1);
@@ -61,8 +62,6 @@ describe('deck-list-page', () => {
         expect(e.element(by.className("deck-name")).getText()).toEqual(name);
 
     });
-
-
 
 
 });

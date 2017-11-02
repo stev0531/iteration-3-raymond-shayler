@@ -29,7 +29,15 @@ describe('card-list-page', () => {
             browser.sleep(100);
             expect(page.getElementsByClass("pop-in-card-entire")).toBeTruthy();
             expect(page.getElementsByClass("pop-in-card-desc").isPresent).toBeTruthy();
-            expect(page.getElementsByClass("pop-in-card-desc").first().getText()).toContain("Synonym");
-            expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
+            page.getElementsByClass("pop-in-card-desc").getText().then(function(inpString: string){
+                        (expect(inpString.length)).toBeGreaterThan(1);},
+                function (inpString: string){
+                //if we reach here, the promise failed.
+                expect(0).toEqual(1);});
+        page.getElementsByClass("pop-in-card-content").getText().then(function(inpString: string){
+                (expect(inpString.length)).toBeGreaterThan(1);},
+            function (inpString: string){
+                //if we reach here, the promise failed.
+                expect(0).toEqual(1);});
         });
 });

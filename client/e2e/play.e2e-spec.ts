@@ -46,7 +46,7 @@ describe('play-page', () => {
         browser.sleep(1000);
         expect(page.getElementsByClass("pop-in-card-entire")).toBeTruthy();
         expect(page.getElementsByClass("pop-in-card-desc").first().isPresent).toBeTruthy();
-        expect(page.getElementsByClass("pop-in-card-desc").getText()).toContain("Synonym");
+        expect(page.getElementsByClass("pop-in-card-desc").first().getText()).toContain("Synonym");
         expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
     });
 

@@ -5,7 +5,7 @@
     <button [ngClass]="{'hide': this.selectedButton !='select'}" color="accent" mat-raised-button class="round-button"
             id="Cancel-Button" (click)="changeButton('Cancel')">Cancel
     </button>
-    <button [ngClass]="{'grey-out': this.selectedButton !='select'}" color="warn" class="round-button" id="Add-Cards"
+    <button [ngClass]="{'grey-out': this.selectedCards.length == 0 || this.selectedDeck == null}" color="warn" class="round-button" id="Add-Cards"
             mat-raised-button (click)="addCards()">Add
     </button>
     <mat-select placeholder="Deck">
