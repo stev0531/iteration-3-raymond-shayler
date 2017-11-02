@@ -2,6 +2,7 @@
 
 
 .selected-arrow{
+    float:left;
     background-color: transparent;
     border-radius: 100px;
     padding-left:2px;
@@ -32,5 +33,9 @@
 
 .card-word{
     text-align: center;
+}
+
+.inside-line{
+    margin-left:22px;
 }
 

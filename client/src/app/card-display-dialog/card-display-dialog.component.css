@@ -1,13 +1,10 @@
-.card-line {
-    margin-top: 5px;
-}
-
 .card-desc{
-    /*display: flex;*/
-    /*justify-content: center;*/
+    font-weight:bold;
 }
 
-.card-cont{
-    margin-left: 1em;
-}
+.pop-in-card-word{
+    white-space: pre;
+    text-align: center;
+    font-size:15pt;
 
+}

@@ -1,27 +1,31 @@
 <mat-dialog-content class="pop-in-card-entire" id="pop-in-card">
-    <h4 class="pop-in-card-word">{{ Word }}</h4>
+    <h5 class="pop-in-card-word">{{ Word }}</h5>
     <mat-divider></mat-divider>
-    <mat-list>
-        <p class="pop-in-card-desc">Synonym</p>
-        <div>
-            <h4 mat-line class="pop-in-card-content">{{Synonym}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="pop-in-card-desc">Antonym</p>
-        <div>
-            <h4 mat-line class="pop-in-card-content">{{Antonym}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="pop-in-card-desc">General Sense</p>
-        <div>
-            <h4 mat-line class="pop-in-card-content">{{General_sense}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="pop-in-card-desc">Example usage</p>
-        <div>
-            <h4 mat-line class="pop-in-card-content">{{Example_usage}}</h4>
-        </div>
-    </mat-list>
+    <mat-card-content>
+        <br>
+        <span class="card-line">
+            <span class="card-synonym card-desc">Synonym:</span>
+            <span class="synonym-cont card-cont">{{Synonym}}</span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line" >
+            <span class="card-antonym card-desc">Antonym:</span>
+            <span class="antonym-cont card-cont">{{Antonym}} </span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line">
+            <span class="card-general-sense card-desc">General sense:</span>
+            <span class="general-sense-cont card-cont">{{General_sense}}</span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line" >
+            <span class="card-example-usage card-desc">Example usage:</span>
+            <span class="example-usage-cont card-cont">{{Example_usage}}</span>
+        </span>
+    </mat-card-content>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="editShown" id="button-controls">
     <button mat-raised-button class="card-edit-fab" mat-tooltip="Peek At Hints" matTooltipPosition="right">

@@ -1,33 +1,25 @@
 <!--<div class="menu">-->
-    <!--<h2 class="page-title">Card List Menu</h2>-->
-
-    <!--<button class="mode-button mode-button-add" mat-button (click)="changeButton('AddCards')">-->
-        <!--Add Cards to Deck-->
-    <!--</button>-->
-    <!--<button class="mode-button mode-button-edit" mat-button (click)="changeButton('Edit')">-->
-        <!--Edit Cards-->
-    <!--</button>-->
-    <!--<button class="mode-button mode-button-create" mat-button>-->
-        <!--Create New Card-->
-    <!--</button>-->
-    <!--<button class="mode-button mode-button-delete" mat-button (click)="changeButton('Delete')">-->
-        <!--Delete Cards-->
-    <!--</button>-->
+    <!--<button id="Select-Button" mat-raised-button (click)="changeButton('select')">Select</button>-->
+    <!--<button id="Cancel-Button" mat-raised-button (click)="changeButton('Cancel')">Cancel</button>-->
+    <!--<mat-select placeholder="Deck">-->
+    <!--<mat-option *ngFor="let deck of decks" [value]="deck" (click)="selectDeck(deck)">-->
+        <!--{{ deck.name }}-->
+    <!--</mat-option>-->
+    <!--</mat-select>-->
+    <!--<button id="Add-Cards" mat-raised-button (click)="addCards()">Add Cards to Deck</button>-->
 <!--</div>-->
-<div class="menu">
-    <!--<mat-button-toggle value="Select" (click)="changeButton('Select')">-->
-        <!--Select-->
-    <!--</mat-button-toggle>-->
-    <button id="Select-Button" mat-raised-button (click)="changeButton('select')">Select</button>
-    <button id="Cancel-Button" mat-raised-button (click)="changeButton('Cancel')">Cancel</button>
+
+<div id="side-menu">
+    <button color="warn" class="round-button" id="Select-Button" mat-raised-button (click)="changeButton('select')">Select</button>
+    <button color="warn" class="round-button" id="Cancel-Button" mat-raised-button (click)="changeButton('Cancel')">Cancel</button>
+    <br>
     <mat-select placeholder="Deck">
     <mat-option *ngFor="let deck of decks" [value]="deck" (click)="selectDeck(deck)">
-        {{ deck.name }}
+    {{ deck.name }}
     </mat-option>
     </mat-select>
     <button id="Add-Cards" mat-raised-button (click)="addCards()">Add Cards to Deck</button>
 </div>
-
 <div class="wrapper">
     <simple-card
         *ngFor="let card of cards"
