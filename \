@@ -1,0 +1,68 @@
+Merge branch 'hint-redesign'
+possibly bad merge.
+
+# Conflicts:
+#	client/e2e/help.e2e-spec.ts
+#	client/e2e/help.po.ts
+#	client/src/app/app.component.html
+#	client/src/app/app.module.ts
+#	client/src/app/app.routes.ts
+#	client/src/app/card-display-dialog/card-display-dialog.component.css
+#	client/src/app/card-display-dialog/card-display-dialog.component.html
+#	client/src/app/help-component/help.component.css
+#	client/src/app/help-component/help.component.html
+#	client/src/app/help-component/help.component.spec.ts
+#	client/src/app/help-component/help.component.ts
+#	client/src/app/play-component/play.component.ts
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .travis.yml
+#	new file:   client/e2e/card.e2e-spec.ts
+#	new file:   client/e2e/card.po.ts
+#	modified:   client/e2e/deck.e2e-spec.ts
+#	modified:   client/e2e/help.e2e-spec.ts
+#	modified:   client/e2e/help.po.ts
+#	modified:   client/src/app/app.component.html
+#	modified:   client/src/app/app.module.ts
+#	modified:   client/src/app/app.routes.ts
+#	modified:   client/src/app/card-component/card.component.css
+#	modified:   client/src/app/card-component/card.component.html
+#	modified:   client/src/app/card-component/card.component.spec.ts
+#	modified:   client/src/app/card-component/card.component.ts
+#	modified:   client/src/app/card-display-dialog/card-display-dialog.component.css
+#	modified:   client/src/app/card-display-dialog/card-display-dialog.component.html
+#	new file:   client/src/app/card-list-component/card-list.component.css
+#	new file:   client/src/app/card-list-component/card-list.component.html
+#	new file:   client/src/app/card-list-component/card-list.component.spec.ts
+#	new file:   client/src/app/card-list-component/card-list.component.ts
+#	new file:   client/src/app/card-list-component/card-list.service.ts
+#	new file:   client/src/app/card/card.service.ts
+#	modified:   client/src/app/deck-list-component/deck-list.component.spec.ts
+#	modified:   client/src/app/help-component/help.component.css
+#	modified:   client/src/app/help-component/help.component.html
+#	modified:   client/src/app/help-component/help.component.spec.ts
+#	modified:   client/src/app/help-component/help.component.ts
+#	modified:   client/src/app/home/home.component.html
+#	modified:   client/src/app/play-component/CardState.ts
+#	modified:   client/src/app/play-component/play.component.html
+#	modified:   client/src/app/play-component/play.component.ts
+#	new file:   client/src/app/simple-card-component/simple-card.component.css
+#	new file:   client/src/app/simple-card-component/simple-card.component.html
+#	new file:   client/src/app/simple-card-component/simple-card.component.spec.ts
+#	new file:   client/src/app/simple-card-component/simple-card.component.ts
+#	new file:   client/src/app/simple-card/simple-card.service.ts
+#	new file:   client/src/app/simple-card/simple-card.ts
+#

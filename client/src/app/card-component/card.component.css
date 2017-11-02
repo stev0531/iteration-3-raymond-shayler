@@ -1,10 +1,20 @@
 
-.hint-selected {
-    background-color: lightskyblue;
-}
 
+
+.selected-arrow{
+    background-color: transparent;
+    border-radius: 100px;
+    padding-left:2px;
+    padding-right:2px;
+    color:white;
+}
 .card-cont {
     display: none;
+}
+
+.hint-selected {
+    background-color:lightgreen;
+    color: black;
 }
 
 .show-hint {
