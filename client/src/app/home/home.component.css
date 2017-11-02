@@ -15,7 +15,7 @@ button {
     color: black;
 }
 
-#card-button:hover, #deck-button:hover, #setting-button:hover {
+#card-button:hover, #deck-button:hover, #help-button:hover {
     color: white;
 }
 

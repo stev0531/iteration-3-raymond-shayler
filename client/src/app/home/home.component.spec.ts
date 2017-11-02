@@ -48,7 +48,7 @@ describe('Home', () => {
         deckDe = fixture.debugElement.query(By.css("#deck-button"));
         deckEl = deckDe.nativeElement;
 
-        settingDe = fixture.debugElement.query(By.css("#setting-button"));
+        settingDe = fixture.debugElement.query(By.css("#help-button"));
         settingEl = settingDe.nativeElement;
 
     });
@@ -76,8 +76,8 @@ describe('Home', () => {
         expect(deckEl.textContent).toContain("Deck");
     });
 
-    it("contains setting button", () => {
+    it("contains help button", () => {
         fixture.detectChanges();
-        expect(settingEl.textContent).toContain("Setting");
+        expect(settingEl.textContent).toContain("Help");
     });
 });
