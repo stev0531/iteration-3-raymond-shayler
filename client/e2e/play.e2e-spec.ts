@@ -41,22 +41,22 @@ describe('play-page', () => {
     });
 
     it("should allow peeking at cards", () => {
-        page.getActivePage();
+        //page.getActivePage();
         page.clickButton('cardPeek');
-        browser.sleep(100);
+        browser.sleep(1000);
         expect(page.getActivePage().element(by.className("card-entire"))).toBeTruthy();
         expect(page.getActivePage().element(by.className("card-desc")).isPresent).toBeTruthy();
         expect(page.getActivePage().element(by.className("card-desc")).getText()).toContain("Synonym");
-        expect(page.getActivePage().element(by.className("card-cont")).getText()).toContain("artistic");
+        expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
     });
 
     it("should peek at the present card", () => {
-        page.getActivePage();
+        //page.getActivePage();
         page.clickButton("forward-button");
         page.clickButton('cardPeek');
-        browser.sleep(100);
-        expect(page.getActivePage().element(by.className("card-entire"))).toBeTruthy();
-        expect(page.getActivePage().element(by.className("card-cont")).getText()).toContain("allegory");
+        browser.sleep(1000);
+        expect(page.getElementById("pop-in-card")).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("allegory");
     })
 
 

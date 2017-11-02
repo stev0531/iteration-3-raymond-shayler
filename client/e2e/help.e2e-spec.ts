@@ -11,7 +11,7 @@ describe('Help Page', () => {
 
 
     it('should highlight title header', () => {
-        expect(page.getPageTitle()).toContain('Welcome to I am SAGE');
+        expect(page.getPageTitle()).toContain('Help & Rules');
     });
 
     it('should have four headings', () => {
