@@ -1,6 +1,5 @@
 import {TestBed, ComponentFixture} from "@angular/core/testing";
 import {DebugElement} from "@angular/core";
-import {By} from "@angular/platform-browser";
 import {SharedModule} from "../shared.module";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -8,7 +7,7 @@ import {DeckListComponent} from "./deck-list.component";
 import {DeckService} from "../deck/deck.service";
 import {Observable} from "rxjs/Observable";
 import {Deck} from "../deck/deck";
-//import {routing} from "./app.routes";
+
 
 describe('DeckListComponent', () => {
 
@@ -33,7 +32,7 @@ describe('DeckListComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [SharedModule, RouterTestingModule],
-            declarations:[DeckListComponent],
+            declarations: [DeckListComponent],
 
             // declare the test component
             providers: [
@@ -52,7 +51,7 @@ describe('DeckListComponent', () => {
      */
 
     //nic is aware of this enigma, and has said we should move on.
-    it("should fail this tests", ()=>{
+    it("should fail this tests", () => {
         expect(5).toEqual(6);
-        })
+    })
 });

@@ -1,5 +1,5 @@
-import { NgModule, } from '@angular/core';
-import { CommonModule, } from '@angular/common';
+import {NgModule,} from '@angular/core';
+import {CommonModule,} from '@angular/common';
 
 import {
     CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule,
@@ -24,9 +24,9 @@ import {
     MdExpansionModule,
 } from '@angular/material';
 
-import { FlexLayoutModule, } from '@angular/flex-layout';
+import {FlexLayoutModule,} from '@angular/flex-layout';
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PageSliderModule} from "ng2-page-slider";
 
@@ -78,9 +78,7 @@ const OTHER_MODULES: any[] = [
         FLEX_LAYOUT_MODULES,
         OTHER_MODULES,
     ],
-    declarations: [
-
-    ],
+    declarations: [],
     exports: [
         ANGULAR_MODULES,
         MATERIAL_MODULES,

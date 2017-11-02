@@ -25,8 +25,8 @@ export class SimpleCardComponent implements OnInit {
 */
 
 
-ngOnInit(){
-this.selected = false;
-}
+    ngOnInit() {
+        this.selected = false;
+    }
 
 }
