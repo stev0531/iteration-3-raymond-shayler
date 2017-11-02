@@ -280,4 +280,25 @@ public class CardControllerSpec {
         ArrayList<Document> cards = deck.get("cards", ArrayList.class);
         assertEquals("Should be 3 cards in the deck", 3, cards.size());
     }
+
+    @Test
+    public void tryAddCardToDeckFromCardList() {
+
+        cardController.addCardsToDeck("59daf3134db3304f4241daa7", [""]);
+    }
+
+    @Test
+    public void tryAddMultipleCardsToDeckFromCardList() {
+
+    }
+
+    @Test
+    public void tryAddDuplicateCardToDeckFromCardList() {
+
+    }
+
+    @Test
+    public void tryAddCardToInvalidDeckFromCardList(){
+
+    }
 }

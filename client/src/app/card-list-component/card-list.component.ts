@@ -116,6 +116,9 @@ export class CardListComponent implements OnInit {
         }
         this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
         this.clearAllSelected = true;
+        this.mode = "View";
+        this.selectedCards.length = 0;
+        this.selectedButton = "Select";
     }
 
     ngOnInit(): void {
