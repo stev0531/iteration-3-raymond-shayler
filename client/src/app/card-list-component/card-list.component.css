@@ -25,7 +25,7 @@ body {
 }
 
 .grey-out {
-    opacity: 0.3;
+    opacity:0.3;
 }
 
 .wrapper {
@@ -46,7 +46,7 @@ body {
     padding-bottom: 12px;
     position: fixed;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgb(190, 190, 190);
 }
 
 #Add-cards {
