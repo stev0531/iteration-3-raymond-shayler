@@ -10,4 +10,18 @@ export class HelpPage {
         let title = element(by.id('help-title')).getText();
         return title;
     }
+
+    getBySelector(selector: string){
+        let item = element(by.css(selector));
+        return item;
+    }
+
+    navigateToSpecific(url: string) {
+        return browser.get(url);
+    }
+
+    clickBySelector(selector: string){
+        let item = element(by.css(selector));
+        item.click();
+    }
 }

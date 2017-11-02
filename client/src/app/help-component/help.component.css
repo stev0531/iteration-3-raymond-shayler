@@ -1,3 +1,14 @@
 #help-title {
     text-align: center;
 }
+
+h2 {
+    font-weight: normal;
+    text-align: center;
+}
+
+.sage-rules {
+    margin: auto;
+    width: 75%;
+}
+

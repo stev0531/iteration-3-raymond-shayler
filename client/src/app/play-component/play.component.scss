@@ -29,6 +29,15 @@ kb-page-slider {
     bottom: 15px;
     right: 30px;
 }
+
+
+.round-button{
+    border-radius:100px;
+    border-top-left-radius:0px;
+    border-style:solid;
+    border-width:1.5px;
+    border-color: black;
+}
 //.button-container {
 //    display: flex;
 //    align-items: center;
