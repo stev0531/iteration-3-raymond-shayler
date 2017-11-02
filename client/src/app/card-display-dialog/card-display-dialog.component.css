@@ -1,21 +1,9 @@
-.card-line {
-    margin-top: 5px;
+.pop-in-card-desc {
+    font-weight: bold;
 }
 
-.card-desc{
-    /*display: flex;*/
-    /*justify-content: center;*/
-}
-
-.card-cont{
-    margin-left: 1em;
-}
-
-.button{
-    border-radius: 2px;
-    border-style:none;
-    background-color: lightgreen;
-    padding:15px;
-    padding-right:18px;
-    padding-left:18px;
+.pop-in-card-word {
+    white-space: pre;
+    text-align: center;
+    font-size: 15pt;
 }

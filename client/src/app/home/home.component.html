@@ -1,21 +1,26 @@
-<h1 id="logo">I Am Sage</h1>
-<h3 id="under-logo">Vocabulary</h3>
 
-<div>
-    <div id="playButton" class="button-row">
-        <button id="play-button" class="double-button" mat-raised-button color="accent" [routerLink]="['/card']">Play</button>
+<mat-card>
+    <mat-card-title id="logo">I Am Sage</mat-card-title>
+    <mat-card-subtitle id="under-logo">Vocabulary</mat-card-subtitle>
+    <div>
+        <div id="playButton" class="button-row">
+            <button id="play-button" class="double-button" mat-raised-button color="accent" [routerLink]="['/card']">
+                Play
+            </button>
+        </div>
+        <div id="cardButton" class="button-row">
+            <button id="card-button" class="double-button" mat-raised-button color="warn" [routerLink]="['/card-list']">
+                Cards
+            </button>
+        </div>
+        <div id="deckButton" class="button-row">
+            <button id="deck-button" class="double-button" mat-raised-button color="warn" [routerLink]="['/card']">Decks</button>
+        </div>
+        <div id="settingButton" class="button-row">
+            <button id="setting-button" class="double-button" mat-raised-button color="warn" >Settings</button>
+        </div>
     </div>
-    <div id="cardButton" class="button-row">
-        <button id="card-button" class="double-button" mat-raised-button color="primary" [routerLink]="['/card-list']">Cards</button>
-    </div>
-    <div id="deckButton" class="button-row">
-        <button id="deck-button" class="double-button" mat-raised-button color="primary" [routerLink]="['/card']">Decks</button>
-    </div>
-    <div id ="helpButton" class="button-row">
-        <button id="help-button" class="double-button" mat-raised-button color="primary" [routerLink]="['/help']">Help</button>
-    </div>
-</div>
-
+</mat-card>
 
 
 

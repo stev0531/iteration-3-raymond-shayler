@@ -1,19 +1,26 @@
 <kb-page-slider *ngIf="this.deck && this.deck.cards" [(page)]="this.pageNumber" (pageCountChange)="pageCount = $event;"
                 [showIndicator]="false" dotColor="black">
     <mat-toolbar color="primary"></mat-toolbar>
-    <div *kbPages="let card of this.deck.cards; let ind = index" [ngClass]="{'active-kb-page' : ind == this.pageNumber}">
-    <div class="margin" layout="row" layout-align="center start" layout-fill>
-        <div flex-gt-xs="70" flex-xs="90">
+    <div *kbPages="let card of this.deck.cards; let ind = index"
+         [ngClass]="{'active-kb-page' : ind == this.pageNumber}">
+        <div class="margin" layout="row" layout-align="center start" layout-fill>
+            <div flex-gt-xs="70" flex-xs="90">
 
 
-            <!--<app-card [card]="card"></app-card>!-->
-            <app-card class="play-card" [card]="card" [selected]="this.getCardState(ind).selected" [showHints]="this.getCardState(ind).showHints"></app-card>
+                <!--<app-card [card]="card"></app-card>!-->
+                <app-card class="play-card" [card]="card" [selected]="this.getCardState(ind).selected"
+                          [showHints]="this.getCardState(ind).showHints"></app-card>
 
-            <button class="hint-button" mat-raised-button color="primary" [disabled]="this.getCardState(ind).isComplete || !this.getCardState(ind).cardHints.length" (click)="this.getCardState(ind).randomizeSages()">Hint?</button>
-            <button class="got-it-button" mat-raised-button color="primary" [disabled]="this.getCardState(ind).isComplete" (click)="this.addPoints(ind)">Got It!</button> <span class="score">Score: {{this.points}}</span>
-
+                <button class="round-button hint-button" mat-raised-button color="warn"
+                        [disabled]="this.getCardState(ind).isComplete || !this.getCardState(ind).cardHints.length"
+                        (click)="this.getCardState(ind).randomizeSages()">Hint?
+                </button>
+                <button class="round-button got-it-button" mat-raised-button color="warn"
+                        [disabled]="this.getCardState(ind).isComplete" (click)="this.addPoints(ind)">Got It!
+                </button>
+                <span class="score">Score: {{this.points}}</span>
+            </div>
         </div>
-    </div>
     </div>
 
     <kb-nav-button id="backward-button" backward [showBackground]="true" hide-xs
@@ -24,7 +31,8 @@
     </kb-nav-button>
 
 </kb-page-slider>
-<button mat-fab id="cardPeek" class="card-peek-fab" matTooltip="Peek At Hints" matTooltipPosition="left" (click)="openPeekDialog()">
+<button mat-fab id="cardPeek" class="card-peek-fab" matTooltip="Peek At Hints" matTooltipPosition="left"
+        (click)="openPeekDialog()">
     <mat-icon class="md-24" aria-label="Peek Cards">visibility</mat-icon>
 </button>
 

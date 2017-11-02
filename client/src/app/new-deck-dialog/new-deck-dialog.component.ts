@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DeckService} from "../deck/deck.service";
-import {MatDialogRef,  MatSnackBar, MatSnackBarConfig} from "@angular/material";
+import {MatDialogRef, MatSnackBar, MatSnackBarConfig} from "@angular/material";
 
 @Component({
-  selector: 'app-new-deck-dialog',
-  templateUrl: './new-deck-dialog.component.html',
-  styleUrls: ['./new-deck-dialog.component.css']
+    selector: 'app-new-deck-dialog',
+    templateUrl: './new-deck-dialog.component.html',
+    styleUrls: ['./new-deck-dialog.component.css']
 })
 export class NewDeckDialogComponent implements OnInit {
 
-    constructor(public deckService : DeckService,
-                public matDialogRef : MatDialogRef<NewDeckDialogComponent>,
-                public snackBar: MatSnackBar) { }
+    constructor(public deckService: DeckService,
+                public matDialogRef: MatDialogRef<NewDeckDialogComponent>,
+                public snackBar: MatSnackBar) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  newDeckName: string;
+    newDeckName: string;
 
     public addNewDeck(): void {
         this.deckService.addNewDeck(this.newDeckName).subscribe(

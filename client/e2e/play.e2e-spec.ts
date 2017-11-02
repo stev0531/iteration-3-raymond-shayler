@@ -1,5 +1,5 @@
 import {PlayPage} from "./play.po";
-import {by} from "protractor";
+import {browser, by} from "protractor";
 
 describe('play-page', () => {
     let page: PlayPage;
@@ -16,13 +16,13 @@ describe('play-page', () => {
     // Commented out because the kb-page-slider causes the test to be ran faster than the page has time to load the next card, causing an empty string
     // instead of the intended result
 
-     it('should move to between cards', () => {
-         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
-         page.clickButton('forward-button');
-         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Alliteration');
-         page.clickButton('backward-button');
-         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
-     });
+    it('should move to between cards', () => {
+        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
+        page.clickButton('forward-button');
+        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Alliteration');
+        page.clickButton('backward-button');
+        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
+    });
 
     it('should not get hint after 4 uses', () => {
         let hintButton = page.getActivePage().element(by.className("hint-button"));
@@ -40,6 +40,24 @@ describe('play-page', () => {
         expect(page.getActivePage().element(by.className('hint-button')).isEnabled()).toEqual(false);
     });
 
+    it("should allow peeking at cards", () => {
+        //page.getActivePage();
+        page.clickButton('cardPeek');
+        browser.sleep(1000);
+        expect(page.getElementsByClass("pop-in-card-entire")).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-desc").first().isPresent).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-desc").getText()).toContain("Synonym");
+        expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
+    });
+
+    it("should peek at the present card", () => {
+        //page.getActivePage();
+        page.clickButton("forward-button");
+        page.clickButton('cardPeek');
+        browser.sleep(1000);
+        expect(page.getElementById("pop-in-card")).toBeTruthy();
+        expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("allegory");
+    })
 
 
 

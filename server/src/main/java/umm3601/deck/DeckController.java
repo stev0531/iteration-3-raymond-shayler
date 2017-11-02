@@ -156,4 +156,26 @@ public class DeckController {
         return newDeck;
     }
 
+    public String getSimpleDecks(Request req, Response res){
+        res.type("application/json");
+        return getSimpleDecks(req.queryMap().toMap());
+    }
+
+    public String getSimpleDecks(Map<String, String[]> queryParams){
+        Document filterDoc = new Document();
+        if (queryParams.containsKey("name")){
+            String  targetName = queryParams.get("name")[0];
+            filterDoc = filterDoc.append("name", targetName);
+        }
+
+        AggregateIterable<Document> decks = deckCollection.aggregate(Arrays.asList(
+            Aggregates.match(filterDoc),
+            Aggregates.project(Projections.fields(
+                Projections.include("name"),
+                Projections.include("_id")
+            ))
+        ));
+
+        return JSON.serialize(decks);
+    }
 }

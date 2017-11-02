@@ -3,3 +3,17 @@
     bottom: 15px;
     right: 30px;
 }
+
+.play-button {
+    border-radius: 100px;
+    border-top-left-radius: 0px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+}
+
+#decks-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25pt;
+}

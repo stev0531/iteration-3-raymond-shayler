@@ -28,13 +28,16 @@ module.exports = function (config) {
         logLevel: config.LOG_INFO,
         autoWatch: true,
         browsers: ['Chrome'],
-        singleRun: false
+        singleRun: false,
+        files: [
+            { pattern: './src/test.ts', watched: false },
+            { pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css' }
+        ]
     };
     if (process.env.TRAVIS) {
         configuration.singleRun = true;
         configuration.browsers = ['ChromeHeadless'];
     }
-
     config.set(configuration);
 };
 

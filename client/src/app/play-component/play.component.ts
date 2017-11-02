@@ -28,7 +28,6 @@ export class PlayComponent implements OnInit {
 
     public cardStates: CardState[];
 
-
     constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog) {
         this.cardStates = [];
     }

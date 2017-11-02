@@ -1,30 +1,37 @@
-<mat-dialog-content class="card-entire">
-    <h4 class="card-word">{{ Word }}</h4>
+<mat-dialog-content class="pop-in-card-entire" id="pop-in-card">
+    <h5 class="pop-in-card-word">{{ Word }}</h5>
     <mat-divider></mat-divider>
-    <mat-list>
-        <p class="card-desc">Synonym</p>
-        <div>
-            <h4 mat-line class="card-cont">{{Synonym}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="card-desc">Antonym</p>
-        <div>
-            <h4 mat-line class="card-cont">{{Antonym}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="card-desc">General Sense</p>
-        <div>
-            <h4 mat-line class="card-cont">{{General_sense}}</h4>
-        </div>
-        <mat-divider></mat-divider>
-        <p class="card-desc">Example usage</p>
-        <div>
-            <h4 mat-line class="card-cont">{{Example_usage}}</h4>
-        </div>
-
-    </mat-list>
-    <div id="button-controls">
-        <hr>
-        <button class="button">Edit</button>
-    </div>
+    <mat-card-content>
+        <br>
+        <span class="card-line">
+            <span class="pop-in-card-synonym pop-in-card-desc">Synonym:</span>
+            <span class="synonym-cont pop-in-card-content">{{Synonym}}</span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line">
+            <span class="pop-in-card-antonym pop-in-card-desc">Antonym:</span>
+            <span class="antonym-cont pop-in-card-content">{{Antonym}} </span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line">
+            <span class="pop-in-card-general-sense pop-in-card-desc">General sense:</span>
+            <span class="general-sense-cont pop-in-card-content">{{General_sense}}</span>
+        </span>
+        <br>
+        <br>
+        <span class="card-line">
+            <span class="pop-in-card-example-usage pop-in-card-desc">Example usage:</span>
+            <span class="example-usage-cont pop-in-card-content">{{Example_usage}}</span>
+        </span>
+    </mat-card-content>
 </mat-dialog-content>
+<mat-dialog-actions *ngIf="editShown" id="button-controls">
+    <button mat-raised-button class="card-edit-fab" mat-tooltip="Peek At Hints" matTooltipPosition="right">
+        <mat-icon class="md-24" aria-label="Edit Card">mode edit</mat-icon>
+    </button>
+</mat-dialog-actions>
+
+
+

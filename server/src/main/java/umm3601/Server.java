@@ -72,6 +72,9 @@ public class Server {
         post("api/decks/add", deckController::addNewDeck);
         get("api/decks/:id", deckController::getDeck);
         post("api/cards/add", cardController::addNewCard);
+        post("api/addMany", cardController::addCardsToDeck);
+        get("api/simple-cards", cardController::getSimpleCards);
+        get("api/simple-decks", deckController::getSimpleDecks);
 
 
         // Called after each request to insert the GZIP header into the response.

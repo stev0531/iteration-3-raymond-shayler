@@ -1,9 +1,9 @@
-import { NgModule, } from '@angular/core';
-import { CommonModule, } from '@angular/common';
+import {NgModule,} from '@angular/core';
+import {CommonModule,} from '@angular/common';
 
 import {
     CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule,
-    CovalentMessageModule /*, any other modules */
+    CovalentMessageModule, /*, any other modules */
 } from '@covalent/core';
 
 import {
@@ -19,11 +19,14 @@ import {
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MatButtonToggleModule,
+    MdSelectModule,
+    MdExpansionModule,
 } from '@angular/material';
 
-import { FlexLayoutModule, } from '@angular/flex-layout';
+import {FlexLayoutModule,} from '@angular/flex-layout';
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PageSliderModule} from "ng2-page-slider";
 
@@ -49,6 +52,9 @@ const MATERIAL_MODULES: any[] = [
     MdFormFieldModule,
     MatDialogModule,
     MdSnackBarModule,
+    MatButtonToggleModule,
+    MdSelectModule,
+    MdExpansionModule,
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -59,8 +65,8 @@ const COVALENT_MODULES: any[] = [
 ];
 
 const OTHER_MODULES: any[] = [
-    PageSliderModule
-]
+    PageSliderModule,
+];
 
 
 @NgModule({
@@ -72,9 +78,7 @@ const OTHER_MODULES: any[] = [
         FLEX_LAYOUT_MODULES,
         OTHER_MODULES,
     ],
-    declarations: [
-
-    ],
+    declarations: [],
     exports: [
         ANGULAR_MODULES,
         MATERIAL_MODULES,
