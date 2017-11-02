@@ -40,17 +40,17 @@ describe('CardComponent', () => {
         expect(component.card.example_usage).toContain("test example_usage");
     });
 
-     it('should highlight hints correctly', () => {
-         let synonym: HTMLElement = debugElement.query(By.css('.card-synonym')).nativeElement;
+     it('should show arrows correctly', () => {
+         let synonym: HTMLElement = debugElement.query(By.css('.synonym-arrow')).nativeElement;
          expect(synonym.classList).toContain("hint-selected");
 
-         let antonym: HTMLElement = debugElement.query(By.css('.card-antonym')).nativeElement;
+         let antonym: HTMLElement = debugElement.query(By.css('.antonym-arrow')).nativeElement;
          expect(antonym.classList).not.toContain("hint-selected");
 
-         let general_sense: HTMLElement = debugElement.query(By.css('.card-general-sense')).nativeElement;
+         let general_sense: HTMLElement = debugElement.query(By.css('.general-sense-arrow')).nativeElement;
          expect(general_sense.classList).not.toContain("hint-selected");
 
-         let example_usage: HTMLElement = debugElement.query(By.css('.card-example-usage')).nativeElement;
+         let example_usage: HTMLElement = debugElement.query(By.css('.example-usage-arrow')).nativeElement;
          expect(example_usage.classList).not.toContain("hint-selected");
      });
 

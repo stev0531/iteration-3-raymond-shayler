@@ -1,3 +1,12 @@
 .add-card-form-fields > *  {
     width: 100%;
 }
+#new-card-submit{
+    border-radius:100px;
+    /*border-style:solid;*/
+    /*border-width:1.5px;*/
+    /*border-color: black;*/
+    border-top-left-radius: 0px;
+}
+
+

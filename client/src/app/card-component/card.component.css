@@ -1,10 +1,20 @@
 
-.hint-selected {
-    background-color: lightskyblue;
-}
 
+
+.selected-arrow{
+    background-color: transparent;
+    border-radius: 100px;
+    padding-left:2px;
+    padding-right:2px;
+    color:white;
+}
 .card-cont {
     display: none;
+}
+
+.hint-selected {
+    background-color:lightgreen;
+    color: black;
 }
 
 .show-hint {
@@ -18,5 +28,9 @@
 .card-line {
     /*padding:5px;*/
     border-radius:2px;
+}
+
+.card-word{
+    text-align: center;
 }
 

@@ -1,9 +1,9 @@
 button{
     margin:5px;
-    border-radius: 100px;
+    border-radius:100px;
     background-color: mediumseagreen;
-    border-style: solid;
-    border-width:2px;
+    border-style:solid;
+    border-width:1.5px;
     border-color: black;
     width:60%;
     height:50px;
@@ -11,18 +11,23 @@ button{
     font-size: 16pt;
 }
 
-button:hover{
+#play-button:hover{
     color: black;
 }
+#card-button:hover,#deck-button:hover,#setting-button:hover{
+    color: white;
+}
+
 
 .button-row{
     text-align: center;
 }
 
 #logo{
+    white-space: pre;
     text-shadow: 3px 3px #898989;
-    font-family:Quattrocento;
-    font-size: 50pt;
+    font-family:Quattrocento, sans-serif;
+    font-size: 60pt;
     text-align:center;
     margin-bottom:0px;
 }
@@ -30,4 +35,22 @@ button:hover{
 #under-logo{
     margin-top: 0px;
     text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    #logo{
+        text-shadow: 2px 2px #898989;
+        font-size: 55px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    #logo{
+        text-shadow: 2px 2px #898989;
+        font-size: 45px;
+    }
+}
+
+mat-card{
+    padding-bottom:50px;
 }
