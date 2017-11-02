@@ -21,57 +21,53 @@ describe('CardListComponent', () => {
     let cardList: CardListComponent;
 
     let cardServiceStub: {
-        getCards: () => Observable<any>
+        getSimpleCards: () => Observable<any>
+        getCard: (_id: string) => Observable<any>
     };
 
     let deckServiceStub: {
-        getDecks: () => Observable<Deck>
+        getSimpleDecks: () => Observable<any>
     };
 
     beforeEach(async(() => {
 
         deckServiceStub = {
-            getDecks: () => Observable.of({
-                _id : {
+            getSimpleDecks: () => Observable.of([{
+                _id: {
                     $oid: "test id"
                 },
                 name: "test deck",
-                cards: [{   _id : "test id",
-                    word : "test word",
-                    synonym : "test synonym",
-                    antonym: "test antonym",
-                    general_sense: "test general_sense",
-                    example_usage: "test example_usage",
-                }]
-            })
+            }])
         };
         cardServiceStub = {
-            getCards: () => Observable.of([
-                    {   _id : "test id",
-                        word : "test word",
-                        synonym : "test synonym",
-                        antonym: "test antonym",
-                        general_sense: "test general_sense",
-                        example_usage: "test example_usage",
-                    },
+            getSimpleCards: () => Observable.of([
+                {
+                    _id: "test id",
+                    word: "test word",
+                },
 
-                    {   _id : "test id",
-                        word : "test word",
-                        synonym : "test synonym",
-                        antonym: "test antonym",
-                        general_sense: "test general_sense",
-                        example_usage: "test example_usage",
-                    },
+                {
+                    _id: "test id",
+                    word: "test word",
+                },
 
-                    {   _id : "test id",
-                        word : "test word",
-                        synonym : "test synonym",
-                        antonym: "test antonym",
-                        general_sense: "test general_sense",
-                        example_usage: "test example_usage",
-                    }
-                ])
+                {
+                    _id: "test id",
+                    word: "test word",
+                }
+            ]),
+
+            getCard: (_id: string) => Observable.of([
+                {
+                    word: "dog",
+                    synonym: "canine",
+                    antonym: "cat",
+                    general_sense: "big furry goofball",
+                    example_usage: "the dog borked"
+                }
+            ])
         };
+
 
         @NgModule({
             imports: [CommonModule],

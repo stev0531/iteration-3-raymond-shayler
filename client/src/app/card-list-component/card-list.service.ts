@@ -27,6 +27,11 @@ export class CardListService {
         return newSimpleCard;
     }
 
+    public getCard(id:string): Observable<Card> {
+        let newCard : Observable<Card> = this.http.request(this.cardUrl + "/" + id).map(res => res.json());
+        return newCard;
+    }
+
 /*
     public deleteCardsFromDeck(ids: string[]) {
         let wipRequest: string = "";

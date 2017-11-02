@@ -9,6 +9,7 @@ import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
 import {SimpleCard} from "../simple-card/simple-card";
 import {SimpleDeck} from "../simple-deck/simple-deck";
+import {CardService} from "../card/card.service";
 
 @Component({
     selector: 'card-list',
@@ -56,18 +57,25 @@ export class CardListComponent implements OnInit {
 
     public openCardDisplay(card) {
         let config = new MatDialogConfig();
-        let presentCard = card;
+        // let presentCard = card;
+        let presentCard: Card = card;
+            this.CardListService.getCard(card._id["$oid"]).subscribe(
+            newCard => {
+                presentCard = newCard
+                console.log(presentCard);
+                config.data = {
+                    Word: presentCard.word,
+                    Synonym: presentCard.synonym,
+                    Antonym: presentCard.antonym,
+                    General_sense: presentCard.general_sense,
+                    Example_usage: presentCard.example_usage,
+                };
+                console.log(config);
 
-        config.data = {
-            Word: presentCard.word,
-            Synonym: presentCard.synonym,
-            Antonym: presentCard.antonym,
-            General_sense: presentCard.general_sense,
-            Example_usage: presentCard.example_usage,
-        };
-        console.log(config);
+            let cardRef = this.peek.open(CardDisplayDialogComponent, config);
+            }
+        );
 
-        let cardRef = this.peek.open(CardDisplayDialogComponent, config);
        // cardRef.setEditShown(true);
     };
 

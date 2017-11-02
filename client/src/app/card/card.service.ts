@@ -15,6 +15,14 @@ export class CardService {
 
     private cardUrl: string = environment.API_URL + "cards";
 
+
+/*
+    public getDeck(id:string) : Observable<Deck> {
+        let newDeck : Observable<Deck> = this.http.request(this.deckUrl + "/" + id).map(res => res.json());
+        return newDeck;
+    }
+    */
+
     public getCards(): void {
         this.http.request(this.cardUrl).map(res => res.json()).subscribe(
             cardsres => {

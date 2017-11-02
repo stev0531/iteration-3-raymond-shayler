@@ -28,10 +28,21 @@ export class DeckService {
       );
   }
 */
+  /*
     public getDecks(): Observable<Deck[]> {
 
         let observable: Observable<any> = this.http.request(this.deckUrl);
         return observable.map(res => res.json());
+    }
+*/
+    public getDecks(): void {
+        this.http.request(this.deckUrl).map(res => res.json()).subscribe(
+            decksres => {
+                this.decks = decksres;
+            }, err => {
+                console.log(err);
+            }
+        );
     }
 
   public getDeck(id:string) : Observable<Deck> {
