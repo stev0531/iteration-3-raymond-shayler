@@ -8,6 +8,7 @@ import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.compone
 import {CardComponent} from "../card-component/card.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -97,7 +98,9 @@ export class PlayComponent implements OnInit {
             this.deckService.getDeck(this.deckid).subscribe(
                 deck => {
                     this.deck = deck;
-                    this.deck.cards=this.shuffle(this.deck.cards);
+                    if (environment.envName == "prod") {
+                        this.deck.cards = this.shuffle(this.deck.cards);
+                    }
                 }
             );
         });
