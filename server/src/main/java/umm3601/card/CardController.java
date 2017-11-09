@@ -1,6 +1,7 @@
 package umm3601.card;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.AggregateIterable;
@@ -19,9 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -105,6 +104,7 @@ public class CardController {
     }
 
     public Object addCardsToDeck(Request req, Response res) {
+        System.out.println("This should print");
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("/tmp/logs.txt"));
             pw.println("In addCardsToDeck");
@@ -120,8 +120,13 @@ public class CardController {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String deckID = dbO.getString("DeckID");
-                    String[] cardIds = (String[]) dbO.get("cardArray");
+                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
+                    String deckID = dbO.getString("deckId");
+                    String[] cardIds = new String[dbIdList.size()];
+
+                    for (int i = 0; i < dbIdList.size(); i++) {
+                        cardIds[i] = dbIdList.get(i).toString();
+                    }
 
                     System.err.println("Adding new cards to " + deckID + " " + cardIds);
                     return addCardsToDeck(deckID, cardIds);
@@ -151,7 +156,7 @@ public class CardController {
 
         for (int i = 0; i < cardIds.length; i++) {
             // try {
-                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", cardIds[i])));
+                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", new ObjectId(cardIds[i]))));
             /* }  catch (MongoException me) {
                 me.printStackTrace();
                 return false;
