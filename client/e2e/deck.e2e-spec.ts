@@ -39,11 +39,11 @@ describe('deck-page', () => {
         page.navigateTo('59de8a1f012e92ce86a57177');
         page.getAllCards().count().then( beforecount => {
             page.addCard('Word test 1', 'Synonym test 1', 'Antonym test 1', 'General Sense test 1', 'Example Usage test 1');
-            browser.sleep(2000); // wait for stuff
+            browser.sleep(3000); // wait for stuff
             page.addCard('Word test 2', 'Synonym test 2', 'Antonym test 2', 'General Sense test 2', 'Example Usage test 2');
-            browser.sleep(2000); // wait for stuff
+            browser.sleep(3000); // wait for stuff
             page.addCard('Word test 3', 'Synonym test 3', 'Antonym test 3', 'General Sense test 3', 'Example Usage test 3');
-            browser.sleep(2000); // wait for cards to be added to list
+            browser.sleep(3000); // wait for cards to be added to list
             expect(page.getAllCards().count()).toEqual(beforecount + 3);
         });
     });

@@ -4,30 +4,37 @@
     <mat-card-content>
 
         <span class="card-line">
-            <span class class="synonym-arrow selected-arrow"[ngClass]="{'hint-selected': this.selected == 1}">→</span>
-            <span class="card-synonym card-desc">Synonym:</span>
-            <span class="synonym-cont card-cont" [ngClass]="{'show-hint': this.showHints[0]}"> {{ card.synonym }}</span>
+            <span class="synonym-arrow selected-arrow" [ngClass]="{'hint-selected': this.selected == 1}">→</span>
+            <div class="inside-line">
+                <span class="card-synonym card-desc">Synonym:</span>
+                <span class="synonym-cont card-cont"
+                      [ngClass]="{'show-hint': this.showHints[0]}"> {{ card.synonym }}</span>
+            </div>
         </span>
-        <br>
-        <br>
-        <span class="card-line" >
-            <span class class="antonym-arrow selected-arrow"[ngClass]="{'hint-selected': this.selected == 2}">→</span>
-            <span class="card-antonym card-desc">Antonym:</span>
-            <span class="antonym-cont card-cont" [ngClass]="{'show-hint': this.showHints[1]}">{{ card.antonym }} </span>
-        </span>
-        <br>
         <br>
         <span class="card-line">
-            <span class class="general-sense-arrow selected-arrow"[ngClass]="{'hint-selected': this.selected == 3}">→</span>
-            <span class="card-general-sense card-desc">General sense:</span>
-            <span class="general-sense-cont card-cont" [ngClass]="{'show-hint': this.showHints[2]}">{{ card.general_sense }}</span>
+            <span class="antonym-arrow selected-arrow" [ngClass]="{'hint-selected': this.selected == 2}">→</span>
+            <div class="inside-line">
+                <span class="card-antonym card-desc">Antonym:</span>
+                <span class="antonym-cont card-cont"
+                      [ngClass]="{'show-hint': this.showHints[1]}">{{ card.antonym }} </span>
+            </div>
         </span>
         <br>
+        <span class="card-line">
+            <span class="general-sense-arrow selected-arrow" [ngClass]="{'hint-selected': this.selected == 3}">→</span>
+            <div class="inside-line">
+                <span class="card-general-sense card-desc">General sense:</span>
+            <span class="general-sense-cont card-cont" [ngClass]="{'show-hint': this.showHints[2]}">{{ card.general_sense }}</span>
+            </div>
+        </span>
         <br>
-        <span class="card-line" >
-            <span class class="example-usage-arrow selected-arrow"[ngClass]="{'hint-selected': this.selected == 4}">→</span>
-            <span class="card-example-usage card-desc">Example usage:</span>
-            <span class="example-usage-cont card-cont" [ngClass]="{'show-hint': this.showHints[3]}">{{ card.example_usage }}</span>
+        <span class="card-line">
+            <span class="example-usage-arrow selected-arrow" [ngClass]="{'hint-selected': this.selected == 4}">→</span>
+            <div class="inside-line">
+                <span class="card-example-usage card-desc">Example usage:</span>
+                <span class="example-usage-cont card-cont" [ngClass]="{'show-hint': this.showHints[3]}">{{ card.example_usage }}</span>
+            </div>
         </span>
     </mat-card-content>
 </mat-card>

@@ -5,7 +5,7 @@ import {By} from "@angular/platform-browser";
 import {SharedModule} from "../shared.module";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {RouterTestingModule} from "@angular/router/testing";
-//import {routing} from "./app.routes";
+
 
 describe('Home', () => {
 
@@ -25,7 +25,7 @@ describe('Home', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [SharedModule, RouterTestingModule],
-            declarations:[HomeComponent],
+            declarations: [HomeComponent],
 
             // declare the test component
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
@@ -48,7 +48,7 @@ describe('Home', () => {
         deckDe = fixture.debugElement.query(By.css("#deck-button"));
         deckEl = deckDe.nativeElement;
 
-        settingDe = fixture.debugElement.query(By.css("#setting-button"));
+        settingDe = fixture.debugElement.query(By.css("#help-button"));
         settingEl = settingDe.nativeElement;
 
     });
@@ -76,8 +76,8 @@ describe('Home', () => {
         expect(deckEl.textContent).toContain("Deck");
     });
 
-    it("contains setting button", () => {
+    it("contains help button", () => {
         fixture.detectChanges();
-        expect(settingEl.textContent).toContain("Setting");
+        expect(settingEl.textContent).toContain("Help");
     });
 });

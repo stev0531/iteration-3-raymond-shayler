@@ -8,7 +8,7 @@ import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.compone
 import {CardComponent} from "../card-component/card.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
-
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -68,6 +68,28 @@ export class PlayComponent implements OnInit {
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
     };
 
+    //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#2450976
+
+    public shuffle(array) {
+        let currentIndex = array.length;
+        let  temporaryValue: number;
+        let randomIndex: number;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+
 
     ngOnInit() {
         this.route.params.subscribe(params => {
@@ -76,6 +98,9 @@ export class PlayComponent implements OnInit {
             this.deckService.getDeck(this.deckid).subscribe(
                 deck => {
                     this.deck = deck;
+                    if (environment.envName == "prod") {
+                        this.deck.cards = this.shuffle(this.deck.cards);
+                    }
                 }
             );
         });

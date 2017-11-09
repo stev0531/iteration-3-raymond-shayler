@@ -1,19 +1,19 @@
 
-
-
-.selected-arrow{
+.selected-arrow {
+    float: left;
     background-color: transparent;
     border-radius: 100px;
-    padding-left:2px;
-    padding-right:2px;
-    color:white;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: white;
 }
+
 .card-cont {
     display: none;
 }
 
 .hint-selected {
-    background-color:lightgreen;
+    background-color: lightgreen;
     color: black;
 }
 
@@ -27,10 +27,14 @@
 
 .card-line {
     /*padding:5px;*/
-    border-radius:2px;
+    border-radius: 2px;
 }
 
-.card-word{
+.card-word {
     text-align: center;
+}
+
+.inside-line {
+    margin-left: 22px;
 }
 

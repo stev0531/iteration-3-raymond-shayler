@@ -1,7 +1,6 @@
-import {Component, Input, OnInit, Inject} from '@angular/core';
-import {Card} from "../card/card";
-import {MatDialogConfig, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA} from "@angular/material";
-import {CardService} from "../card/card.service";
+import {Component, OnInit, Inject} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
+
 
 @Component({
     selector: 'app-card-display-dialog',
@@ -10,10 +9,10 @@ import {CardService} from "../card/card.service";
 })
 export class CardDisplayDialogComponent implements OnInit {
 
-    constructor( public matDialogRef: MatDialogRef<CardDisplayDialogComponent>,
+    constructor(public matDialogRef: MatDialogRef<CardDisplayDialogComponent>,
                 @Inject(MAT_DIALOG_DATA)
-                public data: { Word: string, Synonym: string, Antonym: string, General_sense: string, Example_usage: string, editShown:boolean })
-    {  }
+                public data: { Word: string, Synonym: string, Antonym: string, General_sense: string, Example_usage: string, editShown: boolean }) {
+    }
 
 
     Word: string;
@@ -37,7 +36,7 @@ export class CardDisplayDialogComponent implements OnInit {
 
     }
 
-    setEditShown(value: boolean){
+    setEditShown(value: boolean) {
         this.editShown = value;
     }
 }

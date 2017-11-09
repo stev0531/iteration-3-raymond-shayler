@@ -9,7 +9,6 @@ import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
 import {SimpleCard} from "../simple-card/simple-card";
 import {SimpleDeck} from "../simple-deck/simple-deck";
-import {CardService} from "../card/card.service";
 
 @Component({
     selector: 'card-list',
@@ -32,7 +31,6 @@ export class CardListComponent implements OnInit {
 
     selectDeck(deck) {
         this.selectedDeck = deck;
-        console.log("YAY");
         console.log(this.selectedDeck);
     }
 
@@ -51,7 +49,7 @@ export class CardListComponent implements OnInit {
         console.log(this.selectedCards.length);
     }
 
-    clearSelected(card){
+    clearSelected(card) {
         card.selected = false;
     }
 
@@ -59,7 +57,7 @@ export class CardListComponent implements OnInit {
         let config = new MatDialogConfig();
         // let presentCard = card;
         let presentCard: Card = card;
-            this.CardListService.getCard(card._id["$oid"]).subscribe(
+        this.CardListService.getCard(card._id["$oid"]).subscribe(
             newCard => {
                 presentCard = newCard
                 console.log(presentCard);
@@ -72,14 +70,13 @@ export class CardListComponent implements OnInit {
                 };
                 console.log(config);
 
-            let cardRef = this.peek.open(CardDisplayDialogComponent, config);
+                let cardRef = this.peek.open(CardDisplayDialogComponent, config);
             }
         );
 
-       // cardRef.setEditShown(true);
     };
 
-    public modeHandler(){
+    public modeHandler() {
         if (this.selectedButton == null) {
             this.mode = "View";
         } else if (this.selectedButton == "select") {
@@ -110,7 +107,7 @@ export class CardListComponent implements OnInit {
         this.selectedCards = [];
     }
 
-    addCards(){
+    addCards() {
         let cardIds: string[] = [];
         if (this.selectedCards.length > 0) {
             for (var i = 0; i < this.selectedCards.length; i++) {
@@ -118,7 +115,10 @@ export class CardListComponent implements OnInit {
             }
         }
         this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
-
+        this.clearAllSelected = true;
+        this.mode = "View";
+        this.selectedCards.length = 0;
+        this.selectedButton = "Select";
     }
 
     ngOnInit(): void {

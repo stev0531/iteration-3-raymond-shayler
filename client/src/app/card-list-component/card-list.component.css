@@ -5,17 +5,27 @@ body {
     margin: 40px;
 }
 
-.toggleButtons{
+.hide {
+    display: none;
+}
+
+.toggleButtons {
     display: flex;
     justify-content: center;
 }
 
-.menu{
-    width: 100%;
-    position:fixed;
+.menu {
+    padding-left: 15px;
+    text-align: center;
+    position: fixed;
     margin: auto;
+    padding-bottom: 15px;
     z-index: 1;
-    background-color:#1e88e5;
+    background-color: #1e88e5;
+}
+
+.grey-out {
+    opacity:0.3;
 }
 
 .wrapper {
@@ -27,5 +37,29 @@ body {
     grid-template-rows: auto;
     grid-gap: 3px;
     background-color: transparent;
-    color:black;
+    color: black;
 }
+
+#side-menu {
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 12px;
+    position: fixed;
+    z-index: 1;
+    background-color: rgb(190, 190, 190);
+}
+
+#Add-cards {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+
+.round-button {
+    border-radius: 100px;
+    border-top-left-radius: 0px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+}
+
