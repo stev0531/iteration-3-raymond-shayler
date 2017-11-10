@@ -6,7 +6,10 @@
             id="Cancel-Button" (click)="changeButton('Cancel')">Cancel
     </button>
     <button [ngClass]="{'grey-out': this.selectedCards.length == 0 || this.selectedDeck == null}" color="warn" class="round-button" id="Add-Cards"
-            mat-raised-button (click)="addCards()">Add
+            mat-raised-button (click)="changeDeck('add')">Add
+    </button>
+    <button [ngClass]="{'grey-out': this.selectedCards.length == 0 || this.selectedDeck == null}" color="warn" class="round-button" id="Delete-Cards"
+            mat-raised-button (click)="changeDeck('delete')">Delete
     </button>
     <mat-select placeholder="Deck">
         <mat-option *ngFor="let deck of decks" [value]="deck" (click)="selectDeck(deck)">

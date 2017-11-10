@@ -107,14 +107,20 @@ export class CardListComponent implements OnInit {
         this.selectedCards = [];
     }
 
-    addCards() {
+
+    changeDeck(button: string) {
         let cardIds: string[] = [];
         if (this.selectedCards.length > 0) {
             for (var i = 0; i < this.selectedCards.length; i++) {
                 cardIds[i] = this.selectedCards[i]._id["$oid"];
             }
         }
-        this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
+        if (button == 'add') {
+            this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
+        }
+        else {
+            this.CardListService.deleteCardsFromDeck(this.selectedDeck, cardIds);
+        }
         this.clearAllSelected = true;
         this.mode = "View";
         this.selectedCards.length = 0;
