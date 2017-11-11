@@ -45,9 +45,18 @@ public class Server {
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
 
-        ////REPLACE WITH ACTUAL////
+        ///////////////////////*
+        // you will need to make a config.json file and put it in server folder.
+        // it should look like:
+        //{
+        // "clientId" : "big string of text",
+        // "clientSecret" : "small string of text"
+        // }
+        // get them from https://console.developers.google.com/apis/dashboard?project=sagecards-r-shayler
+        // credentials screen
+        //////////////////////*/
         com.google.gson.stream.JsonReader reader =
-            new com.google.gson.stream.JsonReader(new FileReader("config.json"));
+            new com.google.gson.stream.JsonReader(new FileReader("/config.json"));
         Gson gson = new Gson();
         Conf conf = gson.fromJson(reader, Conf.class);
         Auth auth = new Auth(conf.clientId, conf.clientSecret);
