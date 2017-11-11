@@ -2,15 +2,25 @@ package umm3601;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import com.google.gson.*;
+import org.bson.json.JsonReader;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.utils.IOUtils;
+
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
+import umm3601.Auth;
+import umm3601.Conf;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Map;
+
+
+
+
+
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -34,6 +44,13 @@ public class Server {
 
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
+
+        ////REPLACE WITH ACTUAL////
+        com.google.gson.stream.JsonReader reader =
+            new com.google.gson.stream.JsonReader(new FileReader("config.json"));
+        Gson gson = new Gson();
+        Conf conf = gson.fromJson(reader, Conf.class);
+        Auth auth = new Auth(conf.clientId, conf.clientSecret);
 
         options("/*", (request, response) -> {
 
@@ -76,6 +93,22 @@ public class Server {
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
 
+        //auth test
+        get("api/authTest", ((request, response) -> {
+            response.type("text/plain");
+            response.redirect(auth.getAuthURL());
+
+            return response;
+        }));
+
+        get("callback", (req, res) -> {
+            res.type("application/json");
+            Map<String, String[]> params = req.queryMap().toMap();
+            String state = params.get("state")[0];
+            String code = params.get("code")[0];
+            return auth.getProfile(state, code);
+        });
+
 
         // Called after each request to insert the GZIP header into the response.
         // This causes the response to be compressed _if_ the client specified
@@ -92,7 +125,6 @@ public class Server {
             res.status(404);
             return "Sorry, we couldn't find that!";
         });
-
 
 
     }
