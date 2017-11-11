@@ -5,25 +5,25 @@ evaluationDependsOn ":server"
 task clearMongoDB(type: Exec) {
     group = "application"
     executable "mongo"
-    args = ["i1-droptable-dev", "--eval", "printjson(db.dropDatabase())"]
+    args = ["i3-droptable-dev", "--eval", "printjson(db.dropDatabase())"]
 }
 
 task seedCardData(type: Exec) {
     executable = "mongoimport"
 
-    args = ["-d", "i1-droptable-dev", "-c", "cards", "--file", "cards.seed.json", "--jsonArray"]
+    args = ["-d", "i3-droptable-dev", "-c", "cards", "--file", "cards.seed.json", "--jsonArray"]
 }
 
 task seedDeckData(type: Exec) {
     executable = "mongoimport"
 
-    args = ["-d", "i1-droptable-dev", "-c", "decks", "--file", "decks.seed.json", "--jsonArray"]
+    args = ["-d", "i3-droptable-dev", "-c", "decks", "--file", "decks.seed.json", "--jsonArray"]
 }
 
-task seedClassroomData(type: Exec) {
-    executable = "mongoimport"
-    args = ["-d", "i3-shayler-classrooms", "-c", "classrooms", "--file", "classroom.seed.json", "--jsonArray"]
-}
+//task seedClassroomData(type: Exec) {
+//    executable = "mongoimport"
+//    args = ["-d", "i3-shayler-classrooms", "-c", "classrooms", "--file", "classroom.seed.json", "--jsonArray"]
+//}
 
 task seedMongoDB {
     group = "application"
@@ -32,4 +32,4 @@ task seedMongoDB {
 seedMongoDB.dependsOn(clearMongoDB)
 seedMongoDB.dependsOn(seedCardData)
 seedMongoDB.dependsOn(seedDeckData)
-seedMongoDB.dependsOn(seedClassroomData)
+//seedMongoDB.dependsOn()
