@@ -8,6 +8,7 @@ import spark.Route;
 import spark.utils.IOUtils;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
+import umm3601.sage.SageController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,17 +17,21 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-    private static final String databaseName = "i1-droptable-dev";
-    private static final int serverPort = 4567;
+    private static final String databaseName = "i3-droptable-dev";
+    private static final String classroomDatabaseName = "i3-raymond-classrooms";
+    private static final int serverPort = 4567;;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
         MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoDatabase classroomDB = mongoClient.getDatabase(classroomDatabaseName);
 
         CardController cardController = new CardController(database);
 
         DeckController deckController = new DeckController(database);
+
+        SageController sageController = new SageController(classroomDB);
 
         //Configure Spark
         port(serverPort);
@@ -75,6 +80,8 @@ public class Server {
         post("api/addMany", cardController::addCardsToDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
+        get("api/classrooms",sageController::getClassrooms);
+        get("api/classroom:id",sageController::getClassroom);
 
 
         // Called after each request to insert the GZIP header into the response.

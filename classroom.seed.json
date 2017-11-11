@@ -1,0 +1,24 @@
+[
+    {
+        "_id": {
+            "$oid": "59de8a1f012e92ce86a58177"
+        },
+        "name": "Liams Classroom",
+        "decks": [
+            {
+                "$oid": "59de8a1f012e92ce86a57177"
+            },
+            {
+                "$oid": "59de8a1f012e92ce86a57176"
+            }
+        ],
+        "cards": [
+            {
+                "$oid": "59dac7b147c9429bff9ba9b3"
+            },
+            {
+                "$oid": "59dac7b147c9429bff9ba9b4"
+            }
+        ]
+    }
+]
