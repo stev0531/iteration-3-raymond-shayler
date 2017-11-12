@@ -17,14 +17,13 @@ describe('card-list-page', () => {
 
 
     it('should have four buttons', () => {
-        expect(page.getElementsByClass(".mode-button")).toBeTruthy();
-        expect(page.getElementsByClass(".mode-button-add")).toBeTruthy();
-        expect(page.getElementsByClass(".mode-button-edit")).toBeTruthy();
-        expect(page.getElementsByClass(".mode-button-create")).toBeTruthy();
-        expect(page.getElementsByClass(".mode-button-delete")).toBeTruthy();
+        expect(page.getElementById("Select-Button")).toBeTruthy();
+        expect(page.getElementById("Delete-Button")).toBeTruthy();
+        expect(page.getElementById("Add-Cards")).toBeTruthy();
+        expect(page.getElementById("Delete-Cards")).toBeTruthy();
     });
 
-    it("should display card info when clicked", () =>{
+    it("should display card info when clicked in view mode", () =>{
             page.clickByCSS('.simple-card');
             browser.sleep(100);
             expect(page.getElementsByClass("pop-in-card-entire")).toBeTruthy();
@@ -40,4 +39,9 @@ describe('card-list-page', () => {
                 //if we reach here, the promise failed.
                 expect(0).toEqual(1);});
         });
+
+    it("should select cards when in select mode", () =>{
+
+
+    });
 });
