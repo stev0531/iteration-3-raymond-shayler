@@ -73,15 +73,15 @@ public class SageController {
             filterDoc = filterDoc.append("name", targetName);
         }
 
-        AggregateIterable<Document> decks = classroomCollection.aggregate(Arrays.asList(
+        AggregateIterable<Document> classrooms = classroomCollection.aggregate(Arrays.asList(
             Aggregates.match(filterDoc),
             Aggregates.project(Projections.fields(
-                Projections.include("name"),
-                Projections.computed("count", new Document("$size", "$cards"))
+                Projections.include("name")
+             //   Projections.computed("count", new Document("$size", "$cards"))
             ))
         ));
 
-        return JSON.serialize(decks);
+        return JSON.serialize(classrooms);
     }
 
 

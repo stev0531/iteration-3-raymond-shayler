@@ -22,7 +22,7 @@ task seedDeckData(type: Exec) {
 
 task seedClassroomData(type: Exec) {
     executable = "mongoimport"
-    args = ["-d", "i3-shayler-classrooms", "-c", "classrooms", "--file", "classroom.seed.json", "--jsonArray"]
+    args = ["-d", "i3-droptable-dev", "-c", "classrooms", "--file", "classroom.seed.json", "--jsonArray"]
 }
 
 task seedMongoDB {

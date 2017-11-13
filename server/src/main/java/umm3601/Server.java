@@ -18,20 +18,18 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
     private static final String databaseName = "i3-droptable-dev";
-    private static final String classroomDatabaseName = "i3-raymond-classrooms";
     private static final int serverPort = 4567;;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
         MongoDatabase database = mongoClient.getDatabase(databaseName);
-        MongoDatabase classroomDB = mongoClient.getDatabase(classroomDatabaseName);
 
         CardController cardController = new CardController(database);
 
         DeckController deckController = new DeckController(database);
 
-        SageController sageController = new SageController(classroomDB);
+        SageController sageController = new SageController(database);
 
         //Configure Spark
         port(serverPort);
