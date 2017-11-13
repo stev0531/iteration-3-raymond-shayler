@@ -225,9 +225,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
     }
 
@@ -247,9 +247,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 4 cards", 4, docs.size());
+        assertEquals("Should be 6 cards", 6, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Cool", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration","Catalyst", "Cool", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
         // assertEquals("words should match", Arrays.asList("Aesthetic reading", "Alliteration", "Pletora", "Cool"),cards.stream().map(x -> x.getString("word")).collect(Collectors.toList()));
     }
@@ -273,9 +273,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration","Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
@@ -293,9 +293,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
@@ -313,9 +313,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
