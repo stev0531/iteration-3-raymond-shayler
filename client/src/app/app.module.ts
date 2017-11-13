@@ -29,6 +29,7 @@ import {SimpleCardComponent} from "./simple-card-component/simple-card.component
 import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dialog.component";
 import {ClassroomComponent} from "./classroom-component/classroom.component";
 import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
+import {ClassroomService} from "./classroom/classroom.service";
 
 @NgModule({
 
@@ -65,6 +66,7 @@ import {ClassroomListComponent} from "./classroom-list-component/classroom-list.
     providers: [
         CardListService,
         DeckService,
+        ClassroomService,
         MdDialog,
         MdSnackBar,
         {provide: APP_BASE_HREF, useValue: '/'},

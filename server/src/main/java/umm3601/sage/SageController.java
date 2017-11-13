@@ -19,14 +19,12 @@ public class SageController {
     private final Gson gson;
     private MongoDatabase database;
     private final MongoCollection<Document> classroomCollection;
-    private final MongoCollection<Document> adminCollection;
 
 
     public SageController(MongoDatabase database){
         gson = new Gson();
         this.database = database;
         classroomCollection = database.getCollection("classrooms");
-        adminCollection = database.getCollection("admins");
     }
 
     public String getClassroom(Request req, Response res){
