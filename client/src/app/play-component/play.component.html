@@ -18,7 +18,7 @@
                 <button class="round-button got-it-button" mat-raised-button color="warn"
                         [disabled]="this.getCardState(ind).isComplete" (click)="this.addPoints(ind)">Got It!
                 </button>
-                <button class="round-button finish-button" mat-raised-button color="accent" [routerLink]="['/results', deck._id.$oid]">Finish</button>
+
                 <span class="score">Score: {{this.points}}</span>
 
             </div>

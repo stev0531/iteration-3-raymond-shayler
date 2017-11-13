@@ -59,6 +59,7 @@ import {ResultsComponent} from "./results/results.component";
         NewDeckDialogComponent,
         CardDisplayDialogComponent,
         CardComponent,
+        ResultsComponent,
     ],
     providers: [
         CardListService,

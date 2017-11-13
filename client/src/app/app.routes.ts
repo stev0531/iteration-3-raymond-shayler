@@ -18,11 +18,8 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'card', redirectTo: '/decks', pathMatch: 'full'},
     {path: 'help', component: HelpComponent},
-    {path: 'card-list', component: CardListComponent},
-    {path: 'results/:deck', component: ResultsComponent}
+    {path: 'card-list', component: CardListComponent}
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);
-
-
 

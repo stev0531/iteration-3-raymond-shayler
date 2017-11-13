@@ -1,9 +1,24 @@
-<mat-card>
-    <mat-card-title id="results-title">Results</mat-card-title>
-    <mat-divider></mat-divider>
+<mat-dialog-content class="card-entire">
 
-</mat-card>
+    <mat-card-content class="first-score">
+        <div id="final-score-text">
+            Final Score:
+        </div>
+        <div id="final-score">
+            {{  score  }}
+        </div>
+    </mat-card-content>
 
-<button mat-raised-button color="warn" class="play-again-button" [routerLink]="['/decks']">Play Again</button>
-<button mat-raised-button color="warn" class="home-button" [routerLink]="['/home']">Home</button>
+</mat-dialog-content>
+
+<div class="nav-buttons">
+    <button mat-raised-button color="accent" class="round-button play-again-button" [routerLink]="['/decks']" (click)="this.close()">
+        Play Again?
+    </button>
+    <button mat-raised-button color="warn" class="round-button home-button" [routerLink]="['/home']" (click)="this.close()">
+        Home
+    </button>
+</div>
+<!>
+
 

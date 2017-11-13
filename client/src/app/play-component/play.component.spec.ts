@@ -11,6 +11,8 @@ import {CardComponent} from "../card-component/card.component";
 import {CardState} from "./CardState";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {By} from "@angular/platform-browser";
+import {ResultsComponent} from "../results/results.component";
+import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
 
 describe('PlayComponent', () => {
     let component: PlayComponent;
@@ -55,6 +57,15 @@ describe('PlayComponent', () => {
                         antonym: "test antonym",
                         general_sense: "test general_sense",
                         example_usage: "test example_usage",
+                    },
+
+                    {
+                        _id: "test id",
+                        word: "test word",
+                        synonym: "test synonym",
+                        antonym: "test antonym",
+                        general_sense: "test general_sense",
+                        example_usage: "test example_usage",
                     }
                 ]
             })
@@ -71,6 +82,12 @@ describe('PlayComponent', () => {
                     }
                 }],
         })
+
+            // TestBed.overrideModule(BrowserDynamicTestingModule, {
+            //     set: {
+            //         entryComponents: [ResultsComponent]
+            //     }
+            // })
             .compileComponents();
     }));
 
