@@ -5,7 +5,7 @@ import {Deck} from "../deck/deck";
 import {CardState} from "./CardState";
 import {MdDialog} from "@angular/material";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
-import {CardComponent} from "../card-component/card.component";
+import {ResultsComponent} from "../results/results.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {environment} from "../../environments/environment";
@@ -23,13 +23,13 @@ export class PlayComponent implements OnInit {
     deck: Deck;
 
     public pageNumber: number = 0;
-    public pageCount: number = 0;
+    public cardsDone: number = 0;
 
     public points: number = 0;
 
     public cardStates: CardState[];
 
-    constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog) {
+    constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog, public results: MdDialog) {
         this.cardStates = [];
     }
 
@@ -40,8 +40,13 @@ export class PlayComponent implements OnInit {
             this.points += this.cardStates[pageNumber].cardPoints;
             this.cardStates[pageNumber].selected = 0;
             this.cardStates[pageNumber].isDone();
+            this.cardsDone = this.cardsDone + 1;
             this.pageNumber = pageNumber + 1;
 
+        }
+
+        if(this.cardsDone == (this.deck.cards.length)){
+            this.openResultsDialog();
         }
 
     }
@@ -66,6 +71,17 @@ export class PlayComponent implements OnInit {
         console.log(config);
 
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
+    };
+
+    public openResultsDialog() {
+        let config = new MatDialogConfig();
+        config.data = {
+            points: this.points,
+            deck: this.deck
+        };
+        console.log(config);
+
+        let cardRef = this.results.open(ResultsComponent, config);
     };
 
     //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#2450976

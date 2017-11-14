@@ -27,6 +27,7 @@ import {CardListComponent} from "./card-list-component/card-list.component"
 import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
 import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dialog.component";
+import {ResultsComponent} from "./results/results.component";
 
 @NgModule({
 
@@ -35,7 +36,7 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
         HttpModule,
         JsonpModule,
         Routing,
-        SharedModule,
+        SharedModule
     ],
     declarations: [
         AppComponent,
@@ -50,13 +51,15 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
         CardListComponent,
         SimpleCardComponent,
         CardDisplayDialogComponent,
-        PlayComponent
+        PlayComponent,
+        ResultsComponent
     ],
     entryComponents: [
         NewCardDialogComponent,
         NewDeckDialogComponent,
+        ResultsComponent,
         CardDisplayDialogComponent,
-        CardComponent,
+        CardComponent
     ],
     providers: [
         CardListService,

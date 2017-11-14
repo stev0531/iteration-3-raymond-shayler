@@ -5,12 +5,16 @@ import {Observable} from "rxjs/Observable";
 import {Deck} from "../deck/deck";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {DeckService} from "../deck/deck.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterModule} from "@angular/router";
 import {SharedModule} from "../shared.module";
 import {CardComponent} from "../card-component/card.component";
 import {CardState} from "./CardState";
-import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {By} from "@angular/platform-browser";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {ResultsComponent} from "../results/results.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('PlayComponent', () => {
     let component: PlayComponent;
@@ -60,8 +64,20 @@ describe('PlayComponent', () => {
             })
         };
 
+        @NgModule({
+            imports: [CommonModule, RouterTestingModule],
+            declarations: [ResultsComponent],
+            providers: [],
+            entryComponents: [
+                ResultsComponent,
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+        })
+        class TestDialog {
+        }
+
         TestBed.configureTestingModule({
-            imports: [SharedModule],
+            imports: [SharedModule, TestDialog, CommonModule],
             declarations: [PlayComponent, CardComponent,],
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
                 {provide: DeckService, useValue: deckServiceStub}, {
@@ -70,6 +86,7 @@ describe('PlayComponent', () => {
                         params: Observable.of({id: "test id"})
                     }
                 }],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));

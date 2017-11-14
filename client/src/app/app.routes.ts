@@ -7,6 +7,7 @@ import {DeckComponent} from "./deck-component/deck.component";
 import {PlayComponent} from "./play-component/play.component";
 import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component";
+import {ResultsComponent} from "./results/results.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -21,3 +22,4 @@ export const routes: Routes = [
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);
+
