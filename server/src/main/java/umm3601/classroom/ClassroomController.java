@@ -1,4 +1,4 @@
-package umm3601.sage;
+package umm3601.classroom;
 
 import com.google.gson.Gson;
 import com.mongodb.client.AggregateIterable;
@@ -15,13 +15,13 @@ import spark.Response;
 import java.util.Arrays;
 import java.util.Map;
 
-public class SageController {
+public class ClassroomController {
     private final Gson gson;
     private MongoDatabase database;
     private final MongoCollection<Document> classroomCollection;
 
 
-    public SageController(MongoDatabase database){
+    public ClassroomController(MongoDatabase database){
         gson = new Gson();
         this.database = database;
         classroomCollection = database.getCollection("classrooms");

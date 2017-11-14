@@ -16,7 +16,10 @@
                 Help</a>
             <a mat-list-item [routerLink]="['/classrooms']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>room</mat-icon>
-                Classroom</a>
+                Classrooms</a>
+            <a mat-list-item [routerLink]="['/users']" (click)="layout.close()" routerLinkActive="nav-active">
+                <mat-icon>room</mat-icon>
+                Users</a>
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav toolbarTitle="SAGE" navigationRoute="/">

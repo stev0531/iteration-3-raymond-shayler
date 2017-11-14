@@ -8,6 +8,7 @@ import {PlayComponent} from "./play-component/play.component";
 import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component";
 import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
+import {UserListComponent} from "./user-list/user-list.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -19,7 +20,8 @@ export const routes: Routes = [
     {path: 'card', redirectTo: '/decks', pathMatch: 'full'},
     {path: 'help', component: HelpComponent},
     {path: 'card-list', component: CardListComponent},
-    {path: 'classrooms', component: ClassroomListComponent}
+    {path: 'classrooms', component: ClassroomListComponent},
+    {path: 'users', component: UserListComponent},
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);

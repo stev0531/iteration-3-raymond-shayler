@@ -30,6 +30,7 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
 import {ClassroomComponent} from "./classroom-component/classroom.component";
 import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
 import {ClassroomService} from "./classroom/classroom.service";
+import {UserListComponent} from "./user-list/user-list.component";
 
 @NgModule({
 
@@ -56,6 +57,7 @@ import {ClassroomService} from "./classroom/classroom.service";
         ClassroomComponent,
         ClassroomListComponent,
         PlayComponent,
+        UserListComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,

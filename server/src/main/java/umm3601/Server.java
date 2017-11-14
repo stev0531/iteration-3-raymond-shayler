@@ -8,7 +8,7 @@ import spark.Route;
 import spark.utils.IOUtils;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
-import umm3601.sage.SageController;
+import umm3601.classroom.ClassroomController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ public class Server {
 
         DeckController deckController = new DeckController(database);
 
-        SageController sageController = new SageController(database);
+        ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
         port(serverPort);
@@ -78,8 +78,8 @@ public class Server {
         post("api/addMany", cardController::addCardsToDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/classrooms",sageController::getClassrooms);
-        get("api/classroom:id",sageController::getClassroom);
+        get("api/classrooms", classroomController::getClassrooms);
+        get("api/classroom:id", classroomController::getClassroom);
 
 
         // Called after each request to insert the GZIP header into the response.
