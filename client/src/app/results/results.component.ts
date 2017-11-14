@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
 import {Deck} from "../deck/deck";
 
 
@@ -19,7 +19,7 @@ export class ResultsComponent implements OnInit {
     score: number;
     deck: Deck;
 
-    private close(){
+    public close(){
         this.matDialogRef.close();
     }
 

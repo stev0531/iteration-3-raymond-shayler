@@ -36,7 +36,7 @@ import {ResultsComponent} from "./results/results.component";
         HttpModule,
         JsonpModule,
         Routing,
-        SharedModule,
+        SharedModule
     ],
     declarations: [
         AppComponent,
@@ -57,9 +57,9 @@ import {ResultsComponent} from "./results/results.component";
     entryComponents: [
         NewCardDialogComponent,
         NewDeckDialogComponent,
-        CardDisplayDialogComponent,
-        CardComponent,
         ResultsComponent,
+        CardDisplayDialogComponent,
+        CardComponent
     ],
     providers: [
         CardListService,
