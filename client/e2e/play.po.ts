@@ -25,4 +25,9 @@ export class PlayPage {
         return element.all(by.className(htmlClass));
     }
 
+    getPageTitle(id: string){
+        let title = element(by.id(id)).getText();
+        return title;
+    }
+
 }
