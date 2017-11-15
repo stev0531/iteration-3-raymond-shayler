@@ -1,0 +1,23 @@
+
+<mat-card>
+    <mat-card-title>Make Your Selections!</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-select placeholder="Deck">
+            <mat-option *ngFor="let deck of this.deckService.decks" [value]="deck" (click)="selectDeck(deck)">
+                {{ deck.name }}
+            </mat-option>
+        </mat-select>
+
+        <button mat-raised-button *ngIf="deck; else playError" class="play-button" color="warn" [routerLink]="['/play', deck._id.$oid]">
+            Play
+        </button>
+        <button mat-raised-button color="warn" class="dummy play-button" [ngClass]="{'hide': this.deck != null}">Play</button>
+
+        <ng-template #playError>
+
+        </ng-template>
+
+    </mat-card-content>
+
+</mat-card>
