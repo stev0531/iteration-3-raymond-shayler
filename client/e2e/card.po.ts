@@ -11,6 +11,7 @@ export class CardPage {
         e.click();
     }
 
+
     //incomplete method to test card-clicks.
     calcHints(){
         return 1;

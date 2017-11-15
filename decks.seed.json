@@ -68,5 +68,16 @@
                 "$oid": "59dac7b147c9429bff9ba9b5"
             }
         ]
+    },
+    {
+        "_id": {
+            "$oid": "b2956f25be16349683be4461"
+        },
+        "name": "testdeck3",
+        "cards": [
+            {
+                "$oid": "59dac7b147c9429bff9ba9b6"
+            }
+        ]
     }
 ]

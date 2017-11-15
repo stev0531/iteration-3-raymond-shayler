@@ -52,7 +52,9 @@ export class CardListPage {
         return text;
     }
 
-
-
+    clickElement(id: string) {
+        let e = element(by.id(id));
+        e.click();
+    }
 
 }

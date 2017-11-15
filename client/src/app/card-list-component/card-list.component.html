@@ -11,14 +11,15 @@
     <button [ngClass]="{'grey-out': this.selectedCards.length == 0 || this.selectedDeck == null}" color="warn" class="round-button" id="Delete-Cards"
             mat-raised-button (click)="changeDeck('delete')">Delete
     </button>
-    <mat-select placeholder="Deck">
+    <mat-select placeholder="Deck" id="deck-dropdown">
         <mat-option *ngFor="let deck of decks" [value]="deck" (click)="selectDeck(deck)">
-            {{ deck.name }}
+           <span id="{{deck.name}}"> {{ deck.name }} </span>
         </mat-option>
     </mat-select>
 </div>
 <div class="wrapper">
     <simple-card
+        id="{{card.word}}"
         *ngFor="let card of cards"
         (click)="select(card)"
         [word]="card.word"
