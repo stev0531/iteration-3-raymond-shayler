@@ -1,6 +1,21 @@
 <div layout-gt-sm="row">
     <div flex-gt-xs="60" flex-offset-gt-xs="20" flex-xs="90" flex-offset-xs="5" *ngIf="this.deck && this.deck.cards">
-        <h2 id="deck-header">{{ this.deck.name }}</h2>
+        <span class="name-bar">
+            <h2 [ngClass]="{'hide': this.editMode != false}" id="deck-header">{{ this.deck.name }}</h2>
+            <mat-form-field [ngClass]="{'hide': this.editMode != true}">
+            <input matInput required id="antInput" #input type="text" placeholder="{{this.deck.name}}" [(ngModel)]="newDeckTitle"
+                   name="newCardAntonym">
+            </mat-form-field>
+            <button [ngClass]="{'hide': this.editMode != false}" color="warn" mat-raised-button class="round-button"
+                id="edit" (click)="changeMode()">Edit Name
+            </button>
+            <button [ngClass]="{'hide': this.editMode != true}" color="warn" mat-raised-button class="round-button"
+                    id="save" (click)="saveEdit()">Save Changes
+            </button>
+            <button [ngClass]="{'hide': this.editMode != true}" color="warn" mat-raised-button class="round-button"
+                    id="cancel" (click)="cancelEdit()">Cancel
+        </button>
+        </span>
         <td-message id="no-cards-message" *ngIf="this.deck.cards.length == 0" label="No Cards"
                     sublabel="This deck is empty, tap + to add cards.">
         </td-message>

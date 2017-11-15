@@ -15,11 +15,30 @@ export class DeckComponent implements OnInit {
 
     id: string;
     deck: Deck;
+    editMode: boolean;
+    newDeckTitle: String;
 
 
     constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog) {
+    this.editMode = false;
 
+    }
 
+    changeMode() {
+        if (this.editMode == false) {
+            this.editMode = true;
+        } else {
+            this.editMode = false;
+        }
+    }
+
+    saveEdit() {
+        this.deckService.updateName(this.newDeckTitle, this.deck._id);
+        this.changeMode();
+    }
+
+    cancelEdit() {
+        this.changeMode();
     }
 
     openAddDialog() {
