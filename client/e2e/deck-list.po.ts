@@ -37,6 +37,10 @@ export class DeckListPage {
         }
     }
 
+    getElementById(htmlId: string){
+        return element.all(by.id(htmlId))
+    }
+
     addDeck(name: string) {
         this.clickButton('deckDialog');
         this.typeInput('deckName', name);

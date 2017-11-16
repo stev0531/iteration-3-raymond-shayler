@@ -14,6 +14,22 @@ import org.junit.Before;
 import org.junit.Test;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
+import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoException;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Projections;
+import com.mongodb.util.JSON;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+import spark.Request;
+import spark.Response;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 
 import java.io.IOException;
 import java.util.*;
@@ -28,6 +44,7 @@ public class CardControllerSpec {
     private ObjectId testDeckId;
 
     private List<Document> testCards;
+    private List<Document> moreTestCards;
 
     @Before
     public void clearAndPopulateDB() throws IOException {
@@ -151,7 +168,33 @@ public class CardControllerSpec {
             "        \"example_usage\": \"There was a plethora of rubber duckies in the pool.\"\n" +
             "    }"));
 
+        moreTestCards = new ArrayList<>();
+        moreTestCards.add(Document.parse("{\n" +
+            "        \"_id\": {\n" +
+            "            \"$oid\": \"507f191e810c19729de860ea\"\n" +
+            "        },\n" +
+            "        \"word\": \"Catalyst\",\n" +
+            "        \"synonym\": \"Stimulus\",\n" +
+            "        \"antonym\": \"Prevention\",\n" +
+            "        \"general_sense\": \"Speeding up the action of something\",\n" +
+            "        \"example_usage\": \"The dry weather acted as a catalyst for the forest fire.\"\n" +
+            "    }"));
+
+        moreTestCards.add(Document.parse("{\n" +
+            "        \"_id\": {\n" +
+            "            \"$oid\": \"1fe762ee78d8578716a8727c\"\n" +
+            "        },\n" +
+            "        \"word\": \"Verisimilitude\",\n" +
+            "        \"synonym\": \"Realistic\",\n" +
+            "        \"antonym\": \"Fake\",\n" +
+            "        \"general_sense\": \"Having the appearance of being real\",\n" +
+            "        \"example_usage\": \"The painting created a sense of verisimilitude because of its fine detail.\"\n" +
+            "    }"));
+
+
+        //  cardDocuments.insertMany(moreTestCards);
         cardDocuments.insertMany(testCards);
+        cardDocuments.insertMany(moreTestCards);
         cardController = new CardController(db);
         deckController = new DeckController(db);
     }
@@ -182,9 +225,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
     }
 
@@ -204,9 +247,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 4 cards", 4, docs.size());
+        assertEquals("Should be 6 cards", 6, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Cool", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration","Catalyst", "Cool", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
         // assertEquals("words should match", Arrays.asList("Aesthetic reading", "Alliteration", "Pletora", "Cool"),cards.stream().map(x -> x.getString("word")).collect(Collectors.toList()));
     }
@@ -221,6 +264,7 @@ public class CardControllerSpec {
         ArrayList<Document> cards = deck.get("cards", ArrayList.class);
         assertEquals("Should be 4 cards in the deck", 4, cards.size());
     }
+
     @Test
     public void tryAddWithNullParameters() {
         cardController.addNewCard(null, null, null, null, null, null);
@@ -229,9 +273,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration","Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
@@ -249,9 +293,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
@@ -269,9 +313,9 @@ public class CardControllerSpec {
         String jsonResult = cardController.getCards(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 3 cards", 3, docs.size());
+        assertEquals("Should be 5 cards", 5, docs.size());
         List<String> words = getStringsFromBsonArray(docs, "word");
-        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Pletora");
+        List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration", "Catalyst", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
 
         // Map<String, String[]> emptyMap = new HashMap<>();
@@ -280,4 +324,50 @@ public class CardControllerSpec {
         ArrayList<Document> cards = deck.get("cards", ArrayList.class);
         assertEquals("Should be 3 cards in the deck", 3, cards.size());
     }
+
+    @Test
+    public void tryAddingACardFromCardList() {
+        String[] cardIds = {"507f191e810c19729de860ea"};
+        cardController.addCardsToDeck(testDeckId.toString(), cardIds);
+
+        String jsonResult = deckController.getDeck(testDeckId.toString());
+        Document deckToAdd = Document.parse(jsonResult);
+        ArrayList<Document> cardsToAdd = deckToAdd.get("cards", ArrayList.class);
+        assertEquals("Should be 4 cards in the deck", 4, cardsToAdd.size());
+    }
+
+    @Test
+    public void tryDeletingACardFromCardList() {
+        String[] cardIds = {"59dac7b147c9429bff9ba9b4"};
+        cardController.deleteCardsFromDeck(testDeckId.toString(), cardIds);
+
+        cardController.deleteCardsFromDeck(testDeckId.toString(), cardIds);
+        String jsonResult = deckController.getDeck(testDeckId.toString());
+        Document deckToDelete = Document.parse(jsonResult);
+        ArrayList<Document> cardsToDelete = deckToDelete.get("cards", ArrayList.class);
+        assertEquals("Should be 2 cards in the deck", 2, cardsToDelete.size());
+    }
+
+    @Test
+    public void tryAddingMultipleCardsFromCardList() {
+        String[] cardIds = {"507f191e810c19729de860ea","1fe762ee78d8578716a8727c"};
+        cardController.addCardsToDeck(testDeckId.toString(), cardIds);
+
+        String jsonResult = deckController.getDeck(testDeckId.toString());
+        Document deckToAdd = Document.parse(jsonResult);
+        ArrayList<Document> cardsToAdd = deckToAdd.get("cards", ArrayList.class);
+        assertEquals("Should be 5 cards in the deck", 5, cardsToAdd.size());
+    }
+
+    @Test
+    public void tryDeletingMultipleCardsFromCardList() {
+        String[] cardIds = {"59dac7b147c9429bff9ba9b3","59dac7b147c9429bff9ba9b4"};
+        cardController.deleteCardsFromDeck(testDeckId.toString(), cardIds);
+
+        String jsonResult = deckController.getDeck(testDeckId.toString());
+        Document deckToAdd = Document.parse(jsonResult);
+        ArrayList<Document> cardsToAdd = deckToAdd.get("cards", ArrayList.class);
+        assertEquals("Should be 1 card in the deck", 1, cardsToAdd.size());
+    }
+
 }

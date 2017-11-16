@@ -1,12 +1,14 @@
 package umm3601.card;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.util.JSON;
 import org.bson.Document;
@@ -19,9 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -105,6 +105,7 @@ public class CardController {
     }
 
     public Object addCardsToDeck(Request req, Response res) {
+        System.out.println("This should print");
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("/tmp/logs.txt"));
             pw.println("In addCardsToDeck");
@@ -120,8 +121,13 @@ public class CardController {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String deckID = dbO.getString("DeckID");
-                    String[] cardIds = (String[]) dbO.get("cardArray");
+                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
+                    String deckID = dbO.getString("deckId");
+                    String[] cardIds = new String[dbIdList.size()];
+
+                    for (int i = 0; i < dbIdList.size(); i++) {
+                        cardIds[i] = dbIdList.get(i).toString();
+                    }
 
                     System.err.println("Adding new cards to " + deckID + " " + cardIds);
                     return addCardsToDeck(deckID, cardIds);
@@ -151,7 +157,7 @@ public class CardController {
 
         for (int i = 0; i < cardIds.length; i++) {
             // try {
-                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", cardIds[i])));
+                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", new ObjectId(cardIds[i]))));
             /* }  catch (MongoException me) {
                 me.printStackTrace();
                 return false;
@@ -160,6 +166,58 @@ public class CardController {
         }
             return true;
         }
+
+    public Object deleteCardsFromDeck(Request req, Response res) {
+        System.out.println("This should print");
+
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
+        try {
+            if (o.getClass().equals(BasicDBObject.class)) {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+
+                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
+                    String deckID = dbO.getString("deckId");
+                    String[] cardIds = new String[dbIdList.size()];
+
+                    for (int i = 0; i < dbIdList.size(); i++) {
+                        cardIds[i] = dbIdList.get(i).toString();
+                    }
+
+                    System.err.println("Deleting cards from " + deckID + " " + cardIds[0]);
+                    return deleteCardsFromDeck(deckID, cardIds);
+                } catch (NullPointerException e) {
+                    System.err.println("A value was malformed or omitted, card addition request failed.");
+                    return false;
+                }
+            } else {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return false;
+            }
+        } catch (RuntimeException ree) {
+            ree.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteCardsFromDeck(String deckID, String[] cardIds){
+        System.out.println("This should print");
+        System.out.println(cardIds.length);
+        for (int i = 0; i < cardIds.length; i++) {
+            boolean deckContainsCard = (deckCollection.count(Filters.all("cards", cardIds[i])) == 1);
+            // try {
+          //  if (deckContainsCard) {
+          //      System.out.println(deckContainsCard);
+                deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$pull", new Document("cards", new ObjectId(cardIds[i]))));
+            /* }  catch (MongoException me) {
+                me.printStackTrace();
+                return false;
+            } */
+          //  }
+        }
+        return true;
+    }
 
     public Object addNewCard(Request req, Response res)
     {
