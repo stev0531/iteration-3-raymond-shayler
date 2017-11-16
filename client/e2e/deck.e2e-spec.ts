@@ -78,5 +78,27 @@ describe('deck-page', () => {
 
     });
 
+    it('should edit the deck name and cancel, leaving the name unchanged', () => {
+        page.navigateTo('59de8a1f012e92ce86a57177');
+
+        var startingName = page.getDeckHeader();
+        var name = page.randomText(5);
+
+        page.changeName(name, false);
+
+        expect(page.getDeckHeader()).toEqual(startingName);
+    });
+
+    it('should edit the deck name and save the changes, checking that it updated', () => {
+        page.navigateTo('59de8a1f012e92ce86a57177');
+
+        var startingName = page.getDeckHeader();
+        var name = page.randomText(5);
+
+        page.changeName(name, false);
+        page.clickButton('save');
+
+        expect(page.getDeckHeader()).toEqual(name);
+    });
 
 });
