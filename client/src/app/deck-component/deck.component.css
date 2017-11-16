@@ -15,3 +15,11 @@
     border-width: 1.5px;
     border-color: black;
 }
+
+#deck-header {
+    display: inline-block;
+}
+
+#name-form {
+    display: inline-block;
+}

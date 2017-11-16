@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {MdDialog, MatDialogConfig} from "@angular/material";
+import {ChangeDetectorRef} from "@angular/core";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DeckComponent implements OnInit {
     newDeckTitle: String;
 
 
-    constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog) {
+    constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog, private cd: ChangeDetectorRef) {
     this.editMode = false;
 
     }
@@ -35,6 +36,9 @@ export class DeckComponent implements OnInit {
     saveEdit() {
         this.deckService.updateName(this.newDeckTitle, this.deck._id);
         this.changeMode();
+
+
+        this.cd.detectChanges();
     }
 
     cancelEdit() {
