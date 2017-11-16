@@ -18,10 +18,18 @@
 }
 
 #deck-header {
-    margin-right: 20px;
     display: inline-block;
+    margin-right: 5px;
+}
+
+#title-input {
+    margin-left: 20px;
 }
 
 #name-form {
     display: inline-block;
+}
+
+#edit-icon {
+    padding-bottom: 10px;
 }

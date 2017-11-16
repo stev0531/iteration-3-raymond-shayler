@@ -15,11 +15,13 @@ describe('DeckComponent', () => {
 
     let deckServiceStub: {
         getDeck: (id) => Observable<Deck>
+        updateName: (newName, id) => Observable<any>
     };
 
     beforeEach(async(() => {
 
         deckServiceStub = {
+            updateName: (newName: string, id: object) => Observable.of([]),
             getDeck: (id) => Observable.of({
                 _id: {
                     $oid: "test id"
@@ -81,4 +83,23 @@ describe('DeckComponent', () => {
             ]
         });
     })
+
+    it('Should enter edit mode when the edit button is clicked', () => {
+        component.changeMode();
+        expect(component.editMode).toEqual(true);
+    });
+
+    it('Should exit edit mode when the chancel button is clicked', () => {
+        component.changeMode();
+        component.cancelEdit();
+        expect(component.editMode).toEqual(false);
+    });
+
+    it('Should set the deck name to be the new deck name when Save Changes is pressed', () => {
+        component.changeMode();
+        component.newDeckTitle = "Florida";
+        component.saveEdit();
+        expect(component.editMode).toEqual(false);
+        expect(component.deck.name).toEqual("Florida");
+    });
 });
