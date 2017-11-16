@@ -4,7 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {MdDialog, MatDialogConfig} from "@angular/material";
-import {ChangeDetectorRef} from "@angular/core";
+
 
 
 @Component({
@@ -12,17 +12,17 @@ import {ChangeDetectorRef} from "@angular/core";
     templateUrl: './deck.component.html',
     styleUrls: ['./deck.component.css']
 })
+
 export class DeckComponent implements OnInit {
 
     id: string;
     deck: Deck;
     editMode: boolean;
-    newDeckTitle: String;
+    newDeckTitle: string;
 
 
-    constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog, private cd: ChangeDetectorRef) {
-    this.editMode = false;
-
+    constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog) {
+        this.editMode = false;
     }
 
     changeMode() {
@@ -35,10 +35,9 @@ export class DeckComponent implements OnInit {
 
     saveEdit() {
         this.deckService.updateName(this.newDeckTitle, this.deck._id);
+        this.deck.name = this.newDeckTitle;
         this.changeMode();
 
-
-        this.cd.detectChanges();
     }
 
     cancelEdit() {

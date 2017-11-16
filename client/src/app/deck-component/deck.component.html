@@ -1,10 +1,10 @@
 <div layout-gt-sm="row">
     <div flex-gt-xs="60" flex-offset-gt-xs="20" flex-xs="90" flex-offset-xs="5" *ngIf="this.deck && this.deck.cards">
         <span class="name-bar">
-            <h2 [ngClass]="{'hide': this.editMode != false}" id="deck-header">{{ this.deck.name }}</h2>
+            <h2 [ngClass]="{'hide': this.editMode != false}" id="deck-header" > {{this.deck.name}}</h2>
             <form id="name-form" #newTitleForm="ngForm">
                 <mat-form-field [ngClass]="{'hide': this.editMode != true}">
-                    <input matInput required id="antInput" #input type="text" placeholder="{{this.deck.name}}" [(ngModel)]="newDeckTitle"
+                    <input matInput required id="antInput" #input type="text"  [(ngModel)]="newDeckTitle"
                         name="newDeckTitle">
                 </mat-form-field>
                 <button [ngClass]="{'hide': this.editMode != false}" id="edit-name" color="warn" mat-raised-button class="round-button"
