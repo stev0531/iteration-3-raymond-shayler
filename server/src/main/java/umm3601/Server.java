@@ -13,6 +13,8 @@ import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
 import umm3601.Authentication.Cookie;
 import umm3601.Authentication.UnauthorizedUserException;
+import umm3601.classroom.ClassroomController;
+import umm3601.user.*;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -23,8 +25,8 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 public class Server {
-    private static final String databaseName = "i1-droptable-dev";
-    private static final int serverPort = 4567;
+    private static final String databaseName = "i3-droptable-dev";
+    private static final int serverPort = 4567;;
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
@@ -34,6 +36,10 @@ public class Server {
         CardController cardController = new CardController(database);
 
         DeckController deckController = new DeckController(database);
+
+        UserController userController = new UserController(database);
+
+        ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
         port(serverPort);
@@ -145,6 +151,10 @@ public class Server {
         post("api/addMany", cardController::addCardsToDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
+        get("api/classrooms", classroomController::getClassrooms);
+        get("api/classroom:id", classroomController::getClassroom);
+        get("api/users", userController::getUsers);
+        get("api/user:id", userController::getUser);
 
 
 
