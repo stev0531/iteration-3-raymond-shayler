@@ -30,7 +30,9 @@ import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dia
 import {ClassroomComponent} from "./classroom-component/classroom.component";
 import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
 import {ClassroomService} from "./classroom/classroom.service";
-import {UserListComponent} from "./user-list/user-list.component";
+import {UserListComponent} from "./user-list-component/user-list.component"
+import {UserService} from "./user/user.service";
+import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 @NgModule({
 
@@ -58,6 +60,7 @@ import {UserListComponent} from "./user-list/user-list.component";
         ClassroomListComponent,
         PlayComponent,
         UserListComponent,
+        ProfilePageComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,
@@ -69,6 +72,7 @@ import {UserListComponent} from "./user-list/user-list.component";
         CardListService,
         DeckService,
         ClassroomService,
+        UserService,
         MdDialog,
         MdSnackBar,
         {provide: APP_BASE_HREF, useValue: '/'},

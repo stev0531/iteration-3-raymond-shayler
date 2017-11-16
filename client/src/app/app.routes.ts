@@ -8,7 +8,8 @@ import {PlayComponent} from "./play-component/play.component";
 import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component";
 import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
-import {UserListComponent} from "./user-list/user-list.component";
+import {UserListComponent} from "./user-list-component/user-list.component";
+import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {path: 'card-list', component: CardListComponent},
     {path: 'classrooms', component: ClassroomListComponent},
     {path: 'users', component: UserListComponent},
+    {path: 'profile', component: ProfilePageComponent},
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);

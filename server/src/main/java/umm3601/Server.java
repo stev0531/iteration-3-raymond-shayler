@@ -9,6 +9,7 @@ import spark.utils.IOUtils;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
 import umm3601.classroom.ClassroomController;
+import umm3601.user.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,8 @@ public class Server {
         CardController cardController = new CardController(database);
 
         DeckController deckController = new DeckController(database);
+
+        UserController userController = new UserController(database);
 
         ClassroomController classroomController = new ClassroomController(database);
 
@@ -80,6 +83,8 @@ public class Server {
         get("api/simple-decks", deckController::getSimpleDecks);
         get("api/classrooms", classroomController::getClassrooms);
         get("api/classroom:id", classroomController::getClassroom);
+        get("api/users", userController::getUsers);
+        get("api/user:id", userController::getUser);
 
 
         // Called after each request to insert the GZIP header into the response.

@@ -2,19 +2,19 @@
     <div flex-gt-xs="80" flex-offset-gt-xs="10" flex-xs="96" flex-offset-xs="2">
 
         <mat-card>
-            <mat-card-title id="decks-title">Classrooms</mat-card-title>
+            <mat-card-title id="decks-title">Users</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-                <mat-nav-list *ngIf="this.classroomService.classrooms; else classroomError">
-                    <mat-list-item class="deck" *ngFor="let classroom of this.classroomService.classrooms">
-                        <a class="deck-name" matLine [routerLink]="['/classroom', classroom._id.$oid]">{{ classroom.name }}</a>
+                <mat-nav-list *ngIf="this.userService.users; else userError">
+                    <mat-list-item class="deck" *ngFor="let user of this.userService.users">
+                        <a class="deck-name" matLine [routerLink]="['/users', user._id.$oid]">{{ user.name }}</a>
                         <button>Select</button>
                     </mat-list-item>
                 </mat-nav-list>
                 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
-                <ng-template #classroomError>
+                <ng-template #userError>
                     <p>
-                        There was a problem loading the classroom. Possibly the server is down or perhaps there are network
+                        There was a problem loading the users. Possibly the server is down or perhaps there are network
                         issues.
                     </p>
                     <p>
