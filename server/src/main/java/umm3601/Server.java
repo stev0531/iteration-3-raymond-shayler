@@ -94,21 +94,7 @@ public class Server {
         // Redirects for the "home" page
         redirect.get("", "/");
 
-        Route clientRoute = (req, res) -> {
-            //Return client files
 
-            InputStream stream = Server.class.getResourceAsStream("/public/index.html");
-            if(null != stream){
-                System.err.println("stream is not null");
-                if(null != stream.toString()){
-                    System.err.print(", and is ");
-                    System.err.print(stream.toString());
-                }
-            } else{
-                System.err.println("GASP, Stream is null");
-            }
-            return IOUtils.toString(stream);
-        };
 
         //get("/", clientRoute);
         redirect.get("/", "http://localhost:9000");
@@ -128,14 +114,16 @@ public class Server {
 
         before(((request, response) -> {
             System.out.println("New request: " + request.pathInfo());
-            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))){
+            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()) )){
                 System.out.println("Checking Auth");
-                String cookie = request.cookie("cards.sage");
+                String cookie = request.cookie("ddg");
                 System.out.println(cookie);
 
                 if(!auth.authorized(cookie)) {
                     System.err.println("Auth denied");
                     response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
+                } else {
+                    System.out.println("Auth Passed");
                 }
             }
         }));
@@ -159,11 +147,11 @@ public class Server {
 
 
         get("/callback", (req, res) -> {
-
             Map<String, String[]> params = req.queryMap().toMap();
             String[] states = params.get("state");
             String[] codes = params.get("code");
             String[] errors = params.get("error");
+            System.out.println("/callback reached");
             if (null == states) {
                 // we REQUIRE that we be passed a state
                 halt(400);
@@ -188,12 +176,13 @@ public class Server {
             }
             String state = states[0];
             String code = codes[0];
+            System.out.println("Callback request seems valid, checking...");
             try {
                 String originatingURL = auth.verifyCallBack(state, code);
                 if (null != originatingURL) {
                     Cookie c = auth.getCookie();
                     res.cookie(c.name, c.value, c.max_age);
-                    System.err.println("Innermost Auth script was run");
+                    System.out.println("Innermost Auth script was run");
                     res.redirect(originatingURL);
                     System.out.println("good");
                     return ""; // not reached
@@ -204,6 +193,7 @@ public class Server {
                 }
             } catch (UnauthorizedUserException e) {
                 res.redirect("/");
+                System.err.println("Unauthorized User exception");
                 return ""; // not reached
             }
 //            res.type("application/json");
@@ -222,7 +212,7 @@ public class Server {
         // before they they're processed by things like `get`.
         after("*", Server::addGzipHeader);
 
-        get("/*", clientRoute);
+//        get("/*", clientRoute);
 
         // Handle "404" file not found requests:
         notFound((req, res) -> {
@@ -245,8 +235,6 @@ public class Server {
     private static void addGzipHeader(Request request, Response response) {
         response.header("Content-Encoding", "gzip");
     }
-
-
 }
 
 
