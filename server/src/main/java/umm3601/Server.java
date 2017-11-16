@@ -3,7 +3,6 @@ package umm3601;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.google.gson.*;
-import org.bson.json.JsonReader;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -11,25 +10,23 @@ import spark.utils.IOUtils;
 
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
-import umm3601.Auth;
-import umm3601.Conf;
+import umm3601.Authentication.Auth;
+import umm3601.Authentication.Cookie;
+import umm3601.Authentication.UnauthorizedUserException;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-
-
-
-
-
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
+
 
 public class Server {
     private static final String databaseName = "i1-droptable-dev";
     private static final int serverPort = 4567;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
         MongoClient mongoClient = new MongoClient();
         MongoDatabase database = mongoClient.getDatabase(databaseName);
@@ -55,11 +52,20 @@ public class Server {
         // get them from https://console.developers.google.com/apis/dashboard?project=sagecards-r-shayler
         // credentials screen
         //////////////////////*/
+
+        String publicURL;
+        String callbackURL;
+
+
         com.google.gson.stream.JsonReader reader =
-            new com.google.gson.stream.JsonReader(new FileReader("/config.json"));
+            new com.google.gson.stream.JsonReader(new FileReader("./config.json"));
         Gson gson = new Gson();
-        Conf conf = gson.fromJson(reader, Conf.class);
-        Auth auth = new Auth(conf.clientId, conf.clientSecret);
+        Conf conf;
+        conf = gson.fromJson(reader, Conf.class);
+        callbackURL = conf.callbackURL;
+        publicURL = conf.callbackURL;
+
+        Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
 
         options("/*", (request, response) -> {
 
@@ -84,11 +90,49 @@ public class Server {
 
         Route clientRoute = (req, res) -> {
             //Return client files
+
             InputStream stream = Server.class.getResourceAsStream("/public/index.html");
+            if(null != stream){
+                System.err.println("stream is not null");
+                if(null != stream.toString()){
+                    System.err.print(", and is ");
+                    System.err.print(stream.toString());
+                }
+            } else{
+                System.err.println("GASP, Stream is null");
+            }
             return IOUtils.toString(stream);
         };
 
-        get("/", clientRoute);
+        //get("/", clientRoute);
+        redirect.get("/", "http://localhost:9000");
+
+        get("api/authorize", (req,res) -> {
+            String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
+            String originatingURL;
+            if (originatingURLs == null) {
+                originatingURL = publicURL;
+            } else {
+                originatingURL = originatingURLs[0];
+            }
+            res.redirect(auth.getAuthURL(originatingURL));
+            // I think we could return an arbitrary value since the redirect prevents this from being used
+            return res;
+        });
+
+        before(((request, response) -> {
+            System.out.println("New request: " + request.pathInfo());
+            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))){
+                System.out.println("Checking Auth");
+                String cookie = request.cookie("cards.sage");
+                System.out.println(cookie);
+
+                if(!auth.authorized(cookie)) {
+                    System.err.println("Auth denied");
+                    response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
+                }
+            }
+        }));
 
         /// Deck and Card Endpoints ///////////////////////////
         /////////////////////////////////////////////
@@ -102,20 +146,62 @@ public class Server {
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
 
-        //auth test
-        get("api/authTest", ((request, response) -> {
-            response.type("text/plain");
-            response.redirect(auth.getAuthURL());
 
-            return response;
-        }));
 
-        get("callback", (req, res) -> {
-            res.type("application/json");
+        get("/callback", (req, res) -> {
+
             Map<String, String[]> params = req.queryMap().toMap();
-            String state = params.get("state")[0];
-            String code = params.get("code")[0];
-            return auth.getProfile(state, code);
+            String[] states = params.get("state");
+            String[] codes = params.get("code");
+            String[] errors = params.get("error");
+            if (null == states) {
+                // we REQUIRE that we be passed a state
+                halt(400);
+                return ""; // never reached
+            }
+            if (null == codes ) {
+                if (null == errors) {
+                    // we don't have codes, but we don't have an error either, so this a garbage request
+                    halt(400);
+                    return ""; // never reached
+                }
+                else if ("access_denied".equals(errors[0])) {
+                    // the user clicked "deny", so send them to the visitor page
+                    res.redirect("/");
+                    return ""; // send an empty body back on redirect
+                }
+                else {
+                    // an unknown error was passed to us, so we halt
+                    halt(400);
+                    return ""; // not reached
+                }
+            }
+            String state = states[0];
+            String code = codes[0];
+            try {
+                String originatingURL = auth.verifyCallBack(state, code);
+                if (null != originatingURL) {
+                    Cookie c = auth.getCookie();
+                    res.cookie(c.name, c.value, c.max_age);
+                    System.err.println("Innermost Auth script was run");
+                    res.redirect(originatingURL);
+                    System.out.println("good");
+                    return ""; // not reached
+                } else {
+                    System.out.println("bad");
+                    res.status(403);
+                    return "?????"; // todo: return a reasonable message
+                }
+            } catch (UnauthorizedUserException e) {
+                res.redirect("/");
+                return ""; // not reached
+            }
+//            res.type("application/json");
+//            Map<String, String[]> params = req.queryMap().toMap();
+//            String state = params.get("state")[0];
+//            String code = params.get("code")[0];
+//            System.err.println(req);
+//            return auth.getProfile(state, code);
         });
 
 
@@ -137,9 +223,21 @@ public class Server {
 
 
     }
+    ///moved in here because Java is being weird.
+    private class Conf {
+        public String clientId;
+        public String clientSecret;
+        public String publicURL;
+        public String callbackURL;
+    }
 
     // Enable GZIP for all responses
     private static void addGzipHeader(Request request, Response response) {
         response.header("Content-Encoding", "gzip");
     }
+
+
 }
+
+
+
