@@ -1,21 +1,33 @@
 
 <mat-card>
-    <mat-card-title>Make Your Selections!</mat-card-title>
+    <mat-card-title id="start-title">Make Your Selections!</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <mat-select placeholder="Deck">
+        <mat-select placeholder="Deck" class="deck-selection">
             <mat-option *ngFor="let deck of this.deckService.decks" [value]="deck" (click)="selectDeck(deck)">
                 {{ deck.name }}
             </mat-option>
         </mat-select>
 
-        <button mat-raised-button *ngIf="deck; else playError" class="play-button" color="warn" [routerLink]="['/play', deck._id.$oid]">
+        <button mat-raised-button *ngIf="deck" class="play-button" color="warn" [routerLink]="['/play', deck._id.$oid+'_'+limit]">
             Play
         </button>
-        <button mat-raised-button color="warn" class="dummy play-button" [ngClass]="{'hide': this.deck != null}">Play</button>
+        <button mat-raised-button color="warn" class="dummy play-button" [ngClass]="{'hide': deck != null}">Play</button>
+
+        <div *ngIf="deck">
+            <input class="form-control" id="inputLimit" #input type="number" placeholder="# of Cards" [(ngModel)]="limit">
+        </div>
 
         <ng-template #playError>
+        </ng-template>
 
+        <ng-template #limitError>
+            <p>
+                The number you gave is greater than how many cards are in the deck.
+            </p>
+            <p>
+                Please give a smaller number.
+            </p>
         </ng-template>
 
     </mat-card-content>

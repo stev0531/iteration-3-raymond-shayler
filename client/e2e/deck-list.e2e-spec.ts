@@ -16,14 +16,6 @@ describe('deck-list-page', () => {
         expect(page.getPageTitle()).toEqual('Decks');
     });
 
-    it("should have a play button and a deck name link for every deck", () => {
-        page.getAllDecks().each(e => {
-            expect(e.element(by.className('play-button')).getTagName()).toEqual("button");
-            expect(e.element(by.className('play-button')).getText()).toEqual("Play");
-            expect(e.element(by.className('deck-name')).getTagName()).toEqual("a");
-        });
-    });
-
     it('should add one deck', () => {
         page.getAllDecks().count().then(beforecount => {
             page.addDeck("Test Deck");

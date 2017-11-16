@@ -83,7 +83,7 @@ describe('PlayComponent', () => {
                 {provide: DeckService, useValue: deckServiceStub}, {
                     provide: ActivatedRoute,
                     useValue: {
-                        params: Observable.of({id: "test id"})
+                        params: Observable.of({id:"test id"})
                     }
                 }],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -132,8 +132,8 @@ describe('PlayComponent', () => {
         component.addPoints(1);
         expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints);
 
-        component.addPoints(2);
-        expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints + card_state3.cardPoints);
+        // component.addPoints(2);
+        // expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints + card_state3.cardPoints);
 
     });
 

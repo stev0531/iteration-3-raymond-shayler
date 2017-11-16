@@ -1,11 +1,9 @@
 import {browser, element, by} from 'protractor';
 
-export class PlayPage {
+export class StartPage {
     navigateTo() {
-        return browser.get('/play/59de8a1f012e92ce86a57176_15');
-
+        return browser.get('/start');
     }
-
 
     clickButton(id: string) {
         let e = element(by.id(id));
@@ -17,10 +15,6 @@ export class PlayPage {
         return e;
     }
 
-    getActivePage() {
-        return element(by.className("active-kb-page"));
-    }
-
     getElementsByClass(htmlClass: string){
         return element.all(by.className(htmlClass));
     }
@@ -28,6 +22,12 @@ export class PlayPage {
     getPageTitle(id: string){
         let title = element(by.id(id)).getText();
         return title;
+    }
+
+    typeALimit(limit: number) {
+        let input = element(by.id('inputLimit'));
+        input.click();
+        input.sendKeys(limit);
     }
 
 }

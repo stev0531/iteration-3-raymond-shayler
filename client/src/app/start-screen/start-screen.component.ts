@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
+import {PlayComponent} from "../play-component/play.component";
 
 @Component({
     selector: 'app-start',
@@ -9,6 +10,8 @@ import {Deck} from "../deck/deck";
 })
 export class StartScreenComponent implements OnInit {
     public deck: Deck;
+    public limit: number;
+    public play: PlayComponent;
 
     constructor(public deckService: DeckService) {
 

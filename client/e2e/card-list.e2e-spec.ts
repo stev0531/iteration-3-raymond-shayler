@@ -10,12 +10,6 @@ describe('card-list-page', () => {
        page.navigateTo();
    });
 
-    //No longer relevant
-   // it('should highlight title header', () => {
-   //     expect(page.getPageTitle()).toContain('Card');
-   // });
-
-
     it('should have four buttons', () => {
         expect(page.getElementsByClass(".mode-button")).toBeTruthy();
         expect(page.getElementsByClass(".mode-button-add")).toBeTruthy();

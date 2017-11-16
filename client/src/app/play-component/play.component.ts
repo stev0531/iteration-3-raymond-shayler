@@ -9,6 +9,7 @@ import {ResultsComponent} from "../results/results.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {environment} from "../../environments/environment";
+import {Card} from "../card/card";
 
 
 @Component({
@@ -18,7 +19,9 @@ import {environment} from "../../environments/environment";
 })
 export class PlayComponent implements OnInit {
 
+    deckAndLimit: string;
     deckid: string;
+    private cardLimit: number;
 
     deck: Deck;
 
@@ -32,7 +35,6 @@ export class PlayComponent implements OnInit {
     constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog, public results: MdDialog) {
         this.cardStates = [];
     }
-
 
     public addPoints(pageNumber: number): void {
 
@@ -109,7 +111,13 @@ export class PlayComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.deckid = params['deck'];
+            this.deckAndLimit = params['deck'];
+            if(this.deckAndLimit != null){
+                let splitStr = this.deckAndLimit.split("_", 2);
+
+                this.deckid = splitStr[0];
+                this.cardLimit = Math.abs(+splitStr[1]);
+            }
 
             this.deckService.getDeck(this.deckid).subscribe(
                 deck => {
@@ -117,8 +125,18 @@ export class PlayComponent implements OnInit {
                     if (environment.envName == "prod") {
                         this.deck.cards = this.shuffle(this.deck.cards);
                     }
+
+                    if(this.cardLimit == 0){
+                        this.cardLimit = 1;
+                    }else if(this.cardLimit>this.deck.cards.length){
+                        this.cardLimit = this.deck.cards.length;
+                    }
+
+                    this.deck.cards.splice(0, (this.deck.cards.length - this.cardLimit));
                 }
             );
+
+
         });
     }
 

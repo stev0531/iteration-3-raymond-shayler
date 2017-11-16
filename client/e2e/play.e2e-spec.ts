@@ -95,7 +95,7 @@ describe('play-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
         browser.sleep(1000);
         page.clickButton('play-again-button');
-        expect(page.getPageTitle('decks-title')).toEqual('Decks');
+        expect(page.getPageTitle('start-title')).toEqual('Make Your Selections!');
     });
 
     it("should travel to the home page after clicking the home button", () =>{
