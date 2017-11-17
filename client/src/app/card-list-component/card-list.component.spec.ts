@@ -12,6 +12,7 @@ import {CardListComponent} from "./card-list.component";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
+import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";
 
 
 describe('CardListComponent', () => {
@@ -74,9 +75,10 @@ describe('CardListComponent', () => {
 
         @NgModule({
             imports: [CommonModule],
-            declarations: [CardDisplayDialogComponent],
+            declarations: [CardDisplayDialogComponent, DeckChangesDialogComponent],
             entryComponents: [
                 CardDisplayDialogComponent,
+                DeckChangesDialogComponent
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
