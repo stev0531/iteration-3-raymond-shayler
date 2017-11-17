@@ -69,7 +69,7 @@ public class Server {
         Conf conf;
         conf = gson.fromJson(reader, Conf.class);
         callbackURL = conf.callbackURL;
-        publicURL = conf.callbackURL;
+        publicURL = conf.publicURL;
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
 
@@ -88,13 +88,15 @@ public class Server {
             return "OK";
         });
 
-        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+//        before((request, response) -> response.header("Access-Control-Allow-Origin", "http://localhost:4567/api/*"));
 
+        before((request, response) -> {
+            response.header("Access-Control-Allow-Credentials", "true");
+            response.header("Access-Control-Allow-Origin", publicURL);
+        });
 
         // Redirects for the "home" page
         redirect.get("", "/");
-
-
 
         //get("/", clientRoute);
         redirect.get("/", "http://localhost:9000");

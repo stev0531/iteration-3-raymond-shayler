@@ -26,9 +26,23 @@
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav toolbarTitle="SAGE" navigationRoute="/">
-        <button mat-icon-button td-menu-button class="nav-launch" tdLayoutToggle>
-            <mat-icon>menu</mat-icon>
-        </button>
+        <div td-toolbar-content>
+            <button mat-icon-button td-menu-button class="nav-launch" tdLayoutToggle>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-icon-button td-menu-button class="login-button" onclick="location.href= 'http://localhost:4567/api/authorize'">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+
+            <!--<div>-->
+                <!--<p>Login</p>-->
+                <!--<button mat-button>-->
+                    <!--<mat-icon>-->
+                        <!--login-->
+                    <!--</mat-icon>-->
+                <!--</button>-->
+            <!--</div>-->
+        </div>
         <router-outlet></router-outlet>
     </td-layout-nav>
 </td-layout>

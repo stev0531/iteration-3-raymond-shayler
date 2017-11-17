@@ -9,4 +9,9 @@ export class AuthService {
     authorized() : Observable<boolean> {
         return this.http.get("/api/" + "check-authorization", {withCredentials: true}).map(res => res.json().authorized);
     }
+
+    login(){
+        console.log("Start Login")
+        this.http.request("/api/authorise")
+    }
 }

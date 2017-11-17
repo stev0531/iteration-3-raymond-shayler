@@ -19,7 +19,7 @@ export class DeckService {
     private cardUrl: string = environment.API_URL + "cards";
 
     public getDecks(): void {
-        this.http.request(this.deckUrl).map(res => res.json()).subscribe(
+        this.http.request(this.deckUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             decksres => {
                 this.decks = decksres;
             }, err => {
