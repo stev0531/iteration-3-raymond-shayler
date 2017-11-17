@@ -85,7 +85,7 @@ describe('play-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
     });
 
-    it("should travel to the deck list page after clicking the play-again button", () =>{
+    it("should travel to the start page after clicking the play-again button", () =>{
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));
 
         let i:number;

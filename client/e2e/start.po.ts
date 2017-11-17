@@ -1,4 +1,5 @@
 import {browser, element, by} from 'protractor';
+import {Key} from "selenium-webdriver";
 
 export class StartPage {
     navigateTo() {
@@ -6,6 +7,11 @@ export class StartPage {
     }
 
     clickButton(id: string) {
+        let e = element(by.id(id));
+        e.click();
+    }
+
+    clickElement(id: string) {
         let e = element(by.id(id));
         e.click();
     }
@@ -28,6 +34,10 @@ export class StartPage {
         let input = element(by.id('inputLimit'));
         input.click();
         input.sendKeys(limit);
+    }
+
+    getActivePage(classId: string) {
+        return element(by.className(classId));
     }
 
 }
