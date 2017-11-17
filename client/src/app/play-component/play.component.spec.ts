@@ -132,8 +132,8 @@ describe('PlayComponent', () => {
         component.addPoints(1);
         expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints);
 
-        // component.addPoints(2);
-        // expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints + card_state3.cardPoints);
+        component.addPoints(2);
+        expect(component.points).toEqual(card_state1.cardPoints + card_state2.cardPoints + card_state3.cardPoints);
 
     });
 
