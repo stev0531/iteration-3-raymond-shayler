@@ -1,23 +1,23 @@
 <mat-dialog-content class="pop-in-card-entire" id="pop-in-card">
     <mat-card-content>
         <span class="Changes">
-            <h3 class="Description">The following cards were {{typeOfChange}} {{deckName}}:
+            <h3 class="Description">The following cards were {{typeOfChange}} {{deck.name}}:
         </h3>
         </span>
         <mat-divider>
             <span class="card-names" *ngFor="let card of cards">
-                <p id="names">{{card.word}}</p>
+                <p id="names">{{card}}</p>
             </span>
         </mat-divider>
     </mat-card-content>
     <mat-divider>
-        <div>
-            <!--<button color="warn" class="round-button" id="ok-button"-->
-                    <!--mat-raised-button> Ok-->
-            <!--</button>-->
-            <!--<button color="warn" class="round-button" id="deck-page-button"-->
-                    <!--mat-raised-button [routerLink]="['/deck', deck._id.$oid]">See Changes-->
-            <!--</button>-->
+        <div class="button-container">
+            <button color="warn" class="round-button" id="ok-button"
+                    mat-raised-button (click)="closeDialog()"> Ok
+            </button>
+            <button color="warn"  class="round-button" id="deck-page-button"
+                    mat-raised-button (click)="closeDialog()" [routerLink]="['/decks', deck._id['$oid']]">See Changes
+            </button>
         </div>
     </mat-divider>
 </mat-dialog-content>

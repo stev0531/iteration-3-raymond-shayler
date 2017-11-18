@@ -3,7 +3,7 @@ import {NgModule} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {CardListService} from "./card-list.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterModule} from "@angular/router";
 import {SharedModule} from "../shared.module";
 import {CardComponent} from "../card-component/card.component";
 import {SimpleCardComponent} from "../simple-card-component/simple-card.component";
@@ -13,6 +13,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
 import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";
+import {RouterTestingModule} from "@angular/router/testing";
 
 
 describe('CardListComponent', () => {
@@ -74,20 +75,21 @@ describe('CardListComponent', () => {
 
 
         @NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule, SharedModule, RouterModule, RouterTestingModule],
             declarations: [CardDisplayDialogComponent, DeckChangesDialogComponent],
             entryComponents: [
                 CardDisplayDialogComponent,
                 DeckChangesDialogComponent
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [{provide: ActivatedRoute, useValue: {params: Observable.of({id: "test id"})}}]
         })
         class TestDialog {
         }
 
 
         TestBed.configureTestingModule({
-            imports: [SharedModule, TestDialog, CommonModule],
+            imports: [SharedModule, TestDialog, CommonModule, RouterTestingModule],
             declarations: [CardListComponent, CardComponent, SimpleCardComponent],
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
                 {provide: CardListService, useValue: cardServiceStub}, {
@@ -155,6 +157,7 @@ describe('CardListComponent', () => {
        component.select(component.cards[2]);
        component.selectDeck("test id");
        component.changeDeck("Add");
+      // component.closeDialog(this.cardRef);
        expect(component.selectedCards.length).toBe(0);
     });
 
@@ -176,6 +179,7 @@ describe('CardListComponent', () => {
         component.selectDeck("test id");
         component.changeDeck("Delete");
         component.select(component.cards[0]);
+      //  component.closeDialog(component.cardRef);
         expect(component.selectedCards.length).toBe(0);
     });
 });

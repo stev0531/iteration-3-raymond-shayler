@@ -28,6 +28,8 @@ export class CardListComponent implements OnInit {
     public clearAllSelected: boolean;
     public decks: SimpleDeck[];
     public selectedDeck: SimpleDeck;
+    public cardRef: any;
+    public cardWords: string[] = [];
 
 
     selectDeck(deck) {
@@ -80,7 +82,7 @@ export class CardListComponent implements OnInit {
     public openDeckChangesDisplay(button: string) {
         let config = new MatDialogConfig();
         let changeType: string = "";
-        let cards: SimpleCard[] = this.selectedCards;
+        let cards: string[] = this.cardWords;
         if (button == 'add') {
             changeType = 'added to';
         } else {
@@ -88,17 +90,26 @@ export class CardListComponent implements OnInit {
         }
 
         config.data = {
-            deckName: this.selectedDeck.name,
+            deck: this.selectedDeck,
             cards: cards,
             typeOfChange: changeType
         };
         console.log(config);
         let cardRef = this.peek.open(DeckChangesDialogComponent, config);
-        cardRef.afterClosed().subscribe(result => {
-            this.selectedCards.length = 0;
-            this.selectedButton = "Select";
+        this.cardRef = cardRef;
+            cardRef.afterClosed().subscribe(result => {
+            // this.selectedCards.length = 0;
+            // this.selectedButton = "Select";
         });
     }
+
+
+    //This method is written for testing purposes
+    public closeDialog(cardRef){
+        cardRef.closeDialog();
+        this.selectedCards.length = 0;
+    }
+
 
 
     public modeHandler() {
@@ -135,11 +146,10 @@ export class CardListComponent implements OnInit {
 
     changeDeck(button: string) {
         let cardIds: string[] = [];
-        let cardNames: string[] = [];
         if (this.selectedCards.length > 0) {
             for (var i = 0; i < this.selectedCards.length; i++) {
                 cardIds[i] = this.selectedCards[i]._id["$oid"];
-                cardNames[i] = this.selectedCards[i].word;
+                this.cardWords[i] = this.selectedCards[i].word;
             }
         }
         if (button == 'add') {
@@ -152,6 +162,8 @@ export class CardListComponent implements OnInit {
         }
         this.clearAllSelected = true;
         this.mode = "View";
+        this.selectedCards.length = 0;
+        this.selectedButton = 'Select';
     }
 
     ngOnInit(): void {

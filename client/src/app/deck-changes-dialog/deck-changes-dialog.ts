@@ -13,16 +13,19 @@ export class DeckChangesDialogComponent implements OnInit {
 
     constructor(public matDialogRef: MatDialogRef<DeckChangesDialogComponent>,
                 @Inject(MAT_DIALOG_DATA)
-                public data: { deckName: string, cards: SimpleCard[], typeOfChange: string }) {
+                public data: { deck: SimpleDeck, cards: string[], typeOfChange: string }) {
     }
 
+    closeDialog(){
+        this.matDialogRef.close();
+    }
 
-    deckName: string;
-    cards: SimpleCard[];
+    deck: SimpleDeck;
+    cards: string[];
     typeOfChange: string;
 
     ngOnInit() {
-        this.deckName = this.data.deckName;
+        this.deck = this.data.deck;
         this.cards = this.data.cards;
         this.typeOfChange = this.data.typeOfChange;
     }
