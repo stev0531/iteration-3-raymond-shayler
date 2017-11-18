@@ -168,7 +168,7 @@ describe('CardListComponent', () => {
         component.select(component.cards[2]);
         component.selectDeck("test id");
         component.changeDeck("Delete");
-
+        expect(component.selectedCards.length).toBe(0);
     });
 
     it('Will revert to view mode after adding cards', () => {
@@ -179,7 +179,6 @@ describe('CardListComponent', () => {
         component.selectDeck("test id");
         component.changeDeck("Delete");
         component.select(component.cards[0]);
-      //  component.closeDialog(component.cardRef);
         expect(component.selectedCards.length).toBe(0);
     });
 });
