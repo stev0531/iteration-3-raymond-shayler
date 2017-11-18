@@ -210,25 +210,7 @@ public class DeckController {
         return false;
     }
 }
-    /*
-    public Object updateName(Request req, Response res) {
-        System.out.println("This should print");
 
-        String newDeckName = req.params("name");
-        String id = req.params("id");
-        System.out.println(newDeckName);
-        System.out.println(id);
-        try {
-            updateName(newDeckName, id);
-        } catch (IllegalArgumentException e){
-            res.status(400);
-            res.body("The requested deck id " + id + " wasn't a legal Mongo Object ID.\n" +
-                "See 'https://docs.mongodb.com/manual/reference/method/ObjectId/' for more info.");
-            return "";
-        }
-        return true;
-    }
-*/
     public boolean updateName(String newName, String deckId){
         System.out.println(newName);
         deckCollection.updateOne(new Document("_id", new ObjectId(deckId)), new Document("$set", new Document("name", newName)));

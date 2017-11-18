@@ -4,7 +4,7 @@
             <h2 [ngClass]="{'hide': this.editMode != false}" id="deck-header" > {{this.deck.name}}</h2>
             <form id="name-form" #newTitleForm="ngForm">
                 <mat-form-field id="title-input" [ngClass]="{'hide': this.editMode != true}">
-                    <input matInput required #input type="text"  [(ngModel)]="newDeckTitle"
+                    <input id="text-input" matInput required #input type="text"  [(ngModel)]="newDeckTitle"
                            placeholder="{{deck.name}}" name="newDeckTitle" (keyup.enter)="saveEdit()" >
                 </mat-form-field>
                 <button [ngClass]="{'hide': this.editMode != false}" id="edit-name" mat-button
