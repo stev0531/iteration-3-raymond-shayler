@@ -66,6 +66,11 @@
         min-width: 200px;
     }
 
+    #results-title{
+        font-size: 20px;
+    }
+
+
     #player1-title{
         margin-left: 0px;
         float: none;

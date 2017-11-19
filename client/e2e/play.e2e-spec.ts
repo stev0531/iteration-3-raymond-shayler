@@ -24,6 +24,14 @@ describe('play-page', () => {
         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
     });
 
+    it('should switch between the players scores', () => {
+        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 1');
+        page.clickButton('forward-button');
+        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 2');
+        page.clickButton('forward-button');
+        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 1');
+    });
+
     it('should not get hint after 4 uses', () => {
         let hintButton = page.getActivePage().element(by.className("hint-button"));
         hintButton.click();
@@ -82,7 +90,7 @@ describe('play-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
         expect(page.getElementById("player1-score").getText()).toContain("34");
         expect(page.getElementById("player2-score").getText()).toContain("35");
-    })
+    });
 
     it("should pop-up with results no matter what order they are answered", () => {
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));

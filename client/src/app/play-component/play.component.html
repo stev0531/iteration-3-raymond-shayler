@@ -19,10 +19,8 @@
                         [disabled]="this.getCardState(ind).isComplete" (click)="this.addPoints(ind)">Got It!
                 </button>
 
-                <span class="player" *ngIf="pageNumber%2 == 0">Player 1</span>
-                <span class="player" *ngIf="pageNumber%2 != 0">Player 2</span>
-                <span class="score" *ngIf="pageNumber%2 == 0">Score: {{this.points1}}</span>
-                <span class="score" *ngIf="pageNumber%2 != 0"> Score: {{this.points2}}</span>
+                <span class="player" *ngIf="pageNumber%2 == 0">Player 1 <br> Score: {{this.points1}}</span>
+                <span class="player" *ngIf="pageNumber%2 != 0">Player 2 <br> Score: {{this.points2}}</span>
 
             </div>
         </div>
