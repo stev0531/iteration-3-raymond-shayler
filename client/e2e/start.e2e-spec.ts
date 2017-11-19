@@ -27,7 +27,7 @@ describe('start-page', () => {
         page.clickElement("testdeck3");
 
         page.typeALimit(1);
-        page.getActivePage('selections').element(by.className('play-button')).click();
+        page.getActivePage('selections').element(by.className('actual-play-button')).click();
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
     });
 
@@ -45,7 +45,8 @@ describe('start-page', () => {
             gotItButton.click();
         }
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
-        expect(page.getElementById("final-score").getText()).toContain("20");
+        expect(page.getElementById("player1-score").getText()).toContain("10");
+        expect(page.getElementById("player2-score").getText()).toContain("10");
     });
 
     it('should input a limit of -3 but show 3 cards', () => {
@@ -61,7 +62,8 @@ describe('start-page', () => {
             gotItButton.click();
         }
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
-        expect(page.getElementById("final-score").getText()).toContain("15");
+        expect(page.getElementById("player1-score").getText()).toContain("10");
+        expect(page.getElementById("player2-score").getText()).toContain("5");
     });
 
 });
