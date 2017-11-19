@@ -107,7 +107,7 @@ describe('play-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
     });
 
-    it("should travel to the deck list page after clicking the play-again button", () =>{
+    it("should travel to the start page after clicking the play-again button", () =>{
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));
 
         let i:number;
@@ -117,7 +117,7 @@ describe('play-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
         browser.sleep(1000);
         page.clickButton('play-again-button');
-        expect(page.getPageTitle('decks-title')).toEqual('Decks');
+        expect(page.getPageTitle('start-title')).toEqual('Make Your Selections!');
     });
 
     it("should travel to the home page after clicking the home button", () =>{

@@ -83,7 +83,7 @@ describe('PlayComponent', () => {
                 {provide: DeckService, useValue: deckServiceStub}, {
                     provide: ActivatedRoute,
                     useValue: {
-                        params: Observable.of({id: "test id"})
+                        params: Observable.of({id:"test id"})
                     }
                 }],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
