@@ -5,8 +5,6 @@
             <mat-card-title id="decks-title">Decks</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-
-
                 <mat-nav-list *ngIf="this.deckService.decks; else decksError">
                     <mat-list-item class="deck" *ngFor="let deck of this.deckService.decks">
                       
