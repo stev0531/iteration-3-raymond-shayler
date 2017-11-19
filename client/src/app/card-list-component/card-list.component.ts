@@ -9,6 +9,7 @@ import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
 import {SimpleCard} from "../simple-card/simple-card";
 import {SimpleDeck} from "../simple-deck/simple-deck";
+import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";
 
 @Component({
     selector: 'card-list',
@@ -22,11 +23,13 @@ import {SimpleDeck} from "../simple-deck/simple-deck";
 export class CardListComponent implements OnInit {
     public cards: SimpleCard[];
     public selectedCards: SimpleCard[];
-    public selectedButton: String;
+    public selectedButton: string;
     public mode: String;
     public clearAllSelected: boolean;
     public decks: SimpleDeck[];
     public selectedDeck: SimpleDeck;
+    public cardRef: any;
+    public cardWords: string[] = [];
 
 
     selectDeck(deck) {
@@ -76,6 +79,39 @@ export class CardListComponent implements OnInit {
 
     };
 
+    public openDeckChangesDisplay(button: string) {
+        let config = new MatDialogConfig();
+        let changeType: string = "";
+        let cards: string[] = this.cardWords;
+        if (button == 'add') {
+            changeType = 'added to';
+        } else {
+            changeType = 'removed from';
+        }
+
+        config.data = {
+            deck: this.selectedDeck,
+            cards: cards,
+            typeOfChange: changeType
+        };
+        console.log(config);
+        let cardRef = this.peek.open(DeckChangesDialogComponent, config);
+        this.cardRef = cardRef;
+            cardRef.afterClosed().subscribe(result => {
+            // this.selectedCards.length = 0;
+            // this.selectedButton = "Select";
+        });
+    }
+
+
+    //This method is written for testing purposes
+    public closeDialog(cardRef){
+        cardRef.closeDialog();
+        this.selectedCards.length = 0;
+    }
+
+
+
     public modeHandler() {
         if (this.selectedButton == null) {
             this.mode = "View";
@@ -113,18 +149,21 @@ export class CardListComponent implements OnInit {
         if (this.selectedCards.length > 0) {
             for (var i = 0; i < this.selectedCards.length; i++) {
                 cardIds[i] = this.selectedCards[i]._id["$oid"];
+                this.cardWords[i] = this.selectedCards[i].word;
             }
         }
         if (button == 'add') {
             this.CardListService.addCardsToDeck(this.selectedDeck, cardIds);
+            this.openDeckChangesDisplay(button);
         }
         else {
             this.CardListService.deleteCardsFromDeck(this.selectedDeck, cardIds);
+            this.openDeckChangesDisplay(button);
         }
         this.clearAllSelected = true;
         this.mode = "View";
         this.selectedCards.length = 0;
-        this.selectedButton = "Select";
+        this.selectedButton = 'Select';
     }
 
     ngOnInit(): void {

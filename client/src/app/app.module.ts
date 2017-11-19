@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {
-    MATERIAL_COMPATIBILITY_MODE, MD_DIALOG_SCROLL_STRATEGY_PROVIDER, MdDialogContainer,
+    MATERIAL_COMPATIBILITY_MODE, MD_DIALOG_SCROLL_STRATEGY_PROVIDER, MdDialogClose, MdDialogContainer,
     MdSnackBar
 } from '@angular/material';
 
@@ -19,7 +19,7 @@ import {DeckListComponent} from "./deck-list-component/deck-list.component";
 import {DeckComponent} from "./deck-component/deck.component";
 import {DeckService} from "./deck/deck.service";
 import {PlayComponent} from "./play-component/play.component";
-import {MdDialog} from "@angular/material";
+import {MdDialog, MatDialogClose} from "@angular/material";
 import {NewCardDialogComponent} from "./new-card-dialog/new-card-dialog.component";
 import {NewDeckDialogComponent} from "./new-deck-dialog/new-deck-dialog.component";
 import {HelpComponent} from "./help-component/help.component";
@@ -27,6 +27,7 @@ import {CardListComponent} from "./card-list-component/card-list.component"
 import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
 import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dialog.component";
+import {DeckChangesDialogComponent} from "./deck-changes-dialog/deck-changes-dialog";
 import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 
@@ -53,6 +54,7 @@ import {StartScreenComponent} from "./start-screen/start-screen.component";
         SimpleCardComponent,
         CardDisplayDialogComponent,
         PlayComponent,
+        DeckChangesDialogComponent,
         ResultsComponent,
         StartScreenComponent
     ],
@@ -61,12 +63,15 @@ import {StartScreenComponent} from "./start-screen/start-screen.component";
         NewDeckDialogComponent,
         ResultsComponent,
         CardDisplayDialogComponent,
+        CardComponent,
+        DeckChangesDialogComponent,
         CardComponent
     ],
     providers: [
         CardListService,
         DeckService,
         MdDialog,
+        MatDialogClose,
         MdSnackBar,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
