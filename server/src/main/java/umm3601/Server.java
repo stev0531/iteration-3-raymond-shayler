@@ -61,6 +61,7 @@ public class Server {
 
         String publicURL;
         String callbackURL;
+        String apiURL;
 
 
         com.google.gson.stream.JsonReader reader =
@@ -70,8 +71,26 @@ public class Server {
         conf = gson.fromJson(reader, Conf.class);
         callbackURL = conf.callbackURL;
         publicURL = conf.publicURL;
+        apiURL = conf.apiURL;
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
+//
+//        options("/*", (request, response) -> {
+//
+//            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+//            if (accessControlRequestHeaders != null) {
+//                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+//            }
+//
+//            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+//            if (accessControlRequestMethod != null) {
+//                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+//            }
+//
+//            return "OK";
+//        });
+
+//         Enables CORS on requests. This method is an initialization method and should be called once.
 
         options("/*", (request, response) -> {
 
@@ -88,11 +107,35 @@ public class Server {
             return "OK";
         });
 
-//        before((request, response) -> response.header("Access-Control-Allow-Origin", "http://localhost:4567/api/*"));
 
         before((request, response) -> {
+
+            //Handle authentication
+            System.out.println("New request: " + request.pathInfo());
+            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()) )){
+                System.out.println("Checking Auth");
+                String cookie = request.cookie("ddg");
+                System.out.println(cookie);
+
+                if(!auth.authorized(cookie)) {
+                    System.err.println("Auth denied");
+                    System.out.println("The cookie \n " + cookie);
+                    response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
+                } else {
+                    System.out.println("Auth Passed");
+                }
+            }
+
+            response.header("Access-Control-Allow-Origin", request.headers("Origin"));
+            System.out.println("Request origin: " + request.headers("Origin"));
+            //response.header("Access-Control-Request-Method", "GET");
+            System.out.println("Request method: " + request.requestMethod());
             response.header("Access-Control-Allow-Credentials", "true");
-            response.header("Access-Control-Allow-Origin", publicURL);
+            response.header("Access-Control-Allow-Headers", "object");
+            // Note: this may or may not be necessary in your particular application
+            response.type("application/json");
+
+
         });
 
         // Redirects for the "home" page
@@ -114,21 +157,6 @@ public class Server {
             return res;
         });
 
-        before(((request, response) -> {
-            System.out.println("New request: " + request.pathInfo());
-            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()) )){
-                System.out.println("Checking Auth");
-                String cookie = request.cookie("ddg");
-                System.out.println(cookie);
-
-                if(!auth.authorized(cookie)) {
-                    System.err.println("Auth denied");
-                    response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
-                } else {
-                    System.out.println("Auth Passed");
-                }
-            }
-        }));
 
         /// Deck and Card Endpoints ///////////////////////////
         /////////////////////////////////////////////
@@ -225,12 +253,15 @@ public class Server {
 
 
     }
+
+
     ///moved in here because Java is being weird.
     private class Conf {
         public String clientId;
         public String clientSecret;
         public String publicURL;
         public String callbackURL;
+        public String apiURL;
     }
 
     // Enable GZIP for all responses

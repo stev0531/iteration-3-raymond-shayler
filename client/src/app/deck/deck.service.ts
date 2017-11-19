@@ -29,7 +29,7 @@ export class DeckService {
     }
 
     public getDeck(id: string): Observable<Deck> {
-        let newDeck: Observable<Deck> = this.http.request(this.deckUrl + "/" + id).map(res => res.json());
+        let newDeck: Observable<Deck> = this.http.request(this.deckUrl + "/" + id, {withCredentials: true}).map(res => res.json());
         return newDeck;
     }
 
@@ -41,20 +41,20 @@ export class DeckService {
             antonym: antonym,
             general_sense: general,
             example_usage: example
-        }
+        };
         console.log(body);
 
-        return this.http.post(this.cardUrl + "/add", body).map(res => res.json());
+        return this.http.post(this.cardUrl + "/add", body, {withCredentials: true}).map(res => res.json());
     }
 
     public addNewDeck(name: string) {
-        let response = this.http.post(this.deckUrl + "/add", {name: name}).map(res => res.json());
+        let response = this.http.post(this.deckUrl + "/add", {name: name},{withCredentials: true}).map(res => res.json());
         return response;
     }
 
     public getSimpleDecks(): Observable<SimpleDeck[]> {
 
-        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-decks");
+        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-decks", {withCredentials: true});
         console.log(this.deckUrl + "/simple-decks");
         return observable.map(res => res.json());
     }

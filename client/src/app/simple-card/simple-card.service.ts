@@ -16,7 +16,7 @@ export class SimpleCardService {
     public simpleCards: SimpleCard[];
 
     public getSimpleCards(): void {
-        this.http.request(this.cardUrl).map(res => res.json()).subscribe(
+        this.http.request(this.cardUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             cardsres => {
                 this.simpleCards = cardsres;
             }, err => {
@@ -26,7 +26,7 @@ export class SimpleCardService {
     }
 
     public getSimpleCard(id: string): Observable<SimpleCard> {
-        let newSimpleCard: Observable<SimpleCard> = this.http.request(+"/" + id).map(res => res.json());
+        let newSimpleCard: Observable<SimpleCard> = this.http.request(+"/" + id, {withCredentials:true}).map(res => res.json());
         return newSimpleCard;
     }
 }
