@@ -8,7 +8,9 @@ public class UserMap {
         classRoomHashmap.put(user, classroom);
     }
 
-    public static void removeUser(String user)
+    public static void removeUser(String user){
+        classRoomHashmap.remove(user);
+    }
     public static String getClassroom(String user){
         return classRoomHashmap.get(user);
     }

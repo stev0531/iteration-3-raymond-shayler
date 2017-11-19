@@ -29,4 +29,5 @@ export class ClassroomService {
         let newClassroom: Observable<Classroom> = this.http.request(this.classroomUrl + "/" + id).map(res => res.json());
         return newClassroom;
     }
+
 }

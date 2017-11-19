@@ -8,7 +8,7 @@
                 <mat-nav-list *ngIf="this.classroomService.classrooms; else classroomError">
                     <mat-list-item class="deck" *ngFor="let classroom of this.classroomService.classrooms">
                         <a class="deck-name" matLine [routerLink]="['/classroom', classroom._id.$oid]">{{ classroom.name }}</a>
-                        <button>Select</button>
+                        <button mat-button (click)="selectClassroom($event)">Select</button>
                     </mat-list-item>
                 </mat-nav-list>
                 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->

@@ -9,7 +9,12 @@ import {MdDialog} from "@angular/material";
 })
 export class UserListComponent implements OnInit {
 
+    name: string = "Pleaselogin";
     constructor(public userService: UserService, public dialog: MdDialog) {
+    }
+
+    switchName(user: string) {
+        this.name = user;
     }
 
     ngOnInit() {
