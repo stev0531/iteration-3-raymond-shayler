@@ -48,7 +48,7 @@ describe('card-list-page', () => {
         deckPage = new DeckPage();
 
         deckPage.navigateTo("b2956f25be16349683be4461");
-        expect(deckPage.getAllCards().count()).toEqual(1);
+        expect(deckPage.getAllCards().count()).toEqual(4);
     });
 
     // Note that this test seems to randomly fail about 25% of the time or so
@@ -66,7 +66,7 @@ describe('card-list-page', () => {
         deckPage.navigateTo("b2956f25be16349683be4461");
         browser.waitForAngular();
 
-        expect(deckPage.getAllCards().count()).toEqual(3);
+        expect(deckPage.getAllCards().count()).toEqual(6);
     });
 
     //This test deletes the cards we just added in the previous test
@@ -80,7 +80,7 @@ describe('card-list-page', () => {
         page.clickElement("Delete-Cards");
 
         deckPage.navigateTo("b2956f25be16349683be4461");
-        expect(deckPage.getAllCards().count()).toEqual(1);
+        expect(deckPage.getAllCards().count()).toEqual(4);
     });
 
     it("Should show a dialog when cards are added to a deck", () => {
