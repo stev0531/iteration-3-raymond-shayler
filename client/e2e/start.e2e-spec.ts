@@ -12,6 +12,7 @@ describe('start-page', () => {
         expect(page.getElementsByClass(".deck-dropdown")).toBeTruthy();
         expect(page.getElementsByClass('.dummy-play-button')).toBeTruthy();
     });
+
     it('should select a deck, input a limit, and go to the play page', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
@@ -20,7 +21,8 @@ describe('start-page', () => {
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
         expect(page.getActivePage("active-kb-page").element(by.className("card-word")).getText()).toContain('Alliteration');
     });
-    it('should input a limit of one card and pop up with the results', () => {
+
+    it('should input a limit of one card and pop up with the results after got-it has been clicked', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
