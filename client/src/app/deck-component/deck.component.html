@@ -4,7 +4,9 @@
         <td-message id="no-cards-message" *ngIf="this.deck.cards.length == 0" label="No Cards"
                     sublabel="This deck is empty, tap + to add cards.">
         </td-message>
-        <app-card class="deck-card" *ngFor="let card of this.deck.cards" [card]="card"></app-card>
+        <app-card class="deck-card" *ngFor="let card of this.deck.cards" [card]="card">
+            <a> id="{{card.word}}"</a>
+        </app-card>
     </div>
 </div>
 

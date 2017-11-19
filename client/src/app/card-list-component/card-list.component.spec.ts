@@ -21,6 +21,8 @@ describe('CardListComponent', () => {
     let cardServiceStub: {
         getSimpleCards: () => Observable<any>
         getCard: (_id: string) => Observable<any>
+        deleteCardsFromDeck: (deckId: string, cardIds: string[]) => Observable<any>
+        addCardsToDeck: (deckId: string, cardIds: string[]) => Observable<any>
     };
 
     let deckServiceStub: {
@@ -63,7 +65,10 @@ describe('CardListComponent', () => {
                     general_sense: "big furry goofball",
                     example_usage: "the dog borked"
                 }
-            ])
+            ]),
+
+            deleteCardsFromDeck: (deckId: string, cardIds: string[]) => Observable.of([]),
+            addCardsToDeck: (deckId: string, cardIds: string[]) => Observable.of([])
         };
 
 
@@ -106,6 +111,11 @@ describe('CardListComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('Should have a selected deck if a deck is selected', () => {
+       component.selectDeck("test id")
+       expect(component.selectedDeck.name == "test id");
+    });
+
     it('Should have an array with all of the received cards', () => {
         expect(component.cards.length).toBe(3);
     });
@@ -128,7 +138,7 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
     it('Will deselect all cards if the mode is changed to view', () => {
-        component.mode = "AddCards";
+        component.mode = "Select";
         component.select(component.cards[0]);
         component.select(component.cards[1]);
         component.select(component.cards[2]);
@@ -136,5 +146,34 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
 
+    it('Will deselect all cards once selected cards have been added', () => {
+       component.mode = "Select";
+       component.select(component.cards[0]);
+       component.select(component.cards[1]);
+       component.select(component.cards[2]);
+       component.selectDeck("test id");
+       component.changeDeck("Add");
+       expect(component.selectedCards.length).toBe(0);
+    });
 
+    it('Will deselect all cards once selected cards have been deleted', () => {
+        component.mode = "Select";
+        component.select(component.cards[0]);
+        component.select(component.cards[1]);
+        component.select(component.cards[2]);
+        component.selectDeck("test id");
+        component.changeDeck("Delete");
+
+    });
+
+    it('Will revert to view mode after adding cards', () => {
+        component.mode = "AddCards"
+        component.select(component.cards[0]);
+        component.select(component.cards[1]);
+        component.select(component.cards[2]);
+        component.selectDeck("test id");
+        component.changeDeck("Delete");
+        component.select(component.cards[0]);
+        expect(component.selectedCards.length).toBe(0);
+    });
 });

@@ -1,5 +1,6 @@
 import {browser, element, by} from 'protractor';
-import {Key} from "selenium-webdriver";
+import {Key, WebElement, WebDriver, } from "selenium-webdriver";
+
 
 export class CardListPage {
     navigateTo() {
@@ -14,7 +15,11 @@ export class CardListPage {
 
     getElementsByClass(htmlClass: string){
         return element.all(by.className(htmlClass));
+    }
 
+
+    getElementById(htmlId: string){
+        return element.all(by.id(htmlId))
     }
     getAllDecks(){
         return this.getElementsByClass('deck');
@@ -47,7 +52,9 @@ export class CardListPage {
         return text;
     }
 
-
-
+    clickElement(id: string) {
+        let e = element(by.id(id));
+        e.click();
+    }
 
 }
