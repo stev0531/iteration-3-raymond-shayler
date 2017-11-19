@@ -129,6 +129,6 @@ describe('card-list-page', () => {
 
         page.clickElement('deck-page-button')
 
-        expect(deckPage.getAllCards().count()).toEqual(3);
+        expect(deckPage.getAllCards().count()).toEqual(6);
     });
 });
