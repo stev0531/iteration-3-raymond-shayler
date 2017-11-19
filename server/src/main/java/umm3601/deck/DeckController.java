@@ -1,6 +1,7 @@
 package umm3601.deck;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.AggregateIterable;
@@ -13,11 +14,13 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import spark.Request;
 import spark.Response;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
-
-
 
 
 public class DeckController {
@@ -177,5 +180,40 @@ public class DeckController {
         ));
 
         return JSON.serialize(decks);
+    }
+
+
+    public Object updateName(Request req, Response res) {
+    System.out.println("This should print");
+
+        res.type("application/json");
+    Object o = JSON.parse(req.body());
+        try {
+        if (o.getClass().equals(BasicDBObject.class)) {
+            try {
+                BasicDBObject dbO = (BasicDBObject) o;
+
+                String name = (String) dbO.get("name");
+                String deckID = dbO.getString("id");
+
+                return updateName(name, deckID);
+            } catch (NullPointerException e) {
+                System.err.println("A value was malformed or omitted, deck update request failed.");
+                return false;
+            }
+        } else {
+            System.err.println("Expected BasicDBObject, received " + o.getClass());
+            return false;
+        }
+    } catch (RuntimeException ree) {
+        ree.printStackTrace();
+        return false;
+    }
+}
+
+    public boolean updateName(String newName, String deckId){
+        System.out.println(newName);
+        deckCollection.updateOne(new Document("_id", new ObjectId(deckId)), new Document("$set", new Document("name", newName)));
+        return true;
     }
 }

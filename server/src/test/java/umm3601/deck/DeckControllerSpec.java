@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class DeckControllerSpec {
     private DeckController deckController;
@@ -263,5 +264,12 @@ public class DeckControllerSpec {
         assertEquals("Decks should match", addResult, testDeck);
     }
 
+    @Test
+    public void checkDeckNamesCanBeUpdated(){
+        deckController.updateName("Shayler", testDeckId.toString());
+
+        String jsonResult = deckController.getDeck(testDeckId.toString());
+        assertTrue("Should be 1 card in the deck", jsonResult.contains("Shayler"));
+    }
 
 }
