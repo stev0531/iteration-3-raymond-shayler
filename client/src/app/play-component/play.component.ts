@@ -25,7 +25,8 @@ export class PlayComponent implements OnInit {
     public pageNumber: number = 0;
     public cardsDone: number = 0;
 
-    public points: number = 0;
+    public points1: number = 0;
+    public points2: number = 0;
 
     public cardStates: CardState[];
 
@@ -37,7 +38,12 @@ export class PlayComponent implements OnInit {
     public addPoints(pageNumber: number): void {
 
         if (this.cardStates[pageNumber].isComplete == false && pageNumber < this.deck.cards.length) {
-            this.points += this.cardStates[pageNumber].cardPoints;
+            if(this.pageNumber%2 == 0){
+                this.points1 += this.cardStates[pageNumber].cardPoints;
+            }else {
+                this.points2 += this.cardStates[pageNumber].cardPoints;
+            }
+
             this.cardStates[pageNumber].selected = 0;
             this.cardStates[pageNumber].isDone();
             this.cardsDone = this.cardsDone + 1;
@@ -76,7 +82,8 @@ export class PlayComponent implements OnInit {
     public openResultsDialog() {
         let config = new MatDialogConfig();
         config.data = {
-            points: this.points,
+            points1: this.points1,
+            points2: this.points2,
             deck: this.deck
         };
         console.log(config);

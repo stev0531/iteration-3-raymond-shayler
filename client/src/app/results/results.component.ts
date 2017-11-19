@@ -12,11 +12,12 @@ export class ResultsComponent implements OnInit {
 
     constructor(public matDialogRef: MatDialogRef<ResultsComponent>,
                 @Inject(MAT_DIALOG_DATA)
-                public data: { points: number, deck: Deck }) {
+                public data: { points1: number, points2: number, deck: Deck }) {
     }
 
 
-    score: number;
+    score1: number;
+    score2: number;
     deck: Deck;
 
     public close(){
@@ -25,7 +26,8 @@ export class ResultsComponent implements OnInit {
 
 
     ngOnInit() {
-        this.score = this.data.points;
+        this.score1 = this.data.points1;
+        this.score2 = this.data.points2;
         this.deck = this.data.deck;
 
     }

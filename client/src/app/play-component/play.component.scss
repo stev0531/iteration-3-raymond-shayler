@@ -11,12 +11,22 @@
     margin-top: -64px;
 }
 
-.score {
+.player {
     float: right;
     display: block;
     vertical-align: center;
     margin-right: 15px;
 }
+
+.score {
+    text-align: right;
+    display: block;
+    vertical-align: center;
+    margin-right: 15px;
+    margin-top: 0px;
+}
+
+
 
 kb-page-slider {
     width: 100%;

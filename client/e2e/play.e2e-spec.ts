@@ -67,8 +67,22 @@ describe('play-page', () => {
             gotItButton.click();
         }
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
-        expect(page.getElementById("final-score").getText()).toContain("70");
+        expect(page.getElementById("player1-score").getText()).toContain("35");
+        expect(page.getElementById("player2-score").getText()).toContain("35");
     });
+
+    it("should have two different scores displayed in results pop-up", () => {
+        let gotItButton = page.getActivePage().element(by.className("got-it-button"));
+        let hintButton = page.getActivePage().element(by.className("hint-button"));
+        hintButton.click();
+        let i:number;
+        for(i=0;i<14;i++){
+            gotItButton.click();
+        }
+        expect(page.getElementsByClass('entire-card')).toBeTruthy();
+        expect(page.getElementById("player1-score").getText()).toContain("34");
+        expect(page.getElementById("player2-score").getText()).toContain("35");
+    })
 
     it("should pop-up with results no matter what order they are answered", () => {
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));

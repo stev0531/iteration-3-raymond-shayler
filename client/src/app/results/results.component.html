@@ -1,12 +1,20 @@
 <mat-dialog-content class="card-entire">
-
+    <mat-card-title id="results-title">Final Score for {{deck.name}}:</mat-card-title>
     <mat-card-content class="first-score">
-        <div id="final-score-text">
-            Final Score:
+        <div id="player1-title">
+            Player 1's Score:
+            <p id="player1-score">
+                {{  score1  }}
+            </p>
         </div>
-        <div id="final-score">
-            {{  score  }}
+        <div id="player2-title">
+            Player 2's Score:
+            <p id="player2-score">
+                {{  score2  }}
+            </p>
         </div>
+
+
     </mat-card-content>
 
 </mat-dialog-content>
