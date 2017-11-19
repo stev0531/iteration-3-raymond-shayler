@@ -2,7 +2,7 @@ import {browser, element, by} from 'protractor';
 
 export class PlayPage {
     navigateTo() {
-        return browser.get('/play/59de8a1f012e92ce86a57176');
+        return browser.get('/play/59de8a1f012e92ce86a57176_14');
 
     }
 
@@ -23,6 +23,11 @@ export class PlayPage {
 
     getElementsByClass(htmlClass: string){
         return element.all(by.className(htmlClass));
+    }
+
+    getPageTitle(id: string){
+        let title = element(by.id(id)).getText();
+        return title;
     }
 
 }

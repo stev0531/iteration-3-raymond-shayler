@@ -3,3 +3,33 @@
     bottom: 15px;
     right: 30px;
 }
+
+.hide {
+    display: none;
+}
+
+.round-button {
+    border-radius: 100px;
+    border-top-left-radius: 0px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+    margin-left: 20px;
+}
+
+#deck-header {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#title-input {
+    margin-left: 20px;
+}
+
+#name-form {
+    display: inline-block;
+}
+
+#edit-icon {
+    padding-bottom: 10px;
+}

@@ -7,6 +7,8 @@ import {DeckComponent} from "./deck-component/deck.component";
 import {PlayComponent} from "./play-component/play.component";
 import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component";
+import {ResultsComponent} from "./results/results.component";
+import {StartScreenComponent} from "./start-screen/start-screen.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -17,7 +19,9 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'card', redirectTo: '/decks', pathMatch: 'full'},
     {path: 'help', component: HelpComponent},
-    {path: 'card-list', component: CardListComponent}
+    {path: 'card-list', component: CardListComponent},
+    {path: 'start', component: StartScreenComponent}
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);
+

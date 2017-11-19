@@ -67,6 +67,13 @@ export class DeckPage {
         return text;
     }
 
+    changeName (name: string, enter?: boolean) {
+        this.clickButton('edit');
+        this.typeInput('title-input', name, enter);
 
+        if (!enter) {
+            this.clickButton('cancel');
+        }
+    }
 
 }

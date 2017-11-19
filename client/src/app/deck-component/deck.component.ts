@@ -6,20 +6,42 @@ import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.compone
 import {MdDialog, MatDialogConfig} from "@angular/material";
 
 
+
 @Component({
     selector: 'app-deck',
     templateUrl: './deck.component.html',
     styleUrls: ['./deck.component.css']
 })
+
 export class DeckComponent implements OnInit {
 
     id: string;
     deck: Deck;
+    editMode: boolean;
+    newDeckTitle: string;
 
 
     constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog) {
+        this.editMode = false;
+    }
 
+    changeMode() {
+        if (this.editMode == false) {
+            this.editMode = true;
+        } else {
+            this.editMode = false;
+        }
+    }
 
+    saveEdit() {
+        this.deckService.updateName(this.newDeckTitle, this.deck._id);
+        this.deck.name = this.newDeckTitle;
+        this.changeMode();
+
+    }
+
+    cancelEdit() {
+        this.changeMode();
     }
 
     openAddDialog() {

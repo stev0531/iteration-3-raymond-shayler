@@ -1,4 +1,5 @@
 export interface SimpleDeck {
-    _id: string;
-    name: string;
+    _id: string,
+    name: string
 }
+

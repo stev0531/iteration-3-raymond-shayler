@@ -1,0 +1,32 @@
+<mat-dialog-content class="card-entire">
+    <mat-card-title id="results-title">Final Score for {{deck.name}}:</mat-card-title>
+    <mat-card-content class="first-score">
+        <div id="player1-title">
+            Player 1's Score:
+            <p id="player1-score">
+                {{  score1  }}
+            </p>
+        </div>
+        <div id="player2-title">
+            Player 2's Score:
+            <p id="player2-score">
+                {{  score2  }}
+            </p>
+        </div>
+
+
+    </mat-card-content>
+
+</mat-dialog-content>
+
+<div class="nav-buttons">
+    <button mat-raised-button color="accent" class="round-button" id="play-again-button" [routerLink]="['/start']" (click)="this.close()">
+        Play Again?
+    </button>
+    <button mat-raised-button color="warn" class="round-button" id="home-button" [routerLink]="['/home']" (click)="this.close()">
+        Home
+    </button>
+</div>
+<!>
+
+
