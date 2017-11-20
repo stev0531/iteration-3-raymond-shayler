@@ -13,7 +13,7 @@ describe('start-page', () => {
         expect(page.getElementsByClass('.dummy-play-button')).toBeTruthy();
     });
 
-    fit('should select a deck, input a limit, and go to the play page', () => {
+    it('should select a deck, input a limit, and go to the play page', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
@@ -22,7 +22,7 @@ describe('start-page', () => {
         expect(page.getActivePage("active-kb-page").element(by.className("card-word")).getText()).toContain('Alliteration');
     });
 
-    fit('should input a limit of one card and pop up with the results after got-it has been clicked', () => {
+    it('should input a limit of one card and pop up with the results after got-it has been clicked', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
@@ -31,7 +31,7 @@ describe('start-page', () => {
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
     });
 
-    fit('should input a limit over max but not go over the max', () => {
+    it('should input a limit over max but not go over the max', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
@@ -49,7 +49,7 @@ describe('start-page', () => {
         expect(page.getElementById("player2-score").getText()).toContain("15");
     });
 
-    fit('should input a limit of -3 but show 3 cards', () => {
+    it('should input a limit of -3 but show 3 cards', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
