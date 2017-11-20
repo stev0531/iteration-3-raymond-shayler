@@ -45,8 +45,8 @@ describe('card-list-page', () => {
         page.clickElement("Select-Button");
         page.clickElement("Obstinate");
         page.clickElement("Add-Cards");
-        deckPage = new DeckPage();
 
+        deckPage = new DeckPage();
         deckPage.navigateTo("b2956f25be16349683be4461");
         expect(deckPage.getAllCards().count()).toEqual(4);
     });
@@ -61,7 +61,6 @@ describe('card-list-page', () => {
         page.clickElement("Automaticity");
         page.clickElement("Add-Cards");
         deckPage = new DeckPage();
-
 
         deckPage.navigateTo("b2956f25be16349683be4461");
         browser.waitForAngular();

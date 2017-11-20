@@ -14,9 +14,10 @@ export class CardService {
     private cardUrl: string = environment.API_URL + "cards";
 
     public getCards(): void {
-        this.http.request(this.cardUrl).map(res => res.json()).subscribe(
+        this.http.request(this.cardUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             cardsres => {
                 this.cards = cardsres;
+                console.log("Returned some decks")
             }, err => {
                 console.log(err);
             }

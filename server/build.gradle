@@ -17,6 +17,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'org.mongodb:mongodb-driver:3.4.2'
 
+    compile 'com.github.scribejava:scribejava-apis:4.1.1'
+    compile 'com.nimbusds:nimbus-jose-jwt:4.23'
+    compile 'joda-time:joda-time:2.9.9'
+
     testCompile 'junit:junit:4.12'
 }
 
