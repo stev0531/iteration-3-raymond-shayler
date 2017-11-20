@@ -26,7 +26,8 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
     private static final String databaseName = "i3-droptable-dev";
-    private static final int serverPort = 4567;;
+    private static final int serverPort = 4567;
+    ;
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
@@ -99,10 +100,10 @@ public class Server {
                 response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
             }
 
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
+//            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+//            if (accessControlRequestMethod != null) {
+//                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+//            }
 
             return "OK";
         });
@@ -111,27 +112,36 @@ public class Server {
         before((request, response) -> {
 
             //Handle authentication
-            System.out.println("New request: " + request.pathInfo());
-            if(!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()) )){
-                System.out.println("Checking Auth");
-                String cookie = request.cookie("ddg");
-                System.out.println(cookie);
 
-                if(!auth.authorized(cookie)) {
-                    System.err.println("Auth denied");
-                    System.out.println("The cookie \n " + cookie);
-                    response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
-                } else {
-                    System.out.println("Auth Passed");
+            if (!(request.requestMethod().equals("OPTIONS"))) {
+                //the above lets preflight requests clear the API
+                System.out.println("New request: " + request.pathInfo());
+                if (!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))) {
+                    System.out.println("Checking Auth");
+                    String cookie = request.cookie("ddg");
+                    System.out.println(cookie);
+
+                    if (!auth.authorized(cookie)) {
+                        System.err.println("Auth denied");
+                        System.out.println("The cookie \n " + cookie);
+                        response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
+                    } else {
+                        System.out.println("Auth Passed");
+                    }
                 }
             }
 
             response.header("Access-Control-Allow-Origin", request.headers("Origin"));
             System.out.println("Request origin: " + request.headers("Origin"));
-            //response.header("Access-Control-Request-Method", "GET");
             System.out.println("Request method: " + request.requestMethod());
+            System.out.println("Request headers: " + request.headers("Access-Control-Request-Headers"));
+
+            System.out.println("=======");
+
+            response.header("Access-Control-Allow-Headers", request.headers("Access-Control-Request-Headers"));
+
             response.header("Access-Control-Allow-Credentials", "true");
-            response.header("Access-Control-Allow-Headers", "object");
+            response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             // Note: this may or may not be necessary in your particular application
             response.type("application/json");
 
@@ -144,7 +154,7 @@ public class Server {
         //get("/", clientRoute);
         redirect.get("/", "http://localhost:9000");
 
-        get("api/authorize", (req,res) -> {
+        get("api/authorize", (req, res) -> {
             String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
             String originatingURL;
             if (originatingURLs == null) {
@@ -175,7 +185,6 @@ public class Server {
         get("api/user:id", userController::getUser);
 
 
-
         get("/callback", (req, res) -> {
             Map<String, String[]> params = req.queryMap().toMap();
             String[] states = params.get("state");
@@ -187,18 +196,16 @@ public class Server {
                 halt(400);
                 return ""; // never reached
             }
-            if (null == codes ) {
+            if (null == codes) {
                 if (null == errors) {
                     // we don't have codes, but we don't have an error either, so this a garbage request
                     halt(400);
                     return ""; // never reached
-                }
-                else if ("access_denied".equals(errors[0])) {
+                } else if ("access_denied".equals(errors[0])) {
                     // the user clicked "deny", so send them to the visitor page
                     res.redirect("/");
                     return ""; // send an empty body back on redirect
-                }
-                else {
+                } else {
                     // an unknown error was passed to us, so we halt
                     halt(400);
                     return ""; // not reached
