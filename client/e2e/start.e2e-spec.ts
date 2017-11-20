@@ -27,7 +27,7 @@ describe('start-page', () => {
         page.clickElement("testdeck3");
 
         page.typeALimit(1);
-        page.getActivePage('selections').element(by.className('play-button')).click();
+        page.getActivePage('selections').element(by.className('actual-play-button')).click();
         expect(page.getElementsByClass('entire-card')).toBeTruthy();
     });
 
