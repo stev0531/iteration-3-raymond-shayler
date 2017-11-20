@@ -50,7 +50,7 @@ export class DeckService {
     public updateName(newName: String, id: object) {
         console.log(newName);
         console.log(id);
-        let response = this.http.post(this.deckUrl + "/updateName", {name: newName, id: id}).map(res => res.json()).subscribe();
+        let response = this.http.post(this.deckUrl + "/updateName", {name: newName, id: id}, {withCredentials: true}).map(res => res.json()).subscribe();
         return response;
     }
 

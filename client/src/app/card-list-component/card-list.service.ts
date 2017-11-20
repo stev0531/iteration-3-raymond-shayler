@@ -40,7 +40,7 @@ export class CardListService {
         console.log(wipRequest);
         console.log(environment.API_URL + "addMany");
 
-        return this.http.post(environment.API_URL + "addMany", JSON.stringify(wipRequest)).map(res => res.json()).subscribe();
+        return this.http.post(environment.API_URL + "addMany", JSON.stringify(wipRequest), {withCredentials:true}).map(res => res.json()).subscribe();
     }
 
     public deleteCardsFromDeck(deck: SimpleDeck, ids: Object[]) {
@@ -52,7 +52,7 @@ export class CardListService {
         console.log(wipRequest);
         console.log(environment.API_URL + "deleteMany");
 
-        return this.http.post(environment.API_URL + "deleteMany", JSON.stringify(wipRequest)).map(res => res.json()).subscribe();
+        return this.http.post(environment.API_URL + "deleteMany", JSON.stringify(wipRequest), {withCredentials:true}).map(res => res.json()).subscribe();
     }
 }
 

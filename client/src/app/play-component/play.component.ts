@@ -40,7 +40,7 @@ export class PlayComponent implements OnInit {
 
 
     public addPoints(pageNumber: number): void {
-        setTimeout(()=>{
+
         if (this.cardStates[pageNumber].isComplete == false && pageNumber < this.deck.cards.length) {
             if(this.pageNumber%2 == 0){
                 this.points1 += this.cardStates[pageNumber].cardPoints;
@@ -59,7 +59,6 @@ export class PlayComponent implements OnInit {
         if(this.cardsDone == (this.deck.cards.length)){
             this.openResultsDialog();
         }
-    }, 250)
     }
 
     public getCardState(i: number): CardState {
