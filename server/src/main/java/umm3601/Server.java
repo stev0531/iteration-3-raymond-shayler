@@ -5,8 +5,6 @@ import com.mongodb.client.MongoDatabase;
 import com.google.gson.*;
 import spark.Request;
 import spark.Response;
-import spark.Route;
-import spark.utils.IOUtils;
 
 import umm3601.Authentication.AuthController;
 import umm3601.card.CardController;
@@ -68,12 +66,14 @@ public class Server {
 
 
         com.google.gson.stream.JsonReader reader =
-            new com.google.gson.stream.JsonReader(new FileReader("./config.json"));
+            new com.google.gson.stream.JsonReader(new FileReader("src/config.json"));
         Gson gson = new Gson();
         Conf conf;
         conf = gson.fromJson(reader, Conf.class);
         callbackURL = conf.callbackURL;
         publicURL = conf.publicURL;
+        final boolean USEAUTH = conf.useAuth;
+
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
 //
@@ -114,20 +114,22 @@ public class Server {
 
             //Handle authentication
 
-            if (!(request.requestMethod().equals("OPTIONS"))) {
-                //the above lets preflight requests clear the API
-                System.out.println("New request: " + request.pathInfo());
-                if (!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))) {
-                    System.out.println("Checking Auth");
-                    String cookie = request.cookie("ddg");
-                    System.out.println(cookie);
+            if (USEAUTH) {
+                if (!(request.requestMethod().equals("OPTIONS"))){
+                    //the above lets preflight requests clear the API
+                    System.out.println("New request: " + request.pathInfo());
+                    if (!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))) {
+                        System.out.println("Checking Auth");
+                        String cookie = request.cookie("ddg");
+                        System.out.println(cookie);
 
-                    if (!auth.authorized(cookie)) {
-                        System.err.println("Auth denied");
-                        System.out.println("The cookie \n " + cookie);
-                        response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
-                    } else {
-                        System.out.println("Auth Passed");
+                        if (!auth.authorized(cookie)) {
+                            System.err.println("Auth denied");
+                            System.out.println("The cookie \n " + cookie);
+                            response.redirect(auth.getAuthURL(publicURL + "/api/authorize"));
+                        } else {
+                            System.out.println("Auth Passed");
+                        }
                     }
                 }
             }
@@ -186,6 +188,8 @@ public class Server {
         get("api/classroom:id", classroomController::getClassroom);
         get("api/users", userController::getUsers);
         get("api/user:id", userController::getUser);
+        get("api/deleteMany", cardController::deleteCardsFromDeck);
+        get("api/decks/updateName", deckController::updateName);
 
         get("api/checkAuthorization", authController::checkAuthorization);
 
@@ -273,6 +277,7 @@ public class Server {
         public String clientSecret;
         public String publicURL;
         public String callbackURL;
+        public boolean useAuth;
     }
 
     // Enable GZIP for all responses
