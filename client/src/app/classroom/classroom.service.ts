@@ -16,7 +16,7 @@ export class ClassroomService {
     private classroomUrl: string = environment.API_URL + "classrooms";
 
     public getClassrooms(): void {
-        this.http.request(this.classroomUrl).map(res => res.json()).subscribe(
+        this.http.request(this.classroomUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             classres => {
                 this.classrooms = classres;
             }, err => {
@@ -26,7 +26,7 @@ export class ClassroomService {
     }
 
     public getClassroom(id: string): Observable<Classroom> {
-        let newClassroom: Observable<Classroom> = this.http.request(this.classroomUrl + "/" + id).map(res => res.json());
+        let newClassroom: Observable<Classroom> = this.http.request(this.classroomUrl + "/" + id, {withCredentials:true}).map(res => res.json());
         return newClassroom;
     }
 

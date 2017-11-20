@@ -12,6 +12,7 @@ import {environment} from "../../environments/environment";
 import {Card} from "../card/card";
 
 
+
 @Component({
     selector: 'app-play',
     templateUrl: './play.component.html',
@@ -37,8 +38,9 @@ export class PlayComponent implements OnInit {
         this.cardStates = [];
     }
 
-    public addPoints(pageNumber: number): void {
 
+    public addPoints(pageNumber: number): void {
+        setTimeout(()=>{
         if (this.cardStates[pageNumber].isComplete == false && pageNumber < this.deck.cards.length) {
             if(this.pageNumber%2 == 0){
                 this.points1 += this.cardStates[pageNumber].cardPoints;
@@ -51,12 +53,13 @@ export class PlayComponent implements OnInit {
             this.cardsDone = this.cardsDone + 1;
             this.pageNumber = pageNumber + 1;
 
+
         }
 
         if(this.cardsDone == (this.deck.cards.length)){
             this.openResultsDialog();
         }
-
+    }, 250)
     }
 
     public getCardState(i: number): CardState {

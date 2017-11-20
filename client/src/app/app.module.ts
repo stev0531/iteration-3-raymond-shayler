@@ -36,6 +36,7 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {DeckChangesDialogComponent} from "./deck-changes-dialog/deck-changes-dialog";
 import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
 
@@ -83,6 +84,7 @@ import {StartScreenComponent} from "./start-screen/start-screen.component";
         DeckService,
         ClassroomService,
         UserService,
+        AuthService,
         MdDialog,
         MatDialogClose,
         MdSnackBar,

@@ -16,7 +16,7 @@ export class UserService {
     private userUrl: string = environment.API_URL + "users";
 
     public getUsers(): void {
-        this.http.request(this.userUrl).map(res => res.json()).subscribe(
+        this.http.request(this.userUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             userrs => {
                 this.users = userrs;
             }, err => {

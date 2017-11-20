@@ -6,7 +6,6 @@ import {environment} from "../../environments/environment";
 import "rxjs/add/operator/map";
 import {SimpleDeck} from "../simple-deck/simple-deck";
 
-
 @Injectable()
 export class CardListService {
 
@@ -18,17 +17,17 @@ export class CardListService {
 
     getSimpleCards(): Observable<any> {
 
-        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-cards");
+        let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-cards", {withCredentials:true});
         return observable.map(res => res.json());
     }
 
     public getSimpleCard(id: string): Observable<Card> {
-        let newSimpleCard: Observable<Card> = this.http.request(+"/" + id).map(res => res.json());
+        let newSimpleCard: Observable<Card> = this.http.request(+"/" + id, {withCredentials: true}).map(res => res.json());
         return newSimpleCard;
     }
 
     public getCard(id: string): Observable<Card> {
-        let newCard: Observable<Card> = this.http.request(this.cardUrl + "/" + id).map(res => res.json());
+        let newCard: Observable<Card> = this.http.request(this.cardUrl + "/" + id, {withCredentials: true}).map(res => res.json());
         return newCard;
     }
 
