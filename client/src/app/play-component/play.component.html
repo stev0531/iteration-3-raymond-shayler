@@ -18,7 +18,10 @@
                 <button class="round-button got-it-button" mat-raised-button color="warn"
                         [disabled]="this.getCardState(ind).isComplete" (click)="this.addPoints(ind)">Got It!
                 </button>
-                <span class="score">Score: {{this.points}}</span>
+
+                <span class="player" *ngIf="pageNumber%2 == 0">Player 1 <br> Score: {{this.points1}}</span>
+                <span class="player" *ngIf="pageNumber%2 != 0">Player 2 <br> Score: {{this.points2}}</span>
+
             </div>
         </div>
     </div>

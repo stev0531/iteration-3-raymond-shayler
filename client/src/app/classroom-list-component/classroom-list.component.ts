@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MdDialog} from "@angular/material";
 import {ClassroomService} from "../classroom/classroom.service";
 
@@ -9,6 +9,9 @@ import {ClassroomService} from "../classroom/classroom.service";
 })
 export class ClassroomListComponent implements OnInit {
 
+    @Input() name: string = "";
+
+    classroom: string = "";
     constructor(public classroomService: ClassroomService, public dialog: MdDialog) {
     }
 
@@ -18,6 +21,10 @@ export class ClassroomListComponent implements OnInit {
 
     openAddDialog() {
         this.classroomService.getClassrooms();
+    }
+
+    selectClassroom(classroom: string, $event: string) {
+        this.classroom = classroom;
     }
 
 }

@@ -7,11 +7,9 @@
             <mat-card-content>
                 <mat-nav-list *ngIf="this.deckService.decks; else decksError">
                     <mat-list-item class="deck" *ngFor="let deck of this.deckService.decks">
+                      
                         <a class="deck-name" matLine [routerLink]="['/decks', deck._id.$oid]">{{ deck.name }}</a>
-                        <button mat-raised-button color="warn" class="play-button"
-                                [routerLink]="['/play', deck._id.$oid]">
-                            Play
-                        </button>
+
                     </mat-list-item>
                 </mat-nav-list>
                 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->

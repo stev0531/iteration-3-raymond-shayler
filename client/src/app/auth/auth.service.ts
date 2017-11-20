@@ -7,8 +7,10 @@ export class AuthService {
     constructor(private http:Http) { }
 
     authorized() : Observable<boolean> {
-        return this.http.get("/api/" + "check-authorization", {withCredentials: true}).map(res => res.json().authorized);
+        console.log("checking if I am logged in");
+        return this.http.get("/api/" + "checkAuthorization", {withCredentials: true}).map(res => res.json().authorized);
     }
+
 
     login(){
         console.log("Start Login")

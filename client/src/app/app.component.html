@@ -5,6 +5,9 @@
                [routerLinkActiveOptions]="{exact: true}">
                 <mat-icon>home</mat-icon>
                 Home</a>
+            <a mat-list-item [routerLink]="['/start']" (click)="layout.close()" routerLinkActive="nav-active">
+                <mat-icon>play_arrow</mat-icon>
+                Play</a>
             <a mat-list-item [routerLink]="['/decks']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>view_list</mat-icon>
                 Decks</a>
@@ -14,15 +17,6 @@
             <a mat-list-item [routerLink]="['/help']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>help</mat-icon>
                 Help</a>
-            <a mat-list-item [routerLink]="['/classrooms']" (click)="layout.close()" routerLinkActive="nav-active">
-                <mat-icon>room</mat-icon>
-                Classrooms</a>
-            <a mat-list-item [routerLink]="['/users']" (click)="layout.close()" routerLinkActive="nav-active">
-                <mat-icon>room</mat-icon>
-                Users</a>
-            <a mat-list-item [routerLink]="['/profile']" (click)="layout.close()" routerLinkActive="nav-active">
-                <mat-icon>room</mat-icon>
-                Profile</a>
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav toolbarTitle="SAGE" navigationRoute="/">

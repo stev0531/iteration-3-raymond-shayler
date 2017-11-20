@@ -6,6 +6,7 @@ import com.google.gson.*;
 import spark.Request;
 import spark.Response;
 
+import umm3601.Authentication.AuthController;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
@@ -38,6 +39,8 @@ public class Server {
 
         UserController userController = new UserController(database);
 
+        AuthController authController = new AuthController();
+
         ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
@@ -60,7 +63,6 @@ public class Server {
 
         String publicURL;
         String callbackURL;
-        String apiURL;
 
 
         com.google.gson.stream.JsonReader reader =
@@ -176,14 +178,20 @@ public class Server {
         get("api/decks", deckController::getDecks);
         post("api/decks/add", deckController::addNewDeck);
         get("api/decks/:id", deckController::getDeck);
+        post("api/decks/updateName", deckController::updateName);
         post("api/cards/add", cardController::addNewCard);
         post("api/addMany", cardController::addCardsToDeck);
+        post("api/deleteMany", cardController::deleteCardsFromDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
         get("api/classrooms", classroomController::getClassrooms);
         get("api/classroom:id", classroomController::getClassroom);
         get("api/users", userController::getUsers);
         get("api/user:id", userController::getUser);
+        get("api/deleteMany", cardController::deleteCardsFromDeck);
+        get("api/decks/updateName", deckController::updateName);
+
+        get("api/checkAuthorization", authController::checkAuthorization);
 
 
         get("/callback", (req, res) -> {
@@ -269,7 +277,6 @@ public class Server {
         public String clientSecret;
         public String publicURL;
         public String callbackURL;
-        public String apiURL;
         public boolean useAuth;
     }
 

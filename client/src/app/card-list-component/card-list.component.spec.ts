@@ -3,7 +3,7 @@ import {NgModule} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {CardListService} from "./card-list.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterModule} from "@angular/router";
 import {SharedModule} from "../shared.module";
 import {CardComponent} from "../card-component/card.component";
 import {SimpleCardComponent} from "../simple-card-component/simple-card.component";
@@ -12,6 +12,8 @@ import {CardListComponent} from "./card-list.component";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
+import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";
+import {RouterTestingModule} from "@angular/router/testing";
 
 
 describe('CardListComponent', () => {
@@ -21,6 +23,8 @@ describe('CardListComponent', () => {
     let cardServiceStub: {
         getSimpleCards: () => Observable<any>
         getCard: (_id: string) => Observable<any>
+        deleteCardsFromDeck: (deckId: string, cardIds: string[]) => Observable<any>
+        addCardsToDeck: (deckId: string, cardIds: string[]) => Observable<any>
     };
 
     let deckServiceStub: {
@@ -63,24 +67,29 @@ describe('CardListComponent', () => {
                     general_sense: "big furry goofball",
                     example_usage: "the dog borked"
                 }
-            ])
+            ]),
+
+            deleteCardsFromDeck: (deckId: string, cardIds: string[]) => Observable.of([]),
+            addCardsToDeck: (deckId: string, cardIds: string[]) => Observable.of([])
         };
 
 
         @NgModule({
-            imports: [CommonModule],
-            declarations: [CardDisplayDialogComponent],
+            imports: [CommonModule, SharedModule, RouterModule, RouterTestingModule],
+            declarations: [CardDisplayDialogComponent, DeckChangesDialogComponent],
             entryComponents: [
                 CardDisplayDialogComponent,
+                DeckChangesDialogComponent
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [{provide: ActivatedRoute, useValue: {params: Observable.of({id: "test id"})}}]
         })
         class TestDialog {
         }
 
 
         TestBed.configureTestingModule({
-            imports: [SharedModule, TestDialog, CommonModule],
+            imports: [SharedModule, TestDialog, CommonModule, RouterTestingModule],
             declarations: [CardListComponent, CardComponent, SimpleCardComponent],
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
                 {provide: CardListService, useValue: cardServiceStub}, {
@@ -106,6 +115,11 @@ describe('CardListComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('Should have a selected deck if a deck is selected', () => {
+       component.selectDeck("test id")
+       expect(component.selectedDeck.name == "test id");
+    });
+
     it('Should have an array with all of the received cards', () => {
         expect(component.cards.length).toBe(3);
     });
@@ -128,7 +142,7 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
     it('Will deselect all cards if the mode is changed to view', () => {
-        component.mode = "AddCards";
+        component.mode = "Select";
         component.select(component.cards[0]);
         component.select(component.cards[1]);
         component.select(component.cards[2]);
@@ -136,5 +150,35 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
 
+    it('Will deselect all cards once selected cards have been added', () => {
+       component.mode = "Select";
+       component.select(component.cards[0]);
+       component.select(component.cards[1]);
+       component.select(component.cards[2]);
+       component.selectDeck("test id");
+       component.changeDeck("Add");
+      // component.closeDialog(this.cardRef);
+       expect(component.selectedCards.length).toBe(0);
+    });
 
+    it('Will deselect all cards once selected cards have been deleted', () => {
+        component.mode = "Select";
+        component.select(component.cards[0]);
+        component.select(component.cards[1]);
+        component.select(component.cards[2]);
+        component.selectDeck("test id");
+        component.changeDeck("Delete");
+        expect(component.selectedCards.length).toBe(0);
+    });
+
+    it('Will revert to view mode after adding cards', () => {
+        component.mode = "AddCards"
+        component.select(component.cards[0]);
+        component.select(component.cards[1]);
+        component.select(component.cards[2]);
+        component.selectDeck("test id");
+        component.changeDeck("Delete");
+        component.select(component.cards[0]);
+        expect(component.selectedCards.length).toBe(0);
+    });
 });

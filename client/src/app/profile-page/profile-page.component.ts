@@ -14,6 +14,8 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() {
       this.userService.getUser("58af3a590343927e48e87205");
+
+      console.log(this.authService.authorized());
   }
 
 }

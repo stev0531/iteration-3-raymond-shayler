@@ -18,9 +18,22 @@ export class DeckPage {
         return this.getElementsByClass('deck-card');
     }
 
+    getNames(object){
+        let nameArray: String[];
+        nameArray = [];
+        for (var i = 0; i < object.length; i++) {
+            nameArray[i] = object[i].word
+        }
+        return nameArray;
+    }
+
     clickButton(id: string) {
         let e = element(by.id(id));
         e.click();
+    }
+
+    getElementById(htmlId: string){
+        return element(by.id(htmlId));
     }
 
     typeInput(input: string, text: string, enter?: boolean) {
@@ -54,6 +67,13 @@ export class DeckPage {
         return text;
     }
 
+    changeName (name: string, enter?: boolean) {
+        this.clickButton('edit');
+        this.typeInput('title-input', name, enter);
 
+        if (!enter) {
+            this.clickButton('cancel');
+        }
+    }
 
 }

@@ -1,0 +1,30 @@
+button {
+    margin: 5px;
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+    width: 60%;
+    height: 50px;
+    max-width: 250px;
+    font-size: 16pt;
+}
+
+
+
+.dummy-play-button {
+    opacity:0.3;
+}
+
+.hide {
+    display: none;
+}
+
+.deck-selections {
+    text-align: center;
+}
+
+.play-buttons {
+    text-align: center;
+}
+
