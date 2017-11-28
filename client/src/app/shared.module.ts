@@ -22,6 +22,7 @@ import {
     MatButtonToggleModule,
     MdSelectModule,
     MdExpansionModule,
+    MdDialogModule
 } from '@angular/material';
 
 import {FlexLayoutModule,} from '@angular/flex-layout';
@@ -55,6 +56,7 @@ const MATERIAL_MODULES: any[] = [
     MatButtonToggleModule,
     MdSelectModule,
     MdExpansionModule,
+    MdDialogModule
 ];
 
 const COVALENT_MODULES: any[] = [

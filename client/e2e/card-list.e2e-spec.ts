@@ -3,6 +3,8 @@ import {DeckPage} from "./deck.po";
 import {browser, by} from 'protractor';
 
 
+// Note that these tests seem prone to failure if they have been run multiple times.
+
 describe('card-list-page', () => {
    let page: CardListPage;
    let deckPage: DeckPage;
@@ -43,10 +45,10 @@ describe('card-list-page', () => {
         page.clickElement("Select-Button");
         page.clickElement("Obstinate");
         page.clickElement("Add-Cards");
-        deckPage = new DeckPage();
 
+        deckPage = new DeckPage();
         deckPage.navigateTo("b2956f25be16349683be4461");
-        expect(deckPage.getAllCards().count()).toEqual(1);
+        expect(deckPage.getAllCards().count()).toEqual(4);
     });
 
     // Note that this test seems to randomly fail about 25% of the time or so
@@ -60,11 +62,10 @@ describe('card-list-page', () => {
         page.clickElement("Add-Cards");
         deckPage = new DeckPage();
 
-
         deckPage.navigateTo("b2956f25be16349683be4461");
         browser.waitForAngular();
 
-        expect(deckPage.getAllCards().count()).toEqual(3);
+        expect(deckPage.getAllCards().count()).toEqual(6);
     });
 
     //This test deletes the cards we just added in the previous test
@@ -78,7 +79,55 @@ describe('card-list-page', () => {
         page.clickElement("Delete-Cards");
 
         deckPage.navigateTo("b2956f25be16349683be4461");
-        expect(deckPage.getAllCards().count()).toEqual(1);
+        expect(deckPage.getAllCards().count()).toEqual(4);
     });
 
+    it("Should show a dialog when cards are added to a deck", () => {
+        page.clickElement("deck-dropdown");
+        page.clickElement("testdeck3");
+        page.clickElement("Select-Button");
+        page.clickElement("Cloze");
+        page.clickElement("Automaticity");
+        page.clickElement("Add-Cards");
+        expect(page.getElementById("pop-in-card")).toBeTruthy();
+
+    });
+
+    it("Should show a dialog when cards are deleted from a deck", () => {
+        page.clickElement("deck-dropdown");
+        page.clickElement("testdeck3");
+        page.clickElement("Select-Button");
+        page.clickElement("Cloze");
+        page.clickElement("Automaticity");
+        page.clickElement("Delete-Cards");
+        expect(page.getElementById("pop-in-card")).toBeTruthy();
+
+    });
+
+    it("Should show the selected cards in the changes dialog", () => {
+        page.clickElement("deck-dropdown");
+        page.clickElement("testdeck3");
+        page.clickElement("Select-Button");
+        page.clickElement("Cloze");
+        page.clickElement("Automaticity");
+        page.clickElement("Add-Cards");
+        page.getElementsByClass("card-names").getText().then(function(inpString: string) {
+            (expect (inpString.includes("Cloze")).toBe(true));
+            (expect (inpString.includes("Automaticity")).toBe(true));
+        });
+    });
+
+    it("Should allow users to navigate to a deck page when 'Show Changes' is pressed on the dialog", () =>{
+        deckPage = new DeckPage();
+        page.clickElement("deck-dropdown");
+        page.clickElement("testdeck3");
+        page.clickElement("Select-Button");
+        page.clickElement("Cloze");
+        page.clickElement("Automaticity");
+        page.clickElement("Add-Cards");
+
+        page.clickElement('deck-page-button')
+
+        expect(deckPage.getAllCards().count()).toEqual(6);
+    });
 });
