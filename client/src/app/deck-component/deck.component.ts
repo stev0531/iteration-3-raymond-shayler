@@ -4,7 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {MdDialog, MatDialogConfig} from "@angular/material";
-
+import {DeleteDeckDialogComponent} from "../delete-deck-dialog/delete-deck-dialog";
 
 
 @Component({
@@ -17,8 +17,9 @@ export class DeckComponent implements OnInit {
 
     id: string;
     deck: Deck;
-    editMode: boolean;
+    editMode: boolean = false;
     newDeckTitle: string;
+    cardRef: any;
 
 
     constructor(public deckService: DeckService, private route: ActivatedRoute, public dialog: MdDialog) {
@@ -40,6 +41,10 @@ export class DeckComponent implements OnInit {
 
     }
 
+    deleteDeck() {
+        this.openDeleteDeckDialog();
+    }
+
     cancelEdit() {
         this.changeMode();
     }
@@ -56,6 +61,21 @@ export class DeckComponent implements OnInit {
         });
     }
 
+    public openDeleteDeckDialog() {
+        let config = new MatDialogConfig();
+        let deckName: string = this.deck.name;
+
+        config.data = {
+            deckName: deckName
+        };
+        console.log(config);
+        let cardRef = this.dialog.open(DeleteDeckDialogComponent, config);
+        this.cardRef = cardRef;
+        cardRef.afterClosed().subscribe(result => {
+            // this.selectedCards.length = 0;
+            // this.selectedButton = "Select";
+        });
+    }
 
     ngOnInit() {
         this.route.params.subscribe(params => {

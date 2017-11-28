@@ -8,6 +8,13 @@ import {DeckService} from "../deck/deck.service";
 import {Observable} from "rxjs";
 import {Deck} from "../deck/deck";
 import {ActivatedRoute} from "@angular/router";
+import {DeleteDeckDialogComponent} from "../delete-deck-dialog/delete-deck-dialog";
+import {CommonModule} from "@angular/common";
+import {RouterTestingModule} from "@angular/router/testing";
+import {RouterModule} from "@angular/router";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {NgModule} from "@angular/core";
+
 
 describe('DeckComponent', () => {
     let component: DeckComponent;
@@ -40,6 +47,17 @@ describe('DeckComponent', () => {
             })
         };
 
+        @NgModule({
+            imports: [CommonModule, SharedModule, RouterModule, RouterTestingModule],
+            declarations: [DeleteDeckDialogComponent],
+            entryComponents: [DeleteDeckDialogComponent
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [{provide: ActivatedRoute, useValue: {params: Observable.of({id: "test id"})}}]
+        })
+        class TestDialog {
+        }
+
         TestBed.configureTestingModule({
             imports: [SharedModule],
             declarations: [DeckComponent, CardComponent],
@@ -50,6 +68,7 @@ describe('DeckComponent', () => {
                         params: Observable.of({id: "test id"})
                     }
                 }],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         })
             .compileComponents();
     }));

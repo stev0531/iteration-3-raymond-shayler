@@ -7,8 +7,11 @@
                     <input id="text-input" matInput required #input type="text"  [(ngModel)]="newDeckTitle"
                            placeholder="{{deck.name}}" name="newDeckTitle" (keyup.enter)="saveEdit()" >
                 </mat-form-field>
-                <button [ngClass]="{'hide': this.editMode != false}" id="edit-name" mat-button
-                    id="edit" (click)="changeMode()"> <i id="edit-icon" class="material-icons">mode_edit</i>
+                <button [ngClass]="{'hide': this.editMode != false}" id="edit-name" mat-button class="teacher-buttons"
+                       id="edit" (click)="changeMode()"> <i id="edit-icon" class="material-icons">mode_edit</i>
+                </button>
+                 <button [ngClass]="{'hide': this.editMode != false}" id="delete-deck" mat-button class="teacher-buttons"
+                        id="delete" (click)="deleteDeck()"><i id="trash-icon" class="material-icons">delete</i>
                 </button>
                 <button [ngClass]="{'hide': this.editMode != true}" color="warn" mat-raised-button class="round-button"
                     id="save" (click)="saveEdit()" [disabled]="!newTitleForm.form.valid" type="submit">Save Changes

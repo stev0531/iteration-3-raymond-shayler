@@ -28,8 +28,15 @@
 
 #name-form {
     display: inline-block;
+    vertical-align: middle;
 }
 
 #edit-icon {
     padding-bottom: 10px;
 }
+
+#edit {
+    max-width: 1px !important;
+    padding: 0;
+}
+

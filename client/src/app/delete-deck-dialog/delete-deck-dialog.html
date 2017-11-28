@@ -1,0 +1,20 @@
+<mat-dialog-content class="pop-in-card-entire" id="pop-in-card">
+    <mat-card-content>
+        <span class="Changes">
+            <h3 class="Description">Are you sure you want to delete {{deckName}}?
+        </h3>
+        </span>
+        <mat-divider>
+        </mat-divider>
+    </mat-card-content>
+    <mat-divider>
+        <div class="button-container">
+            <button color="warn" class="round-button" id="delete-button"
+                    mat-raised-button (click)="closeDialog()" [routerLink]="['/decks']"> Delete Deck
+            </button>
+            <button color="warn"  class="round-button" id="cancel-button"
+                    mat-raised-button (click)="closeDialog()">Cancel
+            </button>
+        </div>
+    </mat-divider>
+</mat-dialog-content>
