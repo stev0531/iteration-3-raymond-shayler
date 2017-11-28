@@ -25,8 +25,7 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
     private static final String databaseName = "i3-droptable-dev";
-    private static final int serverPort = 80;
-    ;
+    private static int serverPort;
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
@@ -44,7 +43,7 @@ public class Server {
         ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
-        port(serverPort);
+        //call to port moved down
         enableDebugScreen();
 
         // Specify where assets like images will be "stored"
@@ -64,7 +63,6 @@ public class Server {
         String publicURL;
         String callbackURL;
 
-
         com.google.gson.stream.JsonReader reader =
             new com.google.gson.stream.JsonReader(new FileReader("src/config.json"));
         Gson gson = new Gson();
@@ -72,7 +70,11 @@ public class Server {
         conf = gson.fromJson(reader, Conf.class);
         callbackURL = conf.callbackURL;
         publicURL = conf.publicURL;
+        serverPort = conf.serverPort;
         final boolean USEAUTH = conf.useAuth;
+
+        //moved down here, post config.
+        port(serverPort);
 
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
@@ -92,8 +94,6 @@ public class Server {
 //            return "OK";
 //        });
 
-//         Enables CORS on requests. This method is an initialization method and should be called once.
-
         options("/*", (request, response) -> {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
@@ -108,7 +108,6 @@ public class Server {
 
             return "OK";
         });
-
 
         before((request, response) -> {
 
@@ -132,6 +131,8 @@ public class Server {
                         }
                     }
                 }
+            } else{
+                System.out.println("AUTH DISABLED");
             }
 
             response.header("Access-Control-Allow-Origin", request.headers("Origin"));
@@ -155,7 +156,7 @@ public class Server {
         redirect.get("", "/");
 
         //get("/", clientRoute);
-        redirect.get("/", "http://localhost:9000");
+        redirect.get("/", publicURL);
 
         get("api/authorize", (req, res) -> {
             String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
@@ -250,6 +251,14 @@ public class Server {
 //            return auth.getProfile(state, code);
         });
 
+        //here is the part where, if the request has not matched anything so far, it should match
+        //here and be served the angular bundle.
+
+        get("/*", (req, res) ->{
+            res.redirect("/");
+            System.out.println("Bouncing back homepage");
+            return res;
+        });
 
         // Called after each request to insert the GZIP header into the response.
         // This causes the response to be compressed _if_ the client specified
@@ -278,6 +287,7 @@ public class Server {
         public String publicURL;
         public String callbackURL;
         public boolean useAuth;
+        public int serverPort;
     }
 
     // Enable GZIP for all responses
