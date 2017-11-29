@@ -182,6 +182,7 @@ public class Server {
         post("api/cards/add", cardController::addNewCard);
         post("api/addMany", cardController::addCardsToDeck);
         post("api/deleteMany", cardController::deleteCardsFromDeck);
+        post("api/decks/deleteDeck", deckController::deleteDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
         get("api/classrooms", classroomController::getClassrooms);

@@ -64,8 +64,10 @@ export class DeckComponent implements OnInit {
     public openDeleteDeckDialog() {
         let config = new MatDialogConfig();
         let deckName: string = this.deck.name;
+        let deckId: object = this.deck._id;
 
         config.data = {
+            deckId: deckId,
             deckName: deckName
         };
         console.log(config);

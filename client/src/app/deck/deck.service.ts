@@ -59,6 +59,11 @@ export class DeckService {
         return response;
     }
 
+    public deleteDeck(id: object){
+        let response = this.http.post(this.deckUrl + "/deleteDeck", {id: id}, {withCredentials: true}).map(res => res.json());
+        return response;
+    }
+
     public getSimpleDecks(): Observable<SimpleDeck[]> {
 
         let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-decks", {withCredentials: true});
