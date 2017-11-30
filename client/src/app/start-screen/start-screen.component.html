@@ -20,10 +20,12 @@
                 <input matInput #input type="number" placeholder="# of Cards " [disabled]="true">
             </mat-form-field>
 
+            <mat-select placeholder="# of Players" id="playerNumSelect">
+                <mat-option *ngFor="let player of this.players" [value]="player" (click)="selectNumOfPlayers(player)">
+                    <span id="{{player}}"> {{player}}</span>
+                </mat-option>
+            </mat-select>
         </div>
-
-
-
 
         <br><br>
         <div class="play-buttons">

@@ -19,7 +19,7 @@ import {Card} from "../card/card";
 })
 export class PlayComponent implements OnInit {
 
-    deckAndLimit: string;
+    deckPlus: string;
     deckid: string;
     private cardLimit: number;
 
@@ -27,6 +27,9 @@ export class PlayComponent implements OnInit {
 
     public pageNumber: number = 0;
     public cardsDone: number = 0;
+
+    public playerPoints = [0];
+    public player = 0;
 
     public points1: number = 0;
     public points2: number = 0;
@@ -41,17 +44,17 @@ export class PlayComponent implements OnInit {
     public addPoints(pageNumber: number): void {
 
         if (this.cardStates[pageNumber].isComplete == false && pageNumber < this.deck.cards.length) {
-            if(this.pageNumber%2 == 0){
-                this.points1 += this.cardStates[pageNumber].cardPoints;
-            }else {
-                this.points2 += this.cardStates[pageNumber].cardPoints;
+            this.playerPoints[this.player] += this.cardStates[pageNumber].cardPoints;
+            this.player++;
+
+            if(this.player >= this.playerPoints.length){
+                this.player = 0;
             }
 
             this.cardStates[pageNumber].selected = 0;
             this.cardStates[pageNumber].isDone();
             this.cardsDone = this.cardsDone + 1;
             this.pageNumber = pageNumber + 1;
-
 
         }
 
@@ -118,11 +121,15 @@ export class PlayComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.deckAndLimit = params['deck'];
-            if(this.deckAndLimit != null){
-                let splitStr = this.deckAndLimit.split("_", 2);
+            this.deckPlus = params['deck'];
+            if(this.deckPlus != null){
+                let splitStr = this.deckPlus.split("_", 3);
                 this.deckid = splitStr[0];
                 this.cardLimit = Math.abs(+splitStr[1]);
+                let numOfPlayers = Math.abs(+splitStr[2]);
+                for(let i=0; i<numOfPlayers-1;i++){
+                    this.playerPoints.push(0);
+                }
             }
 
             this.deckService.getDeck(this.deckid).subscribe(

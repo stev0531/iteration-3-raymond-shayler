@@ -11,7 +11,10 @@ import {FormControl, Validators} from '@angular/forms';
 export class StartScreenComponent implements OnInit {
     public deck: Deck;
     public limit: FormControl;
-
+    public players = [1,2,3,4];
+    public numOfplayers: number;
+    public colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+    public color: string;
 
     constructor(public deckService: DeckService) {
 
@@ -25,6 +28,15 @@ export class StartScreenComponent implements OnInit {
         console.log(this.deck);
         this.limit = new FormControl('', [Validators.min(1), Validators.max(30)]);
     }
+
+    selectNumOfPlayers(num) {
+        this.numOfplayers = num;
+    }
+
+    selectColor(colour) {
+        this.color = colour;
+    }
+
 
     // sizeOfSelectedDeck() {
     //     console.log("In sizeOfSelectedDeck");
@@ -45,7 +57,7 @@ export class StartScreenComponent implements OnInit {
     }
 
     setDeckUrl(): string {
-        return this.deck._id.$oid + '_' + this.limit.value;
+        return this.deck._id.$oid + '_' + this.limit.value + '_' + this.numOfplayers;
     }
 
     ngOnInit(): void {
