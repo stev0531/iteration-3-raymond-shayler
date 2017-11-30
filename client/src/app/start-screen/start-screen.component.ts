@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DeckService} from "../deck/deck.service";
 import {Deck} from "../deck/deck";
-import {PlayComponent} from "../play-component/play.component";
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-start',
@@ -10,15 +10,42 @@ import {PlayComponent} from "../play-component/play.component";
 })
 export class StartScreenComponent implements OnInit {
     public deck: Deck;
-    public limit: number;
-    public play: PlayComponent;
+    public limit: FormControl;
+
 
     constructor(public deckService: DeckService) {
 
     }
 
     selectDeck(deck) {
+        console.log("In selectDeck");
+        console.log(this.deckService.decks);
+        console.log(deck);
         this.deck = deck;
+        console.log(this.deck);
+        this.limit = new FormControl('', [Validators.min(1), Validators.max(30)]);
+    }
+
+    // sizeOfSelectedDeck() {
+    //     console.log("In sizeOfSelectedDeck");
+    //     console.log(this.deck);
+    //     //console.log(this.deck.count);
+    //     console.log(this.deckService.decks);
+    //     if (this.deck !== undefined) {
+    //         return 7; // this.deck.count;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
+
+    getErrorMessage() {
+        return this.limit.hasError('min') ? 'The number picked is too low, pick a bigger number' :
+            this.limit.hasError('max') ? 'The number picked is too big, pick a smaller number' :
+            '';
+    }
+
+    setDeckUrl(): string {
+        return this.deck._id.$oid + '_' + this.limit.value;
     }
 
     ngOnInit(): void {

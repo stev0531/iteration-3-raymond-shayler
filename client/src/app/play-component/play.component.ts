@@ -4,7 +4,6 @@ import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {CardState} from "./CardState";
 import {MdDialog} from "@angular/material";
-import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {ResultsComponent} from "../results/results.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
@@ -78,7 +77,6 @@ export class PlayComponent implements OnInit {
             General_sense: presentCard.general_sense,
             Example_usage: presentCard.example_usage
         };
-        console.log(config);
 
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
     };
@@ -90,7 +88,7 @@ export class PlayComponent implements OnInit {
             points2: this.points2,
             deck: this.deck
         };
-        console.log(config);
+        config.disableClose = true;
 
         let cardRef = this.results.open(ResultsComponent, config);
     };
@@ -123,7 +121,6 @@ export class PlayComponent implements OnInit {
             this.deckAndLimit = params['deck'];
             if(this.deckAndLimit != null){
                 let splitStr = this.deckAndLimit.split("_", 2);
-
                 this.deckid = splitStr[0];
                 this.cardLimit = Math.abs(+splitStr[1]);
             }
@@ -135,9 +132,7 @@ export class PlayComponent implements OnInit {
                         this.deck.cards = this.shuffle(this.deck.cards);
                     }
 
-                    if(this.cardLimit == 0){
-                        this.cardLimit = 1;
-                    }else if(this.cardLimit>this.deck.cards.length){
+                    if(this.cardLimit>this.deck.cards.length){
                         this.cardLimit = this.deck.cards.length;
                     }
 

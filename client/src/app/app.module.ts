@@ -37,6 +37,7 @@ import {DeckChangesDialogComponent} from "./deck-changes-dialog/deck-changes-dia
 import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {AuthService} from "./auth/auth.service";
+import { ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 
@@ -45,7 +46,8 @@ import {AuthService} from "./auth/auth.service";
         HttpModule,
         JsonpModule,
         Routing,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
