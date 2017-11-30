@@ -83,42 +83,19 @@ describe('deck-page', () => {
     it('should edit the deck name and cancel, leaving the name unchanged', () => {
         page.navigateTo('59de8a1f012e92ce86a57177');
 
-        page.clickButton('edit');
-        page.clickButton('text-input');
-        page.typeInput('text-input', 'new-deck-name', false );
-        page.clickButton('cancel');
-
-        /*
         var startingName = page.getDeckHeader();
-        var name = page.randomText(5);
-        page.changeName(name, false);*/
 
-        expect(page.getDeckHeader()).toEqual('test deck 2');
+        page.changeName('new-deck-name', false);
+
+        expect(page.getDeckHeader()).toEqual(startingName);
     });
 
     it('should edit the deck name and save the changes, checking that it updated', () => {
         page.navigateTo('59de8a1f012e92ce86a57177');
 
-        page.clickButton('edit');
-        page.clickButton('text-input');
-        page.typeInput('text-input', 'new-deck-name', false );
-        page.clickButton('save');
-
-        /*
         var startingName = page.getDeckHeader();
-        var name = page.randomText(5);
 
-        page.changeName(name, false);
-        page.clickButton('save');
-        */
-
-        expect(page.getDeckHeader()).toEqual('new-deck-name');
-    });
-
-    it('should press the trash button and then press cancel, leaving the page unchanged', ()=>{
-        page.navigateTo('59de8a1f012e92ce86a57177');
-        page.clickButton('delete');
-        page.clickButton('cancel-button');
+        page.changeName('new-deck-name', true);
 
         expect(page.getDeckHeader()).toEqual('new-deck-name');
     });
