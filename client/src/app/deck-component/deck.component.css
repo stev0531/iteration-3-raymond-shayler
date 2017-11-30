@@ -31,12 +31,15 @@
     vertical-align: middle;
 }
 
-#edit-icon {
-    padding-bottom: 10px;
+.icon-buttons{
+    display: inline-block;
 }
 
 #edit {
-    max-width: 1px !important;
-    padding: 0;
+    margin-bottom:8%;
+}
+
+#delete{
+    margin-bottom:8%;
 }
 

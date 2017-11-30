@@ -16,6 +16,14 @@ describe('deck-page', () => {
         expect(page.getDeckHeader()).toEqual("test deck 1");
     });
 
+    it('should have three buttons', () => {
+        page.navigateTo('59de8a1f012e92ce86a57176');
+
+        expect(page.getElementById("edit")).toBeTruthy();
+        expect(page.getElementById("delete")).toBeTruthy();
+        expect(page.getElementById("cardDialog")).toBeTruthy();
+    });
+
     it('should have a synonym, antonym, general usage, and example usage for each card.', () => {
         page.navigateTo('59de8a1f012e92ce86a57176');
         browser.sleep(1000);
@@ -96,6 +104,14 @@ describe('deck-page', () => {
         var startingName = page.getDeckHeader();
 
         page.changeName('new-deck-name', true);
+
+        expect(page.getDeckHeader()).toEqual('new-deck-name');
+    });
+
+    it('should press the trash button and then press cancel, leaving the page unchanged', ()=>{
+        page.navigateTo('59de8a1f012e92ce86a57177');
+        page.clickButton('delete');
+        page.clickButton('cancel-button');
 
         expect(page.getDeckHeader()).toEqual('new-deck-name');
     });

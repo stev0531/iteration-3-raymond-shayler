@@ -1,6 +1,0 @@
-{
-   "clientId" : "163464387736-t5rp74a2rq685gd2bqoio77h7s5aktli.apps.googleusercontent.com",
-   "clientSecret" : "ZBnw2DNjd1z5A9FACb2_7EEJ",
-   "callbackURL" : "http://localhost:4567/callback",
-   "publicURL" : "http://localhost:4567"
-}
