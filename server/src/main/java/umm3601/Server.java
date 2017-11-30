@@ -158,41 +158,42 @@ public class Server {
         //get("/", clientRoute);
         redirect.get("/", publicURL);
 
-        get("api/authorize", (req, res) -> {
-            String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
-            String originatingURL;
-            if (originatingURLs == null) {
-                originatingURL = publicURL;
-            } else {
-                originatingURL = originatingURLs[0];
-            }
-            res.redirect(auth.getAuthURL(originatingURL));
-            // I think we could return an arbitrary value since the redirect prevents this from being used
-            return res;
-        });
-
-
         /// Deck and Card Endpoints ///////////////////////////
         /////////////////////////////////////////////
-        get("api/cards/:id", cardController::getCard);
-        get("api/cards", cardController::getCards);
-        get("api/decks", deckController::getDecks);
-        post("api/decks/add", deckController::addNewDeck);
-        get("api/decks/:id", deckController::getDeck);
-        post("api/decks/updateName", deckController::updateName);
-        post("api/cards/add", cardController::addNewCard);
-        post("api/addMany", cardController::addCardsToDeck);
-        post("api/deleteMany", cardController::deleteCardsFromDeck);
-        get("api/simple-cards", cardController::getSimpleCards);
-        get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/classrooms", classroomController::getClassrooms);
-        get("api/classroom:id", classroomController::getClassroom);
-        get("api/users", userController::getUsers);
-        get("api/user:id", userController::getUser);
-        get("api/deleteMany", cardController::deleteCardsFromDeck);
-        get("api/decks/updateName", deckController::updateName);
+        path("api/", ()->{
+            get("cards/:id", cardController::getCard);
+            get("cards", cardController::getCards);
+            get("decks", deckController::getDecks);
+            post("decks/add", deckController::addNewDeck);
+            get("decks/:id", deckController::getDeck);
+            post("decks/updateName", deckController::updateName);
+            post("cards/add", cardController::addNewCard);
+            post("addMany", cardController::addCardsToDeck);
+            post("deleteMany", cardController::deleteCardsFromDeck);
+            get("simple-cards", cardController::getSimpleCards);
+            get("simple-decks", deckController::getSimpleDecks);
+            get("classrooms", classroomController::getClassrooms);
+            get("classroom:id", classroomController::getClassroom);
+            get("users", userController::getUsers);
+            get("user:id", userController::getUser);
+            get("deleteMany", cardController::deleteCardsFromDeck);
+            get("decks/updateName", deckController::updateName);
 
-        get("api/checkAuthorization", authController::checkAuthorization);
+            get("checkAuthorization", authController::checkAuthorization);
+            get("authorize", (req, res) -> {
+                String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
+                String originatingURL;
+                if (originatingURLs == null) {
+                    originatingURL = publicURL;
+                } else {
+                    originatingURL = originatingURLs[0];
+                }
+                res.redirect(auth.getAuthURL(originatingURL));
+                // I think we could return an arbitrary value since the redirect prevents this from being used
+                return res;
+            });
+        });
+
 
 
         get("/callback", (req, res) -> {
@@ -229,9 +230,9 @@ public class Server {
                 if (null != originatingURL) {
                     Cookie c = auth.getCookie();
                     res.cookie(c.name, c.value, c.max_age);
-                    System.out.println("Innermost Auth script was run");
+                    System.out.println("Innermost Auth script was run, redirecting to: ");
+                    System.out.print(originatingURL +"\n");
                     res.redirect(originatingURL);
-                    System.out.println("good");
                     return ""; // not reached
                 } else {
                     System.out.println("bad");
