@@ -7,11 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 
 public class ServerSpec {
-    @Before
-    public void setupTest(){
-       Server server = new Server();
-    }
-
     @Test
     public void testNeedsAuth(){
         Server server = new Server();
@@ -26,6 +21,7 @@ public class ServerSpec {
         assertFalse(server.needsAuth("api/simple-cards"));
         assertFalse(server.needsAuth("api/decks"));
         assertFalse(server.needsAuth("api/8122182"));
-
+        //testing against a URL that should not exist
+        assertFalse(server.needsAuth("api/figs"));
     }
 }

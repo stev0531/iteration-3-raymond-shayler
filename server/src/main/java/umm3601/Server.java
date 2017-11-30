@@ -285,16 +285,10 @@ public class Server {
         sensitiveURLs.add("api/cards/add");
         sensitiveURLs.add("api/addMany");
         sensitiveURLs.add("api/deleteMany");
-
-        System.out.println("needAuth: " + req);
-
-
         if (sensitiveURLs.contains(req)) {
-            System.out.println("needAuth: needs auth");
             return true;
 
         } else {
-            System.out.println("needAuth: not sensitive");
             return false;
         }
     }
