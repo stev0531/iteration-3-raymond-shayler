@@ -1,4 +1,4 @@
-button {
+.play-button {
     margin: 5px;
     border: 1.5px solid black;
     border-radius: 0px 100px 100px 100px;
@@ -8,10 +8,18 @@ button {
     font-size: 16pt;
 }
 
+#title {
+    display: inline-block;
+    padding-top: 6px;
+}
 
+#help {
+    display: inline-block;
+    float: right;
+}
 
 .dummy-play-button {
-    opacity:0.3;
+    opacity: 0.3;
 }
 
 .hide {
