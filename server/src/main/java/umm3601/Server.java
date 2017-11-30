@@ -280,14 +280,13 @@ public class Server {
     public static boolean needsAuth(String req) {
         Set<String> sensitiveURLs = new HashSet<>();
 
-        sensitiveURLs.add("api/decks/add");
-        sensitiveURLs.add("api/decks/updateName");
-        sensitiveURLs.add("api/cards/add");
-        sensitiveURLs.add("api/addMany");
-        sensitiveURLs.add("api/deleteMany");
+        sensitiveURLs.add("/api/decks/add");
+        sensitiveURLs.add("/api/decks/updateName");
+        sensitiveURLs.add("/api/cards/add");
+        sensitiveURLs.add("/api/addMany");
+        sensitiveURLs.add("/api/deleteMany");
         if (sensitiveURLs.contains(req)) {
             return true;
-
         } else {
             return false;
         }

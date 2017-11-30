@@ -11,17 +11,17 @@ public class ServerSpec {
     public void testNeedsAuth(){
         Server server = new Server();
         //show that these paths need auth
-        assertTrue(server.needsAuth("api/cards/add"));
-        assertTrue(server.needsAuth("api/decks/add"));
-        assertTrue(server.needsAuth("api/addMany"));
-        assertTrue(server.needsAuth("api/deleteMany"));
+        assertTrue(server.needsAuth("/api/cards/add"));
+        assertTrue(server.needsAuth("/api/decks/add"));
+        assertTrue(server.needsAuth("/api/addMany"));
+        assertTrue(server.needsAuth("/api/deleteMany"));
 
         //ignore other paths
-        assertFalse(server.needsAuth("api/cards"));
-        assertFalse(server.needsAuth("api/simple-cards"));
-        assertFalse(server.needsAuth("api/decks"));
-        assertFalse(server.needsAuth("api/8122182"));
+        assertFalse(server.needsAuth("/api/cards"));
+        assertFalse(server.needsAuth("/api/simple-cards"));
+        assertFalse(server.needsAuth("/api/decks"));
+        assertFalse(server.needsAuth("/api/8122182"));
         //testing against a URL that should not exist
-        assertFalse(server.needsAuth("api/figs"));
+        assertFalse(server.needsAuth("/api/figs"));
     }
 }
