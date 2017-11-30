@@ -12,8 +12,6 @@ import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
 import umm3601.Authentication.Cookie;
 import umm3601.Authentication.UnauthorizedUserException;
-import umm3601.classroom.ClassroomController;
-import umm3601.user.*;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -36,11 +34,7 @@ public class Server {
 
         DeckController deckController = new DeckController(database);
 
-        UserController userController = new UserController(database);
-
         AuthController authController = new AuthController();
-
-        ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
         //call to port moved down
@@ -185,10 +179,6 @@ public class Server {
         post("api/deleteMany", cardController::deleteCardsFromDeck);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/classrooms", classroomController::getClassrooms);
-        get("api/classroom:id", classroomController::getClassroom);
-        get("api/users", userController::getUsers);
-        get("api/user:id", userController::getUser);
         get("api/deleteMany", cardController::deleteCardsFromDeck);
         get("api/decks/updateName", deckController::updateName);
 
