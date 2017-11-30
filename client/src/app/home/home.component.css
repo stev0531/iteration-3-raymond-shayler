@@ -1,10 +1,8 @@
 button {
     margin: 5px;
+    border: 1.5px solid black;
     border-radius: 100px;
     background-color: mediumseagreen;
-    border-style: solid;
-    border-width: 1.5px;
-    border-color: black;
     width: 60%;
     height: 50px;
     max-width: 500px;

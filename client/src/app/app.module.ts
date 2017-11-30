@@ -27,12 +27,6 @@ import {CardListComponent} from "./card-list-component/card-list.component"
 import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
 import {CardDisplayDialogComponent} from "./card-display-dialog/card-display-dialog.component";
-import {ClassroomComponent} from "./classroom-component/classroom.component";
-import {ClassroomListComponent} from "./classroom-list-component/classroom-list.component";
-import {ClassroomService} from "./classroom/classroom.service";
-import {UserListComponent} from "./user-list-component/user-list.component"
-import {UserService} from "./user/user.service";
-import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {DeckChangesDialogComponent} from "./deck-changes-dialog/deck-changes-dialog";
 import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
@@ -64,11 +58,7 @@ import {AuthService} from "./auth/auth.service";
         DeckChangesDialogComponent,
         ResultsComponent,
         StartScreenComponent,
-        ClassroomComponent,
-        ClassroomListComponent,
         PlayComponent,
-        UserListComponent,
-        ProfilePageComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,
@@ -82,8 +72,6 @@ import {AuthService} from "./auth/auth.service";
     providers: [
         CardListService,
         DeckService,
-        ClassroomService,
-        UserService,
         AuthService,
         MdDialog,
         MatDialogClose,
