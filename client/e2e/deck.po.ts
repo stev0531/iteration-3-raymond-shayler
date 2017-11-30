@@ -69,10 +69,14 @@ export class DeckPage {
 
     changeName (name: string, enter?: boolean) {
         this.clickButton('edit');
-        this.typeInput('title-input', name, enter);
+        this.clickButton('text-input');
+
+        this.typeInput('text-input', name, false);
 
         if (!enter) {
             this.clickButton('cancel');
+        } else {
+            this.clickButton('save');
         }
     }
 

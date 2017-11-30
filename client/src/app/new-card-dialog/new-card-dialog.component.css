@@ -3,8 +3,17 @@
 }
 
 #new-card-submit {
-    border-radius: 100px;
-    border-top-left-radius: 0px;
+    border-radius: 0px 100px 100px 100px;
+    border: 1.5px solid black;
 }
 
+#new-card-cancel {
+    border-radius: 0px 100px 100px 100px;
+    border: 1.5px solid black;
+    background-color: #81c784;
+}
+
+#new-card-cancel:hover {
+    background-color: #81c784;
+}
 
