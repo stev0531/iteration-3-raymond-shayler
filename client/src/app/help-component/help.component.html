@@ -1,8 +1,8 @@
 <mat-card>
     <mat-card-title id="help-title"><strong>Help & Rules</strong></mat-card-title>
     <mat-divider></mat-divider>
-    <mat-card-content>
-        <mat-expansion-panel class="sage-rules  section-rules">
+    <mat-card-content id="help-content">
+        <mat-expansion-panel class="sage-rules section-rules">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     How to Play
@@ -78,7 +78,8 @@
                 </li>
             </ul>
         </mat-expansion-panel>
-
-        <h2>Have fun!</h2>
+        <div class="play-button">
+            <button id="play-button" mat-raised-button color="warn" [routerLink]="['/start']">Play</button>
+        </div>
     </mat-card-content>
 </mat-card>

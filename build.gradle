@@ -20,16 +20,6 @@ task seedDeckData(type: Exec) {
     args = ["-d", "i3-droptable-dev", "-c", "decks", "--file", "decks.seed.json", "--jsonArray"]
 }
 
-task seedClassroomData(type: Exec) {
-    executable = "mongoimport"
-    args = ["-d", "i3-droptable-dev", "-c", "classrooms", "--file", "classrooms.seed.json", "--jsonArray"]
-}
-
-task seedUserData(type: Exec) {
-    executable = "mongoimport"
-    args = ["-d", "i3-droptable-dev", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
-}
-
 task seedMongoDB {
     group = "application"
 }
@@ -37,5 +27,3 @@ task seedMongoDB {
 seedMongoDB.dependsOn(clearMongoDB)
 seedMongoDB.dependsOn(seedCardData)
 seedMongoDB.dependsOn(seedDeckData)
-seedMongoDB.dependsOn(seedClassroomData)
-seedMongoDB.dependsOn(seedUserData)

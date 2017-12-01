@@ -8,7 +8,21 @@ h2 {
 }
 
 .sage-rules {
+    box-shadow: 0 0px !important;
     margin: auto;
-    width: 75%;
+    width: 100%;
 }
 
+#help-content {
+    padding: 0px 0px 16px 0px;
+}
+
+#play-button {
+    border-radius: 0px 100px 100px 100px;
+    border: 1.5px solid black;
+    margin-top: 16px;
+}
+
+.play-button {
+    text-align: center;
+}
