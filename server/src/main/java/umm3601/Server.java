@@ -168,10 +168,6 @@ public class Server {
             post("deleteMany", cardController::deleteCardsFromDeck);
             get("simple-cards", cardController::getSimpleCards);
             get("simple-decks", deckController::getSimpleDecks);
-            get("classrooms", classroomController::getClassrooms);
-            get("classroom:id", classroomController::getClassroom);
-            get("users", userController::getUsers);
-            get("user:id", userController::getUser);
 
             get("checkAuthorization", authController::checkAuthorization);
             get("authorize", (req, res) -> {
