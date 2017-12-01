@@ -60,6 +60,7 @@ import {DeleteDeckDialogComponent} from "./delete-deck-dialog/delete-deck-dialog
         ResultsComponent,
         StartScreenComponent,
         PlayComponent,
+        DeleteDeckDialogComponent
     ],
     entryComponents: [
         NewCardDialogComponent,
