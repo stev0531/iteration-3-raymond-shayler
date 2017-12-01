@@ -13,6 +13,7 @@ import umm3601.Authentication.Auth;
 import umm3601.Authentication.Cookie;
 import umm3601.Authentication.UnauthorizedUserException;
 
+
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
@@ -36,7 +37,9 @@ public class Server {
 
         DeckController deckController = new DeckController(database);
 
+
         AuthController authController = new AuthController();
+
 
         //Configure Spark
         //call to port moved down
@@ -185,6 +188,25 @@ public class Server {
         });
 
 
+        /// Deck and Card Endpoints ///////////////////////////
+        /////////////////////////////////////////////
+        get("api/cards/:id", cardController::getCard);
+        get("api/cards", cardController::getCards);
+        get("api/decks", deckController::getDecks);
+        post("api/decks/add", deckController::addNewDeck);
+        get("api/decks/:id", deckController::getDeck);
+        post("api/decks/updateName", deckController::updateName);
+        post("api/cards/add", cardController::addNewCard);
+        post("api/addMany", cardController::addCardsToDeck);
+        post("api/deleteMany", cardController::deleteCardsFromDeck);
+        post("api/decks/deleteDeck", deckController::deleteDeck);
+        get("api/simple-cards", cardController::getSimpleCards);
+        get("api/simple-decks", deckController::getSimpleDecks);
+        get("api/deleteMany", cardController::deleteCardsFromDeck);
+        get("api/decks/updateName", deckController::updateName);
+        get("api/checkAuthorization", authController::checkAuthorization);
+
+
         get("/callback", (req, res) -> {
             Map<String, String[]> params = req.queryMap().toMap();
             String[] states = params.get("state");
@@ -222,6 +244,7 @@ public class Server {
                     System.out.println("Innermost Auth script was run, redirecting to: ");
                     System.out.print(originatingURL + "\n");
                     res.redirect(originatingURL);
+                    System.out.println("good");
                     return ""; // not reached
                 } else {
                     System.out.println("bad");
