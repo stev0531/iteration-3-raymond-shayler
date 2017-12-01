@@ -70,8 +70,9 @@ export class CardListComponent implements OnInit {
                     Antonym: presentCard.antonym,
                     General_sense: presentCard.general_sense,
                     Example_usage: presentCard.example_usage,
+                    deleteShown: true,
+                    cardId: presentCard._id
                 };
-                console.log(config);
 
                 let cardRef = this.peek.open(CardDisplayDialogComponent, config);
             }

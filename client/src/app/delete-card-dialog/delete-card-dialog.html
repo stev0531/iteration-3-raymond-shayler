@@ -1,0 +1,23 @@
+<mat-dialog-content class="pop-in-card-entire" id="pop-in-card">
+    <mat-card-content>
+        <span class="Changes">
+            <h2 class="Description">Are you sure you want to delete "{{cardWord}}"?
+        </h2>
+        </span>
+        <mat-divider>
+        </mat-divider>
+        <p>This version of SAGE uses a shared collection of cards across multiple classrooms.<br><br>
+            Some of these cards may have been created by other teachers.<br></p>
+        <h4>Please verify that you are the owner of this card before deleting it!</h4>
+    </mat-card-content>
+    <mat-divider>
+        <div class="button-container">
+            <button color="accent" class="round-button" id="delete-button"
+                    mat-raised-button (click)="deleteCard()"[routerLink]="['/card-list']"> Delete Card
+            </button>
+            <button color="warn"  class="round-button" id="cancel-button"
+                    mat-raised-button (click)="closeDialog()">Cancel
+            </button>
+        </div>
+    </mat-divider>
+</mat-dialog-content>
