@@ -117,11 +117,12 @@ describe('deck-page', () => {
     });
 
     it('should press the trash button, then delete, and be taken to the deck list page which does not contain the deleted deck', () =>{
-    page.clickButton('delete');
-    page.clickButton('delete-button');
-    deckListPage = new DeckListPage;
+        page.navigateTo('59de8a1f012e92ce86a57177');
+        page.clickButton('delete');
+        page.clickButton('delete-button');
+        deckListPage = new DeckListPage;
 
-    expect((deckListPage.getAllDeckNames()).toLocaleString().includes('new-deck-name')).toEqual(false);
+        expect((deckListPage.getAllDeckNames()).toLocaleString().includes('new-deck-name')).toEqual(false);
     });
 
 });
