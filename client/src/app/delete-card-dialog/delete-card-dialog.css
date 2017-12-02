@@ -20,10 +20,11 @@
     margin-top: 2%;
 }
 
-#deck-page-button{
+#cancel-button{
+    margin-right: 5%;
     float: right;
 }
 
-#cancel-button{
+#delete-button{
     margin-left: 5%;
 }
