@@ -142,6 +142,9 @@ export class CardListComponent implements OnInit {
     constructor(public CardListService: CardListService, public DeckService: DeckService, public peek: MdDialog) {
         this.mode = "View";
         this.selectedCards = [];
+        peek.afterAllClosed.subscribe(() => {
+          this.refreshPage();
+        })
     }
 
 
@@ -165,6 +168,14 @@ export class CardListComponent implements OnInit {
         this.mode = "View";
         this.selectedCards.length = 0;
         this.selectedButton = 'Select';
+    }
+
+    refreshPage() {
+        this.CardListService.getSimpleCards().subscribe(
+            cards => {
+                this.cards = cards;
+            }
+        )
     }
 
     ngOnInit(): void {
