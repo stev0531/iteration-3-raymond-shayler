@@ -1,6 +1,6 @@
 <mat-dialog-content (click)="closeDialog()" class="pop-in-card-entire" id="pop-in-card">
     <mat-dialog-actions *ngIf="deleteShown" id="button-controls">
-        <button mat-icon-button id="delete-card" (click)="deleteCard()" mat-tooltip="Permanently delete card" matTooltipPosition="right">
+        <button mat-icon-button id="trash-button" (click)="deleteCard()" mat-tooltip="Permanently delete card" matTooltipPosition="right">
             <mat-icon class="md-24" aria-label="Delete Card">delete</mat-icon>
         </button>
     </mat-dialog-actions>

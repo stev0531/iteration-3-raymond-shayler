@@ -20,11 +20,11 @@
     margin-top: 2%;
 }
 
-#cancel-button{
+#cancel-delete-button{
     margin-right: 5%;
     float: right;
 }
 
-#delete-button{
+#delete-card-button{
     margin-left: 5%;
 }
