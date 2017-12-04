@@ -174,14 +174,28 @@ export class CardListComponent implements OnInit {
         this.CardListService.getSimpleCards().subscribe(
             cards => {
                 this.cards = cards;
+                this.sortCards();
             }
         )
+    }
+
+    sortCards() {
+        this.cards.sort((n1, n2) => {
+           if (n1.word.toLowerCase() > n2.word.toLowerCase()){
+               return 1;
+           }
+           if (n1.word.toLowerCase() < n2.word.toLowerCase()){
+               return -1;
+           }
+           return 0;
+        });
     }
 
     ngOnInit(): void {
         this.CardListService.getSimpleCards().subscribe(
             cards => {
                 this.cards = cards;
+                this.sortCards();
             },
             err => {
                 console.log(err);
