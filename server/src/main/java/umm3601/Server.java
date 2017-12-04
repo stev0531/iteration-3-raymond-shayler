@@ -80,6 +80,7 @@ public class Server {
 
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
+        authController.setAuth(auth);
 //
 //        options("/*", (request, response) -> {
 //
