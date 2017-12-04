@@ -12,12 +12,13 @@ import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
 import umm3601.Authentication.Cookie;
 import umm3601.Authentication.UnauthorizedUserException;
-import umm3601.classroom.ClassroomController;
-import umm3601.user.*;
+
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -36,11 +37,9 @@ public class Server {
 
         DeckController deckController = new DeckController(database);
 
-        UserController userController = new UserController(database);
 
         AuthController authController = new AuthController();
 
-        ClassroomController classroomController = new ClassroomController(database);
 
         //Configure Spark
         //call to port moved down
@@ -114,10 +113,10 @@ public class Server {
             //Handle authentication
 
             if (USEAUTH) {
-                if (!(request.requestMethod().equals("OPTIONS"))){
+                if (!(request.requestMethod().equals("OPTIONS"))) {
                     //the above lets preflight requests clear the API
                     System.out.println("New request: " + request.pathInfo());
-                    if (!("/".equals(request.pathInfo()) || "/api/authorize".equals(request.pathInfo()) || "/callback".equals(request.pathInfo()))) {
+                    if (needsAuth(request.pathInfo())) {
                         System.out.println("Checking Auth");
                         String cookie = request.cookie("ddg");
                         System.out.println(cookie);
@@ -131,7 +130,7 @@ public class Server {
                         }
                     }
                 }
-            } else{
+            } else {
                 System.out.println("AUTH DISABLED");
             }
 
@@ -158,17 +157,34 @@ public class Server {
         //get("/", clientRoute);
         redirect.get("/", publicURL);
 
-        get("api/authorize", (req, res) -> {
-            String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
-            String originatingURL;
-            if (originatingURLs == null) {
-                originatingURL = publicURL;
-            } else {
-                originatingURL = originatingURLs[0];
-            }
-            res.redirect(auth.getAuthURL(originatingURL));
-            // I think we could return an arbitrary value since the redirect prevents this from being used
-            return res;
+        /// Deck and Card Endpoints ///////////////////////////
+        /////////////////////////////////////////////
+        path("api/", ()->{
+            get("cards/:id", cardController::getCard);
+            get("cards", cardController::getCards);
+            get("decks", deckController::getDecks);
+            post("decks/add", deckController::addNewDeck);
+            get("decks/:id", deckController::getDeck);
+            post("decks/updateName", deckController::updateName);
+            post("cards/add", cardController::addNewCard);
+            post("addMany", cardController::addCardsToDeck);
+            post("deleteMany", cardController::deleteCardsFromDeck);
+            get("simple-cards", cardController::getSimpleCards);
+            get("simple-decks", deckController::getSimpleDecks);
+
+            get("checkAuthorization", authController::checkAuthorization);
+            get("authorize", (req, res) -> {
+                String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
+                String originatingURL;
+                if (originatingURLs == null) {
+                    originatingURL = publicURL;
+                } else {
+                    originatingURL = originatingURLs[0];
+                }
+                res.redirect(auth.getAuthURL(originatingURL));
+                // I think we could return an arbitrary value since the redirect prevents this from being used
+                return res;
+            });
         });
 
 
@@ -187,13 +203,8 @@ public class Server {
         post("api/cards/deleteCard", cardController::deleteCard);
         get("api/simple-cards", cardController::getSimpleCards);
         get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/classrooms", classroomController::getClassrooms);
-        get("api/classroom:id", classroomController::getClassroom);
-        get("api/users", userController::getUsers);
-        get("api/user:id", userController::getUser);
         get("api/deleteMany", cardController::deleteCardsFromDeck);
         get("api/decks/updateName", deckController::updateName);
-
         get("api/checkAuthorization", authController::checkAuthorization);
 
 
@@ -231,7 +242,8 @@ public class Server {
                 if (null != originatingURL) {
                     Cookie c = auth.getCookie();
                     res.cookie(c.name, c.value, c.max_age);
-                    System.out.println("Innermost Auth script was run");
+                    System.out.println("Innermost Auth script was run, redirecting to: ");
+                    System.out.print(originatingURL + "\n");
                     res.redirect(originatingURL);
                     System.out.println("good");
                     return ""; // not reached
@@ -256,7 +268,7 @@ public class Server {
         //here is the part where, if the request has not matched anything so far, it should match
         //here and be served the angular bundle.
 
-        get("/*", (req, res) ->{
+        get("/*", (req, res) -> {
             res.redirect("/");
             System.out.println("Bouncing back homepage");
             return res;
@@ -277,20 +289,34 @@ public class Server {
             res.status(404);
             return "Sorry, we couldn't find that!";
         });
+    }
 
+    public static boolean needsAuth(String req) {
+        Set<String> sensitiveURLs = new HashSet<>();
 
+        sensitiveURLs.add("/api/decks/add");
+        sensitiveURLs.add("/api/decks/updateName");
+        sensitiveURLs.add("/api/cards/add");
+        sensitiveURLs.add("/api/addMany");
+        sensitiveURLs.add("/api/deleteMany");
+        if (sensitiveURLs.contains(req)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
     ///moved in here because Java is being weird.
     private class Conf {
-        public String clientId;
-        public String clientSecret;
-        public String publicURL;
-        public String callbackURL;
-        public boolean useAuth;
-        public int serverPort;
+        String clientId;
+        String clientSecret;
+        String publicURL;
+        String callbackURL;
+        boolean useAuth;
+        int serverPort;
     }
+
 
     // Enable GZIP for all responses
     private static void addGzipHeader(Request request, Response response) {

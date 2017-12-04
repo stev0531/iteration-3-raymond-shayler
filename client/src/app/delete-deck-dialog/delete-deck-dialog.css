@@ -25,5 +25,10 @@
 }
 
 #cancel-button{
+    margin-right: 5%;
+    float: right;
+}
+
+#delete-button{
     margin-left: 5%;
 }

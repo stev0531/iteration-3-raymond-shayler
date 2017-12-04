@@ -18,6 +18,7 @@ install:
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
 
 before_script:
+  - chmod 4755 /opt/google/chrome/chrome-sandbox
   - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log --fork
   - npm install -g @angular/cli
