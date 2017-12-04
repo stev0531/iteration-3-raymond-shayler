@@ -138,5 +138,19 @@
         "antonym": "bright, luminous",
         "general_sense": "being without light or without much light",
         "example_usage": "in the midst of those tenebrous days Thomas Paine penned the immortal words These are the times that try men's souls"
+    },
+    {
+        "_id": {
+            "$oid": "beda4cdc2a6f65275f93966f"
+        },
+        "word": "Abominable",
+        "synonym": "Contemptible",
+        "antonym": "Charming",
+        "general_sense": "Causing moral revulsion.",
+        "example_usage": "The treatment of industrial era workers was abominable."
     }
+
+
+
+
 ]

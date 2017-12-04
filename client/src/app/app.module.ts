@@ -62,7 +62,8 @@ import {CardService} from "./card/card.service";
         ResultsComponent,
         StartScreenComponent,
         PlayComponent,
-        DeleteDeckDialogComponent
+        DeleteDeckDialogComponent,
+        DeleteCardDialogComponent
     ],
     entryComponents: [
         NewCardDialogComponent,
@@ -73,6 +74,7 @@ import {CardService} from "./card/card.service";
         DeckChangesDialogComponent,
         CardComponent,
         DeleteDeckDialogComponent,
+        DeleteCardDialogComponent
     ],
     providers: [
         CardListService,

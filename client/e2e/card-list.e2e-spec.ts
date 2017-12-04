@@ -140,17 +140,17 @@ describe('card-list-page', () => {
         browser.sleep(500);
         page.clickElement('cancel-delete-button');
 
-        expect(page.getElementById('Cloze').count()).toBe(1)
+        expect(page.getElementById('Abominable').count()).toBe(1)
     });
 
     it("Should click on a card, press the trash icon, press delete, and the card will not appear on the page", () => {
-        page.clickElement('Cloze');
+        page.clickElement('Abominable');
         browser.sleep(500);
         page.clickElement('trash-button');
         browser.sleep(500);
         page.clickElement('delete-card-button');
         browser.sleep(3000);
-        expect(page.getElementById('Cloze').count()).toBe(0);
+        expect(page.getElementById('Abominable').count()).toBe(0);
     });
 
 });
