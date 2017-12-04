@@ -38,6 +38,7 @@ import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {AuthService} from "./auth/auth.service";
 import { ReactiveFormsModule} from "@angular/forms";
+import {SelectColorComponent} from "./select-color/select-color.component";
 
 @NgModule({
 
@@ -71,6 +72,7 @@ import { ReactiveFormsModule} from "@angular/forms";
         PlayComponent,
         UserListComponent,
         ProfilePageComponent,
+        SelectColorComponent
     ],
     entryComponents: [
         NewCardDialogComponent,

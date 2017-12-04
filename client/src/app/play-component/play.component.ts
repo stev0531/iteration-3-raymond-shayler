@@ -47,6 +47,7 @@ export class PlayComponent implements OnInit {
             this.playerPoints[this.player] += this.cardStates[pageNumber].cardPoints;
             this.player++;
 
+
             if(this.player >= this.playerPoints.length){
                 this.player = 0;
             }

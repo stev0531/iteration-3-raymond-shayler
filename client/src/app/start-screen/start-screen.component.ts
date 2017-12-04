@@ -33,10 +33,6 @@ export class StartScreenComponent implements OnInit {
         this.numOfplayers = num;
     }
 
-    selectColor(colour) {
-        this.color = colour;
-    }
-
 
     // sizeOfSelectedDeck() {
     //     console.log("In sizeOfSelectedDeck");

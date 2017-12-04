@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Player 1</mat-card-title>
+
+
+</mat-card>
+
+<div class="wrapper">
+    <simple-card
+        *ngFor="let color of colors"
+        (click)="select(color)"
+        [ngClass]="{'red': color == 'red'}"
+        [ngClass]="{'orange': color == 'orange'}"
+        [ngClass]="{'yellow': color == 'yellow'}"
+        [ngClass]="{'green': color == 'green'}"
+        [ngClass]="{'blue': color == 'blue'}"
+        [ngClass]="{'purple': color == 'purple'}"
+    ></simple-card>
+</div>
