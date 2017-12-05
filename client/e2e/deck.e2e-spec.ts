@@ -1,8 +1,10 @@
 import {DeckPage} from "./deck.po";
 import {browser, by, protractor} from 'protractor';
+import {DeckListPage} from "./deck-list.po";
 
 describe('deck-page', () => {
     let page: DeckPage;
+    let deckListPage: DeckListPage;
 
     beforeEach(() => {
         page = new DeckPage();
@@ -12,6 +14,14 @@ describe('deck-page', () => {
         page.navigateTo('59de8a1f012e92ce86a57176');
         browser.sleep(1000);
         expect(page.getDeckHeader()).toEqual("test deck 1");
+    });
+
+    it('should have three buttons', () => {
+        page.navigateTo('59de8a1f012e92ce86a57176');
+
+        expect(page.getElementById("edit")).toBeTruthy();
+        expect(page.getElementById("delete")).toBeTruthy();
+        expect(page.getElementById("cardDialog")).toBeTruthy();
     });
 
     it('should have a synonym, antonym, general usage, and example usage for each card.', () => {
@@ -96,6 +106,23 @@ describe('deck-page', () => {
         page.changeName('new-deck-name', true);
 
         expect(page.getDeckHeader()).toEqual('new-deck-name');
+    });
+
+    it('should press the trash button and then press cancel, leaving the page unchanged', ()=>{
+        page.navigateTo('59de8a1f012e92ce86a57177');
+        page.clickButton('delete');
+        page.clickButton('cancel-button');
+
+        expect(page.getDeckHeader()).toEqual('new-deck-name');
+    });
+
+    it('should press the trash button, then delete, and be taken to the deck list page which does not contain the deleted deck', () =>{
+        page.navigateTo('59de8a1f012e92ce86a57177');
+        page.clickButton('delete');
+        page.clickButton('delete-button');
+        deckListPage = new DeckListPage;
+
+        expect((deckListPage.getAllDeckNames()).toLocaleString().includes('new-deck-name')).toEqual(false);
     });
 
 });

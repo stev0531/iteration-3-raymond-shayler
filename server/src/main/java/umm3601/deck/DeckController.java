@@ -216,4 +216,35 @@ public class DeckController {
         deckCollection.updateOne(new Document("_id", new ObjectId(deckId)), new Document("$set", new Document("name", newName)));
         return true;
     }
+
+    public Object deleteDeck(Request req, Response res) {
+        System.out.println("This should print");
+
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
+        try {
+            if (o.getClass().equals(BasicDBObject.class)) {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+                    String deckID = dbO.getString("id");
+
+                    return deleteDeck(deckID);
+                } catch (NullPointerException e) {
+                    System.err.println("A value was malformed or omitted, deck update request failed.");
+                    return false;
+                }
+            } else {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return false;
+            }
+        } catch (RuntimeException ree) {
+            ree.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteDeck(String deckId){
+        deckCollection.deleteOne(new Document("_id", new ObjectId(deckId)));
+        return true;
+    }
 }

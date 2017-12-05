@@ -8,8 +8,18 @@ button {
     font-size: 16pt;
 }
 
+#title {
+    display: inline-block;
+    padding-top: 6px;
+}
+
+#help {
+    display: inline-block;
+    float: right;
+}
+
 .dummy-play-button {
-    opacity:0.3;
+    opacity: 0.3;
 }
 
 .hide {

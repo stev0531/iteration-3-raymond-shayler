@@ -1,6 +1,11 @@
 
 <mat-card>
-    <mat-card-title id="start-title">Make Your Selections!</mat-card-title>
+    <mat-card-title id="start-title">
+        <span id="title">Make Your Selections!</span>
+        <button id="help" mat-button [routerLink]="['/help']">
+            <i class="material-icons">help</i>
+        </button>
+    </mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content class="selections">
 
