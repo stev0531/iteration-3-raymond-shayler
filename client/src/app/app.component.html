@@ -8,7 +8,8 @@
             <a mat-list-item [routerLink]="['/start']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>play_arrow</mat-icon>
                 Play</a>
-            <div *ngIf="{{showTeachOptions}}">
+
+            <div *ngIf="showTeachOptions">
                 <a mat-list-item [routerLink]="['/decks']" (click)="layout.close()" routerLinkActive="nav-active">
                     <mat-icon>view_list</mat-icon>
                     Decks</a>
