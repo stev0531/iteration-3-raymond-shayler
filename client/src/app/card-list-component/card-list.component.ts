@@ -70,8 +70,9 @@ export class CardListComponent implements OnInit {
                     Antonym: presentCard.antonym,
                     General_sense: presentCard.general_sense,
                     Example_usage: presentCard.example_usage,
+                    deleteShown: true,
+                    cardId: presentCard._id
                 };
-                console.log(config);
 
                 let cardRef = this.peek.open(CardDisplayDialogComponent, config);
             }
@@ -141,6 +142,9 @@ export class CardListComponent implements OnInit {
     constructor(public CardListService: CardListService, public DeckService: DeckService, public peek: MdDialog) {
         this.mode = "View";
         this.selectedCards = [];
+        peek.afterAllClosed.subscribe(() => {
+          this.refreshPage();
+        })
     }
 
 
@@ -166,10 +170,32 @@ export class CardListComponent implements OnInit {
         this.selectedButton = 'Select';
     }
 
+    refreshPage() {
+        this.CardListService.getSimpleCards().subscribe(
+            cards => {
+                this.cards = cards;
+                this.sortCards();
+            }
+        )
+    }
+
+    sortCards() {
+        this.cards.sort((n1, n2) => {
+           if (n1.word.toLowerCase() > n2.word.toLowerCase()){
+               return 1;
+           }
+           if (n1.word.toLowerCase() < n2.word.toLowerCase()){
+               return -1;
+           }
+           return 0;
+        });
+    }
+
     ngOnInit(): void {
         this.CardListService.getSimpleCards().subscribe(
             cards => {
                 this.cards = cards;
+                this.sortCards();
             },
             err => {
                 console.log(err);

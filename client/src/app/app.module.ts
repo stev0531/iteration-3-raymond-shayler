@@ -32,6 +32,8 @@ import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {AuthService} from "./auth/auth.service";
 import {DeleteDeckDialogComponent} from "./delete-deck-dialog/delete-deck-dialog";
+import {DeleteCardDialogComponent} from "./delete-card-dialog/delete-card-dialog";
+import {CardService} from "./card/card.service";
 
 @NgModule({
 
@@ -60,7 +62,8 @@ import {DeleteDeckDialogComponent} from "./delete-deck-dialog/delete-deck-dialog
         ResultsComponent,
         StartScreenComponent,
         PlayComponent,
-        DeleteDeckDialogComponent
+        DeleteDeckDialogComponent,
+        DeleteCardDialogComponent
     ],
     entryComponents: [
         NewCardDialogComponent,
@@ -70,11 +73,13 @@ import {DeleteDeckDialogComponent} from "./delete-deck-dialog/delete-deck-dialog
         CardComponent,
         DeckChangesDialogComponent,
         CardComponent,
-        DeleteDeckDialogComponent
+        DeleteDeckDialogComponent,
+        DeleteCardDialogComponent
     ],
     providers: [
         CardListService,
         DeckService,
+        CardService,
         AuthService,
         MdDialog,
         MatDialogClose,

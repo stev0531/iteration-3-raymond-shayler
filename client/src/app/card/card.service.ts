@@ -13,6 +13,11 @@ export class CardService {
     public cards: Card[];
     private cardUrl: string = environment.API_URL + "cards";
 
+    public deleteCard(id: object){
+        let response = this.http.post(this.cardUrl + "/deleteCard", {id: id}, {withCredentials: true}).map(res => res.json());
+        return response;
+    }
+
     public getCards(): void {
         this.http.request(this.cardUrl, {withCredentials: true}).map(res => res.json()).subscribe(
             cardsres => {

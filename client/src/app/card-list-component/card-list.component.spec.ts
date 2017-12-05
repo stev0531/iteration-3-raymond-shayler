@@ -181,4 +181,11 @@ describe('CardListComponent', () => {
         component.select(component.cards[0]);
         expect(component.selectedCards.length).toBe(0);
     });
+
+    it('Sorts the cards from the database alphabetically', () => {
+        for(var i = 0; i < component.cards.length - 1; i++) {
+            expect(component.cards[i].word <= component.cards[i + 1].word)
+        }
+
+    })
 });

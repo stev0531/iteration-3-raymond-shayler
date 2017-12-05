@@ -1,0 +1,30 @@
+.pop-in-card-desc {
+    font-weight: bold;
+}
+
+.pop-in-card-word {
+    white-space: pre;
+    text-align: center;
+    font-size: 15pt;
+}
+
+.round-button {
+    border-radius: 100px;
+    border-top-left-radius: 0px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+}
+
+.button-container{
+    margin-top: 2%;
+}
+
+#cancel-delete-button{
+    margin-right: 5%;
+    float: right;
+}
+
+#delete-card-button{
+    margin-left: 5%;
+}

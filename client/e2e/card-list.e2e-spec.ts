@@ -1,6 +1,7 @@
 import {CardListPage} from "./card-list.po";
 import {DeckPage} from "./deck.po";
 import {browser, by} from 'protractor';
+import {isNullOrUndefined, isUndefined} from "util";
 
 
 // Note that these tests seem prone to failure if they have been run multiple times.
@@ -130,4 +131,26 @@ describe('card-list-page', () => {
 
         expect(deckPage.getAllCards().count()).toEqual(6);
     });
+
+    it("Should click on a card, press the trash icon, and press cancel, leaving the page unchanged", () => {
+
+        page.clickElement('Cloze');
+        browser.sleep(500);
+        page.clickElement('trash-button')
+        browser.sleep(500);
+        page.clickElement('cancel-delete-button');
+
+        expect(page.getElementById('Abominable').count()).toBe(1)
+    });
+
+    it("Should click on a card, press the trash icon, press delete, and the card will not appear on the page", () => {
+        page.clickElement('Abominable');
+        browser.sleep(500);
+        page.clickElement('trash-button');
+        browser.sleep(500);
+        page.clickElement('delete-card-button');
+        browser.sleep(3000);
+        expect(page.getElementById('Abominable').count()).toBe(0);
+    });
+
 });
