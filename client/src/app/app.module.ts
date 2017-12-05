@@ -23,6 +23,7 @@ import {MdDialog, MatDialogClose} from "@angular/material";
 import {NewCardDialogComponent} from "./new-card-dialog/new-card-dialog.component";
 import {NewDeckDialogComponent} from "./new-deck-dialog/new-deck-dialog.component";
 import {HelpComponent} from "./help-component/help.component";
+import {TeacherZoneComponent} from "./teacher-zone/teacher-zone.component";
 import {CardListComponent} from "./card-list-component/card-list.component"
 import {CardListService} from "./card-list-component/card-list.service";
 import {SimpleCardComponent} from "./simple-card-component/simple-card.component";
