@@ -36,6 +36,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class CardControllerSpec {
@@ -251,7 +252,6 @@ public class CardControllerSpec {
         List<String> words = getStringsFromBsonArray(docs, "word");
         List<String> expectedWords = Arrays.asList("Aesthetic reading", "Alliteration","Catalyst", "Cool", "Pletora", "Verisimilitude");
         assertEquals("Words should match", expectedWords, words);
-        // assertEquals("words should match", Arrays.asList("Aesthetic reading", "Alliteration", "Pletora", "Cool"),cards.stream().map(x -> x.getString("word")).collect(Collectors.toList()));
     }
 
     @Test
@@ -368,6 +368,17 @@ public class CardControllerSpec {
         Document deckToAdd = Document.parse(jsonResult);
         ArrayList<Document> cardsToAdd = deckToAdd.get("cards", ArrayList.class);
         assertEquals("Should be 1 card in the deck", 1, cardsToAdd.size());
+    }
+
+    @Test
+    public void tryPermanentlyDeletingCard() {
+        String cardId = "59dac7b147c9429bff9ba9b3";
+        cardController.deleteCard(cardId);
+
+        Map<String, String[]> emptyMap = new HashMap<>();
+        String jsonResult = cardController.getCards(emptyMap);
+
+        assertTrue("The list of cards does not contain Aesthetic Reading", !(jsonResult.contains("Aesthetic reading")));
     }
 
 }

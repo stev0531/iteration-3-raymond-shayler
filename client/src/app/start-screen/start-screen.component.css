@@ -1,19 +1,25 @@
-button {
+.play-button {
     margin: 5px;
-    border-radius: 100px;
-    border-style: solid;
-    border-width: 1.5px;
-    border-color: black;
+    border: 1.5px solid black;
+    border-radius: 0px 100px 100px 100px;
     width: 60%;
     height: 50px;
     max-width: 250px;
     font-size: 16pt;
 }
 
+#title {
+    display: inline-block;
+    padding-top: 6px;
+}
 
+#help {
+    display: inline-block;
+    float: right;
+}
 
 .dummy-play-button {
-    opacity:0.3;
+    opacity: 0.3;
 }
 
 .hide {

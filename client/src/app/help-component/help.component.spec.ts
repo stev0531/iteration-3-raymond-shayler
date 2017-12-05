@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HelpComponent} from './help.component';
 import {SharedModule} from "../shared.module";
+import {RouterTestingModule} from "@angular/router/testing";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
@@ -15,7 +16,7 @@ describe('HelpComponent', () => {
     beforeEach(async(() => {
 
         TestBed.configureTestingModule({
-            imports: [SharedModule],
+            imports: [SharedModule, RouterTestingModule],
             declarations: [HelpComponent], providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
 
         })

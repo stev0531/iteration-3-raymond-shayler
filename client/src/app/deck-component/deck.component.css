@@ -9,11 +9,8 @@
 }
 
 .round-button {
-    border-radius: 100px;
-    border-top-left-radius: 0px;
-    border-style: solid;
-    border-width: 1.5px;
-    border-color: black;
+    border: 1.5px solid black;
+    border-radius: 0px 100px 100px 100px;
     margin-left: 20px;
 }
 
@@ -28,8 +25,18 @@
 
 #name-form {
     display: inline-block;
+    vertical-align: middle;
 }
 
-#edit-icon {
-    padding-bottom: 10px;
+.icon-buttons{
+    display: inline-block;
 }
+
+#edit {
+    margin-bottom:8%;
+}
+
+#delete{
+    margin-bottom:8%;
+}
+

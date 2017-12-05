@@ -323,4 +323,37 @@ public class CardController {
         return JSON.serialize(cards);
     }
 
+    public Object deleteCard(Request req, Response res) {
+        System.out.println("This should print");
+
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
+        try {
+            if (o.getClass().equals(BasicDBObject.class)) {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+                    String cardID = dbO.getString("id");
+
+                    return deleteCard(cardID);
+                } catch (NullPointerException e) {
+                    System.err.println("A value was malformed or omitted, deck update request failed.");
+                    return false;
+                }
+            } else {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return false;
+            }
+        } catch (RuntimeException ree) {
+            ree.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteCard(String cardId){
+        System.out.print(cardId + "this looks null");
+        System.err.print(cardId);
+        cardCollection.deleteOne(new Document("_id", new ObjectId(cardId)));
+        return true;
+    }
+
 }

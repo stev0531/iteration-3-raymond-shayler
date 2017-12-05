@@ -170,10 +170,10 @@ public class DeckControllerSpec {
     }
 
     public List<String> getStringsFromBsonArray(BsonArray docs, String field) {
-            return docs.stream()
-                .map(x -> x.asDocument().getString(field).getValue())
-                .sorted()
-                .collect(Collectors.toList());
+        return docs.stream()
+            .map(x -> x.asDocument().getString(field).getValue())
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class DeckControllerSpec {
     @Test
     public void getDecksbyName() {
         Map<String, String[]> argMap = new HashMap<>();
-        argMap.put("name", new String[] { "test deck 1" });
+        argMap.put("name", new String[]{"test deck 1"});
         String jsonResult = deckController.getDecks(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
@@ -212,7 +212,7 @@ public class DeckControllerSpec {
         Document testDeck = Document.parse(jsonResult);
         ArrayList<Document> cards = testDeck.get("cards", ArrayList.class);
         assertEquals("Should be 3 cards", 3, cards.size());
-        assertEquals("words should match", Arrays.asList("Aesthetic reading", "Alliteration", "Plethora"),cards.stream().map(x -> x.getString("word")).collect(Collectors.toList()));
+        assertEquals("words should match", Arrays.asList("Aesthetic reading", "Alliteration", "Plethora"), cards.stream().map(x -> x.getString("word")).collect(Collectors.toList()));
         assertEquals("Cards should match", testCards, cards);
     }
 
@@ -265,11 +265,23 @@ public class DeckControllerSpec {
     }
 
     @Test
-    public void checkDeckNamesCanBeUpdated(){
+    public void checkDeckNamesCanBeUpdated() {
         deckController.updateName("Shayler", testDeckId.toString());
 
         String jsonResult = deckController.getDeck(testDeckId.toString());
         assertTrue("Should be 1 card in the deck", jsonResult.contains("Shayler"));
     }
 
+    @Test
+    public void deleteADeck() {
+        deckController.deleteDeck(testDeckId.toString());
+
+        Map<String, String[]> emptyMap = new HashMap<>();
+        String jsonResult = deckController.getDecks(emptyMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+        assertEquals("Should be 2 decks", 2, docs.size());
+        List<String> names = getStringsFromBsonArray(docs, "name");
+        List<String> expectedNames = Arrays.asList("test deck 1", "test deck 2");
+        assertEquals("Names should match", expectedNames, names);
+    }
 }
