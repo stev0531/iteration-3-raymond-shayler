@@ -1,30 +1,8 @@
+
 <mat-card>
-    <mat-card-title>SAGE Vocabulary: Teacher's Guide</mat-card-title>
+    <mat-card-title class="faq-title">SAGE Vocabulary: Teacher's Guide</mat-card-title>
     <mat-card-content>
-
-        <mat-expansion-panel class="faq-entry">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    How to Play
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ul class="content-rules">
-                <li>It is played with two people. One person is shown a card which has a word on it and will try to
-                    use
-                </li>
-                a sentence to guess what that word means.
-                <li>The other person can decide if they are correct or not, and can give them hints.</li>
-                <li>If you can guess the word correctly without needing any hints, you'll earn five points!
-                <li>If you are playing with your partner on one screen, your partner can press the peek button to see
-                    all of the hints without changing your points.
-                </li>
-
-
-                <li>To start a game, press play from the homepage, choose your deck, and press play!</li>
-            </ul>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel class="faq-entry">
+        <mat-expansion-panel class="faq-entry section-signIn">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     How to sign in
@@ -37,7 +15,7 @@
             </ul>
         </mat-expansion-panel>
 
-        <mat-expansion-panel class="faq-entry">
+        <mat-expansion-panel class="faq-entry section-createDecks">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     How to create decks
@@ -51,7 +29,7 @@
                     page and clicking into the desired deck.
             </ul>
         </mat-expansion-panel>
-        <mat-expansion-panel class="faq-entry">
+        <mat-expansion-panel class="faq-entry section-addCards">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     How to add cards to you deck
@@ -69,7 +47,7 @@
             </ul>
         </mat-expansion-panel>
 
-        <mat-expansion-panel  class="faq-entry">
+        <mat-expansion-panel  class="faq-entry section-createCards">
             <mat-expansion-panel-header>
                 How to create cards:
             </mat-expansion-panel-header>
@@ -81,15 +59,15 @@
             </ul>
         </mat-expansion-panel>
 
-        <mat-expansion-panel class="faq-entry">
+        <mat-expansion-panel class="faq-entry section-addEmail">
             <mat-expansion-panel-header>How to add another authorized email account?</mat-expansion-panel-header>
             <ul>
             <li>This feature does not currently exist. Please contact the developers who created the SAGE system if you
-                need
-            <li>more information at 1800-nota-number</li>
+                need assistance.</li>
+                <li>you may also consult the Setup Guide</li>
             </ul>
         </mat-expansion-panel>
-        <mat-expansion-panel class="faq-entry">
+        <mat-expansion-panel class="faq-entry section-signInBroken">
             <mat-expansion-panel-header>I signed in, but nothing is working!</mat-expansion-panel-header>
             <ul>
 
@@ -103,8 +81,8 @@
             </li>
             </ul>
         </mat-expansion-panel>
-        <mat-expansion-panel class="faq-entry">
-            <mat-expansion-panel-header>I am teacher, but I don't have access to any of the teacher features</mat-expansion-panel-header>
+        <mat-expansion-panel class="faq-entry section-noAccess">
+            <mat-expansion-panel-header>I am a teacher, but I don't have access to any of the teacher features</mat-expansion-panel-header>
             <ul>
 
             <li>You must sign in with an Authorized SAGE account before you can access teacher specific sections of the
@@ -115,5 +93,8 @@
             </ul>
         </mat-expansion-panel>
     </mat-card-content>
+    <mat-card-actions>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </mat-card-actions>
 </mat-card>
 
