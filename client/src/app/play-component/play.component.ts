@@ -78,7 +78,6 @@ export class PlayComponent implements OnInit {
             General_sense: presentCard.general_sense,
             Example_usage: presentCard.example_usage
         };
-        console.log(config);
 
         let cardRef = this.peek.open(CardDisplayDialogComponent, config);
     };
@@ -90,7 +89,6 @@ export class PlayComponent implements OnInit {
             points2: this.points2,
             deck: this.deck
         };
-        console.log(config);
 
         let cardRef = this.results.open(ResultsComponent, config);
     };

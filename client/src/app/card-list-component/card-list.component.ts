@@ -34,7 +34,6 @@ export class CardListComponent implements OnInit {
 
     selectDeck(deck) {
         this.selectedDeck = deck;
-        console.log(this.selectedDeck);
     }
 
     select(card) {
@@ -49,7 +48,6 @@ export class CardListComponent implements OnInit {
                 this.selectedCards.push(card);
             }
         }
-        console.log(this.selectedCards.length);
     }
 
     clearSelected(card) {
@@ -58,12 +56,10 @@ export class CardListComponent implements OnInit {
 
     public openCardDisplay(card) {
         let config = new MatDialogConfig();
-        // let presentCard = card;
         let presentCard: Card = card;
         this.CardListService.getCard(card._id["$oid"]).subscribe(
             newCard => {
-                presentCard = newCard
-                console.log(presentCard);
+                presentCard = newCard;
                 config.data = {
                     Word: presentCard.word,
                     Synonym: presentCard.synonym,
@@ -73,7 +69,6 @@ export class CardListComponent implements OnInit {
                     deleteShown: true,
                     cardId: presentCard._id
                 };
-
                 let cardRef = this.peek.open(CardDisplayDialogComponent, config);
             }
         );
@@ -95,23 +90,11 @@ export class CardListComponent implements OnInit {
             cards: cards,
             typeOfChange: changeType
         };
-        console.log(config);
         let cardRef = this.peek.open(DeckChangesDialogComponent, config);
         this.cardRef = cardRef;
             cardRef.afterClosed().subscribe(result => {
-            // this.selectedCards.length = 0;
-            // this.selectedButton = "Select";
         });
     }
-
-
-    //This method is written for testing purposes
-    public closeDialog(cardRef){
-        cardRef.closeDialog();
-        this.selectedCards.length = 0;
-    }
-
-
 
     public modeHandler() {
         if (this.selectedButton == null) {

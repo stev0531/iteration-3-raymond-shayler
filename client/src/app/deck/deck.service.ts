@@ -42,14 +42,11 @@ export class DeckService {
             general_sense: general,
             example_usage: example
         };
-        console.log(body);
 
         return this.http.post(this.cardUrl + "/add", body, {withCredentials: true}).map(res => res.json());
     }
 
     public updateName(newName: String, id: object) {
-        console.log(newName);
-        console.log(id);
         let response = this.http.post(this.deckUrl + "/updateName", {name: newName, id: id}, {withCredentials: true}).map(res => res.json()).subscribe();
         return response;
     }
@@ -65,9 +62,7 @@ export class DeckService {
     }
 
     public getSimpleDecks(): Observable<SimpleDeck[]> {
-
         let observable: Observable<any> = this.http.request(environment.API_URL + "/simple-decks", {withCredentials: true});
-        console.log(this.deckUrl + "/simple-decks");
         return observable.map(res => res.json());
     }
 }
