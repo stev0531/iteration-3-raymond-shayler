@@ -17,13 +17,6 @@ export class SimpleCardComponent implements OnInit {
     constructor() {
     }
 
-    //This is the old constructor that caused it to break
-    /*
-    constructor(public SimpleCardService : SimpleCardService, private route: ActivatedRoute) {
-
-    }
-*/
-
 
     ngOnInit() {
         this.selected = false;

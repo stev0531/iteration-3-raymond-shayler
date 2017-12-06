@@ -13,6 +13,11 @@ import {DeleteDeckDialogComponent} from "../delete-deck-dialog/delete-deck-dialo
     styleUrls: ['./deck.component.css']
 })
 
+/*
+Depending on the value of EditMode, certain elements will be hidden at the top of the screen for editing decks.
+The newDeckTitle will be sent out to the server with the id of the deck to be updated in the database.
+ */
+
 export class DeckComponent implements OnInit {
 
     id: string;
@@ -34,6 +39,10 @@ export class DeckComponent implements OnInit {
         }
     }
 
+    /*
+    Makes a call to the server to update the Deck with the new title of the deck. Makes this change
+    locally as well so that the page does not need to be refreshed. Changes the edit mode back to default (false)
+     */
     saveEdit() {
         this.deckService.updateName(this.newDeckTitle, this.deck._id);
         this.deck.name = this.newDeckTitle;
@@ -41,6 +50,7 @@ export class DeckComponent implements OnInit {
 
     }
 
+    // Opens the delete deck dialog, which handles the service request to delete the deck.
     deleteDeck() {
         this.openDeleteDeckDialog();
     }
@@ -61,6 +71,9 @@ export class DeckComponent implements OnInit {
         });
     }
 
+    /*
+    Opens up a delete deck Dialog. Sends the deck name and id to the constructor of the dialog.
+     */
     public openDeleteDeckDialog() {
         let config = new MatDialogConfig();
         let deckName: string = this.deck.name;
@@ -74,8 +87,6 @@ export class DeckComponent implements OnInit {
         let cardRef = this.dialog.open(DeleteDeckDialogComponent, config);
         this.cardRef = cardRef;
         cardRef.afterClosed().subscribe(result => {
-            // this.selectedCards.length = 0;
-            // this.selectedButton = "Select";
         });
     }
 

@@ -4,12 +4,10 @@ import {ActivatedRoute} from "@angular/router";
 import {Deck} from "../deck/deck";
 import {CardState} from "./CardState";
 import {MdDialog} from "@angular/material";
-import {NewCardDialogComponent} from "../new-card-dialog/new-card-dialog.component";
 import {ResultsComponent} from "../results/results.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {environment} from "../../environments/environment";
-import {Card} from "../card/card";
 
 
 
@@ -18,6 +16,8 @@ import {Card} from "../card/card";
     templateUrl: './play.component.html',
     styleUrls: ['./play.component.scss'],
 })
+
+
 export class PlayComponent implements OnInit {
 
     deckAndLimit: string;
