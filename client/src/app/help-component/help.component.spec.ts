@@ -41,17 +41,17 @@ describe('HelpComponent', () => {
     });
 
     it("should have four sections", () => {
-        de = fixture.debugElement.query(By.css('.section-rules'));
+        de = fixture.debugElement.query(By.css('.section-overview'));
         el = de.nativeElement;
-        expect(el.textContent).toContain("How to Play")
+        expect(el.textContent).toContain("Overview")
 
-        de = fixture.debugElement.query(By.css('.section-hints'));
+        de = fixture.debugElement.query(By.css('.section-guesser'));
         el = de.nativeElement;
-        expect(el.textContent).toContain("Hints")
+        expect(el.textContent).toContain("Guesser")
 
-        de = fixture.debugElement.query(By.css('.section-decks'));
+        de = fixture.debugElement.query(By.css('.section-judge'));
         el = de.nativeElement;
-        expect(el.textContent).toContain("Decks")
+        expect(el.textContent).toContain("Judge")
 
         de = fixture.debugElement.query(By.css('.section-cards'));
         el = de.nativeElement;
