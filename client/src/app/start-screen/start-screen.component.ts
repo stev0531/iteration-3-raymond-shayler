@@ -21,9 +21,7 @@ export class StartScreenComponent implements OnInit {
     }
 
     selectDeck(deck) {
-        console.log("In selectDeck");
-        console.log(this.deckService.decks);
-        console.log(deck);
+
         this.deck = deck;
         console.log(this.deck);
         this.limit = new FormControl('', [Validators.min(1), Validators.max(30)]);

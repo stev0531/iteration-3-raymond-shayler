@@ -1,7 +1,7 @@
 <kb-page-slider *ngIf="this.deck && this.deck.cards" [(page)]="this.pageNumber" (pageCountChange)="pageCount = $event;"
                 [showIndicator]="false" dotColor="black">
     <mat-toolbar color="primary"></mat-toolbar>
-    <div *kbPages="let card of this.deck.cards; let ind = index"
+    <div *kbPages="let card of this.deck.cards; let ind = index;"
          [ngClass]="{'active-kb-page' : ind == this.pageNumber}">
         <div class="margin" layout="row" layout-align="center start" layout-fill>
             <div flex-gt-xs="70" flex-xs="90">
@@ -9,7 +9,7 @@
 
                 <!--<app-card [card]="card"></app-card>!-->
                 <app-card class="play-card" [card]="card" [selected]="this.getCardState(ind).selected"
-                          [showHints]="this.getCardState(ind).showHints"></app-card>
+                          [showHints]="this.getCardState(ind).showHints" [color]="this.playerColor[player]"></app-card>
 
                 <button class="round-button hint-button" mat-raised-button color="warn"
                         [disabled]="this.getCardState(ind).isComplete || !this.getCardState(ind).cardHints.length"

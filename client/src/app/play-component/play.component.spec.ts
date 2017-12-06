@@ -18,7 +18,6 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 describe('PlayComponent', () => {
     let component: PlayComponent;
-    let cardState: CardState;
     let fixture: ComponentFixture<PlayComponent>;
 
     let deckServiceStub: {

@@ -29,6 +29,7 @@ export class PlayComponent implements OnInit {
     public cardsDone: number = 0;
 
     public playerPoints = [0];
+    public playerColor = [];
     public player = 0;
 
     public points1: number = 0;
@@ -123,14 +124,21 @@ export class PlayComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.deckPlus = params['deck'];
+
             if(this.deckPlus != null){
-                let splitStr = this.deckPlus.split("_", 3);
+                let splitStr = this.deckPlus.split("_");
                 this.deckid = splitStr[0];
                 this.cardLimit = Math.abs(+splitStr[1]);
                 let numOfPlayers = Math.abs(+splitStr[2]);
-                for(let i=0; i<numOfPlayers-1;i++){
+                let i=0;
+                for(i; i<numOfPlayers-1;i++){
                     this.playerPoints.push(0);
                 }
+
+                for(i=3; i<splitStr.length; i++){
+                    this.playerColor.push(splitStr[i]);
+                }
+
             }
 
             this.deckService.getDeck(this.deckid).subscribe(

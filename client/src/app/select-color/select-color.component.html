@@ -1,18 +1,24 @@
+
 <mat-card>
-    <mat-card-title>Player 1</mat-card-title>
+    <mat-card-title class="color-select-title">Player {{player}} Select Your Color!</mat-card-title>
+
+    <div class="wrapper" *ngIf="player < numOfPlayers">
+        <mat-card class="card" id="red" (click)="select('red')"> Red</mat-card>
+        <mat-card class="card" id="orange" (click)="select('orange')">Orange</mat-card>
+        <mat-card class="card" id="yellow" (click)="select('yellow')">Yellow</mat-card>
+        <mat-card class="card" id="green" (click)="select('green')">Green</mat-card>
+        <mat-card class="card" id="blue" (click)="select('blue')">Blue</mat-card>
+        <mat-card class="card" id="purple" (click)="select('purple')">Purple</mat-card>
+    </div>
+
+    <div class="wrapper" *ngIf="player === numOfPlayers">
+        <mat-card class="card" id="red" [routerLink]="['/play', deckPlus + '_red']"> Red</mat-card>
+        <mat-card class="card" id="orange" [routerLink]="['/play', deckPlus + '_orange']">Orange</mat-card>
+        <mat-card class="card" id="yellow" [routerLink]="['/play', deckPlus + '_yellow']">Yellow</mat-card>
+        <mat-card class="card" id="green" [routerLink]="['/play', deckPlus + '_green']">Green</mat-card>
+        <mat-card class="card" id="blue" [routerLink]="['/play', deckPlus + '_blue']">Blue</mat-card>
+        <mat-card class="card" id="purple" [routerLink]="['/play', deckPlus + '_purple']">Purple</mat-card>
+    </div>
 
 
 </mat-card>
-
-<div class="wrapper">
-    <simple-card
-        *ngFor="let color of colors"
-        (click)="select(color)"
-        [ngClass]="{'red': color == 'red'}"
-        [ngClass]="{'orange': color == 'orange'}"
-        [ngClass]="{'yellow': color == 'yellow'}"
-        [ngClass]="{'green': color == 'green'}"
-        [ngClass]="{'blue': color == 'blue'}"
-        [ngClass]="{'purple': color == 'purple'}"
-    ></simple-card>
-</div>

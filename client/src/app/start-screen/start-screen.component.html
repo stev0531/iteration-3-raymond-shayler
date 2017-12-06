@@ -34,7 +34,7 @@
 
         <br><br>
         <div class="play-buttons">
-            <button mat-raised-button *ngIf="deck" class="actual-play-button play-button" color="warn" [routerLink]="['/play', setDeckUrl()]">
+            <button mat-raised-button *ngIf="deck" class="actual-play-button play-button" color="warn" [routerLink]="['/select-color', setDeckUrl()]">
                 Play
             </button>
             <button mat-raised-button color="warn" class="dummy-play-button play-button" [ngClass]="{'hide': deck != null}">

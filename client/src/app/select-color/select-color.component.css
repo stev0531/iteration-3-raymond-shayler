@@ -1,35 +1,47 @@
+body {
+    padding: 40px;
+}
+
+.card {
+    color: transparent;
+    border-radius: 3px;
+    padding: 30px;
+    margin:5px;
+    font-size: 150%;
+}
+
+
 .wrapper {
     margin-top: 5em;
     text-align: center;
     align-items: center;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    grid-template-columns: 33% 33% 33%;
     grid-template-rows: auto;
-    grid-gap: 3px;
     background-color: transparent;
     color: black;
 }
 
-.red{
+#red{
     background-color: red;
 }
 
-.orange{
+#orange{
     background-color: orange;
 }
 
-.yellow{
+#yellow{
     background-color: yellow;
 }
 
-.green{
+#green{
     background-color: green;
 }
 
-.blue{
+#blue{
     background-color: blue;
 }
 
-.purple{
+#purple{
     background-color: purple;
 }

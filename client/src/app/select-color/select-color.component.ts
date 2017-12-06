@@ -8,27 +8,30 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class SelectColorComponent implements OnInit {
 
-  public colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  public colors = ['red', 'org', 'ylw', 'grn', 'blu', 'pur'];
   public color: string;
   public deckPlus: string;
-  public playerColors: string[];
+  public playerColors = [];
+  public numOfPlayers: number;
+  public player = 1;
 
   constructor(private route: ActivatedRoute) { }
 
     select(color) {
-        this.color = color;
+        this.playerColors.push(color);
+        this.deckPlus = this.deckPlus + '_' + color;
+        this.player++;
     }
 
   ngOnInit() {
       this.route.params.subscribe(params => {
-          this.deckPlus = params['deck'];
-          if (this.deckPlus != null) {
+          this.deckPlus = params['info'];
+          if(this.deckPlus != null){
               let splitStr = this.deckPlus.split("_", 3);
-              let numOfPlayers = Math.abs(+splitStr[2]);
-              for (let i = 0; i < numOfPlayers - 1; i++) {
-                  this.playerColors.push('null');
-              }
+              this.numOfPlayers = Math.abs(+splitStr[2]);
+
           }
+
       });
   }
 
