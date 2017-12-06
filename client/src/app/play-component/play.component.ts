@@ -32,9 +32,6 @@ export class PlayComponent implements OnInit {
     public playerColor = [];
     public player = 0;
 
-    public points1: number = 0;
-    public points2: number = 0;
-
     public cardStates: CardState[];
 
     constructor(public deckService: DeckService, private route: ActivatedRoute, public peek: MdDialog, public results: MdDialog) {
@@ -89,8 +86,10 @@ export class PlayComponent implements OnInit {
     public openResultsDialog() {
         let config = new MatDialogConfig();
         config.data = {
-            points1: this.points1,
-            points2: this.points2,
+            points1: this.playerPoints[0],
+            points2: this.playerPoints[1],
+            points3: this.playerPoints[2],
+            points4: this.playerPoints[3],
             deck: this.deck
         };
         config.disableClose = true;
