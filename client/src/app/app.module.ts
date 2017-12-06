@@ -64,7 +64,8 @@ import {CardService} from "./card/card.service";
         StartScreenComponent,
         PlayComponent,
         DeleteDeckDialogComponent,
-        DeleteCardDialogComponent
+        DeleteCardDialogComponent,
+        TeacherZoneComponent
     ],
     entryComponents: [
         NewCardDialogComponent,
