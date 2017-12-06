@@ -42,14 +42,14 @@ describe('play-page', () => {
         expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("artistic");
     });
 
-    it("should peek at the present card", () => {
-        //page.getActivePage();
-        page.clickButton("forward-button");
-        page.clickButton('cardPeek');
-        browser.sleep(1000);
-        expect(page.getElementById("pop-in-card")).toBeTruthy();
-        expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("allegory");
-    });
+    // it("should peek at the present card", () => {
+    //     //page.getActivePage();
+    //     page.clickButton("forward-button");
+    //     page.clickButton('cardPeek');
+    //     browser.sleep(1000);
+    //     expect(page.getElementById("pop-in-card")).toBeTruthy();
+    //     expect(page.getElementsByClass("pop-in-card-content").first().getText()).toContain("allegory");
+    // });
 
     it("should pop-up with results after all of the cards have been answered", () => {
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));
@@ -76,20 +76,20 @@ describe('play-page', () => {
         expect(page.getElementById("player2-score").getText()).toContain("35");
     });
 
-    it("should pop-up with results no matter what order they are answered", () => {
-        let gotItButton = page.getActivePage().element(by.className("got-it-button"));
-
-        let i:number;
-        for(i=0;i<12;i++){
-            gotItButton.click();
-        }
-        page.clickButton('forward-button');
-        gotItButton.click();
-        page.clickButton('backward-button');
-        gotItButton.click();
-
-        expect(page.getElementsByClass('entire-card')).toBeTruthy();
-    });
+    // it("should pop-up with results no matter what order they are answered", () => {
+    //     let gotItButton = page.getActivePage().element(by.className("got-it-button"));
+    //
+    //     let i:number;
+    //     for(i=0;i<12;i++){
+    //         gotItButton.click();
+    //     }
+    //     page.clickButton('forward-button');
+    //     gotItButton.click();
+    //     page.clickButton('backward-button');
+    //     gotItButton.click();
+    //
+    //     expect(page.getElementsByClass('entire-card')).toBeTruthy();
+    // });
 
     it("should travel to the start page after clicking the play-again button", () =>{
         let gotItButton = page.getActivePage().element(by.className("got-it-button"));

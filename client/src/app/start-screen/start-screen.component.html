@@ -18,14 +18,16 @@
 
             <mat-form-field *ngIf="deck">
                 <input matInput id="inputLimit"  #input type="number" placeholder="# of Cards" [formControl]="limit">
-                <mat-error *ngIf="limit.invalid">{{ getErrorMessage() }}</mat-error>
+                <mat-error id="error-message" *ngIf="limit.invalid">
+                    <mat-icon id="error-icon" class="material-icons">error</mat-icon>{{ getErrorMessage() }}
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field *ngIf="!deck">
                 <input matInput #input type="number" placeholder="# of Cards " [disabled]="true">
             </mat-form-field>
 
-            <mat-select placeholder="# of Players" id="playerNumSelect">
+            <mat-select placeholder="# of Players" id="player-num-select">
                 <mat-option *ngFor="let player of this.players" [value]="player" (click)="selectNumOfPlayers(player)">
                     <span id="{{player}}"> {{player}}</span>
                 </mat-option>
@@ -34,10 +36,10 @@
 
         <br><br>
         <div class="play-buttons">
-            <button mat-raised-button *ngIf="deck" class="actual-play-button play-button" color="warn" [routerLink]="['/select-color', setDeckUrl()]">
+            <button mat-raised-button *ngIf="deck && numOfplayers != null && !limit.invalid" class="actual-play-button play-button" color="warn" [routerLink]="['/select-color', setDeckUrl()]">
                 Play
             </button>
-            <button mat-raised-button color="warn" class="dummy-play-button play-button" [ngClass]="{'hide': deck != null}">
+            <button mat-raised-button color="warn" class="dummy-play-button play-button" [ngClass]="{'hide': deck != null && numOfplayers != null && !limit.invalid}">
                 Play
             </button>
         </div>

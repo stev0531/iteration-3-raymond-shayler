@@ -22,26 +22,26 @@ body {
     color: black;
 }
 
-#red{
-    background-color: red;
+#red, #last-red{
+    background-color: lightcoral;
 }
 
-#orange{
+#orange, #last-orange{
     background-color: orange;
 }
 
-#yellow{
+#yellow, #last-yellow{
     background-color: yellow;
 }
 
-#green{
-    background-color: green;
+#green, #last-green{
+    background-color: lightgreen;
 }
 
-#blue{
-    background-color: blue;
+#blue, #last-blue{
+    background-color: lightblue;
 }
 
-#purple{
-    background-color: purple;
+#purple, #last-purple{
+    background-color: violet;
 }

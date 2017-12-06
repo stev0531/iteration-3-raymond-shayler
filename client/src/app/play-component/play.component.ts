@@ -8,7 +8,6 @@ import {ResultsComponent} from "../results/results.component";
 import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {environment} from "../../environments/environment";
-import {Card} from "../card/card";
 
 
 
@@ -43,17 +42,17 @@ export class PlayComponent implements OnInit {
 
         if (this.cardStates[pageNumber].isComplete == false && pageNumber < this.deck.cards.length) {
             this.playerPoints[this.player] += this.cardStates[pageNumber].cardPoints;
-            this.player++;
-
-
-            if(this.player >= this.playerPoints.length){
-                this.player = 0;
-            }
 
             this.cardStates[pageNumber].selected = 0;
             this.cardStates[pageNumber].isDone();
             this.cardsDone = this.cardsDone + 1;
-            this.pageNumber = pageNumber + 1;
+            if(this.pageNumber<this.deck.cards.length-1){
+                this.pageNumber = pageNumber + 1;
+                this.player++;
+            }
+            if(this.player >= this.playerPoints.length){
+                this.player = 0;
+            }
 
         }
 
@@ -86,6 +85,10 @@ export class PlayComponent implements OnInit {
     public openResultsDialog() {
         let config = new MatDialogConfig();
         config.data = {
+            color1: this.playerColor[0],
+            color2: this.playerColor[1],
+            color3: this.playerColor[2],
+            color4: this.playerColor[3],
             points1: this.playerPoints[0],
             points2: this.playerPoints[1],
             points3: this.playerPoints[2],

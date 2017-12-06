@@ -23,23 +23,23 @@ describe('color-select-page', () => {
     });
 
     it('should click 4 colors and travel to the play page', () => {
-        page.clickByCSS('red');
-        page.clickElement('orange');
-        page.clickElement('blue');
-        page.clickElement('purple');
+        page.getElementById('red').click();
+        page.getElementById('orange').click();
+        page.getElementById('blue').click();
+        page.getElementById('last-purple').click();
 
         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
     });
 
     it('should click 4 colors and cycle through which player is choosing', () => {
-        expect(page.getElementsByClass('color-select-title').getText()).toContain('Player 1');
-        page.clickElement('red');
-        expect(page.getElementById('color-select-title').getText()).toContain('Player 2');
-        page.clickElement('orange');
-        expect(page.getElementById('color-select-title').getText()).toContain('Player 3');
-        page.clickElement('blue');
-        expect(page.getElementById('color-select-title').getText()).toContain('Player 4');
-        page.clickElement('purple');
+        expect(page.getElementById('select-color-title').getText()).toContain('Player 1 Select Your Color!');
+        page.getElementById('red').click();
+        expect(page.getElementById('select-color-title').getText()).toContain('Player 2 Select Your Color!');
+        page.getElementById('orange').click();
+        expect(page.getElementById('select-color-title').getText()).toContain('Player 3 Select Your Color!');
+        page.getElementById('blue').click();
+        expect(page.getElementById('select-color-title').getText()).toContain('Player 4 Select Your Color!');
+        page.getElementById('last-purple').click();
 
         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
     });

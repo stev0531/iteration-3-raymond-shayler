@@ -11,9 +11,8 @@ import {FormControl, Validators} from '@angular/forms';
 export class StartScreenComponent implements OnInit {
     public deck: Deck;
     public limit: FormControl;
-    public players = [1,2,3,4];
+    public players = [2,3,4];
     public numOfplayers: number;
-    public colors = ["red", "orange", "yellow", "green", "blue", "purple"];
     public color: string;
 
     constructor(public deckService: DeckService) {
@@ -24,7 +23,7 @@ export class StartScreenComponent implements OnInit {
 
         this.deck = deck;
         console.log(this.deck);
-        this.limit = new FormControl('', [Validators.min(1), Validators.max(30)]);
+        this.limit = new FormControl('', [Validators.min(1)]);
     }
 
     selectNumOfPlayers(num) {
@@ -46,7 +45,6 @@ export class StartScreenComponent implements OnInit {
 
     getErrorMessage() {
         return this.limit.hasError('min') ? 'The number picked is too low, pick a bigger number' :
-            this.limit.hasError('max') ? 'The number picked is too big, pick a smaller number' :
             '';
     }
 
