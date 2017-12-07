@@ -12,6 +12,7 @@ public class AuthController {
 
     public void setAuth(Auth auth, Boolean USEAUTH) {
         this.auth = auth;
+        this.USEAUTH = USEAUTH;
 
     }
 
