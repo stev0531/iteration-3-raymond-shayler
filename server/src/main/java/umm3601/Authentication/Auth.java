@@ -118,6 +118,7 @@ public class Auth {
      * @return true if this is a JWT token, that we signed, that is not expired, else return false
      */
     public boolean authorized(String jwt) {
+
         if (null == jwt) {
             // null JWTs are obviously invalid
             return false;

@@ -8,15 +8,27 @@
             <a mat-list-item [routerLink]="['/start']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>play_arrow</mat-icon>
                 Play</a>
-            <a mat-list-item [routerLink]="['/decks']" (click)="layout.close()" routerLinkActive="nav-active">
-                <mat-icon>view_list</mat-icon>
-                Decks</a>
-            <a mat-list-item [routerLink]="['/card-list']" (click)="layout.close()" routerLinkActive="nav-active">
-                <mat-icon>view_list</mat-icon>
-                Cards</a>
+
+            <div *ngIf="showTeachOptions">
+                <a mat-list-item [routerLink]="['/decks']" (click)="layout.close()" routerLinkActive="nav-active">
+                    <mat-icon>view_list</mat-icon>
+                    Decks</a>
+                <a mat-list-item [routerLink]="['/card-list']" (click)="layout.close()" routerLinkActive="nav-active">
+                    <mat-icon>view_list</mat-icon>
+                    Cards</a>
+            </div>
+
             <a mat-list-item [routerLink]="['/help']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon>help</mat-icon>
                 Help</a>
+
+            <a mat-list-item [routerLink]="['/teacher-zone']" (click)="layout.close()" routerLinkActive="nav-active">
+                <mat-icon>help</mat-icon>
+                Teachers</a>
+
+
+
+
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav toolbarTitle="SAGE" navigationRoute="/">
@@ -24,17 +36,14 @@
             <button mat-icon-button td-menu-button class="nav-launch" tdLayoutToggle>
                 <mat-icon>menu</mat-icon>
             </button>
-            <button mat-icon-button td-menu-button class="login-button" onclick="location.href= 'http://localhost:4567/api/authorize'">
-                <mat-icon>account_circle</mat-icon>
-            </button>
 
             <!--<div>-->
-                <!--<p>Login</p>-->
-                <!--<button mat-button>-->
-                    <!--<mat-icon>-->
-                        <!--login-->
-                    <!--</mat-icon>-->
-                <!--</button>-->
+            <!--<p>Login</p>-->
+            <!--<button mat-button>-->
+            <!--<mat-icon>-->
+            <!--login-->
+            <!--</mat-icon>-->
+            <!--</button>-->
             <!--</div>-->
         </div>
         <router-outlet></router-outlet>
