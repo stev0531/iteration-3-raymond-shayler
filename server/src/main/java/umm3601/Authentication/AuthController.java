@@ -8,7 +8,7 @@ import spark.Response;
 
 public class AuthController {
     Auth auth;
-    boolean USEAUTH;
+    boolean USEAUTH= false;
 
     public void setAuth(Auth auth, Boolean USEAUTH) {
         this.auth = auth;
