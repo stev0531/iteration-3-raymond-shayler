@@ -74,6 +74,7 @@ public class Auth {
         this.authUsers = new ArrayList<>();
         // TODO: this is where authorized users are hardcoded
         // The email address must be one managed by Google
+        /*
         authUsers.add("rabex028@morris.umn.edu");
         authUsers.add("koehl238@morris.umn.edu");
         authUsers.add("shawx538@morris.umn.edu");
@@ -82,6 +83,7 @@ public class Auth {
         authUsers.add("stev0531@morris.umn.edu");
         authUsers.add("crame160@morris.umn.edu");
         authUsers.add("asloan@morris.umn.edu");
+        */
         this.globalService = new ServiceBuilder()
                 .apiKey(clientId)
                 .apiSecret(clientSecret)
@@ -286,7 +288,8 @@ public class Auth {
             }
 
             // Confirm that the user is on our whitelist
-            boolean authorized = userIsAuthorized(body.email);
+                boolean authorized = true;
+             //  boolean authorized = userIsAuthorized(body.email);
             if (authorized) {
                 return verifiedState.originatingURL;
             } else {
