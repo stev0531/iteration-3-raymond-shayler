@@ -1,6 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
-import {SimpleCard} from "../simple-card/simple-card";
 import {SimpleDeck} from "../simple-deck/simple-deck";
 
 
