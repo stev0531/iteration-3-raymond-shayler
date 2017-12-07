@@ -16,6 +16,8 @@ import {environment} from "../../environments/environment";
     templateUrl: './play.component.html',
     styleUrls: ['./play.component.scss'],
 })
+
+
 export class PlayComponent implements OnInit {
 
     deckPlus: string;

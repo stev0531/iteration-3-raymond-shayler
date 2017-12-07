@@ -26,8 +26,6 @@ export class CardDisplayDialogComponent implements OnInit {
     cardRef: any;
     cardId: object;
 
-    // @Input() card: Card;
-
     deleteCard() {
         console.log(this.cardId);
         this.openDeleteCardDialog();
@@ -46,8 +44,6 @@ export class CardDisplayDialogComponent implements OnInit {
         let cardRef = this.dialog.open(DeleteCardDialogComponent, config);
         this.cardRef = cardRef;
         cardRef.afterClosed().subscribe(result => {
-            // this.selectedCards.length = 0;
-            // this.selectedButton = "Select";
         });
     }
 
@@ -59,8 +55,6 @@ export class CardDisplayDialogComponent implements OnInit {
         this.Example_usage = this.data.Example_usage;
         this.deleteShown = this.data.deleteShown;
         this.cardId = this.data.cardId;
-        console.log(this.data);
-        console.log(this.Word);
 
     }
 
@@ -68,7 +62,4 @@ export class CardDisplayDialogComponent implements OnInit {
         this.matDialogRef.close();
     }
 
-    setDeleteShown(value: boolean) {
-        this.deleteShown = value;
-    }
 }
