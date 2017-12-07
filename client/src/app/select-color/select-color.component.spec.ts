@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SelectColorComponent } from './select-color.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
@@ -7,6 +6,7 @@ import {SharedModule} from "../shared.module";
 import {ActivatedRoute} from "@angular/router";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {RouterTestingModule} from "@angular/router/testing";
+import {Observable} from "rxjs/Observable";
 
 describe('SelectColorComponent', () => {
   let component: SelectColorComponent;
@@ -16,12 +16,12 @@ describe('SelectColorComponent', () => {
 
       TestBed.configureTestingModule({
           imports: [SharedModule, CommonModule, RouterTestingModule],
-          declarations: [],
+          declarations: [SelectColorComponent],
           providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
               {
                   provide: ActivatedRoute,
                   useValue: {
-                      params: true//Observable.of({id:"test id"})
+                      params: Observable.of({id:"test id"})
                   }
               }],
           schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -35,7 +35,7 @@ describe('SelectColorComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+   it('should create', () => {
+     expect(component).toBeTruthy();
+   });
 });
