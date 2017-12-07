@@ -21,7 +21,7 @@ describe('start-page', () => {
         page.clickElement("player-num-select");
         page.clickElement("2");
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 1 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 1');
     });
 
     it('should input a limit of one card and pop up with the results after got-it has been clicked', () => {
@@ -32,7 +32,7 @@ describe('start-page', () => {
         page.clickElement("player-num-select");
         page.clickElement("2");
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 1 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 1');
     });
 
     it('should input a limit over max but not go over the max', () => {
@@ -65,21 +65,6 @@ describe('start-page', () => {
         page.clickElement("player-num-select");
         page.clickElement("2");
         expect(page.getElementsByClass('.dummy-play-button')).toBeTruthy();
-
-        // page.arrowUp(6);
-        // browser.sleep(1000);
-        // page.getActivePage('selections').element(by.className('actual-play-button')).click();
-        // page.getElementById('red').click();
-        // page.getElementById('last-orange').click();
-        //
-        // let gotItButton = page.getActivePage("active-kb-page").element(by.className("got-it-button"));
-        // let i:number;
-        // for(i=0;i<3;i++){
-        //     gotItButton.click();
-        // }
-        // expect(page.getElementsByClass('entire-card')).toBeTruthy();
-        // expect(page.getElementById("player1-score").getText()).toContain("10");
-        // expect(page.getElementById("player2-score").getText()).toContain("5");
     });
 
 });

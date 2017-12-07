@@ -32,13 +32,13 @@ describe('color-select-page', () => {
     });
 
     it('should click 4 colors and cycle through which player is choosing', () => {
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 1 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 1');
         page.getElementById('red').click();
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 2 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 2');
         page.getElementById('orange').click();
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 3 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 3');
         page.getElementById('blue').click();
-        expect(page.getElementById('select-color-title').getText()).toContain('Player 4 Select Your Color!');
+        expect(page.getElementById('player').getText()).toContain('Player 4');
         page.getElementById('last-purple').click();
 
         expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
