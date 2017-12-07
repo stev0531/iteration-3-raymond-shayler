@@ -79,7 +79,6 @@ export class CardListComponent implements OnInit {
                 this.selectedCards.push(card);
             }
         }
-        console.log(this.selectedCards.length);
     }
 
     clearSelected(card) {
@@ -93,12 +92,10 @@ export class CardListComponent implements OnInit {
      */
     public openCardDisplay(card) {
         let config = new MatDialogConfig();
-        // let presentCard = card;
         let presentCard: Card = card;
         this.CardListService.getCard(card._id["$oid"]).subscribe(
             newCard => {
-                presentCard = newCard
-                console.log(presentCard);
+                presentCard = newCard;
                 config.data = {
                     Word: presentCard.word,
                     Synonym: presentCard.synonym,
@@ -108,7 +105,6 @@ export class CardListComponent implements OnInit {
                     deleteShown: true,
                     cardId: presentCard._id
                 };
-
                 let cardRef = this.peek.open(CardDisplayDialogComponent, config);
             }
         );
@@ -135,13 +131,11 @@ export class CardListComponent implements OnInit {
             cards: cards,
             typeOfChange: changeType
         };
-        console.log(config);
         let cardRef = this.peek.open(DeckChangesDialogComponent, config);
         this.cardRef = cardRef;
             cardRef.afterClosed().subscribe(result => {
         });
     }
-
 
     //Changes the mode of the component and will make changes to instance variables accordingly
     public modeHandler() {
@@ -160,6 +154,7 @@ export class CardListComponent implements OnInit {
         }
     }
 
+  
     public changeButton(button) {
         if (this.selectedButton == button) {
             this.selectedButton = null;

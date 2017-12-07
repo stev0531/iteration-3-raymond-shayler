@@ -21,11 +21,6 @@ export class CardListService {
         return observable.map(res => res.json());
     }
 
-    public getSimpleCard(id: string): Observable<Card> {
-        let newSimpleCard: Observable<Card> = this.http.request(+"/" + id, {withCredentials: true}).map(res => res.json());
-        return newSimpleCard;
-    }
-
     public getCard(id: string): Observable<Card> {
         let newCard: Observable<Card> = this.http.request(this.cardUrl + "/" + id, {withCredentials: true}).map(res => res.json());
         return newCard;
@@ -37,8 +32,6 @@ export class CardListService {
             deckId: deck._id["$oid"],
             cardIds: ids
         };
-        console.log(wipRequest);
-        console.log(environment.API_URL + "addMany");
 
         return this.http.post(environment.API_URL + "addMany", JSON.stringify(wipRequest), {withCredentials:true}).map(res => res.json()).subscribe();
     }
@@ -49,8 +42,6 @@ export class CardListService {
             deckId: deck._id["$oid"],
             cardIds: ids
         };
-        console.log(wipRequest);
-        console.log(environment.API_URL + "deleteMany");
 
         return this.http.post(environment.API_URL + "deleteMany", JSON.stringify(wipRequest), {withCredentials:true}).map(res => res.json()).subscribe();
     }

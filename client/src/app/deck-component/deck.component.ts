@@ -83,7 +83,6 @@ export class DeckComponent implements OnInit {
             deckId: deckId,
             deckName: deckName
         };
-        console.log(config);
         let cardRef = this.dialog.open(DeleteDeckDialogComponent, config);
         this.cardRef = cardRef;
         cardRef.afterClosed().subscribe(result => {

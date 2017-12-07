@@ -14,6 +14,7 @@ import {CommonModule} from "@angular/common";
 import {DeckService} from "../deck/deck.service";
 import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";
 import {RouterTestingModule} from "@angular/router/testing";
+import {fakeAsync} from "@angular/core/testing";
 
 
 describe('CardListComponent', () => {
@@ -146,22 +147,21 @@ describe('CardListComponent', () => {
         component.select(component.cards[0]);
         component.select(component.cards[1]);
         component.select(component.cards[2]);
-        component.changeButton("New Card")
+        component.changeButton("New Card");
         expect(component.selectedCards.length).toBe(0);
     });
 
-    it('Will deselect all cards once selected cards have been added', () => {
+    it('Will deselect all cards once selected cards have been added',() => {
        component.mode = "Select";
        component.select(component.cards[0]);
        component.select(component.cards[1]);
        component.select(component.cards[2]);
        component.selectDeck("test id");
        component.changeDeck("Add");
-      // component.closeDialog(this.cardRef);
        expect(component.selectedCards.length).toBe(0);
     });
 
-    it('Will deselect all cards once selected cards have been deleted', () => {
+    it('Will deselect all cards once selected cards have been deleted',() => {
         component.mode = "Select";
         component.select(component.cards[0]);
         component.select(component.cards[1]);
@@ -171,7 +171,7 @@ describe('CardListComponent', () => {
         expect(component.selectedCards.length).toBe(0);
     });
 
-    it('Will revert to view mode after adding cards', () => {
+    it('Will revert to view mode after adding cards',() => {
         component.mode = "AddCards"
         component.select(component.cards[0]);
         component.select(component.cards[1]);

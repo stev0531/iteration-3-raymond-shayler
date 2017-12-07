@@ -1,5 +1,4 @@
 import {HelpPage} from './help.po'
-import {browser} from "protractor";
 
 describe('Help Page', () => {
     let page: HelpPage;
@@ -14,15 +13,12 @@ describe('Help Page', () => {
         expect(page.getPageTitle()).toContain('Help & Rules');
     });
 
-    it('should have four headings', () => {
-        expect(page.getBySelector('section-hints')).toBeTruthy();
-        //toContain("Hints");
-        expect(page.getBySelector('section-rules')).toBeTruthy();
-        //toContain("How To Play");
-        expect(page.getBySelector('section-hints')).toBeTruthy();
-        //toContain("Hints");
-        expect(page.getBySelector('section-hints')).toBeTruthy();
-        //toContain("Hints");
+    it('should have five headings', () => {
+        expect(page.getBySelector('section-overview')).toBeTruthy();
+        expect(page.getBySelector('section-guesser')).toBeTruthy();
+        expect(page.getBySelector('section-judge')).toBeTruthy();
+        expect(page.getBySelector('section-score')).toBeTruthy();
+        expect(page.getBySelector('section-cards')).toBeTruthy();
     });
 
 
