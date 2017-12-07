@@ -10,6 +10,7 @@
 #results-title{
     text-align: center;
     font-weight: bold;
+
 }
 
 .nav-buttons{
@@ -21,21 +22,8 @@
     min-width: 400px;
 }
 
-.first-score{
-    padding-top: 10%;
+.player-info{
     text-align: center;
-}
-
-.players-left {
-    float:left;
-    margin-left: 10px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.players-right{
-    float:right;
-    margin-right: 10px;
     font-size: 20px;
     font-weight: bold;
 }
@@ -50,11 +38,6 @@
     font-weight: normal;
 }
 
-/*#player2-title{*/
-    /*font-size: 20px;*/
-    /*font-weight: bold;*/
-    /**/
-/*}*/
 
 #player2-score{
     margin-top: 5%;
@@ -62,23 +45,12 @@
     font-size: 50px;
 }
 
-/*#player3-title{*/
-    /*font-size: 20px;*/
-    /*font-weight: bold;*/
-    /*margin-left: 10px;*/
-/*}*/
 
 #player3-score{
     margin-top: 5%;
     font-weight: normal;
     font-size: 50px;
 }
-
-/*#player4-title{*/
-    /*font-size: 20px;*/
-    /*font-weight: bold;*/
-    /*margin-right: 10px;*/
-/*}*/
 
 #player4-score{
     margin-top: 5%;
@@ -90,11 +62,6 @@
     .card-entire {
         min-height: 200px;
         min-width: 300px;
-    }
-
-    .card-entire {
-        min-height: 100px;
-        min-width: 200px;
     }
 
     #results-title{

@@ -2,6 +2,10 @@ body {
     padding: 40px;
 }
 
+#select-color-title{
+    text-align: center;
+}
+
 .card {
     color: transparent;
     border-radius: 3px;
@@ -10,6 +14,9 @@ body {
     font-size: 150%;
 }
 
+.greyed-out {
+    opacity: 0.3;
+}
 
 .wrapper {
     margin-top: 5em;
