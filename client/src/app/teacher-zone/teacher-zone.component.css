@@ -26,3 +26,24 @@ h2 {
 .play-button {
     text-align: center;
 }
+
+.custom-button{
+
+}
+
+.custom-button-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.custom-button-text{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 14px;
+    font-weight: light;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+    color: #757575;
+}

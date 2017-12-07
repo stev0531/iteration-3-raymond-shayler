@@ -94,7 +94,10 @@
         </mat-expansion-panel>
     </mat-card-content>
     <mat-card-actions>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button mat-raised-button href="http://localhost:4567/api/authorize" class="custom-button" onclick="location.href= 'http://localhost:4567/api/authorize'">
+            <img src="https://developers.google.com/identity/images/g-logo.png" class="custom-button-icon">
+            <span class="custom-button-text">Sign in</span>
+        </button>
     </mat-card-actions>
 </mat-card>
 
