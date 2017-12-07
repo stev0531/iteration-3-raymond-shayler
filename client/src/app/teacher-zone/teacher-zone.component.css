@@ -1,0 +1,49 @@
+#help-title {
+    text-align: center;
+}
+
+h2 {
+    font-weight: normal;
+    text-align: center;
+}
+
+.faq-entry {
+    box-shadow: 0 0px !important;
+    margin: auto;
+    width: 100%;
+}
+
+#help-content {
+    padding: 0px 0px 16px 0px;
+}
+
+#play-button {
+    border-radius: 0px 100px 100px 100px;
+    border: 1.5px solid black;
+    margin-top: 16px;
+}
+
+.play-button {
+    text-align: center;
+}
+
+.custom-button{
+
+}
+
+.custom-button-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.custom-button-text{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 14px;
+    font-weight: light;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+    color: #757575;
+}

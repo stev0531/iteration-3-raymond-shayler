@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
     selector: 'home.component',
@@ -7,8 +8,20 @@ import {Component} from '@angular/core';
 })
 export class HomeComponent {
     public text: string;
+    showTeachOptions= false;
 
-    constructor() {
+    constructor(private _authService: AuthService) {
         this.text = "Hello world!";
+    }
+
+    ngOnInit() {
+        this._authService.authorized().subscribe(
+            newauth => {
+                this.showTeachOptions = newauth;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 }

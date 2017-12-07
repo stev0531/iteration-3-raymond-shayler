@@ -8,27 +8,27 @@ import spark.Response;
 
 public class AuthController {
     Auth auth;
+    boolean USEAUTH= false;
+
+    public void setAuth(Auth auth, Boolean USEAUTH) {
+        this.auth = auth;
+        this.USEAUTH = USEAUTH;
+
+    }
 
     public Object checkAuthorization(Request request, Response response) {
-//        String cookie = request.cookie("ddg");
-//        System.out.println(cookie);
-//
-//        if (!auth.authorized(cookie)) {
-//            System.out.println("AuthController: Auth failed");
-//            return false;
-//        } else {
-//            System.out.println("AuthController: Auth passed");
-//            return true;
-//        }
-
-
         response.type("application/json");
         response.header("Cache-Control","no-cache, no-store, must-revalidate");
         System.out.println(request.cookie("ddg"));
 
         String cookie = request.cookie("ddg");
         Document returnDoc = new Document();
-        returnDoc.append("authorized", auth.authorized(cookie));
+        System.out.println("cookie says it is " + auth.authorized(cookie));
+        if(USEAUTH) {
+            returnDoc.append("authorized", auth.authorized(cookie));
+        } else{
+            returnDoc.append("authorized", true);
+        }
         System.out.println(JSON.serialize(returnDoc));
         return JSON.serialize(returnDoc);
     };

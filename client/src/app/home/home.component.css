@@ -13,6 +13,10 @@ button {
     color: black;
 }
 
+#play-button {
+    margin-top: 10%;
+}
+
 #card-button:hover, #deck-button:hover, #help-button:hover {
     color: white;
 }
@@ -50,5 +54,5 @@ button {
 }
 
 mat-card {
-    padding-bottom: 50px;
+
 }

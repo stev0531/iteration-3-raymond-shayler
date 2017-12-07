@@ -9,6 +9,7 @@ import {HelpComponent} from "./help-component/help.component";
 import {CardListComponent} from "./card-list-component/card-list.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {SelectColorComponent} from "./select-color/select-color.component";
+import {TeacherZoneComponent} from "./teacher-zone/teacher-zone.component";
 
 // Route Configuration
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {path: 'start', component: StartScreenComponent},
     {path: 'card-list', component: CardListComponent},
     {path: 'select-color/:info', component: SelectColorComponent},
+    {path: 'teacher-zone', component:TeacherZoneComponent}
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);

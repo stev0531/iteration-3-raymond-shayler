@@ -5,6 +5,7 @@ import {By} from "@angular/platform-browser";
 import {SharedModule} from "../shared.module";
 import {MATERIAL_COMPATIBILITY_MODE} from "@angular/material";
 import {RouterTestingModule} from "@angular/router/testing";
+import {AuthService} from "../auth/auth.service";
 
 
 describe('Home', () => {
@@ -28,7 +29,7 @@ describe('Home', () => {
             declarations: [HomeComponent],
 
             // declare the test component
-            providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
+            providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}, {provide: AuthService, useValue: true}],
         })
 
         fixture = TestBed.createComponent(HomeComponent);
