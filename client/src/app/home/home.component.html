@@ -8,6 +8,7 @@
                 Play
             </button>
         </div>
+        <div *ngIf="showTeachOptions">
         <div id="cardButton" class="button-row">
             <button id="card-button" class="double-button" mat-raised-button color="warn" [routerLink]="['/card-list']">
                 Cards
@@ -15,6 +16,7 @@
         </div>
         <div id="deckButton" class="button-row">
             <button id="deck-button" class="double-button" mat-raised-button color="warn" [routerLink]="['/decks']">Decks</button>
+        </div>
         </div>
         <div id="helpButton" class="button-row">
             <button id="help-button" class="double-button" mat-raised-button color="warn" [routerLink]="['/help']">Help</button>
