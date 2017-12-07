@@ -18,7 +18,6 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 describe('PlayComponent', () => {
     let component: PlayComponent;
-    let cardState: CardState;
     let fixture: ComponentFixture<PlayComponent>;
 
     let deckServiceStub: {
@@ -127,13 +126,13 @@ describe('PlayComponent', () => {
         card_state3.randomizeSages();
 
         component.addPoints(0);
-        expect(component.points1).toEqual(card_state1.cardPoints);
+        expect(component.playerPoints[component.player]).toEqual(card_state1.cardPoints);
 
         component.addPoints(1);
-        expect(component.points2).toEqual(card_state2.cardPoints);
+        expect(component.playerPoints[component.player]).toEqual(card_state1.cardPoints + card_state2.cardPoints);
 
         component.addPoints(2);
-        expect(component.points1).toEqual(card_state1.cardPoints + card_state3.cardPoints);
+        expect(component.playerPoints[component.player]).toEqual(card_state1.cardPoints + card_state2.cardPoints + card_state3.cardPoints);
 
     });
 

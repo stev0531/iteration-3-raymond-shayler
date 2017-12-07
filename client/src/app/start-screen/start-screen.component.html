@@ -2,7 +2,7 @@
 <mat-card>
     <mat-card-title id="start-title">
         <span id="title">Make Your Selections!</span>
-        <button id="help" mat-button [routerLink]="['/help']">
+        <button id="help" mat-icon-button [routerLink]="['/help']">
             <i class="material-icons">help</i>
         </button>
     </mat-card-title>
@@ -15,17 +15,31 @@
                     <span id="{{deck.name}}"> {{ deck.name }} </span>
                 </mat-option>
             </mat-select>
-            <mat-form-field>
-                <input matInput id="inputLimit" #input type="number" placeholder="# of Cards" [(ngModel)]="limit">
+
+            <mat-form-field *ngIf="deck">
+                <input matInput id="inputLimit"  #input type="number" placeholder="# of Cards" [formControl]="limit" [required]="true">
+                <mat-error id="error-message" *ngIf="limit.invalid">
+                    <mat-icon id="error-icon" class="material-icons">error</mat-icon>{{ getErrorMessage() }}
+                </mat-error>
             </mat-form-field>
 
+            <mat-form-field *ngIf="!deck">
+                <input matInput #input type="number" placeholder="# of Cards " [disabled]="true">
+            </mat-form-field>
+
+            <mat-select placeholder="# of Players" id="player-num-select">
+                <mat-option *ngFor="let player of this.players" [value]="player" (click)="selectNumOfPlayers(player)">
+                    <span id="{{player}}"> {{player}}</span>
+                </mat-option>
+            </mat-select>
         </div>
+
         <br><br>
         <div class="play-buttons">
-            <button mat-raised-button *ngIf="deck" class="actual-play-button play-button" color="warn" [routerLink]="['/play', deck._id.$oid+'_'+limit]">
+            <button mat-raised-button *ngIf="deck && numOfplayers != null && !limit.invalid" class="actual-play-button play-button" color="warn" [routerLink]="['/select-color', setDeckUrl()]">
                 Play
             </button>
-            <button mat-raised-button color="warn" class="dummy-play-button play-button" [ngClass]="{'hide': deck != null}">
+            <button mat-raised-button color="warn" class="dummy-play-button play-button" [ngClass]="{'hide': deck != null && numOfplayers != null && !limit.invalid}">
                 Play
             </button>
         </div>

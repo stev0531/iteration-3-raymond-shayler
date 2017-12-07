@@ -1,18 +1,34 @@
 <mat-dialog-content class="card-entire">
     <mat-card-title id="results-title">Final Score for {{deck.name}}:</mat-card-title>
-    <mat-card-content class="first-score">
-        <div id="player1-title">
-            Player 1's Score:
-            <p id="player1-score">
-                {{  score1  }}
-            </p>
-        </div>
-        <div id="player2-title">
-            Player 2's Score:
-            <p id="player2-score">
-                {{  score2  }}
-            </p>
-        </div>
+    <mat-card-content class="player-info">
+
+            <div id="player1-title">
+                Player 1's Score:
+                <p id="player1-score">
+                    {{  score1  }}
+                </p>
+            </div>
+
+            <div id="player2-title" *ngIf="score2 != null">
+                Player 2's Score:
+                <p id="player2-score">
+                    {{  score2  }}
+                </p>
+            </div>
+
+            <div class="players-left" id="player3-title" *ngIf="score3 != null">
+                Player 3's Score:
+                <p id="player3-score">
+                    {{  score3  }}
+                </p>
+            </div>
+
+            <div id="player4-title" *ngIf="score4 != null">
+                Player 4's Score:
+                <p id="player4-score">
+                    {{  score4  }}
+                </p>
+            </div>
 
 
     </mat-card-content>

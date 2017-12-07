@@ -1,6 +1,6 @@
 <mat-card>
-    <mat-card-title class="card-word">{{ card.word }}</mat-card-title>
-    <mat-divider></mat-divider>
+    <mat-card-title class="card-word" [ngStyle]="{'background-color': this.color}" >{{ card.word }}</mat-card-title>
+
     <mat-card-content>
 
         <span class="card-line">

@@ -13,13 +13,15 @@ describe('start-page', () => {
         expect(page.getElementsByClass('.dummy-play-button')).toBeTruthy();
     });
 
-    it('should select a deck, input a limit, and go to the play page', () => {
+    it('should select a deck, input a limit, pick how many players, and go to the select color page ', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
         page.typeALimit(6);
+        page.clickElement("player-num-select");
+        page.clickElement("2");
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
-        expect(page.getActivePage("active-kb-page").element(by.className("card-word")).getText()).toContain('Alliteration');
+        expect(page.getElementById('player').getText()).toContain('Player 1');
     });
 
     it('should input a limit of one card and pop up with the results after got-it has been clicked', () => {
@@ -27,8 +29,10 @@ describe('start-page', () => {
         page.clickElement("testdeck3");
 
         page.typeALimit(1);
+        page.clickElement("player-num-select");
+        page.clickElement("2");
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
-        expect(page.getElementsByClass('entire-card')).toBeTruthy();
+        expect(page.getElementById('player').getText()).toContain('Player 1');
     });
 
     it('should input a limit over max but not go over the max', () => {
@@ -36,7 +40,11 @@ describe('start-page', () => {
         page.clickElement("testdeck3");
 
         page.typeALimit(8);
+        page.clickElement("player-num-select");
+        page.clickElement("2");
         page.getActivePage('selections').element(by.className('actual-play-button')).click();
+        page.getElementById('red').click();
+        page.getElementById('last-orange').click();
 
         let gotItButton = page.getActivePage("active-kb-page").element(by.className("got-it-button"));
 
@@ -49,21 +57,14 @@ describe('start-page', () => {
         expect(page.getElementById("player2-score").getText()).toContain("15");
     });
 
-    it('should input a limit of -3 but show 3 cards', () => {
+    it('should input a limit of -3 but not go to color page', () => {
         page.clickElement("deck-dropdown");
         page.clickElement("testdeck3");
 
         page.typeALimit(-3);
-        page.getActivePage('selections').element(by.className('actual-play-button')).click();
-
-        let gotItButton = page.getActivePage("active-kb-page").element(by.className("got-it-button"));
-        let i:number;
-        for(i=0;i<3;i++){
-            gotItButton.click();
-        }
-        expect(page.getElementsByClass('entire-card')).toBeTruthy();
-        expect(page.getElementById("player1-score").getText()).toContain("10");
-        expect(page.getElementById("player2-score").getText()).toContain("5");
+        page.clickElement("player-num-select");
+        page.clickElement("2");
+        expect(page.getElementsByClass('.dummy-play-button')).toBeTruthy();
     });
 
 });

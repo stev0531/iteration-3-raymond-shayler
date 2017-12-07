@@ -16,22 +16,6 @@ describe('play-page', () => {
     // Commented out because the kb-page-slider causes the test to be ran faster than the page has time to load the next card, causing an empty string
     // instead of the intended result
 
-    it('should move to between cards', () => {
-        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
-        page.clickButton('forward-button');
-        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Alliteration');
-        page.clickButton('backward-button');
-        expect(page.getActivePage().element(by.className("card-word")).getText()).toContain('Aesthetic reading');
-    });
-
-    it('should switch between the players scores', () => {
-        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 1');
-        page.clickButton('forward-button');
-        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 2');
-        page.clickButton('forward-button');
-        expect(page.getActivePage().element(by.className("player")).getText()).toContain('Player 1');
-    });
-
     it('should not get hint after 4 uses', () => {
         let hintButton = page.getActivePage().element(by.className("hint-button"));
         hintButton.click();

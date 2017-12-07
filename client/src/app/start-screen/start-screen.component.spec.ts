@@ -9,6 +9,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
 import {DeckService} from "../deck/deck.service";
 import {CommonModule} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('StartScreenComponent', () => {
     let component: StartScreenComponent;
@@ -43,7 +44,7 @@ describe('StartScreenComponent', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [SharedModule, CommonModule ,RouterTestingModule],
+            imports: [SharedModule, CommonModule, RouterTestingModule, ReactiveFormsModule],
             declarations: [StartScreenComponent],
             providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
                 {

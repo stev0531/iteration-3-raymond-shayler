@@ -10,6 +10,7 @@
 #results-title{
     text-align: center;
     font-weight: bold;
+
 }
 
 .nav-buttons{
@@ -18,39 +19,43 @@
 
 .card-entire{
     min-height: 300px;
-    min-width: 500px;
+    min-width: 400px;
 }
 
-.first-score{
-    padding-top: 10%;
-}
-
-#player1-title{
-    font-size: 25px;
-    float: left;
+.player-info{
+    text-align: center;
+    font-size: 20px;
     font-weight: bold;
-    margin-left: 10px;
+}
+
+#player3-title{
+    float:none;
 }
 
 #player1-score{
     margin-top: 5%;
-    text-align: center;
-    font-size: 80px;
+    font-size: 50px;
     font-weight: normal;
 }
 
-#player2-title{
-    font-size: 25px;
-    float: right;
-    font-weight: bold;
-    margin-right: 10px;
-}
 
 #player2-score{
     margin-top: 5%;
     font-weight: normal;
-    text-align: center;
-    font-size: 80px;
+    font-size: 50px;
+}
+
+
+#player3-score{
+    margin-top: 5%;
+    font-weight: normal;
+    font-size: 50px;
+}
+
+#player4-score{
+    margin-top: 5%;
+    font-weight: normal;
+    font-size: 50px;
 }
 
 @media screen and (max-width: 700px) {
@@ -58,39 +63,22 @@
         min-height: 200px;
         min-width: 300px;
     }
-}
-
-@media screen and (max-width: 500px) {
-    .card-entire {
-        min-height: 100px;
-        min-width: 200px;
-    }
 
     #results-title{
         font-size: 20px;
     }
 
 
-    #player1-title{
+    .players-left, .players-right{
         margin-left: 0px;
-        float: none;
-        text-align:center;
-        font-size: 20px;
-    }
-
-    #player2-title{
         margin-right: 0px;
         float: none;
         text-align:center;
         font-size: 20px;
     }
 
-    #player1-score{
-        font-size: 70px;
-    }
-
-    #player2-score{
-        font-size: 70px;
+    #player1-score, #player2-score, #player3-score, #player4-score{
+        font-size: 40px;
     }
 }
 
@@ -99,13 +87,5 @@
     .card-entire {
         min-height: 30%;
         min-width: 30%;
-    }
-
-    #player1-score{
-        font-size: 50px;
-    }
-
-    #player2-score{
-        font-size: 50px;
     }
 }

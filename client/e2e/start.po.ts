@@ -36,6 +36,13 @@ export class StartPage {
         input.sendKeys(limit);
     }
 
+    arrowUp(num: number) {
+        for(let i=0;i<num;i++){
+            browser.actions().sendKeys(Key.ARROW_UP).perform();
+        }
+
+    }
+
     getActivePage(classId: string) {
         return element(by.className(classId));
     }

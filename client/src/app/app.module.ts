@@ -31,6 +31,8 @@ import {DeckChangesDialogComponent} from "./deck-changes-dialog/deck-changes-dia
 import {ResultsComponent} from "./results/results.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {AuthService} from "./auth/auth.service";
+import { ReactiveFormsModule} from "@angular/forms";
+import {SelectColorComponent} from "./select-color/select-color.component";
 import {DeleteDeckDialogComponent} from "./delete-deck-dialog/delete-deck-dialog";
 import {DeleteCardDialogComponent} from "./delete-card-dialog/delete-card-dialog";
 import {CardService} from "./card/card.service";
@@ -42,7 +44,8 @@ import {CardService} from "./card/card.service";
         HttpModule,
         JsonpModule,
         Routing,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
@@ -63,7 +66,8 @@ import {CardService} from "./card/card.service";
         StartScreenComponent,
         PlayComponent,
         DeleteDeckDialogComponent,
-        DeleteCardDialogComponent
+        DeleteCardDialogComponent,
+        SelectColorComponent,
     ],
     entryComponents: [
         NewCardDialogComponent,
@@ -74,7 +78,7 @@ import {CardService} from "./card/card.service";
         DeckChangesDialogComponent,
         CardComponent,
         DeleteDeckDialogComponent,
-        DeleteCardDialogComponent
+        DeleteCardDialogComponent,
     ],
     providers: [
         CardListService,

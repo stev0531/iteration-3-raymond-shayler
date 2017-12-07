@@ -1,0 +1,27 @@
+
+<mat-card>
+    <mat-card-title id="select-color-title">
+        Select Your Color!
+        <h3 id="player">Player {{player}}</h3>
+    </mat-card-title>
+
+    <div class="wrapper" *ngIf="player < numOfPlayers">
+        <mat-card class="card" id="red" (click)="select('lightcoral')"> Red</mat-card>
+        <mat-card class="card" id="orange" (click)="select('orange')">Orange</mat-card>
+        <mat-card class="card" id="yellow" (click)="select('yellow')">Yellow</mat-card>
+        <mat-card class="card" id="green" (click)="select('lightgreen')">Green</mat-card>
+        <mat-card class="card" id="blue" (click)="select('lightblue')">Blue</mat-card>
+        <mat-card class="card" id="purple" (click)="select('violet')">Purple</mat-card>
+    </div>
+
+    <div class="wrapper" *ngIf="player === numOfPlayers">
+        <mat-card class="card" id="last-red" [routerLink]="['/play', deckPlus + '_lightcoral']"> Red</mat-card>
+        <mat-card class="card" id="last-orange" [routerLink]="['/play', deckPlus + '_orange']">Orange</mat-card>
+        <mat-card class="card" id="last-yellow" [routerLink]="['/play', deckPlus + '_yellow']">Yellow</mat-card>
+        <mat-card class="card" id="last-green" [routerLink]="['/play', deckPlus + '_lightgreen']">Green</mat-card>
+        <mat-card class="card" id="last-blue" [routerLink]="['/play', deckPlus + '_lightblue']">Blue</mat-card>
+        <mat-card class="card" id="last-purple"  [routerLink]="['/play', deckPlus + '_violet']">Purple</mat-card>
+    </div>
+
+
+</mat-card>
