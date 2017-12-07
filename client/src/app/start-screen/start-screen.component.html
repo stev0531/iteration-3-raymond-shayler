@@ -17,7 +17,7 @@
             </mat-select>
 
             <mat-form-field *ngIf="deck">
-                <input matInput id="inputLimit"  #input type="number" placeholder="# of Cards" [formControl]="limit">
+                <input matInput id="inputLimit"  #input type="number" placeholder="# of Cards" [formControl]="limit" [required]="true">
                 <mat-error id="error-message" *ngIf="limit.invalid">
                     <mat-icon id="error-icon" class="material-icons">error</mat-icon>{{ getErrorMessage() }}
                 </mat-error>

@@ -38,4 +38,21 @@ describe('SelectColorComponent', () => {
    it('should create', () => {
      expect(component).toBeTruthy();
    });
+
+   it('should select a color and store it as a player color and increment the player', () => {
+      component.select('Purple');
+      expect(component.player).toBe(2);
+      expect(component.playerColors).toContain('Purple');
+   });
+
+   it('should select multiple colors in succession, store each of them, and increment the player accordingly', () => {
+     component.select('Purple');
+     component.select('Blue');
+     component.select('Red');
+
+     expect(component.player).toBe(4);
+     expect(component.playerColors).toContain('Purple');
+     expect(component.playerColors).toContain('Blue');
+     expect(component.playerColors).toContain('Red');
+   })
 });
