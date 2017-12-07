@@ -5,5 +5,7 @@ export interface Deck {
         $oid: string
     },
     name: string,
+    //count: number
     cards: Card[]
+
 }

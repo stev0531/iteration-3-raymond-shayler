@@ -13,6 +13,10 @@
     padding-top: 6px;
 }
 
+#error-message{
+    color: red;
+}
+
 #help {
     display: inline-block;
     float: right;

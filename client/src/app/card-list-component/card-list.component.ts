@@ -6,7 +6,6 @@ import {MatDialogConfig} from "@angular/material";
 import {CardDisplayDialogComponent} from "../card-display-dialog/card-display-dialog.component";
 import {MdDialog} from "@angular/material";
 import {DeckService} from "../deck/deck.service";
-import {Deck} from "../deck/deck";
 import {SimpleCard} from "../simple-card/simple-card";
 import {SimpleDeck} from "../simple-deck/simple-deck";
 import {DeckChangesDialogComponent} from "../deck-changes-dialog/deck-changes-dialog";

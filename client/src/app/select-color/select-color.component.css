@@ -1,0 +1,47 @@
+body {
+    padding: 40px;
+}
+
+.card {
+    color: transparent;
+    border-radius: 3px;
+    padding: 30px;
+    margin:5px;
+    font-size: 150%;
+}
+
+
+.wrapper {
+    margin-top: 5em;
+    text-align: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
+    background-color: transparent;
+    color: black;
+}
+
+#red, #last-red{
+    background-color: lightcoral;
+}
+
+#orange, #last-orange{
+    background-color: orange;
+}
+
+#yellow, #last-yellow{
+    background-color: yellow;
+}
+
+#green, #last-green{
+    background-color: lightgreen;
+}
+
+#blue, #last-blue{
+    background-color: lightblue;
+}
+
+#purple, #last-purple{
+    background-color: violet;
+}
