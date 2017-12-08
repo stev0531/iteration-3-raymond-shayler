@@ -21,7 +21,7 @@ version of SAGE is targeted for elementary aged students.
 SAGE is played with one or more players. These players can take turns at having 
 different roles during the game. One player is shown a word on a card that is 
 displayed on the screen of a device. Their goal is to correctly identify what 
-that word means. The other players (if there are any) will judge whether or not 
+that word means. The other players will judge whether or not 
 the guesser has correctly identified the meaning of the word. Players who are 
 guessing can also receive hints. These hints come in four different
 varieties: synonyms, antonyms, general senses, and example usages (SAGE). 
