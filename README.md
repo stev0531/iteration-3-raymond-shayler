@@ -46,9 +46,8 @@ There is also a card list page which displays the words of every card in the sys
 ## Technologies
 
 The front end technologies of SAGE primarily consist of HTML, CSS, and Typescript 
-which are used in conjunction with an Angular4 framework. The front angular components
-can be found in client/src/app path.  Because typescript is being used, we recommend ignoring messages that may ask to compile the code into javascript as it will cause numerous errors. We have also incorporated various Material Design and 
-Covalent styling modules into our components.  There are angular jasmine and karma unit tests included with each of our components, along with protractor and selenium webdriver end to end tests located in the e2e directory. With regards to the backend,
+which are used in conjunction with an Angular4 framework. The front end angular components
+can be found in client/src/app path.  Because typescript is being used, we recommend ignoring messages that may ask to compile the code into javascript as it will cause numerous errors. We have also incorporated various Material Design styling modules into our components.  There are angular jasmine and karma unit tests included with each of our components, along with protractor and selenium webdriver end to end tests located in the e2e directory. With regards to the backend,
 we have used a java spark server that interacts with a MongoDB database. It is tested with Java unit 
 testing. We have a REST API that is located in the /server/src/main/java/umm3601/Server.java
 path. We are also using both yarn and npm as package managers. Travis CI is currently being used
@@ -63,9 +62,12 @@ various local tasks, which are described in the next section.
 * `runClientTestsWithCoverage` runs the client tests and deposits code coverage statistics into a new directory within `client` called `coverage`. In there you will find an `index.html`. Right click on `index.html` and select `Open in Browser` with your browser of choice. For Chrome users, you can drag and drop index.html onto chrome and it will open it.  
 * `runE2ETest` runs end to end test for the client side. NOTE: Two Gradle tasks _must_ be run before you can run the e2e tests. 
 The server (`run`) needs to be on for this test to work, and test data
-must have been seeded into the database before running this task.
+must have been seeded into the database before running this task. We also recommend that the database be cleared and then re-seeded prior to each run of these tests. Certain tests may fail randomly up to half of the time they are run.
 * `run` will run the server (which is available at ``localhost:4567``)
 * `build` will build the application but not run anything.
 * `runClient` task will build and run the client side of the application (available at ``localhost:9000``)
 * `clearMongoDB` will clear the database of all local data.
 * `seedMongoDB` will populate the database with the data provided in the cards.seed.json and decks.seed.json files.
+
+Please note that a `useAuth` property within the `config.json` file detailed by the SETUP documentation should be set
+to false prior to running tests.
