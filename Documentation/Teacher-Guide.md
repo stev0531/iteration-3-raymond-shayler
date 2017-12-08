@@ -30,7 +30,10 @@
 * Fill in the required information and click confirm 
 
 ## How to add another authorized email account?
-* This feature does not currently exist. Please contact the developers who created the SAGE system if you need more information at
+This feature does not currently exist. Please contact the developers who created the SAGE system if you need more information at
+* rabex028@morris.umn.edu (Student)
+* mcphee@morris.umn.edu (Professor)
+* lamberty@morris.umn.edu (Professor)
 
 
 ## I signed in but nothing is working?
