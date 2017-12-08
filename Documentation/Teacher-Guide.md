@@ -31,6 +31,7 @@
 
 ## How to add another authorized email account?
 This feature does not currently exist. Please contact the developers who created the SAGE system if you need more information at
+* shawx538@morris.umn.edu (Student)
 * rabex028@morris.umn.edu (Student)
 * mcphee@morris.umn.edu (Professor)
 * lamberty@morris.umn.edu (Professor)
