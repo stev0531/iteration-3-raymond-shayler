@@ -47,7 +47,7 @@ There is also a card list page which displays the words of every card in the sys
 
 The front end technologies of SAGE primarily consist of HTML, CSS, and Typescript 
 which are used in conjunction with an Angular4 framework. The front end angular components
-can be found in client/src/app path.  Because typescript is being used, we recommend ignoring messages that may ask to compile the code into javascript as it will cause numerous errors. We have also incorporated various Material Design styling modules into our components.  There are angular jasmine and karma unit tests included with each of our components, along with protractor and selenium webdriver end to end tests located in the e2e directory. With regards to the backend,
+can be found in client/src/app path.  Because typescript is being used, we recommend ignoring messages that may ask to compile the code into javascript as it will cause numerous errors. We have also incorporated various Material Design and Covalent styling modules into our components. There are angular jasmine and karma unit tests included with each of our components, along with protractor and selenium webdriver end to end tests located in the e2e directory. With regards to the backend,
 we have used a java spark server that interacts with a MongoDB database. It is tested with Java unit 
 testing. We have a REST API that is located in the /server/src/main/java/umm3601/Server.java
 path. We are also using both yarn and npm as package managers. Travis CI is currently being used
