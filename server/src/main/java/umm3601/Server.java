@@ -215,26 +215,41 @@ public class Server {
             String[] codes = params.get("code");
             String[] errors = params.get("error");
             System.out.println("/callback reached");
-            if (null == states) {
-                // we REQUIRE that we be passed a state
+
+            if(null ==codes && "access_denied".equals(errors[0])){
+                // the user clicked "deny", so send them to the visitor page
+                res.redirect("/");
+                return ""; // send an empty body back on redirect
+            }
+            else if (null == states || null == codes){
                 halt(400);
                 return ""; // never reached
             }
-            if (null == codes) {
-                if (null == errors) {
-                    // we don't have codes, but we don't have an error either, so this a garbage request
-                    halt(400);
-                    return ""; // never reached
-                } else if ("access_denied".equals(errors[0])) {
-                    // the user clicked "deny", so send them to the visitor page
-                    res.redirect("/");
-                    return ""; // send an empty body back on redirect
-                } else {
-                    // an unknown error was passed to us, so we halt
-                    halt(400);
-                    return ""; // not reached
-                }
-            }
+
+
+//            if (null == states) {
+//                // we REQUIRE that we be passed a state
+//                halt(400);
+//                return ""; // never reached
+//            }
+//            if (null == codes) {
+//                 if ("access_denied".equals(errors[0])) {
+//                    // the user clicked "deny", so send them to the visitor page
+//                    res.redirect("/");
+//                    return ""; // send an empty body back on redirect
+//
+////                    if (null == errors ) {
+////                    // we don't have codes, but we don't have an error either, so this a garbage request
+////                    halt(400);
+////                    return ""; // never reached
+////                }
+//                } else {
+//                    // an unknown error was passed to us, so we halt
+//                    halt(400);
+//                    return ""; // not reached
+//                }
+//            }
+            
             String state = states[0];
             String code = codes[0];
             System.out.println("Callback request seems valid, checking...");
