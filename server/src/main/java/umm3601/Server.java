@@ -191,22 +191,21 @@ public class Server {
 
         /// Deck and Card Endpoints ///////////////////////////
         /////////////////////////////////////////////
-        get("api/cards/:id", cardController::getCard);
-        get("api/cards", cardController::getCards);
-        get("api/decks", deckController::getDecks);
-        post("api/decks/add", deckController::addNewDeck);
-        get("api/decks/:id", deckController::getDeck);
-        post("api/decks/updateName", deckController::updateName);
-        post("api/cards/add", cardController::addNewCard);
-        post("api/addMany", cardController::addCardsToDeck);
-        post("api/deleteMany", cardController::deleteCardsFromDeck);
+//        get("api/cards/:id", cardController::getCard);
+//        get("api/cards", cardController::getCards);
+//        get("api/decks", deckController::getDecks);
+//        post("api/decks/add", deckController::addNewDeck);
+//        get("api/decks/:id", deckController::getDeck);
+//        post("api/decks/updateName", deckController::updateName);
+//        post("api/cards/add", cardController::addNewCard);
+//        post("api/addMany", cardController::addCardsToDeck);
+//        post("api/deleteMany", cardController::deleteCardsFromDeck);
         post("api/decks/deleteDeck", deckController::deleteDeck);
         post("api/cards/deleteCard", cardController::deleteCard);
-        get("api/simple-cards", cardController::getSimpleCards);
-        get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/deleteMany", cardController::deleteCardsFromDeck);
+//        get("api/simple-cards", cardController::getSimpleCards);
+//        get("api/simple-decks", deckController::getSimpleDecks);
         get("api/decks/updateName", deckController::updateName);
-        get("api/checkAuthorization", authController::checkAuthorization);
+//        get("api/checkAuthorization", authController::checkAuthorization);
 
 
         get("/callback", (req, res) -> {
@@ -249,7 +248,7 @@ public class Server {
 //                    return ""; // not reached
 //                }
 //            }
-            
+
             String state = states[0];
             String code = codes[0];
             System.out.println("Callback request seems valid, checking...");
