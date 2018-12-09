@@ -191,26 +191,18 @@ public class Server {
             String[] codes = params.get("code");
             String[] errors = params.get("error");
             System.out.println("/callback reached");
-            if (null == states) {
-                // we REQUIRE that we be passed a state
+
+            if(null ==codes && "access_denied".equals(errors[0])){
+                // the user clicked "deny", so send them to the visitor page
+                res.redirect("/");
+                return ""; // send an empty body back on redirect
+            }
+            else if (null == states || null == codes){
                 halt(400);
                 return ""; // never reached
             }
-            if (null == codes) {
-                if (null == errors) {
-                    // we don't have codes, but we don't have an error either, so this a garbage request
-                    halt(400);
-                    return ""; // never reached
-                } else if ("access_denied".equals(errors[0])) {
-                    // the user clicked "deny", so send them to the visitor page
-                    res.redirect("/");
-                    return ""; // send an empty body back on redirect
-                } else {
-                    // an unknown error was passed to us, so we halt
-                    halt(400);
-                    return ""; // not reached
-                }
-            }
+
+
             String state = states[0];
             String code = codes[0];
             System.out.println("Callback request seems valid, checking...");
@@ -234,12 +226,7 @@ public class Server {
                 System.err.println("Unauthorized User exception");
                 return ""; // not reached
             }
-//            res.type("application/json");
-//            Map<String, String[]> params = req.queryMap().toMap();
-//            String state = params.get("state")[0];
-//            String code = params.get("code")[0];
-//            System.err.println(req);
-//            return auth.getProfile(state, code);
+
         });
 
         //here is the part where, if the request has not matched anything so far, it should match
