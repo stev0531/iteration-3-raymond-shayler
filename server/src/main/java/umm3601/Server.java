@@ -78,21 +78,6 @@ public class Server {
 
         Auth auth = new Auth(conf.clientId, conf.clientSecret, callbackURL);
         authController.setAuth(auth, USEAUTH);
-//
-//        options("/*", (request, response) -> {
-//
-//            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-//            if (accessControlRequestHeaders != null) {
-//                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-//            }
-//
-//            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-//            if (accessControlRequestMethod != null) {
-//                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-//            }
-//
-//            return "OK";
-//        });
 
         options("/*", (request, response) -> {
 
