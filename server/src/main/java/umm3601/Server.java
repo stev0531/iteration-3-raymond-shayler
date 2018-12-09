@@ -6,12 +6,9 @@ import com.google.gson.*;
 import spark.Request;
 import spark.Response;
 
-import umm3601.Authentication.AuthController;
+import umm3601.Authentication.*;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
-import umm3601.Authentication.Auth;
-import umm3601.Authentication.Cookie;
-import umm3601.Authentication.UnauthorizedUserException;
 
 
 import java.io.*;
@@ -179,10 +176,7 @@ public class Server {
             });
         });
 
-
-
-
-
+        
 
 
         get("/callback", (req, res) -> {
@@ -192,40 +186,7 @@ public class Server {
             String[] errors = params.get("error");
             System.out.println("/callback reached");
 
-            if(null ==codes && "access_denied".equals(errors[0])){
-                // the user clicked "deny", so send them to the visitor page
-                res.redirect("/");
-                return ""; // send an empty body back on redirect
-            }
-            else if (null == states || null == codes){
-                halt(400);
-                return ""; // never reached
-            }
-
-
-            String state = states[0];
-            String code = codes[0];
-            System.out.println("Callback request seems valid, checking...");
-            try {
-                String originatingURL = auth.verifyCallBack(state, code);
-                if (null != originatingURL) {
-                    Cookie c = auth.getCookie();
-                    res.cookie(c.name, c.value, c.max_age);
-                    System.out.println("Innermost Auth script was run, redirecting to: ");
-                    System.out.print(originatingURL + "\n");
-                    res.redirect(originatingURL);
-                    System.out.println("good");
-                    return ""; // not reached
-                } else {
-                    System.out.println("bad");
-                    res.status(403);
-                    return "?????"; // todo: return a reasonable message
-                }
-            } catch (UnauthorizedUserException e) {
-                res.redirect("/");
-                System.err.println("Unauthorized User exception");
-                return ""; // not reached
-            }
+            return checkIfParamsValid(codes, states, errors, res, auth);
 
         });
 
@@ -255,6 +216,44 @@ public class Server {
         });
     }
 
+    private static String checkIfParamsValid(String[] codes, String[] states, String[] errors, Response res,Auth auth){
+        if(null ==codes && "access_denied".equals(errors[0])){
+            // the user clicked "deny", so send them to the visitor page
+            res.redirect("/");
+            return ""; // send an empty body back on redirect
+        }
+        else if (null == states || null == codes){
+            halt(400);
+            return ""; // never reached
+        }else {
+            return checkIfOriginalURLNull(states[0], codes[0], res, auth);
+        }
+    }
+
+    private static String checkIfOriginalURLNull(String state, String code, Response res, Auth auth){
+        System.out.println("Callback request seems valid, checking...");
+        try {
+            String originatingURL = auth.verifyCallBack(state, code);
+            if (null != originatingURL) {
+                Cookie c = auth.getCookie();
+                res.cookie(c.name, c.value, c.max_age);
+                System.out.println("Innermost Auth script was run, redirecting to: ");
+                System.out.print(originatingURL + "\n");
+                res.redirect(originatingURL);
+                System.out.println("good");
+                return ""; // not reached
+            } else {
+                System.out.println("bad");
+                res.status(403);
+                return "Originating URL is null"; // the null case
+            }
+        } catch (UnauthorizedUserException | ExpiredTokenException e) {
+            res.redirect("/");
+            System.err.println("Unauthorized User exception");
+            return ""; // not reached
+        }
+    }
+
     public static boolean needsAuth(String req) {
         Set<String> sensitiveURLs = new HashSet<>();
 
@@ -272,7 +271,7 @@ public class Server {
 
 
     ///moved in here because Java is being weird.
-    private class Conf {
+    public class Conf {
         String clientId;
         String clientSecret;
         String publicURL;
