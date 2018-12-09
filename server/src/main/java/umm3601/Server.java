@@ -149,16 +149,22 @@ public class Server {
             get("cards/:id", cardController::getCard);
             get("cards", cardController::getCards);
             get("decks", deckController::getDecks);
-            post("decks/add", deckController::addNewDeck);
             get("decks/:id", deckController::getDeck);
+            get("simple-cards", cardController::getSimpleCards);
+            get("simple-decks", deckController::getSimpleDecks);
+            get("checkAuthorization", authController::checkAuthorization);
+            get("deleteMany", cardController::deleteCardsFromDeck);
+            get("decks/updateName", deckController::updateName);
+
+
+            post("decks/add", deckController::addNewDeck);
             post("decks/updateName", deckController::updateName);
             post("cards/add", cardController::addNewCard);
             post("addMany", cardController::addCardsToDeck);
             post("deleteMany", cardController::deleteCardsFromDeck);
-            get("simple-cards", cardController::getSimpleCards);
-            get("simple-decks", deckController::getSimpleDecks);
+            post("decks/deleteDeck", deckController::deleteDeck);
+            post("cards/deleteCard", cardController::deleteCard);
 
-            get("checkAuthorization", authController::checkAuthorization);
             get("authorize", (req, res) -> {
                 String originatingURLs[] = req.queryMap().toMap().get("originatingURL");
                 String originatingURL;
@@ -174,24 +180,9 @@ public class Server {
         });
 
 
-        /// Deck and Card Endpoints ///////////////////////////
-        /////////////////////////////////////////////
-        get("api/cards/:id", cardController::getCard);
-        get("api/cards", cardController::getCards);
-        get("api/decks", deckController::getDecks);
-        post("api/decks/add", deckController::addNewDeck);
-        get("api/decks/:id", deckController::getDeck);
-        post("api/decks/updateName", deckController::updateName);
-        post("api/cards/add", cardController::addNewCard);
-        post("api/addMany", cardController::addCardsToDeck);
-        post("api/deleteMany", cardController::deleteCardsFromDeck);
-        post("api/decks/deleteDeck", deckController::deleteDeck);
-        post("api/cards/deleteCard", cardController::deleteCard);
-        get("api/simple-cards", cardController::getSimpleCards);
-        get("api/simple-decks", deckController::getSimpleDecks);
-        get("api/deleteMany", cardController::deleteCardsFromDeck);
-        get("api/decks/updateName", deckController::updateName);
-        get("api/checkAuthorization", authController::checkAuthorization);
+
+
+
 
 
         get("/callback", (req, res) -> {
