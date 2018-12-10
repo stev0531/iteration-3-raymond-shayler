@@ -147,26 +147,34 @@ public class CardController {
 
         res.type("application/json");
         Object o = JSON.parse(req.body());
+        return addCardsToDeck(o);
+    }
+
+    private Object addCardsToDeck(Object o){
         try {
             if (o.getClass().equals(BasicDBObject.class)) {
-                try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-
-                    String deckID = writeDeckId(dbO);
-                    String[] cardIds = writeCardId(dbO);
-
-                    System.err.println("Adding new cards to " + deckID + " " + cardIds);
-                    return addCardsToDeck(deckID, cardIds);
-                } catch (NullPointerException e) {
-                    System.err.println("A value was malformed or omitted, card addition request failed.");
-                    return false;
-                }
+                return tryAddCardsToDeck(o);
             } else {
                 System.err.println("Expected BasicDBObject, received " + o.getClass());
                 return false;
             }
         } catch (RuntimeException ree) {
             ree.printStackTrace();
+            return false;
+        }
+    }
+
+    private Object tryAddCardsToDeck(Object o){
+        try {
+            BasicDBObject dbO = (BasicDBObject) o;
+
+            String deckID = writeDeckId(dbO);
+            String[] cardIds = writeCardId(dbO);
+
+            System.err.println("Adding new cards to " + deckID + " " + cardIds);
+            return addCardsToDeck(deckID, cardIds);
+        } catch (NullPointerException e) {
+            System.err.println("A value was malformed or omitted, card addition request failed.");
             return false;
         }
     }
@@ -182,12 +190,7 @@ public class CardController {
         }
 
         for (int i = 0; i < cardIds.length; i++) {
-            // try {
                 deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", new ObjectId(cardIds[i]))));
-            /* }  catch (MongoException me) {
-                me.printStackTrace();
-                return false;
-            } */
 
         }
             return true;
@@ -246,34 +249,7 @@ public class CardController {
         try {
             if(o.getClass().equals(BasicDBObject.class))
             {
-                try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-                    String deckID = dbO.getString("deckID");
-                    String word = dbO.getString("word");
-                    String synonym = dbO.getString("synonym");
-                    String antonym = dbO.getString("antonym");
-                    String general_sense = dbO.getString("general_sense");
-                    String example_usage = dbO.getString("example_usage");
-
-
-
-                    Document newCard = addNewCard(deckID, word, synonym, antonym, general_sense, example_usage);
-                    if (newCard != null) {
-                        return newCard.toJson();
-                    } else {
-                        res.status(400);
-                        res.body("The requested new card is missing one or more objects");
-                        return false;
-                    }
-
-
-                }
-                catch(NullPointerException e)
-                {
-                    System.err.println("A value was malformed or omitted, new card request failed.");
-                    return false;
-                }
-
+                return addNewCard(o,res);
             }
             else
             {
@@ -281,7 +257,6 @@ public class CardController {
                 return false;
             }
         }
-
         catch(RuntimeException ree)
         {
             ree.printStackTrace();
@@ -290,6 +265,33 @@ public class CardController {
 
     }
 
+    private Object addNewCard(Object o, Response res){
+        try {
+            BasicDBObject dbO = (BasicDBObject) o;
+            String deckID = dbO.getString("deckID");
+            String word = dbO.getString("word");
+            String synonym = dbO.getString("synonym");
+            String antonym = dbO.getString("antonym");
+            String general_sense = dbO.getString("general_sense");
+            String example_usage = dbO.getString("example_usage");
+
+            Document newCard = addNewCard(deckID, word, synonym, antonym, general_sense, example_usage);
+            if (newCard != null) {
+                return newCard.toJson();
+            } else {
+                res.status(400);
+                res.body("The requested new card is missing one or more objects");
+                return false;
+            }
+
+
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("A value was malformed or omitted, new card request failed.");
+            return false;
+        }
+    }
 
     public Document addNewCard(String deckID, String word, String synonym, String antonym, String general_sense, String example_usage){
 
