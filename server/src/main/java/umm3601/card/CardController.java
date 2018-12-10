@@ -83,14 +83,8 @@ public class CardController {
     }
 
     public String getCards(Map<String, String[]> queryParams){
-        Document filterDoc = new Document();
-        if (queryParams.containsKey("word")){
-            String  targetWord = queryParams.get("word")[0];
-            filterDoc = filterDoc.append("word", targetWord);
-        }
-
         AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
-            Aggregates.match(filterDoc),
+            Aggregates.match(filterDocContainWord(queryParams)),
             Aggregates.project(Projections.fields(
                 Projections.include("word"),
                 Projections.include("synonym"),
@@ -102,6 +96,43 @@ public class CardController {
         ));
 
         return JSON.serialize(cards);
+    }
+
+    public String getSimpleCards(Map<String, String[]> queryParams){
+        AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
+            Aggregates.match(filterDocContainWord(queryParams)),
+            Aggregates.project(Projections.fields(
+                Projections.include("_id"),
+                Projections.include("word")
+            ))
+        ));
+
+        return JSON.serialize(cards);
+    }
+
+    private Document filterDocContainWord(Map<String, String[]> queryParams){
+        Document filterDoc = new Document();
+        if (queryParams.containsKey("word")){
+            String  targetWord = queryParams.get("word")[0];
+            filterDoc = filterDoc.append("word", targetWord);
+        }
+        return filterDoc;
+    }
+
+    private String[] writeCardId(BasicDBObject dbO){
+        BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
+        String[] cardIds = new String[dbIdList.size()];
+
+        for (int i = 0; i < dbIdList.size(); i++) {
+            cardIds[i] = dbIdList.get(i).toString();
+        }
+
+        return cardIds;
+    }
+
+    private String writeDeckId(BasicDBObject dbO){
+        String deckID = dbO.getString("deckId");
+        return deckID;
     }
 
     public Object addCardsToDeck(Request req, Response res) {
@@ -121,13 +152,8 @@ public class CardController {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
-                    String deckID = dbO.getString("deckId");
-                    String[] cardIds = new String[dbIdList.size()];
-
-                    for (int i = 0; i < dbIdList.size(); i++) {
-                        cardIds[i] = dbIdList.get(i).toString();
-                    }
+                    String deckID = writeDeckId(dbO);
+                    String[] cardIds = writeCardId(dbO);
 
                     System.err.println("Adding new cards to " + deckID + " " + cardIds);
                     return addCardsToDeck(deckID, cardIds);
@@ -176,14 +202,8 @@ public class CardController {
             if (o.getClass().equals(BasicDBObject.class)) {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
-
-                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
-                    String deckID = dbO.getString("deckId");
-                    String[] cardIds = new String[dbIdList.size()];
-
-                    for (int i = 0; i < dbIdList.size(); i++) {
-                        cardIds[i] = dbIdList.get(i).toString();
-                    }
+                    String deckID = writeDeckId(dbO);
+                    String[] cardIds = writeCardId(dbO);
 
                     System.err.println("Deleting cards from " + deckID + " " + cardIds[0]);
                     return deleteCardsFromDeck(deckID, cardIds);
@@ -305,23 +325,7 @@ public class CardController {
         return getSimpleCards(req.queryMap().toMap());
     }
 
-    public String getSimpleCards(Map<String, String[]> queryParams){
-        Document filterDoc = new Document();
-        if (queryParams.containsKey("word")){
-            String  targetWord = queryParams.get("word")[0];
-            filterDoc = filterDoc.append("word", targetWord);
-        }
 
-        AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
-            Aggregates.match(filterDoc),
-            Aggregates.project(Projections.fields(
-                Projections.include("_id"),
-                Projections.include("word")
-            ))
-        ));
-
-        return JSON.serialize(cards);
-    }
 
     public Object deleteCard(Request req, Response res) {
         System.out.println("This should print");
@@ -355,5 +359,8 @@ public class CardController {
         cardCollection.deleteOne(new Document("_id", new ObjectId(cardId)));
         return true;
     }
+
+
+
 
 }

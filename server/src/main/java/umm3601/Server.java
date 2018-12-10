@@ -176,7 +176,7 @@ public class Server {
             });
         });
 
-        
+
 
 
         get("/callback", (req, res) -> {
