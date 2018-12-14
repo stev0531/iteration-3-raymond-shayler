@@ -6,7 +6,7 @@ import com.google.gson.*;
 import spark.Request;
 import spark.Response;
 
-import umm3601.Authentication.*;
+import umm3601.Authentication.AuthController;
 import umm3601.card.CardController;
 import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
