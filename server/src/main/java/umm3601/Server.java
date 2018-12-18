@@ -12,7 +12,7 @@ import umm3601.deck.DeckController;
 import umm3601.Authentication.Auth;
 import umm3601.Authentication.Cookie;
 import umm3601.Authentication.UnauthorizedUserException;
-
+import umm3601.Authentication.ExpiredTokenException;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
