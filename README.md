@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/UMM-CSci-3601-F17/iteration-3-raymond-shayler.svg?branch=style-like-shayler)](https://travis-ci.org/UMM-CSci-3601-F17/iteration-3-raymond-shayler)
+[![Build Status](https://travis-ci.org/stev0531/iteration-3-raymond-shayler.svg?branch=master)](https://travis-ci.org/stev0531/iteration-3-raymond-shayler)
 
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
