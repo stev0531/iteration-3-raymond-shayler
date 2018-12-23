@@ -83,14 +83,8 @@ public class CardController {
     }
 
     public String getCards(Map<String, String[]> queryParams){
-        Document filterDoc = new Document();
-        if (queryParams.containsKey("word")){
-            String  targetWord = queryParams.get("word")[0];
-            filterDoc = filterDoc.append("word", targetWord);
-        }
-
         AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
-            Aggregates.match(filterDoc),
+            Aggregates.match(filterDocContainWord(queryParams)),
             Aggregates.project(Projections.fields(
                 Projections.include("word"),
                 Projections.include("synonym"),
@@ -102,6 +96,43 @@ public class CardController {
         ));
 
         return JSON.serialize(cards);
+    }
+
+    public String getSimpleCards(Map<String, String[]> queryParams){
+        AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
+            Aggregates.match(filterDocContainWord(queryParams)),
+            Aggregates.project(Projections.fields(
+                Projections.include("_id"),
+                Projections.include("word")
+            ))
+        ));
+
+        return JSON.serialize(cards);
+    }
+
+    private Document filterDocContainWord(Map<String, String[]> queryParams){
+        Document filterDoc = new Document();
+        if (queryParams.containsKey("word")){
+            String  targetWord = queryParams.get("word")[0];
+            filterDoc = filterDoc.append("word", targetWord);
+        }
+        return filterDoc;
+    }
+
+    private String[] writeCardId(BasicDBObject dbO){
+        BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
+        String[] cardIds = new String[dbIdList.size()];
+
+        for (int i = 0; i < dbIdList.size(); i++) {
+            cardIds[i] = dbIdList.get(i).toString();
+        }
+
+        return cardIds;
+    }
+
+    private String writeDeckId(BasicDBObject dbO){
+        String deckID = dbO.getString("deckId");
+        return deckID;
     }
 
     public Object addCardsToDeck(Request req, Response res) {
@@ -116,31 +147,34 @@ public class CardController {
 
         res.type("application/json");
         Object o = JSON.parse(req.body());
+        return addCardsToDeck(o);
+    }
+
+    private Object addCardsToDeck(Object o){
         try {
             if (o.getClass().equals(BasicDBObject.class)) {
-                try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-
-                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
-                    String deckID = dbO.getString("deckId");
-                    String[] cardIds = new String[dbIdList.size()];
-
-                    for (int i = 0; i < dbIdList.size(); i++) {
-                        cardIds[i] = dbIdList.get(i).toString();
-                    }
-
-                    System.err.println("Adding new cards to " + deckID + " " + cardIds);
-                    return addCardsToDeck(deckID, cardIds);
-                } catch (NullPointerException e) {
-                    System.err.println("A value was malformed or omitted, card addition request failed.");
-                    return false;
-                }
+                return tryAddCardsToDeck(o);
             } else {
                 System.err.println("Expected BasicDBObject, received " + o.getClass());
                 return false;
             }
         } catch (RuntimeException ree) {
             ree.printStackTrace();
+            return false;
+        }
+    }
+
+    private Object tryAddCardsToDeck(Object o){
+        try {
+            BasicDBObject dbO = (BasicDBObject) o;
+
+            String deckID = writeDeckId(dbO);
+            String[] cardIds = writeCardId(dbO);
+
+            System.err.println("Adding new cards to " + deckID + " " + cardIds);
+            return addCardsToDeck(deckID, cardIds);
+        } catch (NullPointerException e) {
+            System.err.println("A value was malformed or omitted, card addition request failed.");
             return false;
         }
     }
@@ -156,12 +190,7 @@ public class CardController {
         }
 
         for (int i = 0; i < cardIds.length; i++) {
-            // try {
                 deckCollection.updateOne(new Document("_id", new ObjectId(deckID)), new Document("$push", new Document("cards", new ObjectId(cardIds[i]))));
-            /* }  catch (MongoException me) {
-                me.printStackTrace();
-                return false;
-            } */
 
         }
             return true;
@@ -176,14 +205,8 @@ public class CardController {
             if (o.getClass().equals(BasicDBObject.class)) {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
-
-                    BasicDBList dbIdList = (BasicDBList) dbO.get("cardIds");
-                    String deckID = dbO.getString("deckId");
-                    String[] cardIds = new String[dbIdList.size()];
-
-                    for (int i = 0; i < dbIdList.size(); i++) {
-                        cardIds[i] = dbIdList.get(i).toString();
-                    }
+                    String deckID = writeDeckId(dbO);
+                    String[] cardIds = writeCardId(dbO);
 
                     System.err.println("Deleting cards from " + deckID + " " + cardIds[0]);
                     return deleteCardsFromDeck(deckID, cardIds);
@@ -226,34 +249,7 @@ public class CardController {
         try {
             if(o.getClass().equals(BasicDBObject.class))
             {
-                try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-                    String deckID = dbO.getString("deckID");
-                    String word = dbO.getString("word");
-                    String synonym = dbO.getString("synonym");
-                    String antonym = dbO.getString("antonym");
-                    String general_sense = dbO.getString("general_sense");
-                    String example_usage = dbO.getString("example_usage");
-
-
-
-                    Document newCard = addNewCard(deckID, word, synonym, antonym, general_sense, example_usage);
-                    if (newCard != null) {
-                        return newCard.toJson();
-                    } else {
-                        res.status(400);
-                        res.body("The requested new card is missing one or more objects");
-                        return false;
-                    }
-
-
-                }
-                catch(NullPointerException e)
-                {
-                    System.err.println("A value was malformed or omitted, new card request failed.");
-                    return false;
-                }
-
+                return addNewCard(o,res);
             }
             else
             {
@@ -261,7 +257,6 @@ public class CardController {
                 return false;
             }
         }
-
         catch(RuntimeException ree)
         {
             ree.printStackTrace();
@@ -270,6 +265,33 @@ public class CardController {
 
     }
 
+    private Object addNewCard(Object o, Response res){
+        try {
+            BasicDBObject dbO = (BasicDBObject) o;
+            String deckID = dbO.getString("deckID");
+            String word = dbO.getString("word");
+            String synonym = dbO.getString("synonym");
+            String antonym = dbO.getString("antonym");
+            String general_sense = dbO.getString("general_sense");
+            String example_usage = dbO.getString("example_usage");
+
+            Document newCard = addNewCard(deckID, word, synonym, antonym, general_sense, example_usage);
+            if (newCard != null) {
+                return newCard.toJson();
+            } else {
+                res.status(400);
+                res.body("The requested new card is missing one or more objects");
+                return false;
+            }
+
+
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("A value was malformed or omitted, new card request failed.");
+            return false;
+        }
+    }
 
     public Document addNewCard(String deckID, String word, String synonym, String antonym, String general_sense, String example_usage){
 
@@ -305,23 +327,7 @@ public class CardController {
         return getSimpleCards(req.queryMap().toMap());
     }
 
-    public String getSimpleCards(Map<String, String[]> queryParams){
-        Document filterDoc = new Document();
-        if (queryParams.containsKey("word")){
-            String  targetWord = queryParams.get("word")[0];
-            filterDoc = filterDoc.append("word", targetWord);
-        }
 
-        AggregateIterable<Document> cards = cardCollection.aggregate(Arrays.asList(
-            Aggregates.match(filterDoc),
-            Aggregates.project(Projections.fields(
-                Projections.include("_id"),
-                Projections.include("word")
-            ))
-        ));
-
-        return JSON.serialize(cards);
-    }
 
     public Object deleteCard(Request req, Response res) {
         System.out.println("This should print");
@@ -355,5 +361,8 @@ public class CardController {
         cardCollection.deleteOne(new Document("_id", new ObjectId(cardId)));
         return true;
     }
+
+
+
 
 }
